@@ -8,6 +8,7 @@
 node_modules/
 dist/
 .angular/
+/.angular/cache
 # Compiled Java class files
 *.class
 
