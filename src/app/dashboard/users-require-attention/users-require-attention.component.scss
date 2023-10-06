@@ -1,0 +1,77 @@
+@mixin set-size($width, $height, $margin-top: 0) {
+  width: $width;
+  height: $height;
+  margin-top: $margin-top;
+}
+.form {
+  @include set-size(33.75rem, 18.938rem);
+  border-radius: 0.25rem;
+  background-color: #00195f;
+
+  &__title {
+    color: white;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 3.813rem;
+    padding: 0rem 1rem 0rem 1rem;
+    border-bottom: 0.063rem solid #666a71;
+    font-size: 0.938rem;
+    font-weight: 400;
+    line-height: 1.75rem;
+  }
+
+  &__users {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 1rem 0.75rem 1rem;
+
+    &__user {
+      display: flex;
+      flex-direction: row;
+      gap: 0.75rem;
+
+      &__image {
+        @include set-size(2.25rem, 2.25rem);
+      }
+
+      &__details {
+        color: white;
+        display: flex;
+        flex-direction: column;
+        gap: 0.125rem;
+        font-size: 1rem;
+        line-height: 1.5rem;
+
+        &__days {
+          display: flex;
+          flex-direction: row;
+          font-weight: 400;
+          font-size: 0.875rem;
+          letter-spacing: 0.016em;
+          gap: 0.25rem;
+
+          &__point {
+            position: relative;
+            padding: 0rem 0.625rem 0rem 0.625rem;
+
+            &__p {
+              position: absolute;
+              bottom: 18%;
+            }
+          }
+
+          &__clock,
+          &__file {
+            @include set-size(1rem, 1rem, 0.2rem);
+          }
+        }
+      }
+    }
+    &__points-icon {
+      @include set-size(1.25rem, 1.25rem);
+    }
+  }
+}
