@@ -1,0 +1,45 @@
+@mixin set-size($width, $height, $margin-top: 0) {
+  width: $width;
+  height: $height;
+  margin-top: $margin-top;
+}
+
+.form {
+  @include set-size(33.75rem, 18.938rem);
+  border-radius: 0.25rem;
+
+  &__title {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    border-bottom: 0.063rem solid #c7cbd1;
+    line-height: 1.75rem;
+    height: 3.813rem;
+    padding: 0 1rem;
+    background: #f5f5f5;
+  }
+
+  &__title p {
+    color: #0e0f11;
+    font-family: Roboto;
+    font-size: 0.9375rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.75rem;
+    letter-spacing: 0.015rem;
+    flex: 1;
+  }
+
+  .form__view__all__users__button {
+    background: #e6e7e9;
+    border: none;
+    color: #000000;
+    font-family: Roboto;
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 2rem;
+    letter-spacing: 0.078rem;
+  }
+
+}
