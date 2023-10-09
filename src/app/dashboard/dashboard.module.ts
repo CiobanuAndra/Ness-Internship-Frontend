@@ -14,14 +14,15 @@ import { LeaderboardTableComponent } from './leaderboard-table/leaderboard-table
 import { MatTableModule } from '@angular/material/table';
 
 import { RouterModule, Routes } from '@angular/router';
+import { CurrentProgressComponent } from './current-progress/current-progress.component';
 
 const routes: Routes = [
   {
     path: '',
     component: DashboardComponent,
   },
-  { 
-    path: 'leaderboard-table', 
+  {
+    path: 'leaderboard-table',
     component: LeaderboardTableComponent,
   },
 ];
@@ -35,6 +36,7 @@ const routes: Routes = [
     LeaderboardListItemComponent,
     UserProgressTableComponent,
     LeaderboardTableComponent,
+    CurrentProgressComponent,
   ],
   imports: [
     CommonModule,

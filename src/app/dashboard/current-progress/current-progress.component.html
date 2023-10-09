@@ -1,0 +1,29 @@
+<div class="form">
+  <div class="form__title">
+    <div>Current Progress</div>
+    <div>
+      <mat-form-field class="form__title__mat-form-field">
+        <mat-label>Last 30 Days</mat-label>
+        <mat-select>
+          <mat-option> </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+  <div>
+    <div
+      id="donutchart"
+      style="width: 400px; height: 220px; margin-left: 70px"
+    ></div>
+    <div class="legend">
+      <div *ngFor="let item of legendItems" class="legend__colors">
+        <div
+          class="legend__colors__color"
+          [style.backgroundColor]="item.color"
+        ></div>
+        {{ item.name }}
+      </div>
+    </div>
+    <div id="center-text" class="center-text">{{ number }}</div>
+  </div>
+</div>

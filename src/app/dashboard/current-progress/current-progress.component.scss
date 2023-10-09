@@ -1,0 +1,62 @@
+@mixin set-size($width, $height, $margin-top: 0) {
+  width: $width;
+  height: $height;
+  margin-top: $margin-top;
+}
+
+.form {
+  @include set-size(33.75rem, 18.938rem);
+  border-radius: 0.25rem;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+  background-color: white;
+
+  &__title {
+    $medium-gray-color: #c7cbd1;
+    border-bottom: 0.063rem solid #c7cbd1;
+    padding: 0rem 1rem 0rem 1rem;
+    height: 3.813rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    &__mat-form-field {
+      margin-top: 20px;
+    }
+
+    .hovered .mat-form-field-underline {
+      background-color: white;
+    }
+  }
+}
+
+.center-text {
+  position: absolute;
+  top: 20.8%;
+  left: 52.5%;
+  transform: translate(-50%, -50%);
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+}
+.legend {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 390px;
+  height: 20px;
+  position: absolute;
+  top: 31.8%;
+  left: 42%;
+  gap: 12px;
+
+  &__colors {
+    display: flex;
+    gap: 2px;
+    &__color {
+      width: 15px;
+      height: 15px;
+    }
+  }
+}

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { MaterialModule } from 'src/shared/material/material.module';
+import { MaterialModule } from 'src/shared/material-module/material.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -14,11 +14,7 @@ import { InitialsCustomepipePipe } from './pipes/initials-customepipe.pipe';
 import { ResourcesModule } from './resources/resources.module';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    NavbarComponent,
-    InitialsCustomepipePipe,
-  ],
+  declarations: [AppComponent, NavbarComponent, InitialsCustomepipePipe],
   imports: [
     BrowserModule,
     AppRoutingModule,
