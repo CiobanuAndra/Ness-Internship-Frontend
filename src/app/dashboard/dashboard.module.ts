@@ -12,7 +12,11 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatTabsModule } from '@angular/material/tabs';
 
 @NgModule({
-  declarations: [DashboardComponent, UsersRequireAttentionComponent, LeaderboardComponent],
+  declarations: [
+    DashboardComponent,
+    UsersRequireAttentionComponent,
+    LeaderboardComponent,
+  ],
   imports: [
     CommonModule,
     MaterialModule,
@@ -21,7 +25,7 @@ import { MatTabsModule } from '@angular/material/tabs';
     MatTabsModule,
     IconsModule,
     HttpClientModule,
-    DashboardRoutingModule
+    DashboardRoutingModule,
   ],
   exports: [DashboardComponent],
 })
