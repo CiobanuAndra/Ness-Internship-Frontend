@@ -10,12 +10,17 @@ import { DashboardRoutingModule } from './dashboard-routing.module';
 import { LeaderboardComponent } from './leaderboard/leaderboard.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTabsModule } from '@angular/material/tabs';
+import { LeaderboardListComponent } from './leaderboard/leaderboard-list/leaderboard-list.component';
+import { LeaderboardListItemComponent } from './leaderboard/leaderboard-list/leaderboard-list-item/leaderboard-list-item.component';
+import { UsersService } from '../services/users.service';
 
 @NgModule({
   declarations: [
     DashboardComponent,
     UsersRequireAttentionComponent,
     LeaderboardComponent,
+    LeaderboardListComponent,
+    LeaderboardListItemComponent,
   ],
   imports: [
     CommonModule,
@@ -27,6 +32,7 @@ import { MatTabsModule } from '@angular/material/tabs';
     HttpClientModule,
     DashboardRoutingModule,
   ],
+  providers: [UsersService],
   exports: [DashboardComponent],
 })
 export class DashboardModule {}

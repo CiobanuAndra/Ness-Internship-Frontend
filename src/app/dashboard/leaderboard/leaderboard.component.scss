@@ -8,6 +8,7 @@
 .form {
   @include set-size(33.75rem, 18.938rem);
   border-radius: 0.25rem;
+  background-color: $white-color;
 
   &__title {
     display: flex;

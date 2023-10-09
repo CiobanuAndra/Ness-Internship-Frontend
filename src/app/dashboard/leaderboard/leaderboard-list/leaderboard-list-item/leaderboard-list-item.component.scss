@@ -1,0 +1,64 @@
+@import "/src/styleguide.scss";
+
+.user-card {
+  display: grid;
+  grid-template-columns: 15% 70% 15%;
+  border-bottom: 0.063rem solid $medium-gray-color;
+  line-height: 1.5rem;
+  height: 3.813rem;
+  padding: 0 0.25rem;
+  background: $white-color;
+
+  &__avatar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__info {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    flex-direction: column;
+  }
+
+  &__data {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+  }
+
+  &__name {
+      color: $black-color;
+      font-family: Roboto;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 20px;
+      letter-spacing: 0.25px;
+  }
+
+  &__days_left,
+  &__points {
+    color: $black-color;
+  }
+
+  &__separator {
+    opacity: 0.8;
+    color: #3e3f41;
+  }
+
+  &__icon {
+    width: 16px;
+    height: 16px;
+    border-width: 0.2rem;
+  }
+
+  &__trophies {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+  }
+}
