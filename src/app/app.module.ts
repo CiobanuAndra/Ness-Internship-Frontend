@@ -15,6 +15,7 @@ import { ResourcesModule } from './resources/resources.module';
 
 @NgModule({
   declarations: [AppComponent, NavbarComponent, InitialsCustomepipePipe],
+
   imports: [
     BrowserModule,
     AppRoutingModule,
