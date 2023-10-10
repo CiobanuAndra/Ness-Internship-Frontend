@@ -13,13 +13,10 @@ const routes: Routes = [
       import('./users/users/users.module').then((m) => m.UsersModule),
   },
   {
-    path: 'users',
-    loadChildren: () => import('./users/users.module').then((m) => m.UsersModule),
-  },
-  {
     path: 'resources',
-    loadChildren: () => import('./resources/resources.module').then((m) => m.ResourcesModule),
-  }
+    loadChildren: () =>
+      import('./resources/resources.module').then((m) => m.ResourcesModule),
+  },
 ];
 
 @NgModule({

@@ -12,6 +12,8 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatIconModule } from '@angular/material/icon';
+import { MatSelectModule } from '@angular/material/select';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [],
@@ -30,6 +32,8 @@ import { MatIconModule } from '@angular/material/icon';
     MatSortModule,
     MatDividerModule,
     MatIconModule,
+    MatSelectModule,
+    FormsModule,
   ],
   providers: [],
 })
