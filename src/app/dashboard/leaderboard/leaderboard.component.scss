@@ -6,7 +6,7 @@
   margin-top: $margin-top;
 }
 .form {
-  @include set-size(33.75rem, 18.938rem);
+  @include set-size(33.75rem, 37.876rem);
   border-radius: 0.25rem;
   background-color: $white-color;
 
@@ -19,6 +19,10 @@
     height: 3.813rem;
     padding: 0 1rem;
     background: $white-color;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+    border-top: 1px solid black;
+
 
     &-text {
       color: $black-color;
@@ -43,4 +47,39 @@
       letter-spacing: 0.078rem;
     }
   }
+
+  .my-custom-tabs {
+    display: flex;
+    justify-content: space-between;
+}
+
+.tab {
+    flex: 1;
+    text-align: center;
+    color: #00195F;
+    transition: color 0.3s ease;
+    cursor: pointer;
+    padding: 15px 0;
+}
+
+.tab.active-tab {
+    position: relative;
+    color: #00195F;
+    border-bottom: 2px solid #00195F;
+}
+
+.in-progress-tab {
+  border-left: 1px solid black;
+}
+
+.done-tab {
+    color: $dark-gray-color;
+    border-right: 1px solid black;
+}
+
+.tab:hover {
+    background-color: $light-gray-color;
+}
+
+  
 }

@@ -1,11 +1,14 @@
 <form class="form">
-    <div class="form__title">
-        <p class="form__title-text">Leaderboard</p>
-        <button type="button" mat-button class="form__view__all__users__button">{{ 'view all' | uppercase }}</button>
-    </div>
-    <mat-tab-group>
-        <mat-tab label="IN PROGRESS"></mat-tab>
-        <mat-tab label="DONE"></mat-tab>
-    </mat-tab-group>
-    <app-leaderboard-list></app-leaderboard-list>
+<div class="form__title">
+    <p class="form__title-text">Leaderboard</p>
+    <button type="button" mat-button class="form__view__all__users__button">{{ 'view all' | uppercase }}</button>
+</div>
+<div class="my-custom-tabs">
+    <div class="tab in-progress-tab" [class.active-tab]="activeTab === 'in-progress'" (click)="toggleTab('in-progress')">IN PROGRESS</div>
+    <div class="tab done-tab" [class.active-tab]="activeTab === 'done'" (click)="toggleTab('done')">DONE</div>
+</div>
+
+<app-leaderboard-list *ngIf="activeTab === 'in-progress'" [status]="0"></app-leaderboard-list>
+<app-leaderboard-list *ngIf="activeTab === 'done'" [status]="1"></app-leaderboard-list>
+
 </form>

@@ -6,5 +6,16 @@ import { Component } from '@angular/core';
   styleUrls: ['./leaderboard.component.scss']
 })
 export class LeaderboardComponent {
+  activeTab: string = 'in-progress';
+  isInProgressPress = true;
+  isDonePress = false;
 
+  toggleTab(tabName: string) {
+    this.activeTab = tabName;
+    if(this.isInProgressPress) {
+      this.isInProgressPress = !this.isInProgressPress;
+    } else if(this.isDonePress) {
+      this.isDonePress = !this.isDonePress;
+    }
+  }
 }
