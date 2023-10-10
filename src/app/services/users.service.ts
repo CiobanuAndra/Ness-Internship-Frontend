@@ -18,12 +18,12 @@ export class UsersService {
 
   usersLeaderboard: UserCard[] = [
     {status: false, name: 'Bill Ladron', leftDays: 1, points: 300, trophies: 0},
-    {status: true, name: 'Ramon Sanches', leftDays: 0, points: 350, trophies: 1},
-    {status: false, name: 'Michael Rain', leftDays: 2, points: 900, trophies: 3},
-    {status: false, name: 'Frank Joseph', leftDays: 3, points: 700, trophies: 2},
-    {status: false, name: 'Bill Ladron', leftDays: 1, points: 300, trophies: 0},
-    {status: true, name: 'Frank Joseph', leftDays: 0, points: 700, trophies: 2},
-    {status: true, name: 'Bill Ladron', leftDays: 0, points: 300, trophies: 0}
+    // {status: true, name: 'Ramon Sanches', leftDays: 0, points: 350, trophies: 1},
+    // {status: false, name: 'Michael Rain', leftDays: 2, points: 900, trophies: 3},
+    // {status: false, name: 'Frank Joseph', leftDays: 3, points: 700, trophies: 2},
+    // {status: false, name: 'Bill Ladron', leftDays: 1, points: 300, trophies: 0},
+    // {status: true, name: 'Frank Joseph', leftDays: 0, points: 700, trophies: 2},
+    // {status: true, name: 'Bill Ladron', leftDays: 0, points: 300, trophies: 0}
   ]
 
   usersSubject$: BehaviorSubject<User[]> = new BehaviorSubject<User[]>(

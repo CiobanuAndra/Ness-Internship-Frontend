@@ -8,7 +8,19 @@
     <div class="tab done-tab" [class.active-tab]="activeTab === 'done'" (click)="toggleTab('done')">DONE</div>
 </div>
 
-<app-leaderboard-list *ngIf="activeTab === 'in-progress'" [status]="0"></app-leaderboard-list>
-<app-leaderboard-list *ngIf="activeTab === 'done'" [status]="1"></app-leaderboard-list>
+<ng-container *ngIf="activeTab === 'in-progress' && hasUsersInProgress()">
+    <app-leaderboard-list [status]="0"></app-leaderboard-list>
+  </ng-container>
+
+  <ng-container *ngIf="activeTab === 'done' && hasUsersInDone()">
+    <app-leaderboard-list [status]="1"></app-leaderboard-list>
+  </ng-container>
+
+  <ng-container *ngIf="(activeTab === 'in-progress' && !hasUsersInProgress()) || (activeTab === 'done' && !hasUsersInDone())">
+    <div class="no-users-container">
+      <img src="assets/icons/users.svg" alt="Users Icon">
+      <p>No users in {{ activeTab === 'in-progress' ? 'progress' : 'done' }}</p>
+    </div>
+  </ng-container>
 
 </form>
