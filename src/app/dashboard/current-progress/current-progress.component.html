@@ -3,9 +3,10 @@
     <div>Current Progress</div>
     <div>
       <mat-form-field class="form__title__mat-form-field">
-        <mat-label>Last 30 Days</mat-label>
-        <mat-select>
-          <mat-option> </mat-option>
+        <mat-select [(ngModel)]="selectedLastDays">
+          <mat-option *ngFor="let option of lastDays" [value]="selectedLastDays"
+            >{{ option }}
+          </mat-option>
         </mat-select>
       </mat-form-field>
     </div>
@@ -21,8 +22,6 @@
         {{ item.name }}
       </div>
     </div>
-    <div id="center-text" class="center-text">
-      {{ progressSubject | async }}
-    </div>
+    <div id="center-text" class="center-text">{{ currentHoverValue }}</div>
   </div>
 </div>

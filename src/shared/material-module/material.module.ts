@@ -12,6 +12,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
 import { MatSelectModule } from '@angular/material/select';
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [],
@@ -29,6 +30,7 @@ import { HttpClientModule } from '@angular/common/http';
     MatSortModule,
     MatSelectModule,
     HttpClientModule,
+    FormsModule,
   ],
   providers: [MatIconRegistry],
 })
