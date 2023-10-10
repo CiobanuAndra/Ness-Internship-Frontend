@@ -4,15 +4,16 @@
   margin-top: $margin-top;
 }
 
+@import "../../../styleguide.scss";
+
 .form {
   @include set-size(33.75rem, 18.938rem);
   border-radius: 0.25rem;
-  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
-  background-color: white;
+  box-shadow: 5px 5px 10px $black-color(0, 0, 0, 0.3);
+  background-color: $white-color;
 
   &__title {
-    $medium-gray-color: #c7cbd1;
-    border-bottom: 0.063rem solid #c7cbd1;
+    border-bottom: 0.063rem solid $medium-gray-color;
     padding: 0rem 1rem 0rem 1rem;
     height: 3.813rem;
     display: flex;
@@ -25,7 +26,7 @@
     }
 
     .hovered .mat-form-field-underline {
-      background-color: white;
+      background-color: $white-color;
     }
   }
 }
@@ -57,6 +58,7 @@
     &__color {
       width: 0.938rem;
       height: 0.938rem;
+      margin-top: 0.2rem;
     }
   }
 }

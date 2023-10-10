@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 declare var google: any;
 
 @Component({
@@ -7,13 +8,19 @@ declare var google: any;
   styleUrls: ['./current-progress.component.scss'],
 })
 export class CurrentProgressComponent implements OnInit {
+  registerColor = '#00195f';
+  finishedColor = '#8D96B6';
+  inProgressColor = '#149211';
+  notStartedColor = '#CCD1DF';
+
   legendItems = [
     { name: 'Register', color: '#00195f' },
     { name: 'Finished', color: '#8D96B6' },
     { name: 'In Progress', color: '#149211' },
     { name: 'Not Started', color: '#CCD1DF' },
   ];
-  number: string = '25%';
+
+  progressSubject = new BehaviorSubject<number>(25);
 
   ngOnInit(): void {
     google.charts.load('current', { packages: ['corechart'] });
@@ -39,5 +46,9 @@ export class CurrentProgressComponent implements OnInit {
       document.getElementById('donutchart')
     );
     chart.draw(data, options);
+  }
+
+  updateProgressValue(newValue: number) {
+    this.progressSubject.next(newValue);
   }
 }

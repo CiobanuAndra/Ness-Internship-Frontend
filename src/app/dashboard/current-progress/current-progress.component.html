@@ -21,6 +21,8 @@
         {{ item.name }}
       </div>
     </div>
-    <div id="center-text" class="center-text">{{ number }}</div>
+    <div id="center-text" class="center-text">
+      {{ progressSubject | async }}
+    </div>
   </div>
 </div>
