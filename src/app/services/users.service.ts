@@ -7,7 +7,6 @@ import { UserCard } from '../interfaces/user-card.model';
   providedIn: 'root',
 })
 export class UsersService {
-
   constructor() {}
 
   usersRequireAttention: User[] = [
@@ -31,12 +30,103 @@ export class UsersService {
     { status: false, name: 'Mike Chris', tasks: 2, points: 1200, rank: 2 },
   ];
 
-  public loadUsersLeaderboard():Observable<UserCard[]> {
+  public loadUsersLeaderboard(): Observable<UserCard[]> {
     return of(this.usersLeaderboard);
   }
 
+  allUsers: any[] = [
+    {
+      name: 'Alex Muller',
+      status: true,
+      taskCompleted: 5,
+      leftDays: 10,
+      dateAdded: '2023-10-10',
+    },
+    {
+      name: 'Alex Muller',
+      status: true,
+      taskCompleted: 5,
+      leftDays: 10,
+      dateAdded: '2023-10-10',
+    },
+    {
+      name: 'Alex Muller',
+      status: true,
+      taskCompleted: 5,
+      leftDays: 10,
+      dateAdded: '2023-10-10',
+    },
+    {
+      name: 'Alex Muller',
+      status: true,
+      taskCompleted: 5,
+      leftDays: 10,
+      dateAdded: '2023-10-10',
+    },
+    {
+      name: 'Alex Muller',
+      status: true,
+      taskCompleted: 5,
+      leftDays: 10,
+      dateAdded: '2023-10-10',
+    },
+    {
+      name: 'Alex Muller',
+      status: true,
+      taskCompleted: 5,
+      leftDays: 10,
+      dateAdded: '2023-10-10',
+    },
+    {
+      name: 'Alex Muller',
+      status: true,
+      taskCompleted: 5,
+      leftDays: 10,
+      dateAdded: '2023-10-10',
+    },
+    {
+      name: 'Alex Muller',
+      status: true,
+      taskCompleted: 5,
+      leftDays: 10,
+      dateAdded: '2023-10-10',
+    },
+    {
+      name: 'Alex Muller',
+      status: true,
+      taskCompleted: 5,
+      leftDays: 10,
+      dateAdded: '2023-10-10',
+    },
+    {
+      name: 'Alex Muller',
+      status: true,
+      taskCompleted: 5,
+      leftDays: 10,
+      dateAdded: '2023-10-10',
+    },
+    {
+      name: 'Alex Muller',
+      status: true,
+      taskCompleted: 5,
+      leftDays: 10,
+      dateAdded: '2023-10-10',
+    },
+    {
+      name: 'Alex Muller',
+      status: true,
+      taskCompleted: 5,
+      leftDays: 10,
+      dateAdded: '2023-10-10',
+    },
+  ];
+
   usersSubject$: BehaviorSubject<User[]> = new BehaviorSubject<User[]>(
     this.usersRequireAttention
+  );
+
+  allUsersSubject$: BehaviorSubject<any> = new BehaviorSubject<any>(
+    this.allUsers
   );
 
   getUsersRequireAttention(): Observable<User[]> {
@@ -45,5 +135,7 @@ export class UsersService {
   updateUsersRequireAttention(users: User[]) {
     this.usersSubject$.next(users);
   }
-
+  getAllUsers(): Observable<any[]> {
+    return this.allUsersSubject$.asObservable();
+  }
 }

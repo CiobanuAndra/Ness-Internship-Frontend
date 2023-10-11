@@ -1,0 +1,24 @@
+@import "/src/styleguide.scss";
+
+.form {
+  &__title {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border-bottom: 0.063rem solid $medium-gray-color;
+    line-height: 1.75rem;
+    height: 3.813rem;
+    padding: 0 1rem;
+    background: $white-color;
+    gap: 80%;
+
+    &__buttons {
+      display: flex;
+      flex-direction: row;
+      gap: 1rem;
+    }
+  }
+  &__mat-tab-group {
+    width: 20%;
+  }
+}

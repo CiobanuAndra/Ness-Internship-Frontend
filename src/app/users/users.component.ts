@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UsersService } from '../services/users.service';
 
 @Component({
   selector: 'app-users',
@@ -6,24 +7,23 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./users.component.scss'],
 })
 export class UsersComponent implements OnInit {
-  users: any[] = [];
-  data = [
-    {
-      name: 'John',
-      status: 'Active',
-      coursesCompleted: 5,
-      timeLeft: '2 days',
-      dateAdded: '2023-10-10',
-    },
-    {
-      name: 'Jane',
-      status: 'Inactive',
-      coursesCompleted: 8,
-      timeLeft: '1 day',
-      dateAdded: '2023-10-09',
-    },
+  constructor(private _userService: UsersService) {}
+
+  displayedColumns: string[] = [
+    'name',
+    'status',
+    'taskCompleted',
+    'leftDays',
+    'dateAdded',
   ];
+
+  dataSource: any[] = [{ column1: 'name', column2: 'status' }];
+  buttons: any = ['export csv', 'add user', 'add bulk users'];
+  users: any[] = [];
+
   ngOnInit() {
-    this.users = this.data;
+    this._userService.getAllUsers().subscribe((users) => {
+      this.dataSource = users;
+    });
   }
 }
