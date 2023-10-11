@@ -24,6 +24,8 @@ export class CurrentProgressComponent implements OnInit {
 
   currentHoverValue: string = '';
 
+  dataFor0Days = [['Task', 'Hours per Day']];
+
   ngOnInit(): void {
     google.charts.load('current', { packages: ['corechart'] });
     google.charts.setOnLoadCallback(() => this.drawChart());
@@ -55,10 +57,7 @@ export class CurrentProgressComponent implements OnInit {
       (eventData: { row: any }) => {
         var sliceIndex = eventData.row;
         var sliceValue = data.getValue(sliceIndex, 1);
-
         this.currentHoverValue = `${sliceValue}%`;
-
-        console.log(this.currentHoverValue);
       }
     );
     google.visualization.events.addListener(chart, 'onmouseout', () => {});
