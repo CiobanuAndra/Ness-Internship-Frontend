@@ -7,11 +7,11 @@
 }
 
 .form {
-  @include set-size(33.75rem, 37.876rem);
   border-radius: 0.25rem;
+  width: 33.75rem;
+  height: 39.300rem;
   background-color: $white-color;
-  border: 1px solid black;
-  overflow: auto;
+  box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.12), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 1px 0px rgba(0, 0, 0, 0.20);
 
   &__title {
     display: flex;
@@ -50,6 +50,7 @@
   .my-custom-tabs {
     display: flex;
     justify-content: space-between;
+    background-color: $white-color;
   }
 
   .tab {

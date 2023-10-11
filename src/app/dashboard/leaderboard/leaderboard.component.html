@@ -1,19 +1,19 @@
 <form class="form">
-<div class="form__title">
+  <div class="form__title">
     <p class="form__title-text">Leaderboard</p>
     <button type="button" mat-button class="form__view__all__users__button">{{ 'view all' | uppercase }}</button>
-</div>
-<div class="my-custom-tabs">
+  </div>
+  <div class="my-custom-tabs">
     <div class="tab in-progress-tab" [class.active-tab]="activeTab === 'in-progress'" (click)="toggleTab('in-progress')">IN PROGRESS</div>
     <div class="tab done-tab" [class.active-tab]="activeTab === 'done'" (click)="toggleTab('done')">DONE</div>
-</div>
+  </div>
 
-<ng-container *ngIf="activeTab === 'in-progress' && hasUsersInProgress()">
-    <app-leaderboard-list [status]="0"></app-leaderboard-list>
+  <ng-container *ngIf="activeTab === 'in-progress' && hasUsersInProgress()">
+    <app-leaderboard-list [leaderboardUsers]="usersInProgress"></app-leaderboard-list>
   </ng-container>
-
+  
   <ng-container *ngIf="activeTab === 'done' && hasUsersInDone()">
-    <app-leaderboard-list [status]="1"></app-leaderboard-list>
+    <app-leaderboard-list [leaderboardUsers]="usersInDone"></app-leaderboard-list>
   </ng-container>
 
   <ng-container *ngIf="(activeTab === 'in-progress' && !hasUsersInProgress()) || (activeTab === 'done' && !hasUsersInDone())">
@@ -22,5 +22,4 @@
       <p>No users in {{ activeTab === 'in-progress' ? 'progress' : 'done' }}</p>
     </div>
   </ng-container>
-
 </form>
