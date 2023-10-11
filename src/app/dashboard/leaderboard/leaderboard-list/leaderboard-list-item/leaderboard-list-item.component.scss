@@ -1,4 +1,4 @@
-@import "/src/styleguide.scss";
+@import '/src/styleguide.scss';
 
 .user-card {
   display: grid;
@@ -25,22 +25,23 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 4px;
+    gap: 0.25rem;
   }
 
   &__name {
-      color: $black-color;
-      font-family: Roboto;
-      font-size: 14px;
-      font-style: normal;
-      font-weight: 400;
-      line-height: 20px;
-      letter-spacing: 0.25px;
+    color: $black-color;
+    font-family: Roboto;
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.25rem;
+    letter-spacing: 0.015rem;
   }
 
   &__days_left,
   &__points {
     color: $black-color;
+    font-size: 0.75rem;
   }
 
   &__separator {
@@ -49,15 +50,15 @@
   }
 
   &__icon {
-    width: 16px;
-    height: 16px;
-    border-width: 0.2rem;
+    width: 1rem;
+    height: 1rem;
+    border-width: 0.02rem;
   }
 
   &__trophies {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 4px;
+    gap: 0.25rem;
   }
 }
