@@ -57,6 +57,8 @@ export class CurrentProgressComponent implements OnInit {
     ['Not Started', 25],
   ];
 
+  dataFor0Days = [['Task', 'Hours per Day']];
+
   ngOnInit(): void {
     this.chartData = this.dataForLast7Days;
     this.selectedLastDays = this.lastDays[0];
@@ -100,7 +102,6 @@ export class CurrentProgressComponent implements OnInit {
         var sliceIndex = eventData.row;
         var sliceValue = data.getValue(sliceIndex, 1);
         this.currentHoverValue = `${sliceValue}%`;
-        console.log(this.currentHoverValue);
       }
     );
 

@@ -14,7 +14,7 @@
       </mat-form-field>
     </div>
   </div>
-  <div>
+  <div *ngIf="chartData.length > 0">
     <div id="donutchart" class="donutchart"></div>
     <div class="legend">
       <div *ngFor="let item of legendItems" class="legend__colors">
@@ -26,5 +26,9 @@
       </div>
     </div>
     <div id="center-text" class="center-text">{{ currentHoverValue }}</div>
+  </div>
+  <div class="form__no-data" *ngIf="chartData.length === 0">
+    <mat-icon class="form__no-data__icon" svgIcon="no-data"></mat-icon>
+    <p>No data to be shown.</p>
   </div>
 </div>
