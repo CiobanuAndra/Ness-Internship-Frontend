@@ -8,7 +8,7 @@
           (ngModelChange)="updateChart()"
         >
           <mat-option *ngFor="let option of lastDays" [value]="option"
-            >{{ option }}
+            >Last {{ option }} days
           </mat-option>
         </mat-select>
       </mat-form-field>

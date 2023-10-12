@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 declare var google: any;
+import { LastDaysProgress } from 'src/app/enums/last-days-progress';
+import { ProgressService } from 'src/app/services/progress/progress.service';
 
 @Component({
   selector: 'app-current-progress',
@@ -7,16 +9,14 @@ declare var google: any;
   styleUrls: ['./current-progress.component.scss'],
 })
 export class CurrentProgressComponent implements OnInit {
-  selectedLastDays: string = '';
+  constructor(private _progress: ProgressService) {}
+  selectedLastDays: LastDaysProgress = LastDaysProgress.SevenDays;
   currentHoverValue: string = '';
   chartData: any = [];
 
-  lastDays: string[] = [
-    'Last 7 Days',
-    'Last 14 Days',
-    'Last 21 Days',
-    'Last 30 Days',
-  ];
+  lastDays = Object.values(LastDaysProgress).filter(
+    (value) => typeof value === 'number'
+  );
 
   legendItems = [
     { name: 'Register', color: '#00195f' },
@@ -25,59 +25,25 @@ export class CurrentProgressComponent implements OnInit {
     { name: 'Not Started', color: '#CCD1DF' },
   ];
 
-  dataForLast7Days = [
-    ['Task', 'Hours per Day'],
-    ['Register', 10],
-    ['Finished', 80],
-    ['In Progress', 5],
-    ['Not Started', 5],
-  ];
-
-  dataForLast14Days = [
-    ['Task', 'Hours per Day'],
-    ['Register', 15],
-    ['Finished', 30],
-    ['In Progress', 10],
-    ['Not Started', 45],
-  ];
-
-  dataForLast21Days = [
-    ['Task', 'Hours per Day'],
-    ['Register', 1],
-    ['Finished', 2],
-    ['In Progress', 90],
-    ['Not Started', 7],
-  ];
-
-  dataForLast30Days = [
-    ['Task', 'Hours per Day'],
-    ['Register', 25],
-    ['Finished', 25],
-    ['In Progress', 25],
-    ['Not Started', 25],
-  ];
-
-  dataFor0Days = [['Task', 'Hours per Day']];
-
   ngOnInit(): void {
-    this.chartData = this.dataForLast7Days;
-    this.selectedLastDays = this.lastDays[0];
+    this._progress.getDataForLast7Days().subscribe((values) => {
+      values.unshift(['', '']);
+      this.chartData = values;
+    });
+
     google.charts.load('current', { packages: ['corechart'] });
     google.charts.setOnLoadCallback(() => this.drawChart());
   }
+
   updateChart() {
-    if (this.selectedLastDays === 'Last 7 Days') {
-      this.chartData = this.dataForLast7Days;
-    } else if (this.selectedLastDays === 'Last 14 Days') {
-      this.chartData = this.dataForLast14Days;
-    } else if (this.selectedLastDays === 'Last 21 Days') {
-      this.chartData = this.dataForLast21Days;
-    } else if (this.selectedLastDays === 'Last 30 Days') {
-      this.chartData = this.dataForLast30Days;
-    } else {
-      this.chartData = [];
-    }
-    this.drawChart();
+    this._progress
+      .getDataForSelectedLastDays(this.selectedLastDays)
+      .subscribe((values) => {
+        values.unshift(['', '']);
+        this.chartData = values;
+        this.drawChart();
+        this.currentHoverValue = '';
+      });
   }
 
   drawChart() {
@@ -105,7 +71,6 @@ export class CurrentProgressComponent implements OnInit {
       }
     );
 
-    google.visualization.events.addListener(chart, 'onmouseout', () => {});
     chart.draw(data, options);
   }
 }
