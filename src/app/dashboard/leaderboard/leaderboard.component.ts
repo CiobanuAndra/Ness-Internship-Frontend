@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { UsersService } from 'src/app/services/users.service';
 import { UserCard } from 'src/app/interfaces/user-card.model';
+import { map } from 'rxjs';
+import { LeaderboardTabsEnum } from '../enum/leaderboard-tabs.enum';
 
 @Component({
   selector: 'app-leaderboard',
@@ -8,42 +10,26 @@ import { UserCard } from 'src/app/interfaces/user-card.model';
   styleUrls: ['./leaderboard.component.scss'],
 })
 export class LeaderboardComponent implements OnInit {
-  activeTab: string = 'in-progress';
+  activeTab: LeaderboardTabsEnum = LeaderboardTabsEnum.InProgress;
   isInProgressPress = true;
   isDonePress = false;
-  leaderboardUsers: UserCard[] = [];
   usersInProgress: UserCard[] = [];
   usersInDone: UserCard[] = [];
+  leaderboardTabsEnum = LeaderboardTabsEnum;
 
   constructor(private userService: UsersService) {}
 
   ngOnInit() {
-    this.userService.usersLeaderboard$.subscribe((leaderboard) => {
-      this.leaderboardUsers = leaderboard;
-      this.filterUsers();
+    this.userService.loadUsersLeaderboard().pipe(
+      map((leaderboard) => {
+        return {
+          usersInProgress: leaderboard.filter((user) => !user.status),
+          usersInDone: leaderboard.filter((user) => user.status),
+        }
+      })
+    ).subscribe(({usersInProgress, usersInDone}) => {
+        this.usersInProgress = usersInProgress;
+        this.usersInDone = usersInDone;
     });
-  }
-
-  toggleTab(tabName: string) {
-    this.activeTab = tabName;
-    if (this.isInProgressPress) {
-      this.isInProgressPress = !this.isInProgressPress;
-    } else {
-      this.isDonePress = !this.isDonePress;
-    }
-    this.filterUsers();
-  }
-
-  hasUsersInProgress() {
-    return this.leaderboardUsers.some((user) => !user.status);
-  }
-
-  hasUsersInDone() {
-    return this.leaderboardUsers.some((user) => user.status);
-  }
-
-  filterUsers() {
-    this.usersInProgress = this.leaderboardUsers.filter((user) => user.status === false);
-    this.usersInDone = this.leaderboardUsers.filter((user) => user.status === true);
   }
 }

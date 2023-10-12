@@ -1,25 +1,25 @@
-<form class="form">
-  <div class="form__title">
-    <p class="form__title-text">Leaderboard</p>
+<div class="leaderboard-section">
+  <div class="leaderboard-section__header">
+    <p class="leaderboard-section__header__text">Leaderboard</p>
     <button type="button" mat-button class="form__view__all__users__button">{{ 'view all' | uppercase }}</button>
   </div>
   <div class="my-custom-tabs">
-    <div class="tab in-progress-tab" [class.active-tab]="activeTab === 'in-progress'" (click)="toggleTab('in-progress')">IN PROGRESS</div>
-    <div class="tab done-tab" [class.active-tab]="activeTab === 'done'" (click)="toggleTab('done')">DONE</div>
+    <div class="tab in-progress-tab" [class.active-tab]="activeTab === leaderboardTabsEnum.InProgress" (click)="activeTab=leaderboardTabsEnum.InProgress">IN PROGRESS</div>
+    <div class="tab done-tab" [class.active-tab]="activeTab === leaderboardTabsEnum.Done" (click)="activeTab=leaderboardTabsEnum.Done">DONE</div>
   </div>
 
-  <ng-container *ngIf="activeTab === 'in-progress' && hasUsersInProgress()">
+  <ng-container *ngIf="activeTab === leaderboardTabsEnum.InProgress && usersInProgress.length">
     <app-leaderboard-list [leaderboardUsers]="usersInProgress"></app-leaderboard-list>
   </ng-container>
   
-  <ng-container *ngIf="activeTab === 'done' && hasUsersInDone()">
+  <ng-container *ngIf="activeTab === leaderboardTabsEnum.Done && usersInDone.length">
     <app-leaderboard-list [leaderboardUsers]="usersInDone"></app-leaderboard-list>
   </ng-container>
 
-  <ng-container *ngIf="(activeTab === 'in-progress' && !hasUsersInProgress()) || (activeTab === 'done' && !hasUsersInDone())">
+  <ng-container *ngIf="(activeTab === leaderboardTabsEnum.InProgress && !usersInProgress.length) || (activeTab === leaderboardTabsEnum.Done && !usersInDone.length)">
     <div class="no-users-container">
       <img src="assets/icons/users.svg" alt="Users Icon">
-      <p>No users in {{ activeTab === 'in-progress' ? 'progress' : 'done' }}</p>
+      <p>No users in {{ activeTab === leaderboardTabsEnum.InProgress ? 'progress' : 'done' }}</p>
     </div>
   </ng-container>
-</form>
+</div>
