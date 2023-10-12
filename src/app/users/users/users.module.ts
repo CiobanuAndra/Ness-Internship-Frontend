@@ -6,6 +6,8 @@ import { UsersComponent } from '../users.component';
 import { HttpClientModule } from '@angular/common/http';
 import { MaterialModule } from 'src/shared/material/material.module';
 import { MatTableModule } from '@angular/material/table';
+import { IconsModule } from 'src/shared/icons-module/icons/icons.module';
+
 @NgModule({
   declarations: [UsersComponent],
   imports: [
@@ -15,6 +17,7 @@ import { MatTableModule } from '@angular/material/table';
     MatTabsModule,
     HttpClientModule,
     MatTableModule,
+    IconsModule,
   ],
   exports: [UsersComponent],
 })

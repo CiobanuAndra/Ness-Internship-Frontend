@@ -21,4 +21,39 @@
   &__mat-tab-group {
     width: 20%;
   }
+
+  &__mat-columnDef-name {
+    width: 54.438rem;
+
+    &__icon {
+      width: 16px;
+      height: 16px;
+    }
+  }
+  &__mat-columnDef-status,
+  &__mat-columnDef-leftDays,
+  &__mat-columnDef-dateAdded {
+    width: 11.25rem;
+
+    &__icon {
+      width: 16px;
+      height: 16px;
+    }
+  }
+  &__mat-columnDef-taskCompleted {
+    width: 12.5rem;
+
+    &__icon {
+      width: 16px;
+      height: 16px;
+    }
+  }
+  &__settings {
+    width: 49px;
+  }
+
+  &__settings-icon {
+    width: 16px;
+    height: 16px;
+  }
 }

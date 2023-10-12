@@ -8,10 +8,10 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatTableModule } from '@angular/material/table';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
 import { MatSortModule } from '@angular/material/sort';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [],
@@ -29,6 +29,7 @@ import { MatTabsModule } from '@angular/material/tabs';
     MatIconModule,
     MatSortModule,
     MatDividerModule,
+    MatIconModule,
   ],
   providers: [],
 })

@@ -17,9 +17,11 @@ export class IconsModule {
     this.matIconRegistry
       .addSvgIcon('clock', this.setPath(`${this.path}/clock.svg`))
       .addSvgIcon('file', this.setPath(`${this.path}/file.svg`))
-      .addSvgIcon('points', this.setPath(`${this.path}/points.svg`))
       .addSvgIcon('check', this.setPath(`${this.path}/check.svg`))
-      .addSvgIcon('no-data', this.setPath(`${this.path}/no-data.svg`));
+      .addSvgIcon('no-data', this.setPath(`${this.path}/no-data.svg`))
+      .addSvgIcon('points-black', this.setPath(`${this.path}/points-black.svg`))
+      .addSvgIcon('points', this.setPath(`${this.path}/points.svg`))
+      .addSvgIcon('span', this.setPath(`${this.path}/span.svg`));
   }
 
   private setPath(url: string): SafeResourceUrl {

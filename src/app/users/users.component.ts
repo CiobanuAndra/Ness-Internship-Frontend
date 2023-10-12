@@ -15,6 +15,7 @@ export class UsersComponent implements OnInit {
     'taskCompleted',
     'leftDays',
     'dateAdded',
+    'settings',
   ];
 
   dataSource: any[] = [{ column1: 'name', column2: 'status' }];
