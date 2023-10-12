@@ -5,11 +5,15 @@
   height: $height;
   margin-top: $margin-top;
 }
-.form {
-  @include set-size(33.75rem, 18.938rem);
-  border-radius: 0.25rem;
 
-  &__title {
+.leaderboard-section {
+  border-radius: 0.25rem;
+  width: 33.75rem;
+  height: 39.300rem;
+  background-color: $white-color;
+  box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.12), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 1px 0px rgba(0, 0, 0, 0.20);
+
+  &__header {
     display: flex;
     justify-content: flex-start;
     align-items: center;
@@ -19,10 +23,10 @@
     padding: 0 1rem;
     background: $white-color;
 
-    &-text {
+    &__text {
       color: $black-color;
       font-family: Roboto;
-      font-size: 0.9375rem;
+      font-size: 1rem;
       font-style: normal;
       font-weight: 400;
       line-height: 1.75rem;
@@ -41,5 +45,42 @@
       line-height: 2rem;
       letter-spacing: 0.078rem;
     }
+  }
+
+  .my-custom-tabs {
+    display: flex;
+    justify-content: space-between;
+    background-color: $white-color;
+  }
+
+  .tab {
+    flex: 1;
+    text-align: center;
+    color: #00195F;
+    transition: color 0.3s ease;
+    cursor: pointer;
+    padding: 1rem 0;
+  }
+
+  .tab.active-tab {
+    position: relative;
+    color: #00195F;
+    border-bottom: 0.125rem solid #00195F;
+  }
+
+  .done-tab {
+    color: $dark-gray-color;
+  }
+
+  .tab:hover {
+    background-color: $light-gray-color;
+  }
+
+  .no-users-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 28.407rem;
   }
 }
