@@ -2,33 +2,39 @@
   <div class="form__title">
     <p>User that require attention</p>
   </div>
-  <div class="form__users" *ngFor="let user of usersRequireAttention">
-    <div class="form__users__user">
-      <img
-        class="form__users__user__image"
-        src="../../../assets/images/Avatar.png"
-      />
-      <div class="form__users__user__details">
-        <div>{{ user.name }}</div>
-        <div class="form__users__user__details__days">
-          <mat-icon
-            class="form__users__user__details__days__file"
-            svgIcon="file"
-          ></mat-icon>
-          <div>{{ user.leftDays + " Left" }}</div>
-          <div class="form__users__user__details__days__point">
-            <div class="form__users__user__details__days__point__p">
-              {{ "." }}
+  <div *ngIf="usersRequireAttention.length > 0">
+    <div class="form__users" *ngFor="let user of usersRequireAttention">
+      <div class="form__users__user">
+        <img
+          class="form__users__user__image"
+          src="../../../assets/images/Avatar.png"
+        />
+        <div class="form__users__user__details">
+          <div>{{ user.name }}</div>
+          <div class="form__users__user__details__days">
+            <mat-icon
+              class="form__users__user__details__days__file"
+              svgIcon="file"
+            ></mat-icon>
+            <div>{{ user.leftDays + " Left" }}</div>
+            <div class="form__users__user__details__days__point">
+              <div class="form__users__user__details__days__point__p">
+                {{ "." }}
+              </div>
             </div>
+            <mat-icon
+              class="form__users__user__details__days__clock"
+              svgIcon="clock"
+            ></mat-icon>
+            <div>{{ user.pastDays + " Days" }}</div>
           </div>
-          <mat-icon
-            class="form__users__user__details__days__clock"
-            svgIcon="clock"
-          ></mat-icon>
-          <div>{{ user.pastDays + " Days" }}</div>
         </div>
       </div>
+      <mat-icon class="form__users__points-icon" svgIcon="points"></mat-icon>
     </div>
-    <mat-icon class="form__users__points-icon" svgIcon="points"></mat-icon>
+  </div>
+  <div *ngIf="usersRequireAttention.length == 0" class="form__no-users">
+    <mat-icon class="form__no-users__icon" svgIcon="check"></mat-icon>
+    <p>No users require attention.</p>
   </div>
 </form>
