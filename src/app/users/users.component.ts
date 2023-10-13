@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UsersService } from '../services/users.service';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-users',
@@ -7,7 +8,8 @@ import { UsersService } from '../services/users.service';
   styleUrls: ['./users.component.scss'],
 })
 export class UsersComponent implements OnInit {
-  constructor(private _userService: UsersService) {}
+  constructor(private _userService: UsersService, private datePipe: DatePipe) {}
+  totalCourses = 0;
 
   displayedColumns: string[] = [
     'name',
@@ -23,6 +25,7 @@ export class UsersComponent implements OnInit {
   users: any[] = [];
 
   ngOnInit() {
+    this.totalCourses = this._userService.totalCourses;
     this._userService.getAllUsers().subscribe((users) => {
       this.dataSource = users;
     });

@@ -3,57 +3,93 @@
 .form {
   &__title {
     display: flex;
-    justify-content: space-around;
+    flex-direction: row;
     align-items: center;
+    text-align: center;
     border-bottom: 0.063rem solid $medium-gray-color;
     line-height: 1.75rem;
     height: 3.813rem;
     padding: 0 1rem;
     background: $white-color;
-    gap: 80%;
+    gap: 75%;
 
     &__buttons {
       display: flex;
       flex-direction: row;
       gap: 1rem;
+
+      &__export-csv {
+        width: 126px;
+        border-radius: 4px;
+        background-color: $light-gray-color;
+        border: none;
+        height: 36px;
+      }
+      &__add-user {
+        width: 107px;
+        border: none;
+        border-radius: 4px;
+        background-color: $light-gray-color;
+        height: 36px;
+      }
+      &__add-bulk-users {
+        width: 161px;
+        border-radius: 4px;
+        background-color: $primary-color;
+        height: 36px;
+        border: none;
+        color: white;
+      }
     }
   }
-  &__mat-tab-group {
-    width: 20%;
-  }
 
-  &__mat-columnDef-name {
-    width: 54.438rem;
-
-    &__icon {
-      width: 16px;
-      height: 16px;
+  &__table {
+    td,
+    th {
+      vertical-align: middle;
     }
-  }
-  &__mat-columnDef-status,
-  &__mat-columnDef-leftDays,
-  &__mat-columnDef-dateAdded {
-    width: 11.25rem;
 
-    &__icon {
-      width: 16px;
-      height: 16px;
+    &__status-active {
+      color: green;
     }
-  }
-  &__mat-columnDef-taskCompleted {
-    width: 12.5rem;
+    &__status-inactive {
+      color: red;
+    }
 
-    &__icon {
-      width: 16px;
-      height: 16px;
+    &__row {
+      height: 48px;
     }
-  }
-  &__settings {
-    width: 49px;
   }
 
   &__settings-icon {
     width: 16px;
     height: 16px;
+    cursor: pointer;
+  }
+  &__mat-tab-group-div {
+    width: 100%;
+    background-color: $white-color;
+
+    &__mat-tab-group {
+      width: 20%;
+      background-color: $white-color;
+    }
+  }
+
+  &__mat-columnDef-name {
+    width: 54.438rem;
+  }
+  &__mat-columnDef-status,
+  &__mat-columnDef-leftDays,
+  &__mat-columnDef-dateAdded {
+    width: 15rem;
+  }
+  &__mat-columnDef-taskCompleted {
+    width: 12.5rem;
   }
 }
+// ::ng-deep.mat-sort-header-container {
+//   display: flex;
+//   justify-content: space-around;
+//   gap: 0%;
+// }
