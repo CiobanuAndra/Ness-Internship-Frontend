@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { User } from '../interfaces/user.model';
-import { BehaviorSubject, Observable, of } from 'rxjs';
 import { UserCard } from '../interfaces/user-card.model';
+import { BehaviorSubject, Observable, of } from 'rxjs';
+import { UsersListTable } from '../interfaces/users-list-table';
 
 @Injectable({
   providedIn: 'root',
@@ -36,13 +37,12 @@ export class UsersService {
 
   totalCourses: number = 15;
 
-  allUsers: any[] = [
+  allUsers: UsersListTable[] = [
     {
       name: 'Alex Muller',
       status: true,
       coursesCompleted: 5,
       leftDays: 10,
-      coursesNumber: 10,
       dateAdded: new Date(),
     },
     {
@@ -51,7 +51,6 @@ export class UsersService {
       coursesCompleted: 5,
       leftDays: 10,
       dateAdded: new Date(),
-      coursesNumber: 10,
     },
     {
       name: 'Alex Muller',
@@ -59,7 +58,6 @@ export class UsersService {
       coursesCompleted: 5,
       leftDays: 10,
       dateAdded: new Date(),
-      coursesNumber: 10,
     },
     {
       name: 'Alex Muller',
@@ -67,7 +65,6 @@ export class UsersService {
       coursesCompleted: 5,
       leftDays: 10,
       dateAdded: new Date(),
-      coursesNumber: 10,
     },
     {
       name: 'Alex Muller',
@@ -75,7 +72,6 @@ export class UsersService {
       coursesCompleted: 5,
       leftDays: 10,
       dateAdded: new Date(),
-      coursesNumber: 10,
     },
     {
       name: 'Alex Muller',
@@ -83,7 +79,6 @@ export class UsersService {
       coursesCompleted: 5,
       leftDays: 10,
       dateAdded: new Date(),
-      coursesNumber: 10,
     },
     {
       name: 'Alex Muller',
@@ -91,7 +86,6 @@ export class UsersService {
       coursesCompleted: 5,
       leftDays: 10,
       dateAdded: new Date(),
-      coursesNumber: 10,
     },
     {
       name: 'Alex Muller',
@@ -99,7 +93,6 @@ export class UsersService {
       coursesCompleted: 5,
       leftDays: 10,
       dateAdded: new Date(),
-      coursesNumber: 10,
     },
     {
       name: 'Alex Muller',
@@ -107,7 +100,6 @@ export class UsersService {
       coursesCompleted: 5,
       leftDays: 10,
       dateAdded: new Date(),
-      coursesNumber: 10,
     },
     {
       name: 'Alex Muller',
@@ -115,7 +107,6 @@ export class UsersService {
       coursesCompleted: 5,
       leftDays: 10,
       dateAdded: new Date(),
-      coursesNumber: 10,
     },
     {
       name: 'Alex Muller',
@@ -123,7 +114,6 @@ export class UsersService {
       coursesCompleted: 5,
       leftDays: 10,
       dateAdded: new Date(),
-      coursesNumber: 10,
     },
     {
       name: 'Alex Muller',
@@ -131,7 +121,6 @@ export class UsersService {
       coursesCompleted: 5,
       leftDays: 10,
       dateAdded: new Date(),
-      coursesNumber: 10,
     },
   ];
 
