@@ -37,10 +37,6 @@ export class ProgressService {
     [ProgressStatus.NotStarted, 25],
   ];
 
-  getDataForLast7Days(): Observable<any> {
-    return of(this.dataForLast7Days);
-  }
-
   getDataForSelectedLastDays(
     selectedLastDays: LastDaysProgress
   ): Observable<any> {

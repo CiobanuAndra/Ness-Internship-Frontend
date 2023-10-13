@@ -9,7 +9,7 @@ import { ProgressService } from 'src/app/services/progress/progress.service';
   styleUrls: ['./current-progress.component.scss'],
 })
 export class CurrentProgressComponent implements OnInit {
-  constructor(private _progress: ProgressService) {}
+  constructor(private progress: ProgressService) {}
   selectedLastDays: LastDaysProgress = LastDaysProgress.SevenDays;
   currentHoverValue: string = '';
   chartData: any = [];
@@ -26,17 +26,21 @@ export class CurrentProgressComponent implements OnInit {
   ];
 
   ngOnInit(): void {
-    this._progress.getDataForLast7Days().subscribe((values) => {
-      values.unshift(['', '']);
-      this.chartData = values;
-    });
+    this.progress
+      .getDataForSelectedLastDays(this.selectedLastDays)
+      .subscribe((values) => {
+        values.unshift(['', '']);
+        this.chartData = values;
+        this.drawChart();
+        this.currentHoverValue = '';
+      });
 
     google.charts.load('current', { packages: ['corechart'] });
     google.charts.setOnLoadCallback(() => this.drawChart());
   }
 
-  updateChart() {
-    this._progress
+  updateChart(): void {
+    this.progress
       .getDataForSelectedLastDays(this.selectedLastDays)
       .subscribe((values) => {
         values.unshift(['', '']);
@@ -46,7 +50,7 @@ export class CurrentProgressComponent implements OnInit {
       });
   }
 
-  drawChart() {
+  drawChart(): void {
     var data = google.visualization.arrayToDataTable(this.chartData);
 
     var options = {

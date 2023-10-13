@@ -8,13 +8,13 @@ import { MaterialModule } from 'src/shared/material-module/material.module';
 import { LeaderboardComponent } from './leaderboard/leaderboard.component';
 import { LeaderboardListComponent } from './leaderboard-list/leaderboard-list.component';
 import { LeaderboardListItemComponent } from './leaderboard-list-item/leaderboard-list-item.component';
-import { UsersService } from '../services/users.service';
 import { UserProgressTableComponent } from './user-progress-table/user-progress-table.component';
 import { LeaderboardTableComponent } from './leaderboard-table/leaderboard-table.component';
 import { MatTableModule } from '@angular/material/table';
 
 import { RouterModule, Routes } from '@angular/router';
 import { CurrentProgressComponent } from './current-progress/current-progress.component';
+import { UsersService } from '../services/users/users.service';
 
 const routes: Routes = [
   {
@@ -31,12 +31,12 @@ const routes: Routes = [
   declarations: [
     DashboardComponent,
     UsersRequireAttentionComponent,
-    LeaderboardComponent,
     LeaderboardListComponent,
     LeaderboardListItemComponent,
     UserProgressTableComponent,
     LeaderboardTableComponent,
     CurrentProgressComponent,
+    LeaderboardComponent,
   ],
   imports: [
     CommonModule,
