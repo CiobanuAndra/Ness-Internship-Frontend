@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { User } from '../interfaces/user.model';
 import { UserCard } from '../interfaces/user-card.model';
-import { BehaviorSubject, Observable, of } from 'rxjs';
+import { BehaviorSubject, Observable, map, of } from 'rxjs';
 import { UsersListTable } from '../interfaces/users-list-table';
 
 @Injectable({
@@ -60,7 +60,7 @@ export class UsersService {
       dateAdded: new Date(),
     },
     {
-      name: 'Alex Muller',
+      name: 'Bogdy Muller',
       status: true,
       coursesCompleted: 5,
       leftDays: 10,
@@ -122,14 +122,35 @@ export class UsersService {
       leftDays: 10,
       dateAdded: new Date(),
     },
+    {
+      name: 'Alex Muller',
+      status: true,
+      coursesCompleted: 5,
+      leftDays: 10,
+      dateAdded: new Date(),
+    },
+    {
+      name: 'Alex Muller',
+      status: true,
+      coursesCompleted: 5,
+      leftDays: 10,
+      dateAdded: new Date(),
+    },
+    {
+      name: 'Alex Muller',
+      status: true,
+      coursesCompleted: 5,
+      leftDays: 10,
+      dateAdded: new Date(),
+    },
   ];
+
+  allUsersSubject$: BehaviorSubject<UsersListTable[]> = new BehaviorSubject<
+    UsersListTable[]
+  >(this.allUsers);
 
   usersSubject$: BehaviorSubject<User[]> = new BehaviorSubject<User[]>(
     this.usersRequireAttention
-  );
-
-  allUsersSubject$: BehaviorSubject<any> = new BehaviorSubject<any>(
-    this.allUsers
   );
 
   getUsersRequireAttention(): Observable<User[]> {
@@ -138,7 +159,23 @@ export class UsersService {
   updateUsersRequireAttention(users: User[]) {
     this.usersSubject$.next(users);
   }
-  getAllUsers(): Observable<any[]> {
+
+  updateTable(data: UsersListTable[]) {
+    this.allUsersSubject$.next(data);
+  }
+
+  getAllUsers(): Observable<UsersListTable[]> {
     return this.allUsersSubject$.asObservable();
+  }
+
+  getInactiveUsers(): Observable<UsersListTable[]> {
+    return this.allUsersSubject$.pipe(
+      map((users) => users.filter((user) => user.status === false))
+    );
+  }
+  getActiveUsers() {
+    return this.allUsersSubject$.pipe(
+      map((users) => users.filter((user) => user.status === true))
+    );
   }
 }

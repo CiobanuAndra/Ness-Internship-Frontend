@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { UsersService } from '../services/users.service';
-import { DatePipe } from '@angular/common';
+import { UsersListTable } from '../interfaces/users-list-table';
+import { UsersFilter } from '../enums/users-filter';
+import { MatSort } from '@angular/material/sort';
+import { MatTabChangeEvent } from '@angular/material/tabs';
 
 @Component({
   selector: 'app-users',
@@ -8,9 +11,15 @@ import { DatePipe } from '@angular/common';
   styleUrls: ['./users.component.scss'],
 })
 export class UsersComponent implements OnInit {
-  constructor(private _userService: UsersService, private datePipe: DatePipe) {}
-  totalCourses = 0;
+  constructor(private userService: UsersService) {}
 
+  UsersFilterIndex = {
+    [UsersFilter.ALL]: 0,
+    [UsersFilter.ACTIVE]: 1,
+    [UsersFilter.INACTIVE]: 2,
+  };
+  selectedTabIndex: number = this.UsersFilterIndex[UsersFilter.ALL];
+  totalCourses = 0;
   displayedColumns: string[] = [
     'name',
     'status',
@@ -19,15 +28,46 @@ export class UsersComponent implements OnInit {
     'dateAdded',
     'settings',
   ];
-
-  dataSource: any[] = [{ column1: 'name', column2: 'status' }];
+  UsersFilterValues = Object.values(UsersFilter);
+  dataSource: UsersListTable[] = [];
   buttons: any = ['export csv', 'add user', 'add bulk users'];
-  users: any[] = [];
+
+  filterActiveUsers() {
+    this.userService.getActiveUsers().subscribe((values) => {
+      this.dataSource = values;
+    });
+  }
+
+  filterInactiveUsers() {
+    this.userService.getInactiveUsers().subscribe((values) => {
+      this.dataSource = values;
+    });
+  }
+
+  filterAllUsers() {
+    this.userService.getAllUsers().subscribe((values) => {
+      this.dataSource = values;
+    });
+  }
+
+  onTabChange(event: MatTabChangeEvent) {
+    switch (event.index) {
+      case 0:
+        this.filterAllUsers();
+        break;
+      case 1:
+        this.filterActiveUsers();
+        break;
+      case 2:
+        this.filterInactiveUsers();
+        break;
+      default:
+        break;
+    }
+  }
 
   ngOnInit() {
-    this.totalCourses = this._userService.totalCourses;
-    this._userService.getAllUsers().subscribe((users) => {
-      this.dataSource = users;
-    });
+    this.totalCourses = this.userService.totalCourses;
+    this.filterAllUsers();
   }
 }
