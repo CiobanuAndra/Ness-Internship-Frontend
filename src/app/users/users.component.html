@@ -2,7 +2,11 @@
   <div class="form__title">
     <p class="form__title-text">Users</p>
     <div class="form__title__buttons">
-      <button mat-button class="form__title__buttons__export-csv">
+      <button
+        mat-button
+        class="form__title__buttons__export-csv"
+        (click)="downloadCsvFile()"
+      >
         EXPORT CSV
       </button>
       <button mat-button class="form__title__buttons__add-user">
@@ -109,9 +113,9 @@
   </mat-table>
   <div class="line"></div>
   <mat-paginator
-    [length]="10"
-    [pageSize]="10"
-    [pageSizeOptions]="[5, 10, 25, 100]"
+    [length]="15"
+    [pageSize]="15"
+    [pageSizeOptions]="[5, 10, 15]"
     aria-label="Rows per page"
   >
   </mat-paginator>

@@ -46,7 +46,7 @@ export class UsersService {
       dateAdded: new Date(),
     },
     {
-      name: 'Alex Muller',
+      name: 'Eduard Rosu',
       status: true,
       coursesCompleted: 5,
       leftDays: 10,
@@ -60,28 +60,7 @@ export class UsersService {
       dateAdded: new Date(),
     },
     {
-      name: 'Bogdy Muller',
-      status: true,
-      coursesCompleted: 5,
-      leftDays: 10,
-      dateAdded: new Date(),
-    },
-    {
-      name: 'Alex Muller',
-      status: true,
-      coursesCompleted: 5,
-      leftDays: 10,
-      dateAdded: new Date(),
-    },
-    {
-      name: 'Alex Muller',
-      status: true,
-      coursesCompleted: 5,
-      leftDays: 10,
-      dateAdded: new Date(),
-    },
-    {
-      name: 'Alex Muller',
+      name: 'Ioan Bucataru',
       status: true,
       coursesCompleted: 5,
       leftDays: 10,
@@ -102,7 +81,7 @@ export class UsersService {
       dateAdded: new Date(),
     },
     {
-      name: 'Alex Muller',
+      name: 'Magda Paicu',
       status: true,
       coursesCompleted: 5,
       leftDays: 10,
@@ -117,7 +96,7 @@ export class UsersService {
     },
     {
       name: 'Alex Muller',
-      status: true,
+      status: false,
       coursesCompleted: 5,
       leftDays: 10,
       dateAdded: new Date(),
@@ -130,24 +109,41 @@ export class UsersService {
       dateAdded: new Date(),
     },
     {
-      name: 'Alex Muller',
+      name: 'Eduard Rosu',
       status: true,
       coursesCompleted: 5,
       leftDays: 10,
       dateAdded: new Date(),
     },
     {
-      name: 'Alex Muller',
+      name: 'Florin Bodogan',
       status: true,
+      coursesCompleted: 5,
+      leftDays: 10,
+      dateAdded: new Date(),
+    },
+    {
+      name: 'Andra Ciobanu',
+      status: true,
+      coursesCompleted: 5,
+      leftDays: 10,
+      dateAdded: new Date(),
+    },
+    {
+      name: 'Vlad Cristea',
+      status: true,
+      coursesCompleted: 5,
+      leftDays: 10,
+      dateAdded: new Date(),
+    },
+    {
+      name: 'Andra Ciobanu',
+      status: false,
       coursesCompleted: 5,
       leftDays: 10,
       dateAdded: new Date(),
     },
   ];
-
-  allUsersSubject$: BehaviorSubject<UsersListTable[]> = new BehaviorSubject<
-    UsersListTable[]
-  >(this.allUsers);
 
   usersSubject$: BehaviorSubject<User[]> = new BehaviorSubject<User[]>(
     this.usersRequireAttention
@@ -160,21 +156,17 @@ export class UsersService {
     this.usersSubject$.next(users);
   }
 
-  updateTable(data: UsersListTable[]) {
-    this.allUsersSubject$.next(data);
-  }
-
   getAllUsers(): Observable<UsersListTable[]> {
-    return this.allUsersSubject$.asObservable();
+    return of(this.allUsers);
   }
 
   getInactiveUsers(): Observable<UsersListTable[]> {
-    return this.allUsersSubject$.pipe(
+    return of(this.allUsers).pipe(
       map((users) => users.filter((user) => user.status === false))
     );
   }
   getActiveUsers() {
-    return this.allUsersSubject$.pipe(
+    return of(this.allUsers).pipe(
       map((users) => users.filter((user) => user.status === true))
     );
   }

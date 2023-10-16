@@ -4,6 +4,7 @@ import { UsersListTable } from '../interfaces/users-list-table';
 import { UsersFilter } from '../enums/users-filter';
 import { MatSort } from '@angular/material/sort';
 import { MatTabChangeEvent } from '@angular/material/tabs';
+import { ngxCsv } from 'ngx-csv/ngx-csv';
 
 @Component({
   selector: 'app-users',
@@ -64,6 +65,27 @@ export class UsersComponent implements OnInit {
       default:
         break;
     }
+  }
+
+  downloadCsvFile() {
+    var options = {
+      fieldSeparator: ',',
+      quoteStrings: '"',
+      decimalseparator: '.',
+      showLabels: true,
+      showTitle: true,
+      title: 'UsersList',
+      useBom: true,
+      headers: [
+        'Name',
+        'Status',
+        'Courses Completed',
+        'Time Left',
+        'Date Added',
+      ],
+    };
+
+    new ngxCsv(this.dataSource, 'UsersList', options);
   }
 
   ngOnInit() {
