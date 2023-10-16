@@ -1,7 +1,7 @@
 <mat-card class="card-container">
     <mat-card-header class="card-header">
         <mat-card-title class="card-title">
-            {{activeTabTitle}}
+            {{ activeTabTitle }}
         </mat-card-title>
     </mat-card-header>
     <div class="tabs-container">
@@ -13,16 +13,24 @@
             </mat-tab>
 
             <mat-tab label="COURSES">
-                
+                <div class="table-container">
+                    <app-courses></app-courses>
+                </div>
             </mat-tab>
             
             <mat-tab label="AVATARS"> 
-                
+                <div class="table-container">
+                    <app-avatars></app-avatars>
+                </div>
             </mat-tab>
             <mat-tab label="INDUSTRIES"> 
                 
             </mat-tab>
         </mat-tab-group>
-        <button mat-raised-button class="tab-button">Add Task</button>
+        
+        <button mat-raised-button class="tab-button" *ngIf="activeTabTitle === 'Tasks'">Add Task</button>
+        <button mat-raised-button class="tab-button" *ngIf="activeTabTitle === 'Courses'">Add Course</button>
+        <button mat-raised-button class="tab-button" *ngIf="activeTabTitle === 'Avatars'">Add Avatar</button>
+        <button mat-raised-button class="tab-button" *ngIf="activeTabTitle === 'Industries'">Add Industry</button>
     </div>
 </mat-card>

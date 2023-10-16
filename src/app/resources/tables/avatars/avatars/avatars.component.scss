@@ -1,0 +1,13 @@
+@import "/src/styleguide.scss";
+
+.header-cell {
+    text-transform: uppercase;
+}
+
+.mat-column-linked_to {
+    flex: 0 0 50%;
+}
+
+.mat-column-options {  
+    flex: 0 0 5%;
+}

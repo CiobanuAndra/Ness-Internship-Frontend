@@ -81,3 +81,25 @@ $header1-light: (
 .col12 {
   grid-column: 12;
 }
+
+//State no DATA resources component
+.table-with-no-data {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  background-color: $white-color;
+  height: 400px;
+  width: 100%;
+  gap: 1rem;
+}
+
+.no-data-message {
+  font-family: Roboto;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: 0.5px;
+}

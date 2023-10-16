@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatSort, Sort } from '@angular/material/sort';
-import { Task } from 'src/app/interfaces/task.model';
+import { Task } from 'src/app/interfaces/resources/task.model';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { MatTableDataSource } from '@angular/material/table';
 import { Observable } from 'rxjs';
@@ -17,7 +17,7 @@ export class TasksComponent implements AfterViewInit, OnInit {
   dataSource = new MatTableDataSource<Task>();
   columnsToDisplay = ['icon', 'name', 'type', 'courses', 'order', 'length', 'rewards', 'dateAdded', 'lastEdited', 'editedBy', 'options'];
 
-  constructor(private _liveAnnouncer: LiveAnnouncer, private resourcesService: ResourcesService) {}
+  constructor(private liveAnnouncer: LiveAnnouncer, private resourcesService: ResourcesService) {}
 
   ngOnInit(): void {
     this.task$ = this.fetchTasks();
@@ -39,9 +39,9 @@ export class TasksComponent implements AfterViewInit, OnInit {
 
   announceSortChange(sortState: Sort) {
     if (sortState.direction) {
-      this._liveAnnouncer.announce(`Sorted ${sortState.direction}ending`);
+      this.liveAnnouncer.announce(`Sorted ${sortState.direction}ending`);
     } else {
-      this._liveAnnouncer.announce('Sorting cleared');
+      this.liveAnnouncer.announce('Sorting cleared');
     }
   }
 }
