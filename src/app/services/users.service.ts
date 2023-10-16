@@ -22,6 +22,9 @@ export class UsersService {
     { status: false, name: 'Aaron Frey', tasks: 3, points: 1100, rank: 3 },
     { status: false, name: 'John Smith', tasks: 4, points: 1000, rank: 4 },
     { status: false, name: 'Valery Greg', tasks: 10, points: 300, rank: 10 },
+    { status: false, name: 'Zain Grey', tasks: 7, points: 500, rank: 7 },
+    { status: false, name: 'Jackson White', tasks: 11, points: 200, rank: 11 },
+    { status: false, name: 'Paul Greg', tasks: 5, points: 850, rank: 5 },
   ];
 
   public loadUsersLeaderboard():Observable<UserCard[]> {

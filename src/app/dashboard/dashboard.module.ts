@@ -12,8 +12,8 @@ import { UsersService } from '../services/users.service';
 import { UserProgressTableComponent } from './user-progress-table/user-progress-table.component';
 import { LeaderboardTableComponent } from './leaderboard-table/leaderboard-table.component';
 import { MatTableModule } from '@angular/material/table';
+
 import { RouterModule, Routes } from '@angular/router';
-import { MatInputModule } from '@angular/material/input';
 
 
 const routes: Routes = [
@@ -22,9 +22,6 @@ const routes: Routes = [
     component: DashboardComponent,
   },
 ]
-
-
-
 
 @NgModule({
   declarations: [
@@ -43,7 +40,6 @@ const routes: Routes = [
     HttpClientModule,
     MatTableModule,
     RouterModule.forChild(routes),
-    MatInputModule,
   ],
   providers: [UsersService],
   exports: [DashboardComponent],
