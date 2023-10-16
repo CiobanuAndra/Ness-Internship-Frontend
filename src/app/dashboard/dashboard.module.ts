@@ -9,12 +9,16 @@ import { MaterialModule } from 'src/shared/material-module/material.module';
 import { LeaderboardComponent } from './leaderboard/leaderboard.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatPaginatorModule } from '@angular/material/paginator';
 import { LeaderboardListComponent } from './leaderboard-list/leaderboard-list.component';
 import { LeaderboardListItemComponent } from './leaderboard-list-item/leaderboard-list-item.component';
 import { UsersService } from '../services/users.service';
 import { UserProgressTableComponent } from './user-progress-table/user-progress-table.component';
+import { LeaderboardTableComponent } from './leaderboard-table/leaderboard-table.component';
 import { MatTableModule } from '@angular/material/table';
 import { RouterModule, Routes } from '@angular/router';
+import { MatSortModule} from '@angular/material/sort';
+import { MatInputModule } from '@angular/material/input';
 
 const routes: Routes = [
   {
@@ -22,6 +26,8 @@ const routes: Routes = [
     component: DashboardComponent,
   },
 ]
+
+
 
 
 @NgModule({
@@ -32,6 +38,7 @@ const routes: Routes = [
     LeaderboardListComponent,
     LeaderboardListItemComponent,
     UserProgressTableComponent,
+    LeaderboardTableComponent,
   ],
   imports: [
     CommonModule,
@@ -40,9 +47,13 @@ const routes: Routes = [
     MatButtonModule,
     MatTabsModule,
     IconsModule,
+    MatPaginatorModule,
+    MatTableModule,
+    MatSortModule,
     HttpClientModule,
     MatTableModule,
     RouterModule.forChild(routes),
+    MatInputModule,
   ],
   providers: [UsersService],
   exports: [DashboardComponent],
