@@ -15,13 +15,14 @@ import { MatTableModule } from '@angular/material/table';
 
 import { RouterModule, Routes } from '@angular/router';
 
-
 const routes: Routes = [
   {
     path: '',
     component: DashboardComponent,
   },
-]
+  { path: 'leaderboard-table', component: LeaderboardTableComponent },
+];
+
 @NgModule({
   declarations: [
     DashboardComponent,
