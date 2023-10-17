@@ -20,7 +20,10 @@ const routes: Routes = [
     path: '',
     component: DashboardComponent,
   },
-  { path: 'leaderboard-table', component: LeaderboardTableComponent },
+  { 
+    path: 'leaderboard-table', 
+    component: LeaderboardTableComponent,
+  },
 ];
 
 @NgModule({
