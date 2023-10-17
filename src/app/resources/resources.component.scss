@@ -1,0 +1,33 @@
+@import "/src/styleguide.scss";
+
+.card-container {
+    max-width: 1660px;
+    
+    .card-header {
+        padding-bottom: 1rem;
+        border-bottom: 2px solid $light-gray-color;
+
+        .card-title {
+            font-size: 1rem;
+        }
+    }
+
+    .tabs-container {      
+        position: relative;
+        padding: 1rem 0 1rem 0;
+
+        .tab-button {
+            position: absolute;
+            top: 0;     
+            right: 0;
+            transform: translate(-20%, 60%);
+            background-color: #E6E7E9;
+            z-index: 9999;
+        }
+
+        .table-container {
+            border-top: 2px solid $light-gray-color;
+            padding: 0;
+        }
+    }
+}

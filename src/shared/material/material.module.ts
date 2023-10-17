@@ -5,6 +5,13 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatInputModule } from '@angular/material/input';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatTableModule} from '@angular/material/table';
+import { MatCardModule } from '@angular/material/card';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatSort , Sort, MatSortModule} from '@angular/material/sort';
+
 @NgModule({
   declarations: [],
   imports: [CommonModule],
@@ -14,6 +21,12 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatInputModule,
     MatRadioModule,
     MatDialogModule,
+    MatTableModule,
+    MatCardModule,
+    MatTabsModule,
+    MatButtonModule,
+    MatIconModule,
+    MatSortModule,
   ],
   providers: [],
 })

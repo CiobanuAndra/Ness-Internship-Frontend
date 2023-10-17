@@ -1,1 +1,28 @@
-<p>resources works!</p>
+<mat-card class="card-container">
+    <mat-card-header class="card-header">
+        <mat-card-title class="card-title">
+            {{activeTabTitle}}
+        </mat-card-title>
+    </mat-card-header>
+    <div class="tabs-container">
+        <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start" (selectedIndexChange)="updateActiveTabTitle($event)">
+            <mat-tab label="TASKS"> 
+                <div class="table-container">
+                    <app-tasks></app-tasks>
+                </div>
+            </mat-tab>
+
+            <mat-tab label="COURSES">
+                
+            </mat-tab>
+            
+            <mat-tab label="AVATARS"> 
+                
+            </mat-tab>
+            <mat-tab label="INDUSTRIES"> 
+                
+            </mat-tab>
+        </mat-tab-group>
+        <button mat-raised-button class="tab-button">Add Task</button>
+    </div>
+</mat-card>
