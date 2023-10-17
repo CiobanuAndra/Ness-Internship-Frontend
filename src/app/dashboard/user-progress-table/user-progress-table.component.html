@@ -1,0 +1,31 @@
+<div class="table-container mat-elevation-z8">
+    <mat-table #table [dataSource]="dataSource" matSort>
+  
+      <!-- Name Column -->
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Name </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+      </ng-container>
+  
+      <!-- Task Completed Column -->
+      <ng-container matColumnDef="task completed">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Task Completed </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.taskCompleted}} </mat-cell>
+      </ng-container>
+  
+      <!-- Time Column -->
+      <ng-container matColumnDef="time">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Time </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.time}} </mat-cell>
+      </ng-container>
+
+      <!-- Date Registered Column -->
+      <ng-container matColumnDef="Date Registered">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Date Registered </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.dateRegistered}} </mat-cell>
+      </ng-container>
+  
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+  </div>

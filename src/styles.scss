@@ -33,8 +33,9 @@ $admin-fe-theme: mat.define-light-theme(
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
 @include mat.all-component-themes($admin-fe-theme);
-
 /* You can add global styles to this file, and also import other style files */
+
+@import "/src/styleguide.scss";
 
 html,
 body {
@@ -45,5 +46,5 @@ body {
   font-family: Roboto, "Work Sans", sans-serif;
   size: 16px;
   line-height: 22px;
-  background-color: #E6E7E9;
+  background-color: $light-gray-color;
 }

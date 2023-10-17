@@ -1,0 +1,95 @@
+@import "/src/styleguide.scss";
+
+.navbarContainerAdmin {
+    background-color: white;
+    height: 4rem;
+    padding: 0px, 8px;
+    position: relative;
+    display: flex;
+    flex-direction: row;
+
+    .navbar {
+        position: absolute;
+        justify-content: space-between;
+        height: 3rem;
+        align-self: center;
+        box-sizing:border-box ;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        position: absolute;
+
+        .logo {
+            height: 3rem;
+            width: 3rem;
+            img{
+                cursor: pointer;
+            }
+        };
+
+        .buttonContainer{
+            display: flex;
+            flex-direction: row;
+            gap: 40px;
+            justify-content: center;
+            list-style: none;
+            padding: 0px;
+            margin: 0px;
+
+            li{
+                padding: 10px;
+                color: $primary-color ;
+                border-bottom:2px solid white;
+                border-top:2px solid white;
+
+            }
+            li:hover{
+                border-bottom: 2px solid $primary-color;
+                font-weight:500;
+                cursor: pointer;
+            }
+        }
+
+        .avatar {
+            height: 2.3rem;
+            width: 2.3rem;
+            border-radius: 100%;
+            background-color: rgba(0, 25, 95, 1);
+            text-align: center;
+            color: white; 
+            
+            div {
+                height: 2.3rem;
+                line-height: 2.3rem;
+                cursor: pointer;
+            }
+        }
+    }  
+}
+
+
+.containerLogoBig {
+    position: relative;
+    width: 100%;
+    z-index: 4; 
+    height: 4rem;
+    display: flex;
+    flex-direction: row;
+
+    .containerLogoSmall {
+        height: 100%;
+        align-self: center;
+        box-sizing:border-box;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        position: absolute;
+
+        img {
+            position: absolute;
+            height: 3rem;
+            line-height: 3rem;
+            cursor: pointer;
+        }
+    }
+}

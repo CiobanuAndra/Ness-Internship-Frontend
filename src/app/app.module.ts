@@ -1,21 +1,35 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { MaterialModule } from 'src/shared/material/material.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { DashboardModule } from './dashboard/dashboard.module';
-import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTabsModule } from '@angular/material/tabs';
+import { RouterModule, Routes } from '@angular/router';
+import { MatTableModule } from '@angular/material/table';
 
+import { NavbarComponent } from './navbar/navbar.component';
+import { DashboardModule } from './dashboard/dashboard.module';
+import { InitialsCustomepipePipe } from './pipes/initials-customepipe.pipe';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [
+    AppComponent,
+    NavbarComponent,
+    InitialsCustomepipePipe,
+  ],
   imports: [
     BrowserModule,
-    CommonModule,
-    BrowserAnimationsModule,
     AppRoutingModule,
-    DashboardModule
+    BrowserAnimationsModule,
+    MaterialModule,
+    MatIconModule,
+    MatTabsModule,
+    DashboardModule,
+    MatTableModule,
   ],
+  exports: [RouterModule],
   providers: [],
   bootstrap: [AppComponent],
 })
