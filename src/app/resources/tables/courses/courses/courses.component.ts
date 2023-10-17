@@ -12,7 +12,6 @@ import { ResourcesService } from 'src/app/services/resources.service';
   styleUrls: ['./courses.component.scss']
 })
 export class CoursesComponent implements AfterViewInit, OnInit {
-  course$: Observable<Course[]> | undefined;
 
   dataSource = new MatTableDataSource<Course>;
   columnsToDisplay = ['name', 'link/file', 'fileType', 'length', 'rewards', 'dateAdded', 'lastEdited', 'editedBy', 'options'];
@@ -20,8 +19,7 @@ export class CoursesComponent implements AfterViewInit, OnInit {
   constructor(private liveAnnouncer:LiveAnnouncer, private resourcesService:ResourcesService) {}
 
   ngOnInit(): void {
-    this.course$ = this.fetchCourses();
-    this.course$.subscribe(data => {
+    this.fetchCourses().subscribe(data => {
       this.dataSource.data = data;
     })
   };

@@ -10,7 +10,7 @@
         </ng-container>
         <ng-container matColumnDef="default">
             <mat-header-cell class="header-cell" *matHeaderCellDef mat-sort-header sortActionDescription="Sort by default">default</mat-header-cell>
-            <mat-cell *matCellDef="let avatar"> {{ avatar.default }}</mat-cell>
+            <mat-cell *matCellDef="let avatar"> {{ avatar.default? 'Yes' : 'No' }}</mat-cell>
         </ng-container>
         <ng-container matColumnDef="addedBy">
             <mat-header-cell class="header-cell" *matHeaderCellDef mat-sort-header sortActionDescription="Sort by addedBy">added by</mat-header-cell>

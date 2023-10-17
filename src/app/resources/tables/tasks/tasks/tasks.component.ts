@@ -12,7 +12,6 @@ import { ResourcesService } from 'src/app/services/resources.service';
   styleUrls: ['./tasks.component.scss']
 })
 export class TasksComponent implements AfterViewInit, OnInit {
-  task$:Observable<Task[]> | undefined;
 
   dataSource = new MatTableDataSource<Task>();
   columnsToDisplay = ['icon', 'name', 'type', 'courses', 'order', 'length', 'rewards', 'dateAdded', 'lastEdited', 'editedBy', 'options'];
@@ -20,8 +19,7 @@ export class TasksComponent implements AfterViewInit, OnInit {
   constructor(private liveAnnouncer: LiveAnnouncer, private resourcesService: ResourcesService) {}
 
   ngOnInit(): void {
-    this.task$ = this.fetchTasks();
-    this.task$.subscribe(data => {
+    this.fetchTasks().subscribe(data => {
       this.dataSource.data = data;
     });
   }

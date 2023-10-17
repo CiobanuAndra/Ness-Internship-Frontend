@@ -11,6 +11,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSort , Sort, MatSortModule} from '@angular/material/sort';
+import { MatDividerModule } from '@angular/material/divider';
 
 @NgModule({
   declarations: [],
@@ -27,6 +28,7 @@ import { MatSort , Sort, MatSortModule} from '@angular/material/sort';
     MatButtonModule,
     MatIconModule,
     MatSortModule,
+    MatDividerModule
   ],
   providers: [],
 })

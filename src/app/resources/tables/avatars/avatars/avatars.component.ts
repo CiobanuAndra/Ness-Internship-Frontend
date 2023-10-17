@@ -12,7 +12,6 @@ import { ResourcesService } from 'src/app/services/resources.service';
   styleUrls: ['./avatars.component.scss']
 })
 export class AvatarsComponent implements AfterViewInit, OnInit{
-  avatar$: Observable<Avatar[]> | undefined;
 
   dataSource = new MatTableDataSource<Avatar>;
   columnsToDisplay = ['name', 'linked_to', 'default', 'addedBy', 'options'];
@@ -20,8 +19,7 @@ export class AvatarsComponent implements AfterViewInit, OnInit{
   constructor(private liveAnnouncer: LiveAnnouncer, private resourcesService: ResourcesService) {}
 
   ngOnInit(): void {
-    this.avatar$ = this.fetchAvatars();
-    this.avatar$.subscribe(data => {
+    this.fetchAvatars().subscribe(data => {
       this.dataSource.data = data;
     })
   };
