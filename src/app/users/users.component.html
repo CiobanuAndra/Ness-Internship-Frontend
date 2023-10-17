@@ -29,7 +29,13 @@
     </mat-tab-group>
   </div>
 
-  <mat-table [dataSource]="dataSource" class="form__table" matSort>
+  <mat-table
+    [dataSource]="dataSource"
+    class="form__table"
+    matSort
+    matSortDirection="asc"
+    matSortActive="id"
+  >
     <ng-container matColumnDef="name">
       <th
         mat-header-cell
@@ -61,12 +67,12 @@
         {{ element.status ? " Active" : "Inactive" }}
       </td>
     </ng-container>
-    <ng-container matColumnDef="taskCompleted">
+    <ng-container matColumnDef="coursesCompleted">
       <th
         mat-header-cell
         *matHeaderCellDef
         class="form__mat-columnDef-taskCompleted"
-        mat-sort-header="taskCompleted"
+        mat-sort-header="coursesCompleted"
       >
         COURSES COMPLETED
       </th>

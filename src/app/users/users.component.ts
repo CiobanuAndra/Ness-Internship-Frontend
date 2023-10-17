@@ -1,17 +1,18 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { UsersService } from '../services/users.service';
 import { UsersListTable } from '../interfaces/users-list-table';
 import { UsersFilter } from '../enums/users-filter';
-import { MatSort } from '@angular/material/sort';
 import { MatTabChangeEvent } from '@angular/material/tabs';
 import { ngxCsv } from 'ngx-csv/ngx-csv';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.scss'],
 })
-export class UsersComponent implements OnInit {
+export class UsersComponent implements AfterViewInit {
   constructor(private userService: UsersService) {}
 
   UsersFilterIndex = {
@@ -24,30 +25,31 @@ export class UsersComponent implements OnInit {
   displayedColumns: string[] = [
     'name',
     'status',
-    'taskCompleted',
+    'coursesCompleted',
     'leftDays',
     'dateAdded',
     'settings',
   ];
+  @ViewChild(MatSort) sort!: MatSort;
   UsersFilterValues = Object.values(UsersFilter);
-  dataSource: UsersListTable[] = [];
+  dataSource = new MatTableDataSource<UsersListTable>();
   buttons: any = ['export csv', 'add user', 'add bulk users'];
 
   filterActiveUsers() {
     this.userService.getActiveUsers().subscribe((values) => {
-      this.dataSource = values;
+      this.dataSource.data = values;
     });
   }
 
   filterInactiveUsers() {
     this.userService.getInactiveUsers().subscribe((values) => {
-      this.dataSource = values;
+      this.dataSource.data = values;
     });
   }
 
   filterAllUsers() {
     this.userService.getAllUsers().subscribe((values) => {
-      this.dataSource = values;
+      this.dataSource.data = values;
     });
   }
 
@@ -85,10 +87,11 @@ export class UsersComponent implements OnInit {
       ],
     };
 
-    new ngxCsv(this.dataSource, 'UsersList', options);
+    new ngxCsv(this.dataSource.data, 'UsersList', options);
   }
 
-  ngOnInit() {
+  ngAfterViewInit(): void {
+    this.dataSource.sort = this.sort;
     this.totalCourses = this.userService.totalCourses;
     this.filterAllUsers();
   }
