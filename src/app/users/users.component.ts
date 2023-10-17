@@ -6,6 +6,7 @@ import { MatTabChangeEvent } from '@angular/material/tabs';
 import { ngxCsv } from 'ngx-csv/ngx-csv';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-users',
@@ -31,6 +32,7 @@ export class UsersComponent implements AfterViewInit {
     'settings',
   ];
   @ViewChild(MatSort) sort!: MatSort;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
   UsersFilterValues = Object.values(UsersFilter);
   dataSource = new MatTableDataSource<UsersListTable>();
   buttons: any = ['export csv', 'add user', 'add bulk users'];
@@ -92,6 +94,7 @@ export class UsersComponent implements AfterViewInit {
 
   ngAfterViewInit(): void {
     this.dataSource.sort = this.sort;
+    this.dataSource.paginator = this.paginator;
     this.totalCourses = this.userService.totalCourses;
     this.filterAllUsers();
   }
