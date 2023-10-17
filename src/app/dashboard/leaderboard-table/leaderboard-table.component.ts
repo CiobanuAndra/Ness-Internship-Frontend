@@ -24,7 +24,7 @@ export class LeaderboardTableComponent implements AfterViewInit, OnInit {
   constructor(
     private userService: UsersService,
     private _liveAnnouncer: LiveAnnouncer
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.userService
