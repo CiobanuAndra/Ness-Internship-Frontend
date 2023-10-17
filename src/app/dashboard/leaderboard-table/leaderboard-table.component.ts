@@ -19,14 +19,12 @@ export class LeaderboardTableComponent implements AfterViewInit, OnInit {
   usersInDone: UserCard[] = [];
   leaderboardTabsEnum = LeaderboardTabsEnum;
   displayedColumns = ['name', 'tasksLeft', 'points', 'rank'];
-  dataSource: MatTableDataSource<UserCard>;
+  dataSource!: MatTableDataSource<UserCard>;
 
   constructor(
     private userService: UsersService,
     private _liveAnnouncer: LiveAnnouncer
-  ) {
-    this.dataSource = new MatTableDataSource<UserCard>();
-  }
+  ) {}
 
   ngOnInit() {
     this.userService
@@ -42,17 +40,18 @@ export class LeaderboardTableComponent implements AfterViewInit, OnInit {
       .subscribe(({ usersInProgress, usersInDone }) => {
         this.usersInProgress = usersInProgress;
         this.usersInDone = usersInDone;
-        this.dataSource.data =
+        this.dataSource = new MatTableDataSource<UserCard>(
           this.activeTab === LeaderboardTabsEnum.InProgress
             ? this.usersInProgress
-            : this.usersInDone;
+            : this.usersInDone
+        );
       });
   }
 
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  announceSortChange(sortState: Sort) {
+  announceSortChange(sortState: Sort): void {
     if (sortState.direction) {
       this._liveAnnouncer.announce(`Sorted ${sortState.direction}ending`);
     } else {
@@ -66,11 +65,11 @@ export class LeaderboardTableComponent implements AfterViewInit, OnInit {
     this.paginator._intl.itemsPerPageLabel = 'Rows per page';
   }
 
-  setActiveTab(tab: LeaderboardTabsEnum) {
+  setActiveTab(tab: LeaderboardTabsEnum): void {
     this.activeTab = tab;
     this.dataSource.data =
       tab === LeaderboardTabsEnum.InProgress
         ? this.usersInProgress
         : this.usersInDone;
-  }
+  }  
 }
