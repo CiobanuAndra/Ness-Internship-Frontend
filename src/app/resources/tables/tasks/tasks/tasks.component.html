@@ -1,0 +1,65 @@
+<div class="table-container">
+    <mat-table [dataSource]="dataSource" matSort (matSortChange)="announceSortChange($event)" class="mat-elevation-z8">
+        <ng-container matColumnDef="icon">
+            <mat-header-cell *matHeaderCellDef></mat-header-cell>
+            <mat-cell *matCellDef="let task;"> 
+                <img src="{{ task.icon }}" alt="SVG Icon" class="mat-cell-img">
+            </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="name">
+            <mat-header-cell class="header-cell" *matHeaderCellDef mat-sort-header sortActionDescription="Sort by name">name</mat-header-cell>
+            <mat-cell *matCellDef="let task;"> {{ task.name }}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="type">
+            <mat-header-cell class="header-cell" *matHeaderCellDef mat-sort-header sortActionDescription="Sort by type">type</mat-header-cell>
+            <mat-cell *matCellDef="let task"> {{ task.type }}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="courses">
+            <mat-header-cell class="header-cell" *matHeaderCellDef mat-sort-header sortActionDescription="Sort by courses">course</mat-header-cell>
+            <mat-cell *matCellDef="let task"> {{ task.courses }}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="order">
+            <mat-header-cell class="header-cell" *matHeaderCellDef mat-sort-header sortActionDescription="Sort by order">order</mat-header-cell>
+            <mat-cell *matCellDef="let task"> {{ task.order }}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="length">
+            <mat-header-cell class="header-cell" *matHeaderCellDef mat-sort-header sortActionDescription="Sort by length">length</mat-header-cell>
+            <mat-cell *matCellDef="let task"> {{ task.length }}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="rewards">
+            <mat-header-cell class="header-cell" *matHeaderCellDef mat-sort-header sortActionDescription="Sort by rewards">rewards</mat-header-cell>
+            <mat-cell *matCellDef="let task"> {{ task.rewards }}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="dateAdded">
+            <mat-header-cell class="header-cell" *matHeaderCellDef mat-sort-header sortActionDescription="Sort by dateAdded">date added</mat-header-cell>
+            <mat-cell *matCellDef="let task"> {{ task.dateAdded | date:'dd-MM-yyyy' }}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="lastEdited">
+            <mat-header-cell class="header-cell" *matHeaderCellDef mat-sort-header sortActionDescription="Sort by lastEdited">last edited</mat-header-cell>
+            <mat-cell *matCellDef="let task"> {{ task.lastEdited | date:'dd-MM-yyyy' }}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="editedBy">
+            <mat-header-cell class="header-cell" *matHeaderCellDef mat-sort-header sortActionDescription="Sort by editedBy">edited by</mat-header-cell>
+            <mat-cell *matCellDef="let task"> {{ task.editedBy }}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="options">
+            <mat-header-cell *matHeaderCellDef></mat-header-cell>
+            <mat-cell *matCellDef="let task"> 
+                <button mat-icon-button>
+                    <mat-icon>more_vert</mat-icon>
+                </button>
+            </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="columnsToDisplay"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: columnsToDisplay;"></mat-row>
+    </mat-table>
+
+    <!-- State: No Data -->
+    <div *ngIf="dataSource.data.length === 0">
+        <div class="table-with-no-data">
+            <img src="assets/icons/task.svg" alt="task-icon" class="task-icon">
+            <p class="no-data-message">No tasks to display!</p>
+        </div>
+    </div>
+</div>

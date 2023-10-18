@@ -1,7 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ResourcesComponent } from './resources.component';
 import { RouterModule, Routes } from '@angular/router';
+import { MaterialModule } from 'src/shared/material/material.module';
+import { TasksComponent } from './tables/tasks/tasks/tasks.component';
+import { CoursesComponent } from './tables/courses/courses/courses.component';
+import { AvatarsComponent } from './tables/avatars/avatars/avatars.component';
+import { IndustriesComponent } from './tables/industries/industries/industries.component';
+import { ResourcesComponent } from './resources.component';
 
 const routes: Routes = [
   {
@@ -12,12 +17,18 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [
-    ResourcesComponent
+    ResourcesComponent,
+    TasksComponent,
+    CoursesComponent,
+    AvatarsComponent,
+    IndustriesComponent,
   ],
   imports: [
     CommonModule,
-    RouterModule.forChild(routes),
+    MaterialModule,
+    RouterModule.forChild(routes)
   ],
-  exports: [ ResourcesComponent, ],
+  exports:[ResourcesComponent]
 })
+
 export class ResourcesModule { }
