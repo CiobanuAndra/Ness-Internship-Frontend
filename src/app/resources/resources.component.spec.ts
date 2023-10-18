@@ -1,8 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-<<<<<<< HEAD
-
-=======
->>>>>>> 915e7a7 (create resources component)
 import { ResourcesComponent } from './resources.component';
 
 describe('ResourcesComponent', () => {
