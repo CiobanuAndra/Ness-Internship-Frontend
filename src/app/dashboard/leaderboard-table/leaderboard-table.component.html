@@ -1,0 +1,126 @@
+<div class="leaderboard-table-container">
+  <div class="leaderboard__header">
+    <div class="leaderboard__header__details">
+      <p class="leaderboard__header__text">Leaderboard</p>
+    </div>
+    <div class="my-custom-tabs">
+      <div
+        class="tab in-progress-tab"
+        [class.active-tab]="activeTab === leaderboardTabsEnum.InProgress"
+        (click)="setActiveTab(leaderboardTabsEnum.InProgress)"
+      >
+        IN PROGRESS
+      </div>
+      <div
+        class="tab done-tab"
+        [class.active-tab]="activeTab === leaderboardTabsEnum.Done"
+        (click)="setActiveTab(leaderboardTabsEnum.Done)"
+      >
+        DONE
+      </div>
+    </div>
+  </div>
+
+  <div class="leaderboard-table">
+    <mat-table #table [dataSource]="dataSource" matSort>
+      <div class="name-container">
+        <ng-container matColumnDef="name">
+          <mat-cell
+            *matHeaderCellDef
+            mat-sort-header
+            sortActionDescription="Sort by name"
+          >
+            Name
+          </mat-cell>
+          <mat-cell *matCellDef="let element"> {{ element.name }}</mat-cell>
+        </ng-container>
+      </div>
+
+      <div class="tasksLeft-container">
+        <ng-container matColumnDef="tasksLeft">
+          <mat-header-cell
+            *matHeaderCellDef
+            mat-sort-header
+            sortActionDescription="Sort by tasks"
+          >
+            Tasks left
+          </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{ element.tasks }} </mat-cell>
+        </ng-container>
+      </div>
+
+      <div class="points-container">
+        <ng-container matColumnDef="points">
+          <mat-header-cell
+            *matHeaderCellDef
+            mat-sort-header
+            sortActionDescription="Sort by points"
+          >
+            Points
+          </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{ element.points }} </mat-cell>
+        </ng-container>
+      </div>
+
+      <div class="rank-container">
+        <ng-container matColumnDef="rank">
+          <mat-header-cell
+            *matHeaderCellDef
+            mat-sort-header
+            sortActionDescription="Sort by rank"
+          >
+            <div class="text-container">Rank</div>
+          </mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <div class="rank-container-image">
+              <span>{{ element.rank }}</span>
+              <img
+                class="three-dots"
+                src="assets/icons/blue-points.svg"
+                alt="Users Icon"
+              />
+            </div>
+          </mat-cell>
+        </ng-container>
+      </div>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+    </mat-table>
+
+    <ng-container
+      *ngIf="
+        (activeTab === leaderboardTabsEnum.InProgress &&
+          !usersInProgress.length) ||
+        (activeTab === leaderboardTabsEnum.Done && !usersInDone.length)
+      "
+    >
+      <div class="no-users-container">
+        <img src="assets/icons/users.svg" alt="Users Icon" />
+        <p>
+          No users in
+          {{
+            activeTab === leaderboardTabsEnum.InProgress ? "progress" : "done"
+          }}
+        </p>
+      </div>
+    </ng-container>
+
+    <mat-paginator
+      *ngIf="
+        (activeTab === leaderboardTabsEnum.InProgress &&
+          usersInProgress.length) ||
+        (activeTab === leaderboardTabsEnum.Done && usersInDone.length)
+      "
+      #paginator
+      [pageSize]="15"
+      [pageSizeOptions]="[15, 25, 50]"
+      [length]="
+        activeTab === leaderboardTabsEnum.InProgress
+          ? usersInProgress.length
+          : usersInDone.length
+      "
+    >
+    </mat-paginator>
+  </div>
+</div>

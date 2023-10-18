@@ -1,0 +1,124 @@
+@import "/src/styleguide.scss";
+
+@mixin set-size($width, $height) {
+  width: $width;
+  height: $height;
+}
+
+.leaderboard-table-container {
+  width: calc(100% - 4rem);
+  padding: 1rem 2rem;
+}
+
+.leaderboard__header {
+  border-radius: 0.25rem;
+  background-color: $white-color;
+  box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.12),
+    0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 1px 0px rgba(0, 0, 0, 0.2);
+
+  &__details {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    border-bottom: 0.063rem solid $medium-gray-color;
+    padding: 0 1rem;
+    background: $white-color;
+    height: 3.8125rem;
+
+    &__text {
+      color: $black-color;
+      font-family: Roboto;
+      font-size: 1rem;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 1.75rem;
+      letter-spacing: 0.015rem;
+      flex: 1;
+    }
+  }
+
+  .my-custom-tabs {
+    display: flex;
+    justify-content: space-between;
+    background-color: $white-color;
+    width: 20%;
+    height: 3rem;
+  }
+
+  .tab {
+    flex: 1;
+    text-align: center;
+    color: #00195f;
+    transition: color 0.3s ease;
+    cursor: pointer;
+    padding: 0.75rem 0;
+
+    &.active-tab {
+      position: relative;
+      color: #00195f;
+      border-bottom: 0.125rem solid #00195f;
+    }
+  }
+
+  .done-tab {
+    color: $dark-gray-color;
+  }
+
+  .tab:hover {
+    background-color: $light-gray-color;
+  }
+}
+
+.mat-column-name,
+.mat-column-tasksLeft,
+.mat-column-points,
+.mat-column-rank {
+  display: flex;
+}
+
+.mat-column-name {
+  flex: 0 0 50%;
+}
+
+.mat-column-tasksLeft {
+  padding-left: 0;
+}
+
+.mat-column-tasksLeft,
+.mat-column-points,
+.mat-column-rank {
+  flex: 0 0 16.66666666666667%;
+}
+
+.rank-container-image {
+  display: flex;
+  justify-content: space-between;
+  flex: 0 0 100%;
+}
+
+.text-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 50%;
+}
+
+.three-dots {
+  cursor: pointer;
+}
+
+mat-paginator {
+  border-top: 0.063rem solid $medium-gray-color;
+  padding: 0.5rem;
+}
+
+.no-users-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin: 0 auto;
+  background: $white-color;
+  height: 30.25rem;
+  width: 100%;
+}

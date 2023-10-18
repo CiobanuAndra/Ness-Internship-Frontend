@@ -1,7 +1,7 @@
 <div class="leaderboard-section">
   <div class="leaderboard-section__header">
     <p class="leaderboard-section__header__text">Leaderboard</p>
-    <button type="button" mat-button class="form__view__all__users__button">{{ 'view all' | uppercase }}</button>
+    <button type="button" mat-button class="form__view__all__users__button" (click)="viewAllUsers()">{{ 'view all' | uppercase }}</button>
   </div>
   <div class="my-custom-tabs">
     <div class="tab in-progress-tab" [class.active-tab]="activeTab === leaderboardTabsEnum.InProgress" (click)="activeTab=leaderboardTabsEnum.InProgress">IN PROGRESS</div>
