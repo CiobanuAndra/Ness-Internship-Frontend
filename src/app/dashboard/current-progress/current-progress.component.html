@@ -3,9 +3,12 @@
     <div>Current Progress</div>
     <div>
       <mat-form-field class="form__title__mat-form-field">
-        <mat-select [(ngModel)]="selectedLastDays">
-          <mat-option *ngFor="let option of lastDays" [value]="selectedLastDays"
-            >{{ option }}
+        <mat-select
+          [(ngModel)]="selectedLastDays"
+          (ngModelChange)="updateChart()"
+        >
+          <mat-option *ngFor="let option of lastDays" [value]="option"
+            >Last {{ option }} days
           </mat-option>
         </mat-select>
       </mat-form-field>

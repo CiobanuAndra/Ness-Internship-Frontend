@@ -21,12 +21,7 @@ export class IconsModule {
       .addSvgIcon('no-data', this.setPath(`${this.path}/no-data.svg`))
       .addSvgIcon('points-black', this.setPath(`${this.path}/points-black.svg`))
       .addSvgIcon('points', this.setPath(`${this.path}/points.svg`))
-<<<<<<< HEAD
       .addSvgIcon('span', this.setPath(`${this.path}/span.svg`));
-=======
-      .addSvgIcon('check', this.setPath(`${this.path}/check.svg`))
-      .addSvgIcon('no-data', this.setPath(`${this.path}/no-data.svg`));
->>>>>>> 17a6d94 (feat(current-progress): create no-data view)
   }
 
   private setPath(url: string): SafeResourceUrl {

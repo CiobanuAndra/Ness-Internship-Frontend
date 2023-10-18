@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 declare var google: any;
+import { LastDaysProgress } from 'src/app/enums/last-days-progress';
+import { ProgressService } from 'src/app/services/progress/progress.service';
 
 @Component({
   selector: 'app-current-progress',
@@ -7,13 +9,14 @@ declare var google: any;
   styleUrls: ['./current-progress.component.scss'],
 })
 export class CurrentProgressComponent implements OnInit {
-  lastDays: string[] = [
-    'Last 7 Days',
-    'Last 14 Days',
-    'Last 21 Days',
-    'Last 30 Days',
-  ];
-  selectedLastDays: string = '';
+  constructor(private progress: ProgressService) {}
+  selectedLastDays: LastDaysProgress = LastDaysProgress.SevenDays;
+  currentHoverValue: string = '';
+  chartData: any = [];
+
+  lastDays = Object.values(LastDaysProgress).filter(
+    (value) => typeof value === 'number'
+  );
 
   legendItems = [
     { name: 'Register', color: '#00195f' },
@@ -22,23 +25,33 @@ export class CurrentProgressComponent implements OnInit {
     { name: 'Not Started', color: '#CCD1DF' },
   ];
 
-  currentHoverValue: string = '';
-
-  dataFor0Days = [['Task', 'Hours per Day']];
-
   ngOnInit(): void {
+    this.progress
+      .getDataForSelectedLastDays(this.selectedLastDays)
+      .subscribe((values) => {
+        values.unshift(['', '']);
+        this.chartData = values;
+        this.drawChart();
+        this.currentHoverValue = '';
+      });
+
     google.charts.load('current', { packages: ['corechart'] });
     google.charts.setOnLoadCallback(() => this.drawChart());
   }
 
-  drawChart() {
-    var data = google.visualization.arrayToDataTable([
-      ['Task', 'Hours per Day'],
-      ['Register', 17],
-      ['Finished', 3],
-      ['In Progress', 10],
-      ['Not Started', 70],
-    ]);
+  updateChart(): void {
+    this.progress
+      .getDataForSelectedLastDays(this.selectedLastDays)
+      .subscribe((values) => {
+        values.unshift(['', '']);
+        this.chartData = values;
+        this.drawChart();
+        this.currentHoverValue = '';
+      });
+  }
+
+  drawChart(): void {
+    var data = google.visualization.arrayToDataTable(this.chartData);
 
     var options = {
       pieHole: 0.78,
@@ -51,6 +64,7 @@ export class CurrentProgressComponent implements OnInit {
     var chart = new google.visualization.PieChart(
       document.getElementById('donutchart')
     );
+
     google.visualization.events.addListener(
       chart,
       'onmouseover',
@@ -60,7 +74,7 @@ export class CurrentProgressComponent implements OnInit {
         this.currentHoverValue = `${sliceValue}%`;
       }
     );
-    google.visualization.events.addListener(chart, 'onmouseout', () => {});
+
     chart.draw(data, options);
   }
 }

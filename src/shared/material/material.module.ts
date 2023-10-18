@@ -7,11 +7,12 @@ import { MatInputModule } from '@angular/material/input';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatTableModule } from '@angular/material/table';
 import { MatCardModule } from '@angular/material/card';
+import { MatTabsModule } from '@angular/material/tabs';
 import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 import { MatSortModule } from '@angular/material/sort';
 import { MatDividerModule } from '@angular/material/divider';
-import { MatTabsModule } from '@angular/material/tabs';
-import { MatIconModule } from '@angular/material/icon';
+import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSelectModule } from '@angular/material/select';
 import { FormsModule } from '@angular/forms';
 
@@ -21,6 +22,7 @@ import { FormsModule } from '@angular/forms';
   exports: [
     MatAutocompleteModule,
     MatFormFieldModule,
+    FormsModule,
     MatInputModule,
     MatRadioModule,
     MatDialogModule,
@@ -31,9 +33,8 @@ import { FormsModule } from '@angular/forms';
     MatIconModule,
     MatSortModule,
     MatDividerModule,
-    MatIconModule,
+    MatPaginatorModule,
     MatSelectModule,
-    FormsModule,
   ],
   providers: [],
 })
