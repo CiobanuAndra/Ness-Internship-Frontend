@@ -18,7 +18,8 @@ export class IconsModule {
       .addSvgIcon('clock', this.setPath(`${this.path}/clock.svg`))
       .addSvgIcon('file', this.setPath(`${this.path}/file.svg`))
       .addSvgIcon('points', this.setPath(`${this.path}/points.svg`))
-      .addSvgIcon('check', this.setPath(`${this.path}/check.svg`));
+      .addSvgIcon('check', this.setPath(`${this.path}/check.svg`))
+      .addSvgIcon('no-data', this.setPath(`${this.path}/no-data.svg`));
   }
 
   private setPath(url: string): SafeResourceUrl {
