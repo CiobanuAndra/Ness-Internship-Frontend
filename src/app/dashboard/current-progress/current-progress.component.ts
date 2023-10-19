@@ -1,4 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  Component,
+  OnInit,
+} from '@angular/core';
 declare var google: any;
 import { LastDaysProgress } from 'src/app/enums/last-days-progress';
 import { ProgressService } from 'src/app/services/progress/progress.service';
@@ -26,6 +31,9 @@ export class CurrentProgressComponent implements OnInit {
   ];
 
   ngOnInit(): void {
+    google.charts.load('current', { packages: ['corechart'] });
+    google.charts.setOnLoadCallback(() => this.drawChart());
+
     this.progress
       .getDataForSelectedLastDays(this.selectedLastDays)
       .subscribe((values) => {
@@ -34,9 +42,6 @@ export class CurrentProgressComponent implements OnInit {
         this.drawChart();
         this.currentHoverValue = '';
       });
-
-    google.charts.load('current', { packages: ['corechart'] });
-    google.charts.setOnLoadCallback(() => this.drawChart());
   }
 
   updateChart(): void {
@@ -51,30 +56,35 @@ export class CurrentProgressComponent implements OnInit {
   }
 
   drawChart(): void {
-    var data = google.visualization.arrayToDataTable(this.chartData);
+    if (
+      typeof google !== 'undefined' &&
+      typeof google.visualization !== 'undefined'
+    ) {
+      var data = google.visualization.arrayToDataTable(this.chartData);
 
-    var options = {
-      pieHole: 0.78,
-      colors: ['#00195f', '#8D96B6', '#149211', '#CCD1DF'],
-      legend: 'none',
-      pieSliceText: 'none',
-      tooltip: { trigger: 'none' },
-    };
+      var options = {
+        pieHole: 0.78,
+        colors: ['#00195f', '#8D96B6', '#149211', '#CCD1DF'],
+        legend: 'none',
+        pieSliceText: 'none',
+        tooltip: { trigger: 'none' },
+      };
 
-    var chart = new google.visualization.PieChart(
-      document.getElementById('donutchart')
-    );
+      var chart = new google.visualization.PieChart(
+        document.getElementById('donutchart')
+      );
 
-    google.visualization.events.addListener(
-      chart,
-      'onmouseover',
-      (eventData: { row: any }) => {
-        var sliceIndex = eventData.row;
-        var sliceValue = data.getValue(sliceIndex, 1);
-        this.currentHoverValue = `${sliceValue}%`;
-      }
-    );
+      google.visualization.events.addListener(
+        chart,
+        'onmouseover',
+        (eventData: { row: any }) => {
+          var sliceIndex = eventData.row;
+          var sliceValue = data.getValue(sliceIndex, 1);
+          this.currentHoverValue = `${sliceValue}%`;
+        }
+      );
 
-    chart.draw(data, options);
+      chart.draw(data, options);
+    }
   }
 }
