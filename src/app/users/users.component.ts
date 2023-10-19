@@ -14,12 +14,15 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { ResourcesService } from '../services/resources.service';
+import { MatDialog } from '@angular/material/dialog';
+import { AddbulkusersComponent } from './modals/addbulkusers/addbulkusers/addbulkusers.component';
 
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.scss'],
 })
+
 export class UsersComponent implements AfterViewInit {
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -45,15 +48,20 @@ export class UsersComponent implements AfterViewInit {
     'dateAdded',
     'settings',
   ];
-
-  constructor(
-    private userService: UsersService,
-    private resourcesService: ResourcesService
-  ) {}
+  
+  constructor(private userService: UsersService, public dialog: MatDialog, private resourcesService: ResourcesService) {}
 
   toggleBulkUsersSidenav() {
     this.opened = !this.opened;
     this.resourcesService.setSidenavVisibility(this.opened);
+  }
+
+  openDialog() {
+    const dialogRef = this.dialog.open(AddbulkusersComponent);
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
   }
 
   filterActiveUsers(): void {

@@ -18,6 +18,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSelectModule } from '@angular/material/select';
 import { HttpClientModule } from '@angular/common/http';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 @NgModule({
   declarations: [],
@@ -42,6 +43,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
     HttpClientModule,
     MatButtonModule,
     MatSidenavModule,
+    MatExpansionModule,
   ],
   providers: [MatIconRegistry],
 })

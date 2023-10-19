@@ -1,0 +1,25 @@
+<mat-card class="card-container">
+    <mat-card-header class="card-header">
+        <mat-card-title class="card-title">
+            12 Users Uploaded
+        </mat-card-title>
+    </mat-card-header>
+    <mat-divider></mat-divider>
+
+    <mat-card-content>
+        <div class="require-attention-container">
+            <p class="table-header">12 Users Require Attention</p>
+            <app-requireattention></app-requireattention>
+        </div>
+
+        <div class="await-confirmation-container">
+            <p class="table-header">12 Users Await Confirmation</p>
+            <app-awaitconfirmation></app-awaitconfirmation>
+        </div>
+        <div class="buttons-container">
+            <button mat-raised-button class="addUser-button">Confirm & Add Users</button>
+            <button mat-raised-button class="cancel-button">Cancel</button>
+        </div>
+    </mat-card-content>
+
+</mat-card>

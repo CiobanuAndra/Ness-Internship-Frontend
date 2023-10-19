@@ -1,0 +1,27 @@
+.card-container {
+    width: 820px;
+    margin: 0 auto;
+    
+    .table-header {
+        margin-top: 1rem;
+    }
+
+    .buttons-container {
+        display: flex;
+        padding: 1rem 0 1rem 0;
+        gap: 1rem;
+
+        .addUser-button, .cancel-button {
+            text-transform: uppercase;
+        }
+
+        .addUser-button {
+            background-color: #00195F;
+            color: #fff;    
+        }
+
+        .cancel-button {
+            background-color: #F5F5F5;
+        }
+    }
+}

@@ -11,7 +11,7 @@ import { ResourcesService } from 'src/app/services/resources.service';
   templateUrl: './avatars.component.html',
   styleUrls: ['./avatars.component.scss']
 })
-export class AvatarsComponent implements AfterViewInit, OnInit{
+export class AvatarsComponent implements AfterViewInit, OnInit {
 
   dataSource = new MatTableDataSource<Avatar>;
   columnsToDisplay = ['name', 'linked_to', 'default', 'addedBy', 'options'];

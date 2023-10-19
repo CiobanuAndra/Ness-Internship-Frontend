@@ -3,6 +3,7 @@ import { UserRequireAttention } from '../interfaces/user-require-attention.model
 import { UserCard } from '../interfaces/user-card.model';
 import { BehaviorSubject, Observable, map, of } from 'rxjs';
 import { UsersListTable } from '../interfaces/users-list-table';
+import { UserModal } from '../interfaces/users/user-modal.model';
 
 @Injectable({
   providedIn: 'root',
@@ -327,6 +328,7 @@ export class UsersService {
     this.usersSubject$.next(users);
   }
 
+
   public loadUsersLeaderboard(): Observable<UserCard[]> {
     return of(this.usersLeaderboard);
   }
@@ -358,6 +360,7 @@ export class UsersService {
       map((users) => users.filter((user) => user.status === true))
     );
   }
+
   filterActiveUsersRequireAttention(): Observable<UserRequireAttention[]> {
     return of(this.usersRequireAttention).pipe(
       map((users) => users.filter((user) => user.status === true))
@@ -368,4 +371,24 @@ export class UsersService {
       map((users) => users.filter((user) => user.status === false))
     );
   }
+  //modals
+  usersModalRequire: UserModal[] = [
+    { name: 'Mustas', surname: 'Abdul', email: '1512512@ness.com'},
+    { name: 'Mustas', surname: 'Rajesh', email: '1512512@ness.com'},
+  ];  
+  
+  usersModalAwait: UserModal[] = [
+    { name: 'Mustas', surname: 'Abdul', email: '1512512@ness.com'},
+    { name: 'Mustas', surname: 'Abdul', email: '1512512@ness.com'},
+    { name: 'Mustas', surname: 'Abdul', email: '1512512@ness.com'},
+    { name: 'Mustas', surname: 'Rajesh', email: '1512512@ness.com'},
+  ];  
+  
+  public loadUsersRequireModal(): Observable<UserModal[]> {
+    return of(this.usersModalRequire);
+  };
+  
+  public loadUsersAwaitModal(): Observable<UserModal[]> {
+    return of(this.usersModalAwait);
+  };
 }
