@@ -1,3 +1,9 @@
+<mat-sidenav-container class="example-container" *ngIf="showSidenav">
+    <mat-sidenav-content><app-add-task></app-add-task></mat-sidenav-content>
+  </mat-sidenav-container>
+
+  
+
 <mat-card class="card-container">
   <mat-card-header class="card-header">
     <mat-card-title class="card-title">
@@ -18,51 +24,28 @@
         </div>
       </mat-tab>
 
-      <mat-tab label="COURSES">
-        <mat-divider></mat-divider>
-        <div class="table-container">
-          <app-courses></app-courses>
-        </div>
-      </mat-tab>
-
-      <mat-tab label="AVATARS">
-        <mat-divider></mat-divider>
-        <div class="table-container">
-          <app-avatars></app-avatars>
-        </div>
-      </mat-tab>
-      <mat-tab label="INDUSTRIES">
-        <mat-divider></mat-divider>
-      </mat-tab>
-    </mat-tab-group>
-
-    <button
-      mat-raised-button
-      class="tab-button"
-      *ngIf="activeTabTitle === 'Tasks'"
-    >
-      Add Task
-    </button>
-    <button
-      mat-raised-button
-      class="tab-button"
-      *ngIf="activeTabTitle === 'Courses'"
-    >
-      Add Course
-    </button>
-    <button
-      mat-raised-button
-      class="tab-button"
-      *ngIf="activeTabTitle === 'Avatars'"
-    >
-      Add Avatar
-    </button>
-    <button
-      mat-raised-button
-      class="tab-button"
-      *ngIf="activeTabTitle === 'Industries'"
-    >
-      Add Industry
-    </button>
-  </div>
+            <mat-tab label="COURSES">
+                <mat-divider></mat-divider>
+                <div class="table-container">
+                    <app-courses></app-courses>
+                </div>
+            </mat-tab>
+            
+            <mat-tab label="AVATARS"> 
+                <mat-divider></mat-divider>
+                <div class="table-container">
+                    <app-avatars></app-avatars>
+                </div>
+            </mat-tab>
+            <mat-tab label="INDUSTRIES"> 
+                <mat-divider></mat-divider>
+            </mat-tab>
+        </mat-tab-group>
+        
+        <button mat-raised-button class="tab-button" *ngIf="activeTabTitle === 'Tasks'" (click)="toggleSidenav()">Add Task</button>
+        <button mat-raised-button class="tab-button" *ngIf="activeTabTitle === 'Courses'">Add Course</button>
+        <button mat-raised-button class="tab-button" *ngIf="activeTabTitle === 'Avatars'">Add Avatar</button>
+        <button mat-raised-button class="tab-button" *ngIf="activeTabTitle === 'Industries'">Add Industry</button>
+    </div>
 </mat-card>
+

@@ -1,32 +1,46 @@
 @import "/src/styleguide.scss";
 
 .card-container {
-    max-width: 1660px;
-    margin: 0 auto;
-    margin-top: 1rem;
-    width: 90%;
+  max-width: 1660px;
+  margin: 0 auto;
+  margin-top: 1rem;
+  width: 90%;
 
-    .card-header {
-        padding-bottom: 1rem;
+  .card-header {
+    padding-bottom: 1rem;
 
-        .card-title {
-            font-size: 1rem;
-        }
+    .card-title {
+      font-size: 1rem;
     }
+  }
 
-    .tabs-container {      
-        position: relative;
-        padding: 1rem 0 1rem 0;
+  .tabs-container {
+    position: relative;
+    padding: 1rem 0;
 
-        .tab-button {
-            position: absolute;
-            top: 0;     
-            right: 0;
-            text-transform: uppercase;
-            font-size: 14px;
-            transform: translate(-20%, 55%);
-            background-color: #E6E7E9;
-            z-index: 9999;
-        }
+    .tab-button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      text-transform: uppercase;
+      font-size: 14px;
+      transform: translate(-20%, 55%);
+      background-color: #E6E7E9;
+      z-index: 9999;
     }
+  }
+}
+
+.example-container {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  height: 100vh;
+  width: 40%;
+  z-index: 10000;
+  transition: 0.5s;
+  background-color: #FFF;
+  border-radius: 4px;
+  box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.12), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 1px 0px rgba(0, 0, 0, 0.20);
 }

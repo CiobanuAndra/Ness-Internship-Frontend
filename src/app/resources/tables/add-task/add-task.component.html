@@ -1,0 +1,73 @@
+<div class="add-task-container">
+    <div class="add-task-header">
+        <span>Add Task</span>
+        <img class="cancel-image" src="assets/icons/cancel.svg" alt="Cancel Icon" />
+    </div>
+
+    <div class="stepper-container">
+        <mat-horizontal-stepper linear #stepper>
+
+            <div class="stepper-general-container">
+                <mat-step [stepControl]="firstFormGroup">
+                    <form [formGroup]="firstFormGroup">
+                        <ng-template matStepLabel>General</ng-template>
+                        <hr>
+
+                        <div class="general-stepper-inputs">
+                            <input matInput placeholder="Mandatory Training" type="text" formControlName="firstCtrl"
+                                required value="Mandatory Training" class="custom-input" />
+                            <mat-hint class="hint-title">Title</mat-hint>
+
+                            <div class="general-stepper-textarea">
+                                <textarea placeholder="Description" rows="6" cols="75" required></textarea>
+                            </div>
+
+                            <div class="general-order">
+                            <input matInput placeholder="1" type="number" formControlName="firstCtrl" required
+                                class="custom-input" />
+                            <mat-hint class="hint-title">Order for User on Homepage from top to bottom</mat-hint>
+                            </div>
+                        </div>
+                        <div>
+
+
+
+                        </div>
+                    </form>
+                    <div class="general-buttons">
+                        <button mat-button matStepperNext class="next-button">
+                            Next Step
+                        </button>
+                        <button mat-button matStepperNext class="cancel-button">
+                            Cancel
+                        </button>
+                    </div>
+                </mat-step>
+
+            </div>
+
+            <mat-step [stepControl]="secondFormGroup" [optional]="isOptional">
+                <form [formGroup]="secondFormGroup">
+                    <ng-template matStepLabel>Details</ng-template>
+                    <mat-form-field>
+                        <input matInput placeholder="Address" formControlName="secondCtrl" required />
+                    </mat-form-field>
+                    <div>
+                        <button mat-button matStepperPrevious>Back</button>
+                        <button mat-button matStepperNext>Next</button>
+                    </div>
+                </form>
+            </mat-step>
+
+            <mat-step>
+                <ng-template matStepLabel>Rewards</ng-template>
+                <div>
+                    <button mat-button matStepperPrevious>Back</button>
+                    <button mat-button (click)="stepper.reset()">Reset</button>
+                </div>
+            </mat-step>
+
+
+        </mat-horizontal-stepper>
+    </div>
+</div>
