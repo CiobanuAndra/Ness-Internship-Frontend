@@ -1,10 +1,4 @@
-import {
-  AfterViewInit,
-  ChangeDetectionStrategy,
-  Component,
-  OnInit,
-} from '@angular/core';
-declare var google: any;
+import { Component, OnInit } from '@angular/core';
 import { LastDaysProgress } from 'src/app/enums/last-days-progress';
 import { ProgressService } from 'src/app/services/progress/progress.service';
 
@@ -56,35 +50,35 @@ export class CurrentProgressComponent implements OnInit {
   }
 
   drawChart(): void {
-    if (
-      typeof google !== 'undefined' &&
-      typeof google.visualization !== 'undefined'
-    ) {
-      var data = google.visualization.arrayToDataTable(this.chartData);
+    const chartContainer = document.getElementById('donutchart');
+    if (chartContainer) {
+      if (
+        typeof google !== 'undefined' &&
+        typeof google.visualization !== 'undefined'
+      ) {
+        var data = google.visualization.arrayToDataTable(this.chartData);
 
-      var options = {
-        pieHole: 0.78,
-        colors: ['#00195f', '#149211', '#C1BA00', '#CCD1DF'],
-        legend: 'none',
-        pieSliceText: 'none',
-        tooltip: { trigger: 'none' },
-      };
+        var options: google.visualization.PieChartOptions = {
+          pieHole: 0.78,
+          colors: ['#00195f', '#149211', '#C1BA00', '#CCD1DF'],
+          legend: 'none',
+          pieSliceText: 'none',
+          tooltip: { trigger: 'none' },
+        };
+        var chart = new google.visualization.PieChart(chartContainer);
 
-      var chart = new google.visualization.PieChart(
-        document.getElementById('donutchart')
-      );
+        google.visualization.events.addListener(
+          chart,
+          'onmouseover',
+          (eventData: { row: any }) => {
+            var sliceIndex = eventData.row;
+            var sliceValue = data.getValue(sliceIndex, 1);
+            this.currentHoverValue = `${sliceValue}%`;
+          }
+        );
 
-      google.visualization.events.addListener(
-        chart,
-        'onmouseover',
-        (eventData: { row: any }) => {
-          var sliceIndex = eventData.row;
-          var sliceValue = data.getValue(sliceIndex, 1);
-          this.currentHoverValue = `${sliceValue}%`;
-        }
-      );
-
-      chart.draw(data, options);
+        chart.draw(data, options);
+      }
     }
   }
 }
