@@ -25,8 +25,8 @@ export class CurrentProgressComponent implements OnInit {
 
   legendItems = [
     { name: 'Register', color: '#00195f' },
-    { name: 'Finished', color: '#8D96B6' },
-    { name: 'In Progress', color: '#149211' },
+    { name: 'Finished', color: '#149211' },
+    { name: 'In Progress', color: '#C1BA00' },
     { name: 'Not Started', color: '#CCD1DF' },
   ];
 
@@ -64,7 +64,7 @@ export class CurrentProgressComponent implements OnInit {
 
       var options = {
         pieHole: 0.78,
-        colors: ['#00195f', '#8D96B6', '#149211', '#CCD1DF'],
+        colors: ['#00195f', '#149211', '#C1BA00', '#CCD1DF'],
         legend: 'none',
         pieSliceText: 'none',
         tooltip: { trigger: 'none' },
