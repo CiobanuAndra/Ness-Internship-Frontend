@@ -10,6 +10,7 @@ import { TableHeaders } from 'src/app/enums/addbulkuser-table';
   templateUrl: './addbulkusers.component.html',
   styleUrls: ['./addbulkusers.component.scss']
 })
+
 export class AddbulkusersComponent implements OnInit{
   @ViewChild(AddbulkuserTableComponent) child!:AddbulkuserTableComponent;
 
