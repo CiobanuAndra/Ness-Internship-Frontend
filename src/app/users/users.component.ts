@@ -19,9 +19,8 @@ export class UsersComponent implements AfterViewInit {
   totalCourses = 0;
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
-  UsersFilterValues = Object.values(UsersFilter);
+  UsersFilterValues = Object(UsersFilter);
   dataSource = new MatTableDataSource<UsersListTable>();
-  buttons: any = ['export csv', 'add user', 'add bulk users'];
 
   UsersFilterIndex = {
     [UsersFilter.ALL]: 0,

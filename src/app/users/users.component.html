@@ -1,25 +1,27 @@
-<form class="form">
-  <div class="form__title">
-    <p class="form__title-text">Users</p>
-    <div class="form__title__buttons">
+<div class="users-list">
+  <div class="users-list__title">
+    <p class="users-list__title-text">Users</p>
+    <div class="users-list__title__buttons">
       <button
         mat-button
-        class="form__title__buttons__export-csv"
+        class="users-list__title__buttons__export-csv"
         (click)="downloadCsvFile()"
       >
         EXPORT CSV
       </button>
-      <button mat-button class="form__title__buttons__add-user">
+      <button mat-button class="users-list__title__buttons__add-user">
         ADD USER
       </button>
-      <button mat-button class="form__title__buttons__add-bulk-users">
-        <p class="form__title__buttons__add-bulk-users__p">ADD BULK USERS</p>
+      <button mat-button class="users-list__title__buttons__add-bulk-users">
+        <p class="users-list__title__buttons__add-bulk-users__p">
+          ADD BULK USERS
+        </p>
       </button>
     </div>
   </div>
-  <div class="form__mat-tab-group-div">
+  <div class="users-list__mat-tab-group-div">
     <mat-tab-group
-      class="form__mat-tab-group-div__mat-tab-group"
+      class="users-list__mat-tab-group-div__mat-tab-group"
       [(selectedIndex)]="selectedTabIndex"
       (selectedTabChange)="onTabChange($event)"
     >
@@ -31,7 +33,7 @@
 
   <mat-table
     [dataSource]="dataSource"
-    class="form__table"
+    class="users-list__table"
     matSort
     matSortDirection="asc"
     matSortActive="id"
@@ -40,7 +42,7 @@
       <th
         mat-header-cell
         *matHeaderCellDef
-        class="form__mat-columnDef-name"
+        class="users-list__mat-columnDef-name"
         mat-sort-header="name"
       >
         NAME
@@ -51,7 +53,7 @@
       <th
         mat-header-cell
         *matHeaderCellDef
-        class="form__mat-columnDef-status"
+        class="users-list__mat-columnDef-status"
         mat-sort-header="status"
       >
         STATUS
@@ -60,8 +62,8 @@
         mat-cell
         *matCellDef="let element"
         [ngClass]="{
-          'form__table__status-active': element.status,
-          'form__table__status-inactive': !element.status
+          'users-list__table__status-active': element.status,
+          'users-list__table__status-inactive': !element.status
         }"
       >
         {{ element.status ? " Active" : "Inactive" }}
@@ -71,7 +73,7 @@
       <th
         mat-header-cell
         *matHeaderCellDef
-        class="form__mat-columnDef-taskCompleted"
+        class="users-list__mat-columnDef-taskCompleted"
         mat-sort-header="coursesCompleted"
       >
         COURSES COMPLETED
@@ -84,7 +86,7 @@
       <th
         mat-header-cell
         *matHeaderCellDef
-        class="form__mat-columnDef-leftDays"
+        class="users-list__mat-columnDef-leftDays"
         mat-sort-header="leftDays"
       >
         TIME LEFT
@@ -95,7 +97,7 @@
       <th
         mat-header-cell
         *matHeaderCellDef
-        class="form__mat-columnDef-dateAdded"
+        class="users-list__mat-columnDef-dateAdded"
         mat-sort-header="dateAdded"
       >
         DATE ADDED
@@ -107,14 +109,17 @@
     <ng-container matColumnDef="settings">
       <th mat-header-cell *matHeaderCellDef mat-sort-header="settings"></th>
       <td mat-cell *matCellDef="let element">
-        <mat-icon class="form__settings-icon" svgIcon="points-black"></mat-icon>
+        <mat-icon
+          class="users-list__settings-icon"
+          svgIcon="points-black"
+        ></mat-icon>
       </td>
     </ng-container>
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr
       mat-row
       *matRowDef="let row; columns: displayedColumns"
-      class="form__table__row"
+      class="users-list__table__row"
     ></tr>
   </mat-table>
   <div class="line"></div>
@@ -125,4 +130,4 @@
     aria-label="Rows per page"
   >
   </mat-paginator>
-</form>
+</div>

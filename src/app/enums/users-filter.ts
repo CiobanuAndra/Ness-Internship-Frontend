@@ -1,5 +1,5 @@
 export enum UsersFilter {
-  ALL = 'ALL',
-  ACTIVE = 'ACTIVE',
-  INACTIVE = 'INACTIVE',
+  ALL,
+  ACTIVE,
+  INACTIVE,
 }
