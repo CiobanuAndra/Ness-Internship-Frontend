@@ -18,7 +18,7 @@ export class LeaderboardTableComponent implements AfterViewInit, OnInit {
   usersInProgress: UserCard[] = [];
   usersInDone: UserCard[] = [];
   leaderboardTabsEnum = LeaderboardTabsEnum;
-  displayedColumns = ['name', 'tasksLeft', 'points', 'rank'];
+  displayedColumns = ['name', 'tasks', 'points', 'rank'];
   dataSource!: MatTableDataSource<UserCard>;
 
   constructor(
@@ -71,5 +71,5 @@ export class LeaderboardTableComponent implements AfterViewInit, OnInit {
       tab === LeaderboardTabsEnum.InProgress
         ? this.usersInProgress
         : this.usersInDone;
-  }  
+  }
 }
