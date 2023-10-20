@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { User } from '../interfaces/user.model';
-import { BehaviorSubject, Observable, of } from 'rxjs';
 import { UserCard } from '../interfaces/user-card.model';
+import { BehaviorSubject, Observable, map, of } from 'rxjs';
+import { UsersListTable } from '../interfaces/users-list-table';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UsersService {
-
   constructor() {}
 
   usersRequireAttention: User[] = [
@@ -31,9 +31,115 @@ export class UsersService {
     { status: false, name: 'Mike Chris', tasks: 2, points: 1200, rank: 2 },
   ];
 
-  public loadUsersLeaderboard():Observable<UserCard[]> {
-    return of(this.usersLeaderboard);
-  }
+  totalCourses: number = 15;
+
+  allUsers: UsersListTable[] = [
+    {
+      name: 'Alex Muller',
+      status: true,
+      coursesCompleted: 8,
+      leftDays: 4,
+      dateAdded: new Date('2023-10-30'),
+    },
+    {
+      name: 'Eduard Rosu',
+      status: true,
+      coursesCompleted: 2,
+      leftDays: 10,
+      dateAdded: new Date('2023-09-15'),
+    },
+    {
+      name: 'Alex Muller',
+      status: false,
+      coursesCompleted: 15,
+      leftDays: 1,
+      dateAdded: new Date('2023-08-07'),
+    },
+    {
+      name: 'Ioan Bucataru',
+      status: true,
+      coursesCompleted: 2,
+      leftDays: 9,
+      dateAdded: new Date('2023-07-22'),
+    },
+    {
+      name: 'Alex Muller',
+      status: true,
+      coursesCompleted: 7,
+      leftDays: 0,
+      dateAdded: new Date(),
+    },
+    {
+      name: 'Alex Muller',
+      status: false,
+      coursesCompleted: 15,
+      leftDays: 10,
+      dateAdded: new Date(),
+    },
+    {
+      name: 'Magda Paicu',
+      status: true,
+      coursesCompleted: 5,
+      leftDays: 10,
+      dateAdded: new Date(),
+    },
+    {
+      name: 'Alex Muller',
+      status: true,
+      coursesCompleted: 7,
+      leftDays: 7,
+      dateAdded: new Date(),
+    },
+    {
+      name: 'Alex Muller',
+      status: false,
+      coursesCompleted: 14,
+      leftDays: 10,
+      dateAdded: new Date(),
+    },
+    {
+      name: 'Alex Muller',
+      status: true,
+      coursesCompleted: 8,
+      leftDays: 12,
+      dateAdded: new Date(),
+    },
+    {
+      name: 'Eduard Rosu',
+      status: true,
+      coursesCompleted: 9,
+      leftDays: 10,
+      dateAdded: new Date(),
+    },
+    {
+      name: 'Florin Bodogan',
+      status: true,
+      coursesCompleted: 11,
+      leftDays: 3,
+      dateAdded: new Date(),
+    },
+    {
+      name: 'Andra Ciobanu',
+      status: true,
+      coursesCompleted: 2,
+      leftDays: 15,
+      dateAdded: new Date(),
+    },
+    {
+      name: 'Vlad Cristea',
+      status: true,
+      coursesCompleted: 3,
+      leftDays: 6,
+      dateAdded: new Date(),
+    },
+    {
+      name: 'Andra Ciobanu',
+      status: false,
+      coursesCompleted: 5,
+      leftDays: 10,
+      dateAdded: new Date(),
+    },
+  ];
 
   usersSubject$: BehaviorSubject<User[]> = new BehaviorSubject<User[]>(
     this.usersRequireAttention
@@ -42,8 +148,27 @@ export class UsersService {
   getUsersRequireAttention(): Observable<User[]> {
     return this.usersSubject$.asObservable();
   }
+
   updateUsersRequireAttention(users: User[]) {
     this.usersSubject$.next(users);
   }
 
+  public loadUsersLeaderboard(): Observable<UserCard[]> {
+    return of(this.usersLeaderboard);
+  }
+
+  getAllUsers(): Observable<UsersListTable[]> {
+    return of(this.allUsers);
+  }
+
+  getInactiveUsers(): Observable<UsersListTable[]> {
+    return of(this.allUsers).pipe(
+      map((users) => users.filter((user) => user.status === false))
+    );
+  }
+  getActiveUsers(): Observable<UsersListTable[]> {
+    return of(this.allUsers).pipe(
+      map((users) => users.filter((user) => user.status === true))
+    );
+  }
 }
