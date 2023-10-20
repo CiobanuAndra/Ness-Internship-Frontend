@@ -9,12 +9,13 @@ import { MatTableModule } from '@angular/material/table';
 import { MatCardModule } from '@angular/material/card';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
+import { MatIconModule, MatIconRegistry } from '@angular/material/icon';
 import { MatSortModule } from '@angular/material/sort';
 import { MatDividerModule } from '@angular/material/divider';
+import { FormsModule } from '@angular/forms';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSelectModule } from '@angular/material/select';
-import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [],
@@ -24,6 +25,7 @@ import { FormsModule } from '@angular/forms';
     MatFormFieldModule,
     FormsModule,
     MatInputModule,
+    FormsModule,
     MatRadioModule,
     MatDialogModule,
     MatTableModule,
@@ -35,7 +37,8 @@ import { FormsModule } from '@angular/forms';
     MatDividerModule,
     MatPaginatorModule,
     MatSelectModule,
+    HttpClientModule,
   ],
-  providers: [],
+  providers: [MatIconRegistry],
 })
 export class MaterialModule {}
