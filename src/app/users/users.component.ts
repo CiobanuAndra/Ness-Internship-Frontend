@@ -16,13 +16,19 @@ import { MatPaginator } from '@angular/material/paginator';
 export class UsersComponent implements AfterViewInit {
   constructor(private userService: UsersService) {}
 
+  totalCourses = 0;
+  @ViewChild(MatSort) sort!: MatSort;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  UsersFilterValues = Object.values(UsersFilter);
+  dataSource = new MatTableDataSource<UsersListTable>();
+  buttons: any = ['export csv', 'add user', 'add bulk users'];
+
   UsersFilterIndex = {
     [UsersFilter.ALL]: 0,
     [UsersFilter.ACTIVE]: 1,
     [UsersFilter.INACTIVE]: 2,
   };
   selectedTabIndex: number = this.UsersFilterIndex[UsersFilter.ALL];
-  totalCourses = 0;
   displayedColumns: string[] = [
     'name',
     'status',
@@ -31,31 +37,26 @@ export class UsersComponent implements AfterViewInit {
     'dateAdded',
     'settings',
   ];
-  @ViewChild(MatSort) sort!: MatSort;
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
-  UsersFilterValues = Object.values(UsersFilter);
-  dataSource = new MatTableDataSource<UsersListTable>();
-  buttons: any = ['export csv', 'add user', 'add bulk users'];
 
-  filterActiveUsers() {
+  filterActiveUsers(): void {
     this.userService.getActiveUsers().subscribe((values) => {
       this.dataSource.data = values;
     });
   }
 
-  filterInactiveUsers() {
+  filterInactiveUsers(): void {
     this.userService.getInactiveUsers().subscribe((values) => {
       this.dataSource.data = values;
     });
   }
 
-  filterAllUsers() {
+  filterAllUsers(): void {
     this.userService.getAllUsers().subscribe((values) => {
       this.dataSource.data = values;
     });
   }
 
-  onTabChange(event: MatTabChangeEvent) {
+  onTabChange(event: MatTabChangeEvent): void {
     switch (event.index) {
       case 0:
         this.filterAllUsers();
@@ -71,7 +72,7 @@ export class UsersComponent implements AfterViewInit {
     }
   }
 
-  downloadCsvFile() {
+  downloadCsvFile(): void {
     var options = {
       fieldSeparator: ',',
       quoteStrings: '"',
@@ -88,7 +89,6 @@ export class UsersComponent implements AfterViewInit {
         'Date Added',
       ],
     };
-
     new ngxCsv(this.dataSource.data, 'UsersList', options);
   }
 

@@ -31,10 +31,6 @@ export class UsersService {
     { status: false, name: 'Mike Chris', tasks: 2, points: 1200, rank: 2 },
   ];
 
-  public loadUsersLeaderboard(): Observable<UserCard[]> {
-    return of(this.usersLeaderboard);
-  }
-
   totalCourses: number = 15;
 
   allUsers: UsersListTable[] = [
@@ -43,28 +39,28 @@ export class UsersService {
       status: true,
       coursesCompleted: 8,
       leftDays: 4,
-      dateAdded: new Date(),
+      dateAdded: new Date('2023-10-30'),
     },
     {
       name: 'Eduard Rosu',
       status: true,
       coursesCompleted: 2,
       leftDays: 10,
-      dateAdded: new Date(),
+      dateAdded: new Date('2023-09-15'),
     },
     {
       name: 'Alex Muller',
       status: false,
       coursesCompleted: 15,
       leftDays: 1,
-      dateAdded: new Date(),
+      dateAdded: new Date('2023-08-07'),
     },
     {
       name: 'Ioan Bucataru',
       status: true,
       coursesCompleted: 2,
       leftDays: 9,
-      dateAdded: new Date(),
+      dateAdded: new Date('2023-07-22'),
     },
     {
       name: 'Alex Muller',
@@ -152,8 +148,13 @@ export class UsersService {
   getUsersRequireAttention(): Observable<User[]> {
     return this.usersSubject$.asObservable();
   }
+
   updateUsersRequireAttention(users: User[]) {
     this.usersSubject$.next(users);
+  }
+
+  public loadUsersLeaderboard(): Observable<UserCard[]> {
+    return of(this.usersLeaderboard);
   }
 
   getAllUsers(): Observable<UsersListTable[]> {
@@ -165,7 +166,7 @@ export class UsersService {
       map((users) => users.filter((user) => user.status === false))
     );
   }
-  getActiveUsers() {
+  getActiveUsers(): Observable<UsersListTable[]> {
     return of(this.allUsers).pipe(
       map((users) => users.filter((user) => user.status === true))
     );
