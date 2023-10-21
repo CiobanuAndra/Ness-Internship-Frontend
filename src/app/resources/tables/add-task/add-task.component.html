@@ -1,7 +1,9 @@
 <div class="add-task-container">
     <div class="add-task-header">
         <span>Add Task</span>
-        <img class="cancel-image" src="assets/icons/cancel.svg" alt="Cancel Icon" />
+        <button mat-icon-button (click)="closeDialog()">
+            <mat-icon>close</mat-icon>
+        </button>
     </div>
 
     <div class="stepper-container">
@@ -10,40 +12,39 @@
             <div class="stepper-general-container">
                 <mat-step [stepControl]="firstFormGroup">
                     <form [formGroup]="firstFormGroup">
-                        <ng-template matStepLabel>General</ng-template>
-                        <hr>
-
-                        <div class="general-stepper-inputs">
-                            <input matInput placeholder="Mandatory Training" type="text" formControlName="firstCtrl"
-                                required value="Mandatory Training" class="custom-input" />
-                            <mat-hint class="hint-title">Title</mat-hint>
-
-                            <div class="general-stepper-textarea">
-                                <textarea placeholder="Description" rows="6" cols="75" required></textarea>
-                            </div>
-
-                            <div class="general-order">
-                            <input matInput placeholder="1" type="number" formControlName="firstCtrl" required
-                                class="custom-input" />
+                      <ng-template matStepLabel>General</ng-template>
+                      <hr>
+                  
+                      <div class="general-stepper-inputs">
+                        <input matInput placeholder="Mandatory Training" type="text" formControlName="name"
+                          value="Mandatory Training" class="custom-input" />
+                        <mat-hint class="hint-title">Title</mat-hint>
+                        <div class="alert" [style.visibility]="showGeneralAlertsInput1 ? 'visible' : 'hidden'">Enter some strings</div>
+                  
+                        <div class="general-stepper-textarea">
+                          <textarea placeholder="Description" formControlName="description" rows="6" cols="70"></textarea>
+                          <div class="alert" [style.visibility]="showGeneralAlertsInput2 ? 'visible' : 'hidden'">Enter some strings</div>
+                        </div>
+                  
+                        <div class="general-order">
+                            <input matInput type="number" formControlName="order" class="custom-input" min="0" />
                             <mat-hint class="hint-title">Order for User on Homepage from top to bottom</mat-hint>
-                            </div>
+                            <div class="alert" [style.visibility]="showGeneralAlertsInput3 ? 'visible' : 'hidden'">Enter some strings</div>
                         </div>
-                        <div>
-
-
-
-                        </div>
+                      </div>
+                      <div>
+                      </div>
                     </form>
                     <div class="general-buttons">
-                        <button mat-button matStepperNext class="next-button">
-                            Next Step
-                        </button>
-                        <button mat-button matStepperNext class="cancel-button">
-                            Cancel
-                        </button>
+                      <button mat-button class="next-button" (click)="goForward(stepper)">
+                        Next Step
+                      </button>
+                      <button mat-button matStepperNext class="cancel-button" (click)="closeDialog()">
+                        Cancel
+                      </button>
                     </div>
-                </mat-step>
-
+                  </mat-step>
+                  
             </div>
 
             <mat-step [stepControl]="secondFormGroup" [optional]="isOptional">
@@ -60,7 +61,12 @@
             </mat-step>
 
             <mat-step>
-                <ng-template matStepLabel>Rewards</ng-template>
+                <ng-template matStepLabel>
+                    <div class="step3-container">
+                        <span class="rewards-text">Rewards</span>
+                        <span class="points-avatar-text">Points & Avatar</span>
+                    </div>
+                </ng-template>
                 <div>
                     <button mat-button matStepperPrevious>Back</button>
                     <button mat-button (click)="stepper.reset()">Reset</button>

@@ -3,6 +3,7 @@ import { Task } from '../interfaces/resources/task.model';
 import { Observable, of } from 'rxjs';
 import { Course } from '../interfaces/resources/course.model';
 import { Avatar } from '../interfaces/resources/avatar.model';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
