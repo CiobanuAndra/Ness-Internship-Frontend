@@ -1,79 +1,125 @@
 <div class="add-task-container">
-    <div class="add-task-header">
-        <span>Add Task</span>
-        <button mat-icon-button (click)="closeDialog()">
-            <mat-icon>close</mat-icon>
-        </button>
-    </div>
+  <div class="add-task-header">
+    <span>Add Task</span>
+    <button mat-icon-button (click)="closeDialog()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
 
-    <div class="stepper-container">
-        <mat-horizontal-stepper linear #stepper>
+  <div class="stepper-container">
+    <mat-horizontal-stepper linear #stepper>
+      <div class="stepper-general-container">
+        <mat-step [stepControl]="firstFormGroup">
+          <form [formGroup]="firstFormGroup">
+            <ng-template matStepLabel>General</ng-template>
+            <hr class="stepper-divider" />
 
-            <div class="stepper-general-container">
-                <mat-step [stepControl]="firstFormGroup">
-                    <form [formGroup]="firstFormGroup">
-                      <ng-template matStepLabel>General</ng-template>
-                      <hr>
-                  
-                      <div class="general-stepper-inputs">
-                        <input matInput placeholder="Mandatory Training" type="text" formControlName="name"
-                          value="Mandatory Training" class="custom-input" />
-                        <mat-hint class="hint-title">Title</mat-hint>
-                        <div class="alert" [style.visibility]="showGeneralAlertsInput1 ? 'visible' : 'hidden'">Enter some strings</div>
-                  
-                        <div class="general-stepper-textarea">
-                          <textarea placeholder="Description" formControlName="description" rows="6" cols="70"></textarea>
-                          <div class="alert" [style.visibility]="showGeneralAlertsInput2 ? 'visible' : 'hidden'">Enter some strings</div>
-                        </div>
-                  
-                        <div class="general-order">
-                            <input matInput type="number" formControlName="order" class="custom-input" min="0" />
-                            <mat-hint class="hint-title">Order for User on Homepage from top to bottom</mat-hint>
-                            <div class="alert" [style.visibility]="showGeneralAlertsInput3 ? 'visible' : 'hidden'">Enter some strings</div>
-                        </div>
-                      </div>
-                      <div>
-                      </div>
-                    </form>
-                    <div class="general-buttons">
-                      <button mat-button class="next-button" (click)="goForward(stepper)">
-                        Next Step
-                      </button>
-                      <button mat-button matStepperNext class="cancel-button" (click)="closeDialog()">
-                        Cancel
-                      </button>
-                    </div>
-                  </mat-step>
-                  
-            </div>
+            <div class="general-stepper-inputs">
+              <input
+                matInput
+                placeholder="Mandatory Training"
+                type="text"
+                formControlName="name"
+                value="Mandatory Training"
+                class="custom-input"
+              />
+              <mat-hint class="hint-title">Title</mat-hint>
+              <div
+                class="alert"
+                [style.visibility]="
+                showTitleAlert ? 'visible' : 'hidden'
+                "
+              >
+                Please add a title
+              </div>
 
-            <mat-step [stepControl]="secondFormGroup" [optional]="isOptional">
-                <form [formGroup]="secondFormGroup">
-                    <ng-template matStepLabel>Details</ng-template>
-                    <mat-form-field>
-                        <input matInput placeholder="Address" formControlName="secondCtrl" required />
-                    </mat-form-field>
-                    <div>
-                        <button mat-button matStepperPrevious>Back</button>
-                        <button mat-button matStepperNext>Next</button>
-                    </div>
-                </form>
-            </mat-step>
-
-            <mat-step>
-                <ng-template matStepLabel>
-                    <div class="step3-container">
-                        <span class="rewards-text">Rewards</span>
-                        <span class="points-avatar-text">Points & Avatar</span>
-                    </div>
-                </ng-template>
-                <div>
-                    <button mat-button matStepperPrevious>Back</button>
-                    <button mat-button (click)="stepper.reset()">Reset</button>
+              <div class="general-stepper-textarea">
+                <textarea
+                  class="description-textarea"
+                  placeholder="Description"
+                  formControlName="description"
+                  rows="6"
+                  cols="70"
+                ></textarea>
+                <div
+                  class="alert"
+                  [style.visibility]="
+                  showDescriptionAlert ? 'visible' : 'hidden'
+                  "
+                >
+                  Please add a description
                 </div>
-            </mat-step>
+              </div>
 
+              <div class="general-stepper-order">
+                <input
+                  matInput
+                  type="number"
+                  formControlName="order"
+                  class="custom-input"
+                  placeholder="1"
+                />
+                <mat-hint class="hint-title"
+                  >Order for User on Homepage from top to bottom</mat-hint
+                >
+                <div
+                  class="alert"
+                  [style.visibility]="
+                  showOrderAlert ? 'visible' : 'hidden'
+                  "
+                >
+                  Please specify a valid order value
+                </div>
+              </div>
+            </div>
+            <div></div>
+          </form>
+          <div class="general-buttons">
+            <button mat-button class="next-button" (click)="moveToDetailsStepper(stepper)">
+              {{ 'next step' | uppercase }}
+            </button>
+            <button
+              mat-button
+              matStepperNext
+              class="cancel-button"
+              (click)="closeDialog()"
+            >
+            {{ 'cancel' | uppercase }}
+            </button>
+          </div>
+        </mat-step>
+      </div>
 
-        </mat-horizontal-stepper>
-    </div>
+      <mat-step [stepControl]="secondFormGroup" [optional]="isOptional">
+        <form [formGroup]="secondFormGroup">
+          <ng-template matStepLabel>Details</ng-template>
+          <mat-form-field>
+            <input
+              matInput
+              placeholder="Address"
+              formControlName="secondCtrl"
+              required
+            />
+          </mat-form-field>
+          <div>
+            <button mat-button matStepperPrevious>Back</button>
+            <button mat-button matStepperNext>Next</button>
+          </div>
+        </form>
+      </mat-step>
+
+      <mat-step>
+        <ng-template matStepLabel>
+          <div class="stepper-rewards-container">
+            <span class="rewards-text">Rewards</span>
+            <span class="points-avatar-text">Points & Avatar</span>
+          </div>
+        </ng-template>
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button (click)="stepper.reset()">Reset</button>
+        </div>
+      </mat-step>
+    </mat-horizontal-stepper>
+  </div>
 </div>
