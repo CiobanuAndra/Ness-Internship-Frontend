@@ -1,9 +1,10 @@
-<mat-sidenav-container class="example-container" *ngIf="showSidenav">
+<mat-sidenav-container class="sidenav-container" *ngIf="showSidenav">
     <mat-sidenav-content>
         <app-add-task [showSidenav]="showSidenav" (showSidenavChange)="showSidenav = $event"></app-add-task>
     </mat-sidenav-content>
 </mat-sidenav-container>
 
+<div class="resources-container" [ngClass]="{'open': showSidenav}">
 <mat-card class="card-container">
   <mat-card-header class="card-header">
     <mat-card-title class="card-title">
@@ -48,4 +49,4 @@
         <button mat-raised-button class="tab-button" *ngIf="activeTabTitle === 'Industries'">Add Industry</button>
     </div>
 </mat-card>
-
+</div>

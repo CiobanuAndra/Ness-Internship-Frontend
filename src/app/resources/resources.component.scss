@@ -1,10 +1,18 @@
 @import "/src/styleguide.scss";
 
+.resources-container.open {
+  width: 100%;
+  height: calc(100% - 5rem);
+  background-color: #E6E7E9;
+  filter: brightness(0.7);
+  transition: filter 0.5s;
+}
+
 .card-container {
   max-width: 1660px;
   margin: 0 auto;
-  margin-top: 1rem;
   width: 90%;
+  height: 85%;
 
   .card-header {
     padding-bottom: 1rem;
@@ -31,7 +39,7 @@
   }
 }
 
-.example-container {
+.sidenav-container {
   position: absolute;
   top: 0;
   bottom: 0;

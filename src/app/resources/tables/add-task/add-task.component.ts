@@ -1,6 +1,7 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatStepper } from '@angular/material/stepper';
+import { ResourcesService } from 'src/app/services/resources.service';
 
 @Component({
   selector: 'app-add-task',
@@ -18,11 +19,11 @@ export class AddTaskComponent {
   isOptional = false;
   firstInputValue: string = '';
 
-  constructor(private _formBuilder: FormBuilder) {}
+  constructor(private _formBuilder: FormBuilder, private resourcesService: ResourcesService) {}
 
   ngOnInit() {
     this.firstFormGroup = this._formBuilder.group({
-      name: ['', Validators.required],
+      title: ['', Validators.required],
       description: ['', Validators.required],
       order: ['', Validators.required],
     });
@@ -34,27 +35,28 @@ export class AddTaskComponent {
   closeDialog() {
     this.showSidenav = false;
     this.showSidenavChange.emit(this.showSidenav);
+    this.resourcesService.setSidenavVisibility(false);
   }
 
   moveToDetailsStepper(stepper: MatStepper) {
-    const nameValue = this.firstFormGroup.get('name')!.value.trim();
+    const titleValue = this.firstFormGroup.get('title')!.value.trim();
     const descriptionValue = this.firstFormGroup.get('description')!.value.trim();
     const orderValue = this.firstFormGroup.get('order')!.value;
 
-    const isNameEmpty = nameValue === '';
+    const isTitleEmpty = titleValue === '';
     const isDescriptionEmpty = descriptionValue === '';
     const isOrderEmpty = orderValue === '';
     const isOrderNaN = isNaN(orderValue);
 
-    if (!isNameEmpty || !isDescriptionEmpty || !isOrderEmpty || !isOrderNaN) {
+    if (!isTitleEmpty || !isDescriptionEmpty || !isOrderEmpty || !isOrderNaN) {
       this.firstFormGroup.updateValueAndValidity();
 
-      const isNameValid = this.firstFormGroup.get('name')!.valid;
+      const isTitleValid = this.firstFormGroup.get('title')!.valid;
       const isDescriptionValid = this.firstFormGroup.get('description')!.valid;
       const isOrderValid = this.firstFormGroup.get('order')!.valid;
 
-      if (!isNameValid || !isDescriptionValid || !isOrderValid) {
-        this.showTitleAlert = !isNameValid;
+      if (!isTitleValid || !isDescriptionValid || !isOrderValid) {
+        this.showTitleAlert = !isTitleValid;
         this.showDescriptionAlert = !isDescriptionValid;
         this.showOrderAlert = !isOrderValid;
       } else {
@@ -65,4 +67,20 @@ export class AddTaskComponent {
       }
     }
   }
+
+  onTitleInputChange() {
+    const titleValue = this.firstFormGroup.get('title')!.value.trim();
+    this.showTitleAlert = titleValue === '';
+  }
+  
+  onDescriptionInputChange() {
+    const descriptionValue = this.firstFormGroup.get('description')!.value.trim();
+    this.showDescriptionAlert = descriptionValue === '';
+  }
+  
+  onOrderInputChange() {
+    const orderValue = this.firstFormGroup.get('order')!.value;
+    this.showOrderAlert = isNaN(orderValue) || orderValue === null || orderValue === '';
+  }  
+  
 }

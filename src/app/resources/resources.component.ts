@@ -11,6 +11,7 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class ResourcesComponent {
   // Tab headers
+  
   activeTabTitle: string = '';
   showSidenav = false;
   isDialogOpen = false;
@@ -22,14 +23,12 @@ export class ResourcesComponent {
 
   updateActiveTabTitle(selectedIndex: number): void {
     const tabLabels = ['Tasks', 'Courses', 'Avatars', 'Industries'];
-
     this.activeTabTitle = tabLabels[selectedIndex];
-
-    
   }
 
   toggleSidenav() {
     this.showSidenav = !this.showSidenav;
+    this.resourcesService.setSidenavVisibility(this.showSidenav);
   }
 
 }
