@@ -24,7 +24,6 @@ import { UsersModule } from './users/users/users.module';
     MaterialModule,
     MatIconModule,
     MatTabsModule,
-    DashboardModule,
     MatTableModule,
     DashboardModule,
     ResourcesModule,

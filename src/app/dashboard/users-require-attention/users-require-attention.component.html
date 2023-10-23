@@ -3,7 +3,11 @@
     <span
       >{{ allUsersRequireAttention.length }} User that require attention</span
     >
-    <button mat-button class="users-require-attention__title__button">
+    <button
+      mat-button
+      class="users-require-attention__title__button"
+      (click)="navigateToUsersRequireAttentionTable()"
+    >
       VIEW ALL
     </button>
   </div>
