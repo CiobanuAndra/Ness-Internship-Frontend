@@ -56,9 +56,12 @@ export class UsersComponent implements AfterViewInit {
     this.resourcesService.setSidenavVisibility(this.opened);
   }
 
+  //MODAL
   openDialog() {
-    const dialogRef = this.dialog.open(AddbulkusersComponent);
-
+    const dialogRef = this.dialog.open(AddbulkusersComponent, {
+      autoFocus: false,
+    });
+    
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
     });

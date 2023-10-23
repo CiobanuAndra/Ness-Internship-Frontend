@@ -1,25 +1,31 @@
 <mat-card class="card-container">
     <mat-card-header class="card-header">
         <mat-card-title class="card-title">
-            12 Users Uploaded
+            7 Users Uploaded
         </mat-card-title>
+        <button mat-icon-button mat-dialog-close class="close-button">
+            <mat-icon>
+                close
+            </mat-icon>
+        </button>
     </mat-card-header>
     <mat-divider></mat-divider>
 
     <mat-card-content>
-        <div class="require-attention-container">
-            <p class="table-header">12 Users Require Attention</p>
-            <app-requireattention></app-requireattention>
-        </div>
-
-        <div class="await-confirmation-container">
-            <p class="table-header">12 Users Await Confirmation</p>
-            <app-awaitconfirmation></app-awaitconfirmation>
-        </div>
-        <div class="buttons-container">
-            <button mat-raised-button class="addUser-button">Confirm & Add Users</button>
-            <button mat-raised-button class="cancel-button">Cancel</button>
-        </div>
+        <mat-dialog-content class="dialog-container">
+            <div class="require-attention-container">
+                <p class="table-header">3 Users Require Attention</p>
+                <app-requireattention></app-requireattention>
+            </div>
+    
+            <div class="await-confirmation-container">
+                <p class="table-header">4 Users Await Confirmation</p>
+                <app-awaitconfirmation></app-awaitconfirmation>
+            </div>
+            <div class="buttons-container">
+                <button mat-raised-button (click)="addUsers()" class="addUser-button">Confirm & Add Users</button>
+                <button mat-raised-button mat-dialog-close class="cancel-button">Cancel</button>                
+            </div>
+        </mat-dialog-content>
     </mat-card-content>
-
 </mat-card>

@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
-import { UserRequireAttention } from '../interfaces/user-require-attention.model';
-import { UserCard } from '../interfaces/user-card.model';
 import { BehaviorSubject, Observable, map, of } from 'rxjs';
 import { UsersListTable } from '../interfaces/users-list-table';
+import { User } from '../interfaces/users/user.model';
+import { UserCard } from '../interfaces/users/user-card.model';
 import { UserModal } from '../interfaces/users/user-modal.model';
+import { UserRequireAttention } from '../interfaces/user-require-attention.model';
 
 @Injectable({
   providedIn: 'root',
@@ -373,8 +374,9 @@ export class UsersService {
   }
   //modals
   usersModalRequire: UserModal[] = [
-    { name: 'Mustas', surname: 'Abdul', email: '1512512@ness.com'},
-    { name: 'Mustas', surname: 'Rajesh', email: '1512512@ness.com'},
+    { name: 'Mustas1', surname: 'Abdul1', email: '1412421@ness.com', message: "No Email Adress"},
+    { name: 'Mustas2', surname: 'Abdul2', email: '1512512@ness.com', message: "No Email Adress"},
+    { name: 'Mustas2', surname: 'Abdul2', email: '1512512@ness.com', message: "No Email Adress"},
   ];  
   
   usersModalAwait: UserModal[] = [
@@ -392,3 +394,4 @@ export class UsersService {
     return of(this.usersModalAwait);
   };
 }
+

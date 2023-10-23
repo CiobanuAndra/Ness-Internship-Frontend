@@ -1,13 +1,59 @@
 @import "/src/styleguide.scss";
 
 .header-cell {
-    text-transform: uppercase;
+  text-transform: uppercase;
 }
 
 .mat-elevation-z8 {
-    box-shadow: 0px 5px 5px -3px rgb(0 0 0 / 3%), 0px 8px 10px 1px rgb(0 0 0 / 3%), 0px 3px 14px 2px rgb(0 0 0 / 3%);
+  box-shadow: 0px 5px 5px -3px rgb(0 0 0 / 3%), 0px 8px 10px 1px rgb(0 0 0 / 3%), 0px 3px 14px 2px rgb(0 0 0 / 3%);
 }
 
-.mat-column-options {  
-    flex: 0 0 10%;
+.mat-mdc-header-cell {
+  text-transform: uppercase;
+}
+
+//EXPANDED CONTENT
+.mat-column-email {
+  width: 60%;
+}
+
+.mat-column-options, .mat-column-expand {  
+  width: 10%;
+}
+
+.detail-row {
+  height: 0;
+  background: #FF5252;
+}
+
+td {
+  border-bottom: solid 0.1px #e7e7e7;
+}
+
+.error-message {
+  padding: 1rem 0 1rem 5rem;
+  color: #FFF;
+  font-family: Roboto;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px;
+  letter-spacing: 0.25px;
+}
+
+.element-row:not(.expanded-row):hover {
+  background: whitesmoke;
+}
+
+.element-row:not(.expanded-row):active {
+  background: #efefef;
+}
+
+.element-detail {
+  overflow: hidden;
+  display: flex;
+}
+
+.table-with-no-data {
+  height: 200px;
 }
