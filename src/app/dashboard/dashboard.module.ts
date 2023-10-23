@@ -13,7 +13,7 @@ import { LeaderboardTableComponent } from './leaderboard-table/leaderboard-table
 import { MatTableModule } from '@angular/material/table';
 import { RouterModule, Routes } from '@angular/router';
 import { CurrentProgressComponent } from './current-progress/current-progress.component';
-import { UsersService } from '../services/users/users.service';
+import { UsersService } from '../services/users.service';
 import { GoogleChartsModule } from 'angular-google-charts';
 
 const routes: Routes = [
