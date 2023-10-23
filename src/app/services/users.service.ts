@@ -11,9 +11,24 @@ export class UsersService {
   constructor() {}
 
   usersRequireAttention: UserRequireAttention[] = [
-    { name: 'Andrei Artene', leftDays: 4, pastDays: 2 },
-    { name: 'Vasile Ion', leftDays: 1, pastDays: 4 },
-    { name: 'Mark Willerhower', leftDays: 2, pastDays: 4 },
+    { name: 'Andrei Artene', leftDays: 4, pastDays: 2, tasksLeft: 3 },
+    { name: 'Vasile Ion', leftDays: 1, pastDays: 4, tasksLeft: 5 },
+    { name: 'Mark Willerhower', leftDays: 2, pastDays: 4, tasksLeft: 4 },
+    { name: 'Andrei Artene', leftDays: 4, pastDays: 2, tasksLeft: 3 },
+    { name: 'Vasile Ion', leftDays: 1, pastDays: 4, tasksLeft: 5 },
+    { name: 'Mark Willerhower', leftDays: 2, pastDays: 4, tasksLeft: 4 },
+    { name: 'Andrei Artene', leftDays: 4, pastDays: 2, tasksLeft: 3 },
+    { name: 'Vasile Ion', leftDays: 1, pastDays: 4, tasksLeft: 5 },
+    { name: 'Mark Willerhower', leftDays: 2, pastDays: 4, tasksLeft: 4 },
+    { name: 'Andrei Artene', leftDays: 4, pastDays: 2, tasksLeft: 3 },
+    { name: 'Vasile Ion', leftDays: 1, pastDays: 4, tasksLeft: 5 },
+    { name: 'Mark Willerhower', leftDays: 2, pastDays: 4, tasksLeft: 4 },
+    { name: 'Andrei Artene', leftDays: 4, pastDays: 2, tasksLeft: 3 },
+    { name: 'Vasile Ion', leftDays: 1, pastDays: 4, tasksLeft: 5 },
+    { name: 'Mark Willerhower', leftDays: 2, pastDays: 4, tasksLeft: 4 },
+    { name: 'Andrei Artene', leftDays: 4, pastDays: 2, tasksLeft: 3 },
+    { name: 'Vasile Ion', leftDays: 1, pastDays: 4, tasksLeft: 5 },
+    { name: 'Mark Willerhower', leftDays: 2, pastDays: 4, tasksLeft: 4 },
   ];
 
   usersLeaderboard: UserCard[] = [

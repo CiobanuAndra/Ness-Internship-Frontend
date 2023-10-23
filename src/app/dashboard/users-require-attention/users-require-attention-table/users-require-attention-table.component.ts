@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { MatTableDataSource } from '@angular/material/table';
+import { UserRequireAttention } from 'src/app/interfaces/user-require-attention.model';
 import { UsersService } from 'src/app/services/users.service';
 
 @Component({
@@ -9,7 +11,12 @@ import { UsersService } from 'src/app/services/users.service';
 export class UsersRequireAttentionTableComponent implements OnInit {
   constructor(private usersService: UsersService) {}
 
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
+  displayedColumns: string[] = ['name', 'tasksLeft', 'timeLeft', 'buttons'];
+  dataSource = new MatTableDataSource<UserRequireAttention>();
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.usersService.getUsersRequireAttention().subscribe((values) => {
+      this.dataSource.data = values;
+    });
+  }
 }
