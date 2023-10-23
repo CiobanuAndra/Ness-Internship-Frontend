@@ -1,6 +1,11 @@
 <div class="users-require-attention">
   <div class="users-require-attention__title">
-    <p>User that require attention</p>
+    <span
+      >{{ allUsersRequireAttention.length }} User that require attention</span
+    >
+    <button mat-button class="users-require-attention__title__button">
+      VIEW ALL
+    </button>
   </div>
   <div *ngIf="usersRequireAttention.length > 0">
     <div

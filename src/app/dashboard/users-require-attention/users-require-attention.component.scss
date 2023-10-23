@@ -1,3 +1,5 @@
+@import "../../../styleguide.scss";
+
 @mixin set-size($width, $height, $margin-top: 0) {
   width: $width;
   height: $height;
@@ -6,7 +8,7 @@
 .users-require-attention {
   @include set-size(33.75rem, 18.938rem);
   border-radius: 0.25rem;
-  background-color: #00195f;
+  background-color: $primary-color;
 
   &__title {
     color: white;
@@ -19,6 +21,13 @@
     font-size: 0.938rem;
     font-weight: 400;
     line-height: 1.75rem;
+    justify-content: space-between;
+
+    &__button {
+      border-radius: 0.25rem;
+      background-color: $white-color;
+      padding: 0px, 16px, 0px, 16px;
+    }
   }
 
   &__users {
