@@ -13,7 +13,7 @@ import { ngxCsv } from 'ngx-csv/ngx-csv';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
-import { ResourcesService } from '../services/resources.service';
+import { ResourcesService } from '../services/resources/resources.service';
 import { MatDialog } from '@angular/material/dialog';
 import { AddbulkusersComponent } from './modals/addbulkusers/addbulkusers/addbulkusers.component';
 

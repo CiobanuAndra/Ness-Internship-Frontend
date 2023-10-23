@@ -4,7 +4,7 @@ import { Task } from 'src/app/interfaces/resources/task.model';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { MatTableDataSource } from '@angular/material/table';
 import { Observable } from 'rxjs';
-import { ResourcesService } from 'src/app/services/resources.service';
+import { ResourcesService } from 'src/app/services/resources/resources.service';
 
 @Component({
   selector: 'app-tasks',

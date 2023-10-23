@@ -11,7 +11,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { InitialsCustomepipePipe } from './pipes/initials-customepipe.pipe';
 import { ResourcesModule } from './resources/resources.module';
-import { UsersModule } from './users/users/users.module';
+import { UsersModule } from './users/users.module';
 
 @NgModule({
   declarations: [AppComponent, NavbarComponent, InitialsCustomepipePipe],

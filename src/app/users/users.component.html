@@ -9,6 +9,39 @@
   </mat-sidenav-content>
 </mat-sidenav-container>
 
+<div class="users-list">
+  <div class="users-list__title">
+    <p class="users-list__title-text">Users</p>
+    <div class="users-list__title__buttons">
+      <button
+        mat-button
+        class="users-list__title__buttons__export-csv"
+        (click)="downloadCsvFile()"
+      >
+        EXPORT CSV
+      </button>
+      <button mat-button class="users-list__title__buttons__add-user">
+        ADD USER
+      </button>
+      <button mat-button (click)="openDialog()" class="users-list__title__buttons__add-bulk-users">
+        <p class="users-list__title__buttons__add-bulk-users__p">
+          ADD BULK USERS
+        </p>
+      </button>
+    </div>
+  </div>
+  <div class="users-list__mat-tab-group-div">
+    <mat-tab-group
+      class="users-list__mat-tab-group-div__mat-tab-group"
+      [(selectedIndex)]="selectedTabIndex"
+      (selectedTabChange)="onTabChange($event)"
+    >
+      <mat-tab [label]="UsersFilterValues[0]"></mat-tab>
+      <mat-tab [label]="UsersFilterValues[1]"></mat-tab>
+      <mat-tab [label]="UsersFilterValues[2]"></mat-tab>
+    </mat-tab-group>
+  </div>
+
 <div [ngClass]="{ 'aside-open': opened }">
   <div class="users-list">
     <div class="users-list__title">
@@ -232,5 +265,4 @@
     aria-label="Rows per page"
   >
   </mat-paginator>
-  <button mat-button (click)="openDialog()">Open dialog</button>
 </div>

@@ -1,6 +1,6 @@
-import { Component, Output, EventEmitter, ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { RequireattentionComponent } from './tables/requireattentions/requireattention/requireattention.component';
-import { UsersService } from 'src/app/services/users.service';
+import { UsersService } from 'src/app/services/users/users.service';
 import { UserModal } from 'src/app/interfaces/users/user-modal.model';
 
 @Component({
@@ -11,10 +11,10 @@ import { UserModal } from 'src/app/interfaces/users/user-modal.model';
 export class AddbulkusersComponent {
   @ViewChild(RequireattentionComponent) child!:RequireattentionComponent;
 
-  constructor(private userssService: UsersService) {}
+  constructor(private usersService: UsersService) {}
 
   addUsers() {
-    this.userssService.loadUsersRequireModal().subscribe(
+    this.usersService.loadUsersRequireModal().subscribe(
       (users: UserModal[]) => {
         if (users.length > 0) {
           this.child.expandAllRows();

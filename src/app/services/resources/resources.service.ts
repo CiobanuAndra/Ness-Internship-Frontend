@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Task } from '../interfaces/resources/task.model';
+import { Task } from '../../interfaces/resources/task.model';
 import { Observable, of } from 'rxjs';
-import { Course } from '../interfaces/resources/course.model';
-import { Avatar } from '../interfaces/resources/avatar.model';
+import { Course } from '../../interfaces/resources/course.model';
+import { Avatar } from '../../interfaces/resources/avatar.model';
 
 @Injectable({
   providedIn: 'root'
