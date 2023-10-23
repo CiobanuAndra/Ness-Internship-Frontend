@@ -9,12 +9,14 @@ import { UsersService } from 'src/app/services/users/users.service';
 })
 export class UsersRequireAttentionComponent implements OnInit {
   usersRequireAttention: User[] = [];
+  allUsersRequireAttention: User[] = [];
 
   constructor(private _usersService: UsersService) {}
 
   ngOnInit(): void {
     this._usersService.getUsersRequireAttention().subscribe((values) => {
-      this.usersRequireAttention = values;
+      this.usersRequireAttention = values.slice(0, 3);
+      this.allUsersRequireAttention = values;
     });
   }
 }

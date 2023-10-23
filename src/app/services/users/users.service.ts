@@ -13,6 +13,9 @@ export class UsersService {
     { name: 'Andrei Artene', leftDays: 4, pastDays: 2 },
     { name: 'Vasile Ion', leftDays: 1, pastDays: 4 },
     { name: 'Mark Willerhower', leftDays: 2, pastDays: 4 },
+    { name: 'Andrei Artene', leftDays: 4, pastDays: 2 },
+    { name: 'Vasile Ion', leftDays: 1, pastDays: 4 },
+    { name: 'Mark Willerhower', leftDays: 2, pastDays: 4 },
   ];
 
   usersLeaderboard: UserCard[] = [
