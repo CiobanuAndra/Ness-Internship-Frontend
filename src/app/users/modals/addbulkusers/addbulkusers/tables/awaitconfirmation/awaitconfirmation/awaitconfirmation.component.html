@@ -26,3 +26,11 @@
         <mat-row *matRowDef="let row; columns: columnsToDisplay;"></mat-row>
     </mat-table>
 </div>
+
+<!-- State: No Data -->
+<div *ngIf="dataSource.data.length === 0">
+    <div class="table-with-no-data">
+        <img src="assets/icons/avatar.svg" alt="task-icon" class="task-icon">
+        <p class="no-data-message">No user await confirmation!</p>
+    </div>
+</div>

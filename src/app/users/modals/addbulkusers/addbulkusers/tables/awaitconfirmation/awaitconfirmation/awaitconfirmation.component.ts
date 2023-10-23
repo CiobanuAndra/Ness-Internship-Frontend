@@ -14,16 +14,16 @@ import { UsersService } from 'src/app/services/users.service';
 export class AwaitconfirmationComponent implements AfterViewInit, OnInit {
   dataSource = new MatTableDataSource<UserModal>;
   columnsToDisplay = ['name', 'surname', 'email', 'options'];
-
+  
   constructor(private liveAnnouncer: LiveAnnouncer, private usersService: UsersService) {}
 
   ngOnInit(): void {
-    this.fetchUserModal().subscribe(data => {
+    this.fetchUserAwaitModal().subscribe(data => {
       this.dataSource.data = data;
     })
   };
 
-  fetchUserModal():Observable<UserModal[]> {
+  fetchUserAwaitModal():Observable<UserModal[]> {
     return this.usersService.loadUsersAwaitModal();
   }
 

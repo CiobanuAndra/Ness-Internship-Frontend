@@ -1,33 +1,59 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Observable } from 'rxjs';
 import { UsersService } from 'src/app/services/users.service';
-import { UserModal } from 'src/app/interfaces/users/user-modal.model';
 import { trigger, state, style, transition, animate } from '@angular/animations';
+import { UserModal } from 'src/app/interfaces/users/user-modal.model';
 
 @Component({
   selector: 'app-requireattention',
   templateUrl: './requireattention.component.html',
   styleUrls: ['./requireattention.component.scss'],
+  animations: [
+    trigger('detailExpand', [
+      state(
+        'collapsed',
+        style({ height: '0px', minHeight: '0', visibility: 'hidden' })
+      ),
+      state('expanded', style({ height: '*', visibility: 'visible' })),
+      transition(
+        'expanded <=> collapsed',
+        animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')
+      )
+    ])
+  ],
 })
+
 export class RequireattentionComponent implements AfterViewInit, OnInit{
+  expandedElement: UserModal[] | null | undefined= [];
   dataSource = new MatTableDataSource<UserModal>;
-  columnsToDisplay = ['name', 'surname', 'email', 'options'];
+  columnsToDisplay = ['name', 'surname', 'email'];
+  columnsToDisplayWithExpand = ['expand', ...this.columnsToDisplay, 'options'];
 
   constructor(private liveAnnouncer: LiveAnnouncer, private usersService: UsersService) {}
 
+  expandAllRows() {
+    for (const element of this.dataSource.data) {
+      if (!this.isExpanded(element)) {
+        this.pushPopElement(element);
+      }
+    }
+  }
+
+  ////////////////////////////////////////////
+
   ngOnInit(): void {
-    this.fetchUserModal().subscribe(data => {
+    this.fetchUserRequireModal().subscribe(data => {
       this.dataSource.data = data;
     })
   };
 
-  fetchUserModal():Observable<UserModal[]> {
+  fetchUserRequireModal():Observable<UserModal[]> {
     return this.usersService.loadUsersRequireModal();
   }
-
+  
   //Sorting
   @ViewChild(MatSort) sort!:MatSort;
 
@@ -42,4 +68,57 @@ export class RequireattentionComponent implements AfterViewInit, OnInit{
       this.liveAnnouncer.announce('Sorting cleared');
     }
   };
+
+   //Open multiple rows at the same time 
+   checkExpanded(element: UserModal): boolean {
+    let flag = false;
+    if (this.expandedElement !== null) {
+      if (Array.isArray(this.expandedElement)) {
+        this.expandedElement.forEach((e) => {
+          if (e === element) {
+            flag = true;
+          }
+        });
+      }
+    }
+    return flag;
+  };
+  
+  pushPopElement(element: UserModal) {
+    if (this.expandedElement !== null) {
+      if (Array.isArray(this.expandedElement)) {
+        const index = this.expandedElement.indexOf(element);
+        if (index === -1) {
+          this.expandedElement.push(element);
+        } else {
+          this.expandedElement.splice(index, 1);
+        }
+      } else {
+        console.error("this.expandedElement is not an array");
+      }
+    } else {
+      console.error("this.expandedElement is null");
+    }
+  };
+
+  onExpandAllClick() {
+    for (const element of this.dataSource.data) {
+      if (!this.isExpanded(element)) {
+        this.pushPopElement(element);
+      }
+    }
+  }
+
+  //toggle for arrow buttons
+  isExpanded(element: UserModal): boolean {
+    if (Array.isArray(this.expandedElement)) {
+      return this.expandedElement.includes(element);
+    }
+    return false;
+  };
+
+  //Stop extend row event for options button
+  stopPropagation(event: Event): void {
+    event.stopPropagation();
+  };  
 }
