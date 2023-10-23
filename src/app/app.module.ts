@@ -13,9 +13,15 @@ import { DashboardModule } from './dashboard/dashboard.module';
 import { InitialsCustomepipePipe } from './pipes/initials-customepipe.pipe';
 import { ResourcesModule } from './resources/resources.module';
 import { UsersModule } from './users/users/users.module';
+import { AddBluckUsersComponent } from './users/sidenavs/add-bluck-users/add-bluck-users.component';
 
 @NgModule({
-  declarations: [AppComponent, NavbarComponent, InitialsCustomepipePipe],
+  declarations: [
+    AppComponent,
+    NavbarComponent,
+    InitialsCustomepipePipe,
+    AddBluckUsersComponent,
+  ],
 
   imports: [
     BrowserModule,

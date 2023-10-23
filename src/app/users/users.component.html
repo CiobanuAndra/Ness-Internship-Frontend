@@ -12,7 +12,11 @@
       <button mat-button class="users-list__title__buttons__add-user">
         ADD USER
       </button>
-      <button mat-button class="users-list__title__buttons__add-bulk-users">
+      <button
+        mat-button
+        class="users-list__title__buttons__add-bulk-users"
+        (click)="openSidenav()"
+      >
         <p class="users-list__title__buttons__add-bulk-users__p">
           ADD BULK USERS
         </p>

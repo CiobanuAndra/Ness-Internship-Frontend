@@ -19,13 +19,13 @@ export class UsersComponent implements AfterViewInit {
 
   dataSource = new MatTableDataSource<UsersListTable>();
   UsersFilterValues = Object(UsersFilter);
+  totalCourses = 0;
   UsersFilterIndex = {
     [UsersFilter.ALL]: 0,
     [UsersFilter.ACTIVE]: 1,
     [UsersFilter.INACTIVE]: 2,
   };
   selectedTabIndex: number = this.UsersFilterIndex[UsersFilter.ALL];
-  totalCourses = 0;
   displayedColumns: string[] = [
     'name',
     'status',

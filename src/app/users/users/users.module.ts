@@ -10,6 +10,8 @@ import { IconsModule } from 'src/shared/icons-module/icons/icons.module';
 import { MatSortModule } from '@angular/material/sort';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { DatePipe } from '@angular/common';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { SidenavService } from '../sidenavs/add-bluck-users/service/sidenav.service';
 
 @NgModule({
   declarations: [UsersComponent],
@@ -23,8 +25,9 @@ import { DatePipe } from '@angular/common';
     IconsModule,
     MatSortModule,
     MatPaginatorModule,
+    MatSidenavModule,
   ],
   exports: [UsersComponent],
-  providers: [DatePipe],
+  providers: [DatePipe, SidenavService],
 })
 export class UsersModule {}

@@ -1,10 +1,4 @@
 <mat-sidenav-container class="full-container">
-  <mat-sidenav class="right-sidenav">
-    <!-- Conținutul sidenav-ului aici -->
-  </mat-sidenav>
-
-  <mat-sidenav-content>
-    <!-- Conținutul principal al aplicației aici -->
-    <button mat-button (click)="openSidenav()">Deschide Sidenav</button>
-  </mat-sidenav-content>
+  <mat-sidenav class="right-sidenav" [opened]="isSidenavOpen"> </mat-sidenav>
+  <mat-sidenav-content> </mat-sidenav-content>
 </mat-sidenav-container>
