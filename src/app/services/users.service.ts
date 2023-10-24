@@ -11,24 +11,132 @@ export class UsersService {
   constructor() {}
 
   usersRequireAttention: UserRequireAttention[] = [
-    { name: 'Andrei Artene', leftDays: 4, pastDays: 2, tasksLeft: 3 },
-    { name: 'Vasile Ion', leftDays: 1, pastDays: 4, tasksLeft: 5 },
-    { name: 'Mark Willerhower', leftDays: 2, pastDays: 4, tasksLeft: 4 },
-    { name: 'Andrei Artene', leftDays: 4, pastDays: 2, tasksLeft: 3 },
-    { name: 'Vasile Ion', leftDays: 1, pastDays: 4, tasksLeft: 5 },
-    { name: 'Mark Willerhower', leftDays: 2, pastDays: 4, tasksLeft: 4 },
-    { name: 'Andrei Artene', leftDays: 4, pastDays: 2, tasksLeft: 3 },
-    { name: 'Vasile Ion', leftDays: 1, pastDays: 4, tasksLeft: 5 },
-    { name: 'Mark Willerhower', leftDays: 2, pastDays: 4, tasksLeft: 4 },
-    { name: 'Andrei Artene', leftDays: 4, pastDays: 2, tasksLeft: 3 },
-    { name: 'Vasile Ion', leftDays: 1, pastDays: 4, tasksLeft: 5 },
-    { name: 'Mark Willerhower', leftDays: 2, pastDays: 4, tasksLeft: 4 },
-    { name: 'Andrei Artene', leftDays: 4, pastDays: 2, tasksLeft: 3 },
-    { name: 'Vasile Ion', leftDays: 1, pastDays: 4, tasksLeft: 5 },
-    { name: 'Mark Willerhower', leftDays: 2, pastDays: 4, tasksLeft: 4 },
-    { name: 'Andrei Artene', leftDays: 4, pastDays: 2, tasksLeft: 3 },
-    { name: 'Vasile Ion', leftDays: 1, pastDays: 4, tasksLeft: 5 },
-    { name: 'Mark Willerhower', leftDays: 2, pastDays: 4, tasksLeft: 4 },
+    {
+      name: 'Andrei Artene',
+      leftDays: 4,
+      pastDays: 2,
+      tasksLeft: 3,
+      status: true,
+    },
+    {
+      name: 'Vasile Ion',
+      leftDays: 1,
+      pastDays: 4,
+      tasksLeft: 5,
+      status: true,
+    },
+    {
+      name: 'Mark Willerhower',
+      leftDays: 2,
+      pastDays: 4,
+      tasksLeft: 4,
+      status: true,
+    },
+    {
+      name: 'Andrei Artene',
+      leftDays: 4,
+      pastDays: 2,
+      tasksLeft: 3,
+      status: true,
+    },
+    {
+      name: 'Vasile Ion',
+      leftDays: 1,
+      pastDays: 4,
+      tasksLeft: 5,
+      status: true,
+    },
+    {
+      name: 'Mark Willerhower',
+      leftDays: 2,
+      pastDays: 4,
+      tasksLeft: 4,
+      status: false,
+    },
+    {
+      name: 'Andrei Artene',
+      leftDays: 4,
+      pastDays: 2,
+      tasksLeft: 3,
+      status: true,
+    },
+    {
+      name: 'Vasile Ion',
+      leftDays: 1,
+      pastDays: 4,
+      tasksLeft: 5,
+      status: false,
+    },
+    {
+      name: 'Mark Willerhower',
+      leftDays: 2,
+      pastDays: 4,
+      tasksLeft: 4,
+      status: true,
+    },
+    {
+      name: 'Andrei Artene',
+      leftDays: 4,
+      pastDays: 2,
+      tasksLeft: 3,
+      status: false,
+    },
+    {
+      name: 'Vasile Ion',
+      leftDays: 1,
+      pastDays: 4,
+      tasksLeft: 5,
+      status: true,
+    },
+    {
+      name: 'Mark Willerhower',
+      leftDays: 2,
+      pastDays: 4,
+      tasksLeft: 4,
+      status: true,
+    },
+    {
+      name: 'Andrei Artene',
+      leftDays: 4,
+      pastDays: 2,
+      tasksLeft: 3,
+      status: false,
+    },
+    {
+      name: 'Vasile Ion',
+      leftDays: 1,
+      pastDays: 4,
+      tasksLeft: 5,
+      status: true,
+    },
+    {
+      name: 'Mark Willerhower',
+      leftDays: 2,
+      pastDays: 4,
+      tasksLeft: 4,
+      status: true,
+    },
+    {
+      name: 'Andrei Artene',
+      leftDays: 4,
+      pastDays: 2,
+      tasksLeft: 3,
+      status: false,
+    },
+    {
+      name: 'Vasile Ion',
+      leftDays: 1,
+      pastDays: 4,
+      tasksLeft: 5,
+      status: true,
+    },
+    {
+      name: 'Mark Willerhower',
+      leftDays: 2,
+      pastDays: 4,
+      tasksLeft: 4,
+      status: false,
+    },
   ];
 
   usersLeaderboard: UserCard[] = [
@@ -184,6 +292,16 @@ export class UsersService {
   getActiveUsers(): Observable<UsersListTable[]> {
     return of(this.allUsers).pipe(
       map((users) => users.filter((user) => user.status === true))
+    );
+  }
+  filterActiveUsersRequireAttention(): Observable<UserRequireAttention[]> {
+    return of(this.usersRequireAttention).pipe(
+      map((users) => users.filter((user) => user.status === true))
+    );
+  }
+  filterInactiveUsersRequireAttention(): Observable<UserRequireAttention[]> {
+    return of(this.usersRequireAttention).pipe(
+      map((users) => users.filter((user) => user.status === false))
     );
   }
 }

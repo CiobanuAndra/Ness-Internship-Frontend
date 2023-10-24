@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { UsersService } from '../services/users.service';
 import { UsersListTable } from '../interfaces/users-list-table';
 import { UsersFilter } from '../enums/users-filter';

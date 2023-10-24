@@ -3,4 +3,5 @@ export interface UserRequireAttention {
   leftDays: number;
   pastDays: number;
   tasksLeft: number;
+  status: boolean;
 }
