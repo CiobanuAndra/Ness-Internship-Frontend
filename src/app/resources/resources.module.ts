@@ -3,14 +3,8 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { MaterialModule } from 'src/shared/material/material.module';
 import { ResourcesComponent } from './resources.component';
-import { AddTaskComponent } from './tables/add-task/add-task.component';
 import { MatStepperModule } from '@angular/material/stepper';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { TasksComponent } from './tables/tasks/tasks.component';
-import { AvatarsComponent } from './tables/avatars/avatars/avatars.component';
-import { CoursesComponent } from './tables/courses/courses/courses.component';
-import {MediaMatcher} from '@angular/cdk/layout';
-import {ChangeDetectorRef, OnDestroy} from '@angular/core';
 import {MatListModule} from '@angular/material/list';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatIconModule} from '@angular/material/icon';
@@ -29,10 +23,7 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     ResourcesComponent,
-    AddTaskComponent,
-    TasksComponent,
-    CoursesComponent,
-    AvatarsComponent,
+    ResourceTableComponent,
   ],
   imports: [
     CommonModule,
