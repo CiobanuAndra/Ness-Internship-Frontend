@@ -10,9 +10,13 @@ import { SidenavService } from './service/sidenav.service';
 export class AddBluckUsersComponent {
   isSidenavOpen = false;
 
-  constructor(private sidenavService: SidenavService) {
-    this.sidenavService.isSidenavOpen$.subscribe((isOpen) => {
-      this.isSidenavOpen = isOpen;
-    });
+  constructor(private sidenavService: SidenavService) {}
+
+  toggleSidenav() {
+    this.sidenavService.toggleSidenav();
+  }
+
+  isSidenavOpened() {
+    return this.sidenavService.isSidenavOpened();
   }
 }

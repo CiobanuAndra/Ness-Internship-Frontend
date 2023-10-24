@@ -7,14 +7,24 @@ import { BehaviorSubject } from 'rxjs';
 export class SidenavService {
   constructor() {}
 
-  private isSidenavOpenSubject = new BehaviorSubject<boolean>(false);
-  isSidenavOpen$ = this.isSidenavOpenSubject.asObservable();
+  // private isSidenavOpenSubject = new BehaviorSubject<boolean>(false);
+  // isSidenavOpen$ = this.isSidenavOpenSubject.asObservable();
 
-  openSidenav() {
-    this.isSidenavOpenSubject.next(true);
+  // openSidenav() {
+  //   this.isSidenavOpenSubject.next(true);
+  // }
+
+  // closeSidenav() {
+  //   this.isSidenavOpenSubject.next(false);
+  // }
+
+  private isSidenavOpen = false;
+
+  toggleSidenav() {
+    this.isSidenavOpen = !this.isSidenavOpen;
   }
 
-  closeSidenav() {
-    this.isSidenavOpenSubject.next(false);
+  isSidenavOpened() {
+    return this.isSidenavOpen;
   }
 }

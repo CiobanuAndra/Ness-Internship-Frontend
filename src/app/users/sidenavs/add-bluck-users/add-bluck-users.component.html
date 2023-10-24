@@ -1,4 +1,18 @@
 <mat-sidenav-container class="full-container">
-  <mat-sidenav class="right-sidenav" [opened]="isSidenavOpen"> </mat-sidenav>
-  <mat-sidenav-content> </mat-sidenav-content>
+  <!-- Content -->
+  <mat-sidenav-content>
+    <div class="main-content">
+      <!-- Restul conținutului paginii aici -->
+    </div>
+  </mat-sidenav-content>
+
+  <!-- Sidenav -->
+  <mat-sidenav
+    class="right-sidenav"
+    #sidenav
+    mode="side"
+    [opened]="isSidenavOpened()"
+  >
+    sidenav-bar
+  </mat-sidenav>
 </mat-sidenav-container>

@@ -12,9 +12,10 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { DatePipe } from '@angular/common';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { SidenavService } from '../sidenavs/add-bluck-users/service/sidenav.service';
+import { AddBluckUsersComponent } from '../sidenavs/add-bluck-users/add-bluck-users.component';
 
 @NgModule({
-  declarations: [UsersComponent],
+  declarations: [UsersComponent, AddBluckUsersComponent],
   imports: [
     CommonModule,
     UsersRoutingModule,
@@ -27,7 +28,7 @@ import { SidenavService } from '../sidenavs/add-bluck-users/service/sidenav.serv
     MatPaginatorModule,
     MatSidenavModule,
   ],
-  exports: [UsersComponent],
+  exports: [UsersComponent, AddBluckUsersComponent],
   providers: [DatePipe, SidenavService],
 })
 export class UsersModule {}
