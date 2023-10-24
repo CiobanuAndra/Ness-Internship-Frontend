@@ -15,9 +15,9 @@ export class UsersRequireAttentionTableComponent implements AfterViewInit {
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
+  dataSource = new MatTableDataSource<UserRequireAttention>();
   totalCourses: number = 0;
   displayedColumns: string[] = ['name', 'tasksLeft', 'timeLeft', 'buttons'];
-  dataSource = new MatTableDataSource<UserRequireAttention>();
 
   constructor(private usersService: UsersService) {}
 
