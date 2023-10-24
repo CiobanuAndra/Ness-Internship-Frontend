@@ -27,14 +27,12 @@ import { UserModal } from 'src/app/interfaces/users/user-modal.model';
 })
 
 export class RequireattentionComponent implements AfterViewInit, OnInit{
-  expandedElement: UserModal[] | null | undefined= [];
+  expandedElement: UserModal[] | null | undefined = [];
   dataSource = new MatTableDataSource<UserModal>;
   columnsToDisplay = ['name', 'surname', 'email'];
   columnsToDisplayWithExpand = ['expand', ...this.columnsToDisplay, 'options'];
 
   constructor(private liveAnnouncer: LiveAnnouncer, private usersService: UsersService) {}
-
-  
 
   ngOnInit(): void {
     this.fetchUserRequireModal().subscribe(data => {
