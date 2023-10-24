@@ -126,3 +126,13 @@
   @include dimensions(100%, 0.063rem);
   background-color: $medium-gray-color;
 }
+
+.mat-sidenav-container {
+  z-index: 10000;
+  top: 0;
+  right: 0;
+  position: absolute;
+  background-color: red;
+  width: 20%;
+  height: 100%;
+}

@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import { UsersService } from '../services/users.service';
 import { UsersListTable } from '../interfaces/users-list-table';
 import { UsersFilter } from '../enums/users-filter';
@@ -18,8 +18,10 @@ export class UsersComponent implements AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   dataSource = new MatTableDataSource<UsersListTable>();
+  opened: boolean = false;
   UsersFilterValues = Object(UsersFilter);
   totalCourses = 0;
+
   UsersFilterIndex = {
     [UsersFilter.ALL]: 0,
     [UsersFilter.ACTIVE]: 1,

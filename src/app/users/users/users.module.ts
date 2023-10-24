@@ -11,7 +11,6 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { DatePipe } from '@angular/common';
 import { MatSidenavModule } from '@angular/material/sidenav';
-import { SidenavService } from '../sidenavs/add-bluck-users/service/sidenav.service';
 import { AddBluckUsersComponent } from '../sidenavs/add-bluck-users/add-bluck-users.component';
 
 @NgModule({
@@ -29,6 +28,6 @@ import { AddBluckUsersComponent } from '../sidenavs/add-bluck-users/add-bluck-us
     MatSidenavModule,
   ],
   exports: [UsersComponent, AddBluckUsersComponent],
-  providers: [DatePipe, SidenavService],
+  providers: [DatePipe],
 })
 export class UsersModule {}

@@ -1,6 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
-import { MatSidenav } from '@angular/material/sidenav';
-import { SidenavService } from './service/sidenav.service';
+import { Component, Input, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-add-bluck-users',
@@ -8,15 +6,7 @@ import { SidenavService } from './service/sidenav.service';
   styleUrls: ['./add-bluck-users.component.scss'],
 })
 export class AddBluckUsersComponent {
-  isSidenavOpen = false;
+  @Input() opened!: boolean;
 
-  constructor(private sidenavService: SidenavService) {}
-
-  toggleSidenav() {
-    this.sidenavService.toggleSidenav();
-  }
-
-  isSidenavOpened() {
-    return this.sidenavService.isSidenavOpened();
-  }
+  constructor() {}
 }

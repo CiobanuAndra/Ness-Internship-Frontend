@@ -13,7 +13,6 @@ import { DashboardModule } from './dashboard/dashboard.module';
 import { InitialsCustomepipePipe } from './pipes/initials-customepipe.pipe';
 import { ResourcesModule } from './resources/resources.module';
 import { UsersModule } from './users/users/users.module';
-import { SidenavService } from './users/sidenavs/add-bluck-users/service/sidenav.service';
 
 @NgModule({
   declarations: [AppComponent, NavbarComponent, InitialsCustomepipePipe],
@@ -31,7 +30,7 @@ import { SidenavService } from './users/sidenavs/add-bluck-users/service/sidenav
     UsersModule,
   ],
   exports: [RouterModule],
-  providers: [SidenavService],
+  providers: [],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
