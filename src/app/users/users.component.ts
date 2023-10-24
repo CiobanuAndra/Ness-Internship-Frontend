@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { UsersService } from '../services/users.service';
 import { UsersListTable } from '../interfaces/users-list-table';
 import { UsersFilter } from '../enums/users-filter';
@@ -14,20 +14,18 @@ import { MatPaginator } from '@angular/material/paginator';
   styleUrls: ['./users.component.scss'],
 })
 export class UsersComponent implements AfterViewInit {
-  constructor(private userService: UsersService) {}
-
-  totalCourses = 0;
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
-  UsersFilterValues = Object(UsersFilter);
-  dataSource = new MatTableDataSource<UsersListTable>();
 
+  dataSource = new MatTableDataSource<UsersListTable>();
+  UsersFilterValues = Object(UsersFilter);
   UsersFilterIndex = {
     [UsersFilter.ALL]: 0,
     [UsersFilter.ACTIVE]: 1,
     [UsersFilter.INACTIVE]: 2,
   };
   selectedTabIndex: number = this.UsersFilterIndex[UsersFilter.ALL];
+  totalCourses = 0;
   displayedColumns: string[] = [
     'name',
     'status',
@@ -36,6 +34,8 @@ export class UsersComponent implements AfterViewInit {
     'dateAdded',
     'settings',
   ];
+
+  constructor(private userService: UsersService) {}
 
   filterActiveUsers(): void {
     this.userService.getActiveUsers().subscribe((values) => {

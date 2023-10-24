@@ -15,6 +15,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { CurrentProgressComponent } from './current-progress/current-progress.component';
 import { UsersService } from '../services/users.service';
 import { GoogleChartsModule } from 'angular-google-charts';
+import { UsersRequireAttentionTableComponent } from './users-require-attention/users-require-attention-table/users-require-attention-table.component';
 
 const routes: Routes = [
   {
@@ -24,6 +25,10 @@ const routes: Routes = [
   {
     path: 'leaderboard-table',
     component: LeaderboardTableComponent,
+  },
+  {
+    path: 'users-require-attention-table',
+    component: UsersRequireAttentionTableComponent,
   },
 ];
 
@@ -37,6 +42,7 @@ const routes: Routes = [
     LeaderboardTableComponent,
     CurrentProgressComponent,
     LeaderboardComponent,
+    UsersRequireAttentionTableComponent,
   ],
   imports: [
     CommonModule,

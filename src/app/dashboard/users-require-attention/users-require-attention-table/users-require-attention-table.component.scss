@@ -1,0 +1,59 @@
+@import "../../../../styleguide.scss";
+
+.users-require-attention {
+  margin: 0 auto;
+  margin-top: 1rem;
+  width: 103.75rem;
+  height: 58.5rem;
+  border-radius: 0.25rem;
+
+  &__title {
+    background-color: $white-color;
+    height: 3.813rem;
+    display: flex;
+    align-items: center;
+
+    span {
+      margin-left: 1rem;
+    }
+  }
+  &__mat-tab-group-div {
+    background-color: $white-color;
+
+    mat-tab-group {
+      width: 22.5rem;
+    }
+  }
+
+  &__button-view-profile {
+    background-color: $light-gray-color;
+    padding: 0px, 16px, 0px, 16px;
+    margin-left: 1rem;
+  }
+  &__button-extend-time {
+    background-color: $primary-color;
+    padding: 0px, 16px, 0px, 16px;
+    margin-left: 0.625rem;
+
+    span {
+      color: $white-color;
+    }
+  }
+
+  &__name {
+    width: 60.438rem;
+  }
+  &__tasks-left {
+    width: 12.5rem;
+  }
+  &__time-left {
+    width: 11.25rem;
+  }
+  &__buttons {
+    width: 19.563rem;
+  }
+
+  tr {
+    height: 3rem;
+  }
+}

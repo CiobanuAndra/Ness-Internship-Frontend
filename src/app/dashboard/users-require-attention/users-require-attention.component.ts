@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from 'src/app/interfaces/user.model';
+import { Router } from '@angular/router';
 import { UsersService } from 'src/app/services/users.service';
+import { UserRequireAttention } from 'src/app/interfaces/user-require-attention.model';
 
 @Component({
   selector: 'app-users-require-attention',
@@ -8,11 +9,14 @@ import { UsersService } from 'src/app/services/users.service';
   styleUrls: ['./users-require-attention.component.scss'],
 })
 export class UsersRequireAttentionComponent implements OnInit {
-  usersRequireAttention: User[] = [];
-  allUsersRequireAttention: User[] = [];
+  usersRequireAttention: UserRequireAttention[] = [];
+  allUsersRequireAttention: UserRequireAttention[] = [];
 
-  constructor(private usersService: UsersService) {}
+  constructor(private usersService: UsersService, private router: Router) {}
 
+  navigateToUsersRequireAttentionTable() {
+    this.router.navigate(['/users-require-attention-table']);
+  }
   ngOnInit(): void {
     this.usersService.getUsersRequireAttention().subscribe((values) => {
       this.usersRequireAttention = values.slice(0, 3);
