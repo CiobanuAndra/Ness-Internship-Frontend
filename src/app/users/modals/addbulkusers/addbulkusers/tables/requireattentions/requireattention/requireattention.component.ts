@@ -42,8 +42,6 @@ export class RequireattentionComponent implements AfterViewInit, OnInit{
     }
   }
 
-  ////////////////////////////////////////////
-
   ngOnInit(): void {
     this.fetchUserRequireModal().subscribe(data => {
       this.dataSource.data = data;

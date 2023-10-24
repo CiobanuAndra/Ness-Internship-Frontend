@@ -56,6 +56,9 @@ export class UsersComponent implements AfterViewInit {
     this.resourcesService.setSidenavVisibility(this.opened);
   }
 
+  //ASIDE
+  
+
   //MODAL
   openDialog() {
     const dialogRef = this.dialog.open(AddbulkusersComponent, {

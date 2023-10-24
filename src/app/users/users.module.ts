@@ -7,6 +7,7 @@ import { UsersComponent } from './users.component';
 import { AddbulkusersComponent } from './modals/addbulkusers/addbulkusers/addbulkusers.component';
 import { RequireattentionComponent } from './modals/addbulkusers/addbulkusers/tables/requireattentions/requireattention/requireattention.component';
 import { AwaitconfirmationComponent } from './modals/addbulkusers/addbulkusers/tables/awaitconfirmation/awaitconfirmation/awaitconfirmation.component';
+import { AddnewuserComponent } from './asides/addnewuser/addnewuser/addnewuser.component';
 
 const routes: Routes = [
   {
@@ -21,6 +22,7 @@ const routes: Routes = [
     AddbulkusersComponent,
     RequireattentionComponent,
     AwaitconfirmationComponent,
+    AddnewuserComponent,
   ],
   imports: [
     CommonModule,

@@ -26,14 +26,14 @@ export class TasksComponent implements AfterViewInit, OnInit {
 
   fetchTasks(): Observable<Task[]> {
     return this.resourcesService.loadTasks();
-  }
+  };
 
   //Sorting
   @ViewChild(MatSort) sort!: MatSort;
 
   ngAfterViewInit(): void {
     this.dataSource.sort = this.sort;
-  }
+  };
 
   announceSortChange(sortState: Sort) {
     if (sortState.direction) {
@@ -41,5 +41,5 @@ export class TasksComponent implements AfterViewInit, OnInit {
     } else {
       this.liveAnnouncer.announce('Sorting cleared');
     }
-  }
+  };
 }

@@ -21,12 +21,12 @@ export class AvatarsComponent implements AfterViewInit, OnInit {
   ngOnInit(): void {
     this.fetchAvatars().subscribe(data => {
       this.dataSource.data = data;
-    })
+    });
   };
 
   fetchAvatars():Observable<Avatar[]> {
     return this.resourcesService.loadAvatars();
-  }
+  };
 
   //Sorting
   @ViewChild(MatSort) sort!:MatSort;
@@ -42,5 +42,4 @@ export class AvatarsComponent implements AfterViewInit, OnInit {
       this.liveAnnouncer.announce('Sorting cleared');
     }
   };
-
 }

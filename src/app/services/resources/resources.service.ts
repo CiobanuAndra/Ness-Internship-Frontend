@@ -23,20 +23,20 @@ export class ResourcesService {
   ];  
 
   courses: Course[] = [
-    { name: 'repair1', link: 'file', fileType: 'kung-fu', length: 1230, rewards: 2, dateAdded: new Date('2023-10-11'), lastEdited: new Date('2023-10-11'), editedBy: 'Ioana Maria'},
-    { name: 'repair2', link: 'file', fileType: 'kung-fu', length: 1231, rewards: 3, dateAdded: new Date('2023-10-12'), lastEdited: new Date('2023-10-12'), editedBy: 'Ioana Maria1'},
-    { name: 'repair3', link: 'file', fileType: 'kung-fu', length: 1232, rewards: 4, dateAdded: new Date('2023-10-13'), lastEdited: new Date('2023-10-12'), editedBy: 'Ioana Maria2'},
-    { name: 'repair4', link: 'file', fileType: 'kung-fu', length: 1233, rewards: 5, dateAdded: new Date('2023-10-14'), lastEdited: new Date('2023-10-13'), editedBy: 'Ioana Maria3'},
-    { name: 'repair5', link: 'link', fileType: 'kung-fu', length: 1234, rewards: 6, dateAdded: new Date('2023-10-15'), lastEdited: new Date('2023-10-14'), editedBy: 'Ioana Maria4'},
+    { name: 'repair1', link: 'file1', fileType: 'PDF1', length: 1230, rewards: 2, dateAdded: new Date('2023-10-11'), lastEdited: new Date('2023-10-11'), editedBy: 'Ioana Maria'},
+    { name: 'repair2', link: 'file2', fileType: 'PDF2', length: 1231, rewards: 3, dateAdded: new Date('2023-10-12'), lastEdited: new Date('2023-10-12'), editedBy: 'Ioana Maria1'},
+    { name: 'repair3', link: 'file3', fileType: 'PDF3', length: 1232, rewards: 4, dateAdded: new Date('2023-10-13'), lastEdited: new Date('2023-10-12'), editedBy: 'Ioana Maria2'},
+    { name: 'repair4', link: 'file4', fileType: 'PDF4', length: 1233, rewards: 5, dateAdded: new Date('2023-10-14'), lastEdited: new Date('2023-10-13'), editedBy: 'Ioana Maria3'},
+    { name: 'repair5', link: 'link', fileType: 'PDF5', length: 1234, rewards: 6, dateAdded: new Date('2023-10-15'), lastEdited: new Date('2023-10-14'), editedBy: 'Ioana Maria4'},
 
   ];  
 
   avatars: Avatar[] = [
-    { name: 'Mustas', linked_to: 'Task_Name', default: true, addedBy: 'Ioana Maria'},
-    { name: 'Kewl', linked_to: 'Task_Name', default: true, addedBy: 'Ioana Maria'},
-    { name: 'Mustas', linked_to: 'Task_Name', default: false, addedBy: 'Ioana Popescu'},
-    { name: 'Kewl', linked_to: 'Task_Name', default: false, addedBy: 'Ioana Maria'},
-    { name: 'Mustas', linked_to: 'Task_Name', default: true, addedBy: 'Ioana Popescu'},
+    { name: 'Mustas', linked_to: 'Task_Name1', default: true, addedBy: 'Ioana Maria'},
+    { name: 'Kewl', linked_to: 'Task_Name2', default: true, addedBy: 'Ioana Maria'},
+    { name: 'Mustas', linked_to: 'Task_Name3', default: false, addedBy: 'Ioana Popescu'},
+    { name: 'Kewl', linked_to: 'Task_Name4', default: false, addedBy: 'Ioana Maria'},
+    { name: 'Mustas', linked_to: 'Task_Name5', default: true, addedBy: 'Ioana Popescu'},
   ];  
 
   public loadTasks(): Observable<Task[]> {

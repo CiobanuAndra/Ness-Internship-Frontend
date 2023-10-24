@@ -1,33 +1,24 @@
 import { Component, ViewChild } from '@angular/core';
-import { MediaMatcher } from '@angular/cdk/layout';
-import { ChangeDetectorRef, OnDestroy } from '@angular/core';
-import { ResourcesService } from '../services/resources.service';
-import { MatDialog } from '@angular/material/dialog';
-import { TabTitle } from '../enums/tab-title';
+import { ResourceTableComponent } from './tables/resource-table/resource-table.component';
 
 @Component({
   selector: 'app-resources',
   templateUrl: './resources.component.html',
   styleUrls: ['./resources.component.scss']
 })
-export class ResourcesComponent {
-  // Tab headers
-  activeTabTitle: TabTitle = TabTitle.Tasks;
-  showSidenav = false;
-  isDialogOpen = false;
 
-  constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher, private resourcesService: ResourcesService, private dialog: MatDialog) {
- 
-  }
+export class ResourcesComponent{ 
+  activeTable = 'Tasks';
+  selectedTableTasks = 'Tasks';
+  selectedTableCourses = 'Courses';
+  selectedTableAvatars = 'Avatars';
+
+  @ViewChild(ResourceTableComponent) child!:ResourceTableComponent;
 
   updateActiveTabTitle(selectedIndex: number): void {
-    const tabLabels = Object.values(TabTitle);
-    this.activeTabTitle = tabLabels[selectedIndex];
-  }
-
-  toggleSidenav() {
-    this.showSidenav = !this.showSidenav;
-    this.resourcesService.setSidenavVisibility(this.showSidenav);
-  }
-
+    const tabLabels = ['Tasks', 'Courses', 'Avatars'];
+    
+    this.activeTable = tabLabels[selectedIndex];
+    this.child.loadData();
+  }  
 }
