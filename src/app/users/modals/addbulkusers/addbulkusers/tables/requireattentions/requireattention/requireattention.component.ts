@@ -34,13 +34,7 @@ export class RequireattentionComponent implements AfterViewInit, OnInit{
 
   constructor(private liveAnnouncer: LiveAnnouncer, private usersService: UsersService) {}
 
-  expandAllRows() {
-    for (const element of this.dataSource.data) {
-      if (!this.isExpanded(element)) {
-        this.pushPopElement(element);
-      }
-    }
-  }
+  
 
   ngOnInit(): void {
     this.fetchUserRequireModal().subscribe(data => {
@@ -67,7 +61,28 @@ export class RequireattentionComponent implements AfterViewInit, OnInit{
     }
   };
 
-   //Open multiple rows at the same time 
+  //Check if tables have users with problems
+  public postUsers(): void {
+    this.usersService.loadUsersRequireModal().subscribe(
+      (users: UserModal[]) => {
+        if (users.length > 0) {
+          this.expandAllRows();
+        } else {
+          //Proceed to send data
+        }
+      }
+    );
+  }
+
+  //Open multiple rows at the same time
+  expandAllRows() {
+    for (const element of this.dataSource.data) {
+      if (!this.isExpanded(element)) {
+        this.pushPopElement(element);
+      }
+    }
+  }
+
    checkExpanded(element: UserModal): boolean {
     let flag = false;
     if (this.expandedElement !== null) {
@@ -98,14 +113,6 @@ export class RequireattentionComponent implements AfterViewInit, OnInit{
       console.error("this.expandedElement is null");
     }
   };
-
-  onExpandAllClick() {
-    for (const element of this.dataSource.data) {
-      if (!this.isExpanded(element)) {
-        this.pushPopElement(element);
-      }
-    }
-  }
 
   //toggle for arrow buttons
   isExpanded(element: UserModal): boolean {
