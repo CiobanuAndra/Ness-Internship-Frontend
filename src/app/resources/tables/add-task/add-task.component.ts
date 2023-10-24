@@ -18,69 +18,53 @@ export class AddTaskComponent {
   secondFormGroup!: FormGroup;
   isOptional = false;
   firstInputValue: string = '';
+  numericRegex: string = '^[0-9]+';
 
-  constructor(private _formBuilder: FormBuilder, private resourcesService: ResourcesService) {}
+  constructor(private formBuilder: FormBuilder, private resourcesService: ResourcesService) {}
 
   ngOnInit() {
-    this.firstFormGroup = this._formBuilder.group({
-      title: ['', Validators.required],
-      description: ['', Validators.required],
-      order: ['', Validators.required],
+    this.firstFormGroup = this.formBuilder.group({
+      title: ['', [Validators.required]],
+      description: ['', [Validators.required]],
+      order: ['', [Validators.required, Validators.pattern(this.numericRegex)]],
     });
-    this.secondFormGroup = this._formBuilder.group({
-      secondCtrl: ['', Validators.required],
+    this.secondFormGroup = this.formBuilder.group({
+      secondCtrl: ['', [Validators.required]],
     });
+
+  this.checkValueChanges();
   }
 
-  closeDialog() {
+  closeDialog(): void {
     this.showSidenav = false;
     this.showSidenavChange.emit(this.showSidenav);
     this.resourcesService.setSidenavVisibility(false);
   }
 
-  moveToDetailsStepper(stepper: MatStepper) {
-    const titleValue = this.firstFormGroup.get('title')!.value.trim();
-    const descriptionValue = this.firstFormGroup.get('description')!.value.trim();
-    const orderValue = this.firstFormGroup.get('order')!.value;
-
-    const isTitleEmpty = titleValue === '';
-    const isDescriptionEmpty = descriptionValue === '';
-    const isOrderEmpty = orderValue === '';
-    const isOrderNaN = isNaN(orderValue);
-
-    if (!isTitleEmpty || !isDescriptionEmpty || !isOrderEmpty || !isOrderNaN) {
-      this.firstFormGroup.updateValueAndValidity();
-
-      const isTitleValid = this.firstFormGroup.get('title')!.valid;
-      const isDescriptionValid = this.firstFormGroup.get('description')!.valid;
-      const isOrderValid = this.firstFormGroup.get('order')!.valid;
-
-      if (!isTitleValid || !isDescriptionValid || !isOrderValid) {
-        this.showTitleAlert = !isTitleValid;
-        this.showDescriptionAlert = !isDescriptionValid;
-        this.showOrderAlert = !isOrderValid;
-      } else {
-        stepper.next();
-        this.showTitleAlert = false;
-        this.showDescriptionAlert = false;
-        this.showOrderAlert = false;
-      }
+  moveToDetailsStepper(stepper: MatStepper): void {
+    this.firstFormGroup.updateValueAndValidity();
+    
+    if (this.firstFormGroup.valid) {
+      stepper.next();
+      this.showTitleAlert = false;
+      this.showDescriptionAlert = false;
+      this.showOrderAlert = false;
+    } else {
+      this.showTitleAlert = !this.firstFormGroup.get('title')!.valid;
+      this.showDescriptionAlert = !this.firstFormGroup.get('description')!.valid;
+      this.showOrderAlert = !this.firstFormGroup.get('order')!.valid;
     }
   }
 
-  onTitleInputChange() {
-    const titleValue = this.firstFormGroup.get('title')!.value.trim();
-    this.showTitleAlert = titleValue === '';
+  private checkValueChanges(): void {
+    this.firstFormGroup.get('title')!.valueChanges.subscribe(titleValue => {
+      this.showTitleAlert = titleValue.trim() === '';
+    });
+    this.firstFormGroup.get('description')!.valueChanges.subscribe(descriptionValue => {
+      this.showDescriptionAlert = descriptionValue.trim() === '';
+    });
+    this.firstFormGroup.get('order')!.valueChanges.subscribe(orderValue => {
+      this.showOrderAlert = !new RegExp(this.numericRegex).test(orderValue);
+    });
   }
-  
-  onDescriptionInputChange() {
-    const descriptionValue = this.firstFormGroup.get('description')!.value.trim();
-    this.showDescriptionAlert = descriptionValue === '';
-  }
-  
-  onOrderInputChange() {
-    const orderValue = this.firstFormGroup.get('order')!.value;
-    this.showOrderAlert = isNaN(orderValue) || orderValue === null || orderValue === '';
-  }  
-  
 }

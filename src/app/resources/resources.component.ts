@@ -3,6 +3,7 @@ import { MediaMatcher } from '@angular/cdk/layout';
 import { ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { ResourcesService } from '../services/resources.service';
 import { MatDialog } from '@angular/material/dialog';
+import { TabTitle } from '../enums/tab-title';
 
 @Component({
   selector: 'app-resources',
@@ -11,18 +12,16 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class ResourcesComponent {
   // Tab headers
-  
-  activeTabTitle: string = '';
+  activeTabTitle: TabTitle = TabTitle.Tasks;
   showSidenav = false;
   isDialogOpen = false;
 
   constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher, private resourcesService: ResourcesService, private dialog: MatDialog) {
  
-    this.activeTabTitle = 'Tasks';
   }
 
   updateActiveTabTitle(selectedIndex: number): void {
-    const tabLabels = ['Tasks', 'Courses', 'Avatars', 'Industries'];
+    const tabLabels = Object.values(TabTitle);
     this.activeTabTitle = tabLabels[selectedIndex];
   }
 

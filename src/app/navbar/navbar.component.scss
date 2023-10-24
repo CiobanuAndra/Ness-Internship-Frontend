@@ -37,13 +37,13 @@
       padding: 0px;
       margin: 0px;
 
-      li {
+      .list-item {
         padding: 10px;
         color: $primary-color;
         border-bottom: 2px solid white;
         border-top: 2px solid white;
       }
-      li:hover {
+      .list-item:hover {
         border-bottom: 2px solid $primary-color;
         font-weight: 500;
         cursor: pointer;
@@ -98,4 +98,5 @@
   filter: brightness(0.7);
   transition: filter 0.5s;
   border-bottom: 1rem solid #e6e7e9;
+  pointer-events: none;
 }

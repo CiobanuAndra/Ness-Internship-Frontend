@@ -22,7 +22,6 @@
                 formControlName="title"
                 value="Mandatory Training"
                 class="custom-input"
-                (input)="onTitleInputChange()"
               />
               <mat-hint class="hint-title">Title</mat-hint>
               <div
@@ -41,7 +40,6 @@
                   formControlName="description"
                   rows="6"
                   cols="70"
-                  (input)="onDescriptionInputChange()"
                 ></textarea>
                 <div
                   class="alert"
@@ -60,7 +58,6 @@
                   formControlName="order"
                   class="custom-input"
                   placeholder="1"
-                  (input)="onOrderInputChange()"
                 />
                 <mat-hint class="hint-title"
                   >Order for User on Homepage from top to bottom</mat-hint
