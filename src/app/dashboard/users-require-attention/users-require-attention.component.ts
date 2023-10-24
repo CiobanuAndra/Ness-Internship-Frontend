@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/interfaces/user.model';
-import { UsersService } from 'src/app/services/users/users.service';
+import { UsersService } from 'src/app/services/users.service';
 
 @Component({
   selector: 'app-users-require-attention',
@@ -11,10 +11,10 @@ export class UsersRequireAttentionComponent implements OnInit {
   usersRequireAttention: User[] = [];
   allUsersRequireAttention: User[] = [];
 
-  constructor(private _usersService: UsersService) {}
+  constructor(private usersService: UsersService) {}
 
   ngOnInit(): void {
-    this._usersService.getUsersRequireAttention().subscribe((values) => {
+    this.usersService.getUsersRequireAttention().subscribe((values) => {
       this.usersRequireAttention = values.slice(0, 3);
       this.allUsersRequireAttention = values;
     });
