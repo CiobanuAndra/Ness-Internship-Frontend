@@ -12,13 +12,14 @@ import { UsersService } from 'src/app/services/users.service';
   styleUrls: ['./users-require-attention-table.component.scss'],
 })
 export class UsersRequireAttentionTableComponent implements AfterViewInit {
-  constructor(private usersService: UsersService) {}
+  @ViewChild(MatSort) sort!: MatSort;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   totalCourses: number = 0;
   displayedColumns: string[] = ['name', 'tasksLeft', 'timeLeft', 'buttons'];
-  @ViewChild(MatSort) sort!: MatSort;
   dataSource = new MatTableDataSource<UserRequireAttention>();
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
+
+  constructor(private usersService: UsersService) {}
 
   filterActiveUsers(): void {
     this.usersService
@@ -44,11 +45,11 @@ export class UsersRequireAttentionTableComponent implements AfterViewInit {
       case 1:
         this.filterInactiveUsers();
         break;
-
       default:
         break;
     }
   }
+
   ngAfterViewInit(): void {
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
