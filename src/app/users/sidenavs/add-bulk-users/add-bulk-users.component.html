@@ -8,11 +8,19 @@
         class="add-bulk-users__details__title__icon"
       ></mat-icon>
     </div>
-    <mat-divider></mat-divider>
-
-    <div>
-      <input matInput type="text" />
-      <mat-hint>File format: .CSV, example of file below</mat-hint>
+    <div class="add-bulk-users__details__title__input">
+      <div class="add-bulk-users__details__title__input__div">
+        <input
+          matInput
+          placeholder="CSV File"
+          type="text"
+          class="add-bulk-users__details__title__input__div__input"
+        />
+        <mat-icon svgIcon="upload"></mat-icon>
+      </div>
+      <mat-hint class="add-bulk-users__details__title__input__hint"
+        >File format: .CSV, example of file below</mat-hint
+      >
     </div>
 
     <div>
@@ -42,17 +50,13 @@
         </table>
       </div>
     </div>
-
-    <div>
-      <div class="add-bulk-users__buttons">
-        <button class="add-bulk-users__buttons__check-file">CHECK FILE</button>
-        <button
-          class="add-bulk-users__buttons__cancel"
-          (click)="closeSidenav()"
-        >
-          CANCEL
-        </button>
-      </div>
+  </div>
+  <div>
+    <div class="add-bulk-users__buttons">
+      <button class="add-bulk-users__buttons__check-file">CHECK FILE</button>
+      <button class="add-bulk-users__buttons__cancel" (click)="closeSidenav()">
+        CANCEL
+      </button>
     </div>
   </div>
 </div>

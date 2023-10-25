@@ -4,19 +4,20 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  gap: 40rem;
-  height: 100%;
+  gap: 37rem;
 
   &__details {
     &__table {
       width: 39.875rem;
       box-shadow: 0px 1px 5px 0px #0000001f;
+      margin-left: 0.75rem;
     }
+
     &__title {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      height: 2.5625rem;
+      height: 3.313rem;
       padding: 0 0.5rem;
       border-bottom: 1px solid #c7cbd1;
 
@@ -24,13 +25,48 @@
         width: 1rem;
         height: 1rem;
       }
+
+      &__input {
+        margin-left: 0.75rem;
+        margin-top: 1rem;
+
+        &__div {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+
+          &__input {
+            border: none;
+            height: 2.5625rem;
+            margin-bottom: 0.3125rem;
+            color: rgba(0, 0, 0, 0.87);
+            font-style: normal;
+            font-weight: normal;
+            font-size: 1rem;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.42);
+            width: 95%;
+
+            &__hint {
+              color: rgba(0, 0, 0, 0.6);
+              font-family: Roboto;
+              font-size: 0.75rem;
+              font-style: normal;
+              font-weight: 400;
+              line-height: 1.25rem;
+              letter-spacing: 0.4px;
+            }
+          }
+        }
+      }
     }
   }
+
   &__buttons {
     width: 227px;
     height: 36px;
     gap: 16px;
     display: flex;
+    margin-left: 12px;
 
     &__check-file {
       width: 119px;
@@ -40,6 +76,7 @@
       background-color: $primary-color;
       color: $white-color;
     }
+
     &__cancel {
       width: 92px;
       height: 36px;
