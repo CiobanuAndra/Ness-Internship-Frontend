@@ -15,8 +15,6 @@ export class AddbulkusersComponent implements OnInit{
   selectedTableAttention = 'Attention';
   selectedTableConfirmation = 'Confirmation';
 
-  
-  //recieving data from child component for displaying no. of users
   dataSourceAttention = new MatTableDataSource<UserModal>;
   dataSourceConfirmation = new MatTableDataSource<UserModal>;
 
