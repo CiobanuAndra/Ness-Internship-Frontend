@@ -1,7 +1,7 @@
 <mat-card class="card-container">
     <mat-card-header class="card-header">
         <mat-card-title class="card-title">
-            7 Users Uploaded
+            {{usersToUpdate}} Users Uploaded
         </mat-card-title>
         <button mat-icon-button mat-dialog-close class="close-button">
             <mat-icon>
@@ -14,13 +14,13 @@
     <mat-card-content>
         <mat-dialog-content class="dialog-container">
             <div class="require-attention-container">
-                <p class="table-header">3 Users Require Attention</p>
-                <app-addbulkuser-table [selectedTableAttention]="selectedTableAttention"></app-addbulkuser-table>
+                <p class="table-header">{{usersAttention.length}} Users Require Attention</p>
+                <app-addbulkuser-table [dataSource]="dataSourceAttention" [selectedTableAttention]="selectedTableAttention"></app-addbulkuser-table>
             </div>
     
             <div class="await-confirmation-container">
-                <p class="table-header">4 Users Await Confirmation</p>
-                <app-addbulkuser-table [selectedTableConfirmation]="selectedTableConfirmation"></app-addbulkuser-table>
+                <p class="table-header">{{usersConfirmation.length}} Users Await Confirmation</p>
+                <app-addbulkuser-table [dataSource]="dataSourceConfirmation" [selectedTableConfirmation]="selectedTableConfirmation"></app-addbulkuser-table>
             </div>
             <div class="buttons-container">
                 <button mat-raised-button (click)="addUsers()" class="addUser-button">Confirm & Add Users</button>

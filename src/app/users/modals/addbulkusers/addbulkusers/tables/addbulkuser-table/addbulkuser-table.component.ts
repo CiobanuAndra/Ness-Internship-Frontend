@@ -1,6 +1,6 @@
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { AwaitConfirmationTable, RequireAttentionTable } from 'src/app/enums/addbulkuser-table';
@@ -26,12 +26,12 @@ import { UsersService } from 'src/app/services/users/users.service';
   ],
 })
 
-export class AddbulkuserTableComponent implements OnInit{
+export class AddbulkuserTableComponent{
   @Input() selectedTableAttention = '';
   @Input() selectedTableConfirmation = '';
 
-  dataSourceAttention = new MatTableDataSource<UserModal>;
-  dataSourceConfirmation = new MatTableDataSource<UserModal>;
+  @Input() dataSource!: MatTableDataSource<UserModal>;
+
   expandedElement: UserModal[] | null | undefined = [];
 
   columnsToDisplayAttention: string[] = this.parseEnumToArray(RequireAttentionTable) as string[];
@@ -43,35 +43,14 @@ export class AddbulkuserTableComponent implements OnInit{
   }
 
   constructor(private liveAnnouncer: LiveAnnouncer, private usersService: UsersService) {}
-
-  ngOnInit(): void {
-    this.loadData();
-  }
-
-  loadData():void {
-    this.fetchUserRequireModal();
-    this.fetchUserAwaitModal();
-  }
-
-  fetchUserRequireModal(): void {
-    this.usersService.loadUsersRequireModal().subscribe(data => {
-      this.dataSourceAttention.data = data;
-    });
-  };
-
-  fetchUserAwaitModal(): void {
-    this.usersService.loadUsersAwaitModal().subscribe(data => {
-      this.dataSourceConfirmation.data = data;
-    });
-  };
   
   //Sorting
   @ViewChild(MatSort) sortAttention!:MatSort;
   @ViewChild(MatSort) sortConfirmation!:MatSort;
 
   ngAfterViewInit(): void {
-    this.dataSourceAttention.sort = this.sortAttention;
-    this.dataSourceConfirmation.sort = this.sortConfirmation;
+    this.dataSource.sort = this.sortAttention;
+    this.dataSource.sort = this.sortConfirmation;
   };
 
   announceSortChange(sortState: Sort) {
@@ -82,22 +61,9 @@ export class AddbulkuserTableComponent implements OnInit{
     }
   };
 
-  //Check if tables have users with problems and if no proceed to submit
-  public postUsers(): void {
-    this.usersService.loadUsersRequireModal().subscribe(
-      (users: UserModal[]) => {
-        if (users.length > 0) {
-          this.expandAllRows();
-        } else {
-          //Proceed to send data
-        }
-      }
-    );
-  }
-
   //Open multiple rows at the same time
   expandAllRows() {
-    for (const element of this.dataSourceAttention.data) {
+    for (const element of this.dataSource.data) {
       if (!this.isExpanded(element)) {
         this.pushPopElement(element);
       }
