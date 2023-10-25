@@ -1,12 +1,10 @@
-<mat-sidenav-container
-  *ngIf="opened"
-  class="mat-sidenav-container"
-  [hasBackdrop]="true"
->
+<mat-sidenav-container *ngIf="opened" class="mat-sidenav-container">
   <mat-sidenav-content>
-    <app-add-bluck-users></app-add-bluck-users>
+    <app-add-bluck-users #sidenav></app-add-bluck-users>
   </mat-sidenav-content>
 </mat-sidenav-container>
+
+<div class="overlay" *ngIf="opened" (click)="closeBulkUsersSidenav()"></div>
 
 <div class="users-list">
   <div class="users-list__title">
@@ -23,7 +21,10 @@
         ADD USER
       </button>
       <button mat-button class="users-list__title__buttons__add-bulk-users">
-        <p class="users-list__title__buttons__add-bulk-users__p">
+        <p
+          class="users-list__title__buttons__add-bulk-users__p"
+          (click)="openBulkUsersSidenav()"
+        >
           ADD BULK USERS
         </p>
       </button>

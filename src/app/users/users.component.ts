@@ -1,4 +1,10 @@
-import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  Renderer2,
+  ViewChild,
+} from '@angular/core';
 import { UsersService } from '../services/users.service';
 import { UsersListTable } from '../interfaces/users-list-table';
 import { UsersFilter } from '../enums/users-filter';
@@ -16,11 +22,13 @@ import { MatPaginator } from '@angular/material/paginator';
 export class UsersComponent implements AfterViewInit {
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild('sidenav') sidenav!: ElementRef;
 
   dataSource = new MatTableDataSource<UsersListTable>();
   opened: boolean = false;
   UsersFilterValues = Object(UsersFilter);
   totalCourses = 0;
+  sidenavOpen = false;
 
   UsersFilterIndex = {
     [UsersFilter.ALL]: 0,
@@ -38,6 +46,14 @@ export class UsersComponent implements AfterViewInit {
   ];
 
   constructor(private userService: UsersService) {}
+
+  closeBulkUsersSidenav() {
+    this.opened = false;
+  }
+
+  openBulkUsersSidenav() {
+    this.opened = true;
+  }
 
   filterActiveUsers(): void {
     this.userService.getActiveUsers().subscribe((values) => {
@@ -97,6 +113,7 @@ export class UsersComponent implements AfterViewInit {
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
     this.totalCourses = this.userService.totalCourses;
+
     this.filterAllUsers();
   }
 }
