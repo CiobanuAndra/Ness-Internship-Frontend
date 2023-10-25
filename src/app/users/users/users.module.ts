@@ -11,10 +11,10 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { DatePipe } from '@angular/common';
 import { MatSidenavModule } from '@angular/material/sidenav';
-import { AddBluckUsersComponent } from '../sidenavs/add-bluck-users/add-bluck-users.component';
+import { AddBulkUsersComponent } from '../sidenavs/add-bulk-users/add-bulk-users.component';
 
 @NgModule({
-  declarations: [UsersComponent, AddBluckUsersComponent],
+  declarations: [UsersComponent, AddBulkUsersComponent],
   imports: [
     CommonModule,
     UsersRoutingModule,
@@ -27,7 +27,7 @@ import { AddBluckUsersComponent } from '../sidenavs/add-bluck-users/add-bluck-us
     MatPaginatorModule,
     MatSidenavModule,
   ],
-  exports: [UsersComponent, AddBluckUsersComponent],
+  exports: [UsersComponent, AddBulkUsersComponent],
   providers: [DatePipe],
 })
 export class UsersModule {}

@@ -1,16 +1,15 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { AddBluckUsersComponent } from './add-bluck-users.component';
+import { AddBulkUsersComponent } from './add-bulk-users.component';
 
 describe('AddBluckUsersComponent', () => {
-  let component: AddBluckUsersComponent;
-  let fixture: ComponentFixture<AddBluckUsersComponent>;
+  let component: AddBulkUsersComponent;
+  let fixture: ComponentFixture<AddBulkUsersComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [AddBluckUsersComponent]
+      declarations: [AddBulkUsersComponent],
     });
-    fixture = TestBed.createComponent(AddBluckUsersComponent);
+    fixture = TestBed.createComponent(AddBulkUsersComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
