@@ -14,8 +14,16 @@
     }
     &__title {
       display: flex;
-      flex-direction: row;
       justify-content: space-between;
+      align-items: center;
+      height: 2.5625rem;
+      padding: 0 0.5rem;
+      border-bottom: 1px solid #c7cbd1;
+
+      &__icon {
+        width: 1rem;
+        height: 1rem;
+      }
     }
   }
   &__buttons {

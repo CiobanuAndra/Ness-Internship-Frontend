@@ -1,10 +1,12 @@
 <mat-sidenav-container *ngIf="opened" class="mat-sidenav-container">
   <mat-sidenav-content>
-    <app-add-bulk-users #sidenav></app-add-bulk-users>
+    <app-add-bulk-users
+      #sidenav
+      [opened]="opened"
+      (closeSidenavEvent)="closeBulkUsersSidenav()"
+    ></app-add-bulk-users>
   </mat-sidenav-content>
 </mat-sidenav-container>
-
-<div class="overlay" *ngIf="opened" (click)="closeBulkUsersSidenav()"></div>
 
 <div class="users-list">
   <div class="users-list__title">

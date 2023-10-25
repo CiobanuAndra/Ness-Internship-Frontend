@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
@@ -8,10 +8,15 @@ import { MatTableDataSource } from '@angular/material/table';
 })
 export class AddBulkUsersComponent implements OnInit {
   @Input() opened!: boolean;
+  @Output() closeSidenavEvent = new EventEmitter<void>();
   displayedColumns: string[] = ['firstname', 'lastname', 'email'];
   dataSource = new MatTableDataSource<any>();
 
   constructor() {}
+
+  closeSidenav(): void {
+    this.closeSidenavEvent.emit();
+  }
 
   ngOnInit() {
     this.dataSource.data = [
