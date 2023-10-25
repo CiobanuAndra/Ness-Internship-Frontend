@@ -1,5 +1,95 @@
-@import "../../../styleguide.scss";
+@import "/src/styleguide.scss";
 
-.name {
-  color: $primary-color;
+@mixin button-style($width, $bg-color, $height, $border, $border-radius) {
+  width: $width;
+  border: $border;
+  border-radius: $border-radius;
+  background-color: $bg-color;
+  height: $height;
+}
+
+@mixin dimensions($width, $height) {
+  width: $width;
+  height: $height;
+}
+
+.users-list {
+  @include dimensions(100%, 100%);
+  background: $white-color;  
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  &__title {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    text-align: center;
+    justify-content: space-between;
+    border-bottom: 0.063rem solid $medium-gray-color;
+    line-height: 1.75rem;
+    @include dimensions(null, 3.813rem);
+    padding: 0 1rem;
+    background: $white-color;
+
+    &__buttons {
+      display: flex;
+      flex-direction: row;
+      gap: 1rem;
+      @include button-style(none,
+          $light-gray-color,
+          2.25rem,
+          none,
+          0.25rem);
+    }
+   
+  };
+  &__settings-icon {
+    @include dimensions(0.5rem, 1rem);
+    cursor: pointer;
+  }; 
+  &__table {
+    overflow: hidden;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    tr{
+      display: grid;
+      grid-template-columns: 2fr 0.8fr 0.6fr 0.8fr 0.2fr;
+      align-items: center;
+
+      td,
+      th {
+        width: 100%;
+        white-space: nowrap;
+      }
+    }
+  };
+  
+.users-require-attention__no-users{
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  vertical-align: middle;
+  h1{
+    margin: 0px;
+  }
+}
+}
+
+.users-require-attention__no-users{
+  &__icon{
+    width: 3.75rem;
+    height: auto;
+  }
+  h1{
+    font-size: 16px;
+  }
+}
+
+.line {
+  @include dimensions(100%, 0.063rem);
+  background-color: $medium-gray-color;
 }
