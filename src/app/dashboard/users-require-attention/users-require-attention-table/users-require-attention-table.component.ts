@@ -4,7 +4,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatTabChangeEvent } from '@angular/material/tabs';
 import { UserRequireAttention } from 'src/app/interfaces/user-require-attention.model';
-import { UsersService } from 'src/app/services/users.service';
+import { UsersService } from 'src/app/services/users/users.service';
 
 @Component({
   selector: 'app-users-require-attention-table',

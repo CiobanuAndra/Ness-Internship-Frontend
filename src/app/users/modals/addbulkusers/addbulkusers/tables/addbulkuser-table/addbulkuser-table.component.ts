@@ -5,7 +5,7 @@ import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { AwaitConfirmationTable, RequireAttentionTable } from 'src/app/enums/addbulkuser-table';
 import { UserModal } from 'src/app/interfaces/users/user-modal.model';
-import { UsersService } from 'src/app/services/users.service';
+import { UsersService } from 'src/app/services/users/users.service';
 
 @Component({
   selector: 'app-addbulkuser-table',

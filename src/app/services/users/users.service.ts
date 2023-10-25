@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, map, of } from 'rxjs';
-import { UsersListTable } from '../interfaces/users-list-table';
-import { User } from '../interfaces/users/user.model';
-import { UserCard } from '../interfaces/users/user-card.model';
-import { UserModal } from '../interfaces/users/user-modal.model';
-import { UserRequireAttention } from '../interfaces/user-require-attention.model';
+import { UsersListTable } from '../../interfaces/users-list-table';
+import { User } from '../../interfaces/users/user.model';
+import { UserCard } from '../../interfaces/users/user-card.model';
+import { UserModal } from '../../interfaces/users/user-modal.model';
+import { UserRequireAttention } from '../../interfaces/user-require-attention.model';
 
 @Injectable({
   providedIn: 'root',

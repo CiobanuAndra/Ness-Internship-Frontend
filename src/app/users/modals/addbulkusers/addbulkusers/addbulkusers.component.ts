@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AddbulkuserTableComponent } from './tables/addbulkuser-table/addbulkuser-table.component';
 import { UserModal } from 'src/app/interfaces/users/user-modal.model';
-import { UsersService } from 'src/app/services/users.service';
+import { UsersService } from 'src/app/services/users/users.service';
 import { MatTableDataSource } from '@angular/material/table';
 
 @Component({

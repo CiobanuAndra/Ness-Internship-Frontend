@@ -5,7 +5,7 @@ import {
   Renderer2,
   ViewChild,
 } from '@angular/core';
-import { UsersService } from '../services/users.service';
+import { UsersService } from '../services/users/users.service';
 import { UsersListTable } from '../interfaces/users-list-table';
 import { UsersFilter } from '../enums/users-filter';
 import { MatTabChangeEvent } from '@angular/material/tabs';

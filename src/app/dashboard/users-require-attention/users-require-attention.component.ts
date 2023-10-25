@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { UsersService } from 'src/app/services/users.service';
+import { UsersService } from 'src/app/services/users/users.service';
 import { UserRequireAttention } from 'src/app/interfaces/user-require-attention.model';
 import { User } from 'src/app/interfaces/users/user.model';
 
