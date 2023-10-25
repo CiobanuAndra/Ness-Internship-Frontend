@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { InitialsCustomepipePipe } from '../pipes/initials-customepipe.pipe';
-import { ResourcesService } from '../services/resources.service';
+import { ResourcesService } from '../services/resources/resources.service';
 
 @Component({
   selector: 'app-navbar',

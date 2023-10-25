@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AddbulkuserTableComponent } from './tables/addbulkuser-table/addbulkuser-table.component';
 import { UserModal } from 'src/app/interfaces/users/user-modal.model';
-import { UsersService } from 'src/app/services/users/users.service';
+import { UsersService } from 'src/app/services/users.service';
 import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
@@ -18,8 +18,8 @@ export class AddbulkusersComponent implements OnInit{
   dataSourceAttention = new MatTableDataSource<UserModal>;
   dataSourceConfirmation = new MatTableDataSource<UserModal>;
 
-  usersAttention: UserModal[] = [];
-  usersConfirmation: UserModal[] = [];
+  usersAttention =0;
+  usersConfirmation = 0;
   usersToUpdate = 0;
   
   constructor(private usersService: UsersService) {}
@@ -45,6 +45,7 @@ export class AddbulkusersComponent implements OnInit{
   fetchUserRequireModal(): void {
     this.usersService.loadUsersRequireModal().subscribe(data => {
       this.dataSourceAttention.data = data;
+      this.usersAttention += data.length;
       this.usersToUpdate += data.length;
     });
   };
@@ -52,6 +53,7 @@ export class AddbulkusersComponent implements OnInit{
   fetchUserAwaitModal(): void {
     this.usersService.loadUsersAwaitModal().subscribe(data => {
       this.dataSourceConfirmation.data = data;
+      this.usersConfirmation = data.length;
       this.usersToUpdate += data.length;
     });
   };

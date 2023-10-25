@@ -1,10 +1,10 @@
-<mat-sidenav-container class="sidenav-container" *ngIf="showSidenav">
+<!-- <mat-sidenav-container class="sidenav-container" *ngIf="showSidenav">
     <mat-sidenav-content>
         <app-add-task [showSidenav]="showSidenav" (showSidenavChange)="showSidenav = $event"></app-add-task>
     </mat-sidenav-content>
-</mat-sidenav-container>
+</mat-sidenav-container> -->
 
-<div class="resources-container" [ngClass]="{'open': showSidenav}">
+<div class="resources-container">
 <mat-card class="card-container">
     <mat-card-header class="card-header">
         <mat-card-title class="card-title">
@@ -14,27 +14,27 @@
     <mat-divider></mat-divider>
     <div class="tabs-container">
         <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start" (selectedIndexChange)="updateActiveTabTitle($event)">
-            <mat-tab label="TASKS" [disabled]="showSidenav"> 
+            <mat-tab label="TASKS"> 
                 <mat-divider></mat-divider>
                 <div class="table-container">
                     <app-resource-table [selectedTable]="selectedTableTasks"></app-resource-table>
                 </div>
             </mat-tab>
 
-            <mat-tab label="COURSES" [disabled]="showSidenav">
+            <mat-tab label="COURSES">
                 <mat-divider></mat-divider>
                 <div class="table-container">
                     <app-resource-table [selectedTable]="selectedTableCourses"></app-resource-table>
                 </div>
             </mat-tab>
             
-            <mat-tab label="AVATARS" [disabled]="showSidenav"> 
+            <mat-tab label="AVATARS"> 
                 <mat-divider></mat-divider>
                 <div class="table-container">
                     <app-resource-table [selectedTable]="selectedTableAvatars"></app-resource-table>
                 </div>
             </mat-tab>
-            <mat-tab label="INDUSTRIES" [disabled]="showSidenav"> 
+            <mat-tab label="INDUSTRIES"> 
                 <mat-divider></mat-divider>
             </mat-tab>
         </mat-tab-group>

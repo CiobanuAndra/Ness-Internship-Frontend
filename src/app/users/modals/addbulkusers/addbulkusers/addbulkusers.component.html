@@ -14,12 +14,12 @@
     <mat-card-content>
         <mat-dialog-content class="dialog-container">
             <div class="require-attention-container">
-                <p class="table-header">{{usersAttention.length}} Users Require Attention</p>
+                <p class="table-header">{{usersAttention}} Users Require Attention</p>
                 <app-addbulkuser-table [dataSource]="dataSourceAttention" [selectedTableAttention]="selectedTableAttention"></app-addbulkuser-table>
             </div>
     
             <div class="await-confirmation-container">
-                <p class="table-header">{{usersConfirmation.length}} Users Await Confirmation</p>
+                <p class="table-header">{{usersConfirmation}} Users Await Confirmation</p>
                 <app-addbulkuser-table [dataSource]="dataSourceConfirmation" [selectedTableConfirmation]="selectedTableConfirmation"></app-addbulkuser-table>
             </div>
             <div class="buttons-container">
