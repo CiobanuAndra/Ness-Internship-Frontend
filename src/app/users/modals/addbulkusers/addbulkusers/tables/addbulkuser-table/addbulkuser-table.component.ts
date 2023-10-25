@@ -1,16 +1,16 @@
-import { AfterViewInit, Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+import { trigger, state, style, transition, animate } from '@angular/animations';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { Observable } from 'rxjs';
-import { UsersService } from 'src/app/services/users/users.service';
-import { trigger, state, style, transition, animate } from '@angular/animations';
+import { AwaitConfirmationTable, RequireAttentionTable } from 'src/app/enums/addbulkuser-table';
 import { UserModal } from 'src/app/interfaces/users/user-modal.model';
+import { UsersService } from 'src/app/services/users/users.service';
 
 @Component({
-  selector: 'app-requireattention',
-  templateUrl: './requireattention.component.html',
-  styleUrls: ['./requireattention.component.scss'],
+  selector: 'app-addbulkuser-table',
+  templateUrl: './addbulkuser-table.component.html',
+  styleUrls: ['./addbulkuser-table.component.scss'],
   animations: [
     trigger('detailExpand', [
       state(
@@ -26,29 +26,52 @@ import { UserModal } from 'src/app/interfaces/users/user-modal.model';
   ],
 })
 
-export class RequireattentionComponent implements AfterViewInit, OnInit{
+export class AddbulkuserTableComponent implements OnInit{
+  @Input() selectedTableAttention = '';
+  @Input() selectedTableConfirmation = '';
+
+  dataSourceAttention = new MatTableDataSource<UserModal>;
+  dataSourceConfirmation = new MatTableDataSource<UserModal>;
   expandedElement: UserModal[] | null | undefined = [];
-  dataSource = new MatTableDataSource<UserModal>;
-  columnsToDisplay = ['name', 'surname', 'email'];
-  columnsToDisplayWithExpand = ['expand', ...this.columnsToDisplay, 'options'];
+
+  columnsToDisplayAttention: string[] = this.parseEnumToArray(RequireAttentionTable) as string[];
+  columnsToDisplayWithExpand = ['expand', ...this.columnsToDisplayAttention, 'options'];
+  columnsToDisplayConfirmation = this.parseEnumToArray(AwaitConfirmationTable);
+
+  parseEnumToArray(enumObject: any) {
+    return Object.values(enumObject).filter(value => isNaN(Number(value)));
+  }
 
   constructor(private liveAnnouncer: LiveAnnouncer, private usersService: UsersService) {}
 
   ngOnInit(): void {
-    this.fetchUserRequireModal().subscribe(data => {
-      this.dataSource.data = data;
-    })
+    this.loadData();
+  }
+
+  loadData():void {
+    this.fetchUserRequireModal();
+    this.fetchUserAwaitModal();
+  }
+
+  fetchUserRequireModal(): void {
+    this.usersService.loadUsersRequireModal().subscribe(data => {
+      this.dataSourceAttention.data = data;
+    });
   };
 
-  fetchUserRequireModal():Observable<UserModal[]> {
-    return this.usersService.loadUsersRequireModal();
-  }
+  fetchUserAwaitModal(): void {
+    this.usersService.loadUsersAwaitModal().subscribe(data => {
+      this.dataSourceConfirmation.data = data;
+    });
+  };
   
   //Sorting
-  @ViewChild(MatSort) sort!:MatSort;
+  @ViewChild(MatSort) sortAttention!:MatSort;
+  @ViewChild(MatSort) sortConfirmation!:MatSort;
 
   ngAfterViewInit(): void {
-    this.dataSource.sort = this.sort;
+    this.dataSourceAttention.sort = this.sortAttention;
+    this.dataSourceConfirmation.sort = this.sortConfirmation;
   };
 
   announceSortChange(sortState: Sort) {
@@ -59,7 +82,7 @@ export class RequireattentionComponent implements AfterViewInit, OnInit{
     }
   };
 
-  //Check if tables have users with problems
+  //Check if tables have users with problems and if no proceed to submit
   public postUsers(): void {
     this.usersService.loadUsersRequireModal().subscribe(
       (users: UserModal[]) => {
@@ -74,7 +97,7 @@ export class RequireattentionComponent implements AfterViewInit, OnInit{
 
   //Open multiple rows at the same time
   expandAllRows() {
-    for (const element of this.dataSource.data) {
+    for (const element of this.dataSourceAttention.data) {
       if (!this.isExpanded(element)) {
         this.pushPopElement(element);
       }
@@ -123,5 +146,5 @@ export class RequireattentionComponent implements AfterViewInit, OnInit{
   //Stop extend row event for options button
   stopPropagation(event: Event): void {
     event.stopPropagation();
-  };  
+  };
 }

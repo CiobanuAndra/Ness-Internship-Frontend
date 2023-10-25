@@ -15,12 +15,12 @@
         <mat-dialog-content class="dialog-container">
             <div class="require-attention-container">
                 <p class="table-header">3 Users Require Attention</p>
-                <app-requireattention></app-requireattention>
+                <app-addbulkuser-table [selectedTableAttention]="selectedTableAttention"></app-addbulkuser-table>
             </div>
     
             <div class="await-confirmation-container">
                 <p class="table-header">4 Users Await Confirmation</p>
-                <app-awaitconfirmation></app-awaitconfirmation>
+                <app-addbulkuser-table [selectedTableConfirmation]="selectedTableConfirmation"></app-addbulkuser-table>
             </div>
             <div class="buttons-container">
                 <button mat-raised-button (click)="addUsers()" class="addUser-button">Confirm & Add Users</button>

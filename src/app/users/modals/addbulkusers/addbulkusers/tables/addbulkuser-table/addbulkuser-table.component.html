@@ -1,0 +1,93 @@
+<div class="table-container">
+<!-- Require Attention Table -->
+<table mat-table *ngIf="selectedTableAttention === 'Attention'" [dataSource]="dataSourceAttention" multiTemplateDataRows class="mat-elevation-z8" matSort (matSortChange)="announceSortChange($event)">
+    <ng-container matColumnDef="{{column}}" *ngFor="let column of columnsToDisplayAttention">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by column"> {{column}} </th>
+      <td mat-cell *matCellDef="let element"> {{element[column]}} </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="expand">
+      <th mat-header-cell *matHeaderCellDef aria-label="row actions">&nbsp;</th>
+      <td mat-cell *matCellDef="let element">
+          <button mat-icon-button aria-label="expand row">
+              <mat-icon *ngIf="isExpanded(element)">keyboard_arrow_up</mat-icon>
+              <mat-icon *ngIf="!isExpanded(element)">keyboard_arrow_down</mat-icon>
+          </button>   
+      </td>
+    </ng-container>
+    
+    <ng-container matColumnDef="expandedDetail">
+      <td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplayWithExpand.length">
+        <div class="element-detail"
+          [@detailExpand]="checkExpanded(element) ? 'expanded' : 'collapsed'">
+          <div>
+            <div class="error-message"> {{element.message}} </div>
+          </div>
+        </div>
+      </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="options">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let element"> 
+          <button mat-icon-button (click)="stopPropagation($event)">
+              <mat-icon>more_vert</mat-icon>
+          </button>
+      </td>
+     </ng-container>
+    
+     <tr mat-header-row *matHeaderRowDef="columnsToDisplayWithExpand"></tr>
+     <tr mat-row *matRowDef="let element; columns: columnsToDisplayWithExpand;"
+     class="element-row"
+     [class.expanded-row]="checkExpanded(element)"
+     (click)="pushPopElement(element)">
+    </tr>
+    <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="detail-row"></tr>
+  </table>
+  
+  <!-- State: No Data -->
+  <div *ngIf="dataSourceAttention.data.length === 0">
+      <div class="table-with-no-data">
+          <img src="assets/icons/avatar.svg" alt="task-icon" class="task-icon">
+          <p class="no-data-message">No user require attention!</p>
+      </div>
+  </div>
+
+
+  <!-- Await Confirmation table -->
+    <mat-table *ngIf="selectedTableConfirmation === 'Confirmation'" [dataSource]="dataSourceConfirmation" matSort (matSortChange)="announceSortChange($event)" class="mat-elevation-z8">
+        <ng-container matColumnDef="name">
+            <mat-header-cell class="header-cell" *matHeaderCellDef mat-sort-header sortActionDescription="Sort by name">name</mat-header-cell>
+            <mat-cell *matCellDef="let user;"> {{ user.name }}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="surname">
+            <mat-header-cell class="header-cell" *matHeaderCellDef mat-sort-header sortActionDescription="Sort by surname">surname</mat-header-cell>
+            <mat-cell *matCellDef="let user"> {{ user.surname }}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="email">
+            <mat-header-cell class="header-cell" *matHeaderCellDef mat-sort-header sortActionDescription="Sort by email">email</mat-header-cell>
+            <mat-cell *matCellDef="let user"> {{ user.email }}</mat-cell>
+        </ng-container> 
+        
+        <ng-container matColumnDef="options">
+            <mat-header-cell *matHeaderCellDef></mat-header-cell>
+            <mat-cell *matCellDef="let user"> 
+                <button mat-icon-button>
+                    <mat-icon>more_vert</mat-icon>
+                </button>
+            </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="columnsToDisplayConfirmation"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: columnsToDisplayConfirmation;"></mat-row>
+    </mat-table>
+</div>
+
+<!-- State: No Data -->
+<div *ngIf="dataSourceConfirmation.data.length === 0">
+    <div class="table-with-no-data">
+        <img src="assets/icons/avatar.svg" alt="task-icon" class="task-icon">
+        <p class="no-data-message">No user await confirmation!</p>
+    </div>
+</div>
+  

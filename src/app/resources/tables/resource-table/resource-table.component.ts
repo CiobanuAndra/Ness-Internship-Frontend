@@ -3,6 +3,7 @@ import { Component, Input, ViewChild } from '@angular/core';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Observable } from 'rxjs';
+import { ResourceTableAvatars, ResourceTableCourses, ResourceTableTasks } from 'src/app/enums/resource-table';
 import { Avatar } from 'src/app/interfaces/resources/avatar.model';
 import { Course } from 'src/app/interfaces/resources/course.model';
 import { Task } from 'src/app/interfaces/resources/task.model';
@@ -20,9 +21,13 @@ export class ResourceTableComponent {
   dataSourceCourses = new MatTableDataSource<Course>;
   dataSourceAvatars = new MatTableDataSource<Avatar>;
   
-  columnsToDisplayTasks = ['icon', 'name', 'type', 'courses', 'order', 'length', 'rewards', 'dateAdded', 'lastEdited', 'editedBy', 'options'];
-  columnsToDisplayCourses = ['name', 'link', 'fileType', 'length', 'rewards', 'dateAdded', 'lastEdited', 'editedBy', 'options'];
-  columnsToDisplayAvatars = ['name', 'linked_to', 'default', 'addedBy', 'options'];
+  columnsToDisplayTasks = this.parseEnumToArray(ResourceTableTasks);
+  columnsToDisplayCourses = this.parseEnumToArray(ResourceTableCourses);
+  columnsToDisplayAvatars = this.parseEnumToArray(ResourceTableAvatars);
+
+  parseEnumToArray(enumObject: any) {
+    return Object.values(enumObject).filter(value => isNaN(Number(value)));
+  }
 
   constructor(private liveAnnouncer: LiveAnnouncer, private resourcesService: ResourcesService) {}
 

@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { RequireattentionComponent } from './tables/requireattentions/requireattention/requireattention.component';
+import { AddbulkuserTableComponent } from './tables/addbulkuser-table/addbulkuser-table.component';
 
 @Component({
   selector: 'app-addbulkusers',
@@ -7,7 +7,10 @@ import { RequireattentionComponent } from './tables/requireattentions/requireatt
   styleUrls: ['./addbulkusers.component.scss']
 })
 export class AddbulkusersComponent {
-  @ViewChild(RequireattentionComponent) child!:RequireattentionComponent;
+  @ViewChild(AddbulkuserTableComponent) child!:AddbulkuserTableComponent;
+
+  selectedTableAttention = 'Attention';
+  selectedTableConfirmation = 'Confirmation';
 
   addUsers(): void {
     this.child.postUsers();

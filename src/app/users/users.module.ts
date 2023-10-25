@@ -5,9 +5,8 @@ import { MaterialModule } from 'src/shared/material/material.module';
 import { RouterModule, Routes } from '@angular/router';
 import { UsersComponent } from './users.component';
 import { AddbulkusersComponent } from './modals/addbulkusers/addbulkusers/addbulkusers.component';
-import { RequireattentionComponent } from './modals/addbulkusers/addbulkusers/tables/requireattentions/requireattention/requireattention.component';
-import { AwaitconfirmationComponent } from './modals/addbulkusers/addbulkusers/tables/awaitconfirmation/awaitconfirmation/awaitconfirmation.component';
 import { AddnewuserComponent } from './asides/addnewuser/addnewuser/addnewuser.component';
+import { AddbulkuserTableComponent } from './modals/addbulkusers/addbulkusers/tables/addbulkuser-table/addbulkuser-table.component';
 
 const routes: Routes = [
   {
@@ -20,9 +19,8 @@ const routes: Routes = [
   declarations: [
     UsersComponent,
     AddbulkusersComponent,
-    RequireattentionComponent,
-    AwaitconfirmationComponent,
     AddnewuserComponent,
+    AddbulkuserTableComponent,
   ],
   imports: [
     CommonModule,
