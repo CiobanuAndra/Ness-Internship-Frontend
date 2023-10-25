@@ -9,6 +9,8 @@ import { Avatar } from '../interfaces/resources/avatar.model';
 })
 export class ResourcesService {
 
+  private showSidenav = false;
+
   constructor() { }
 
   tasks: Task[] = [
@@ -47,6 +49,14 @@ export class ResourcesService {
 
   public loadAvatars(): Observable<Avatar[]> {
     return of(this.avatars);
+  }
+
+  setSidenavVisibility(show: boolean): void {
+    this.showSidenav = show;
+  }
+
+  getShowSidenav(): boolean {
+    return this.showSidenav;
   }
   
 }

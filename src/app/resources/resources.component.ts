@@ -1,22 +1,33 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import { MediaMatcher } from '@angular/cdk/layout';
+import { ChangeDetectorRef, OnDestroy } from '@angular/core';
+import { ResourcesService } from '../services/resources.service';
+import { MatDialog } from '@angular/material/dialog';
+import { TabTitle } from '../enums/tab-title';
 
 @Component({
   selector: 'app-resources',
   templateUrl: './resources.component.html',
   styleUrls: ['./resources.component.scss']
 })
-export class ResourcesComponent{ 
+export class ResourcesComponent {
+  // Tab headers
+  activeTabTitle: TabTitle = TabTitle.Tasks;
+  showSidenav = false;
+  isDialogOpen = false;
 
-  //tab headers
-  activeTabTitle: string = '';
+  constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher, private resourcesService: ResourcesService, private dialog: MatDialog) {
+ 
+  }
 
   updateActiveTabTitle(selectedIndex: number): void {
-    const tabLabels = ['Tasks', 'Courses', 'Avatars', 'Industries'];
-    
+    const tabLabels = Object.values(TabTitle);
     this.activeTabTitle = tabLabels[selectedIndex];
   }
 
-  constructor() {
-    this.activeTabTitle = 'Tasks';
+  toggleSidenav() {
+    this.showSidenav = !this.showSidenav;
+    this.resourcesService.setSidenavVisibility(this.showSidenav);
   }
+
 }
