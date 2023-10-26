@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
 import { UsersService } from 'src/app/services/users.service';
 import { UserFromCSVFile } from 'src/app/interfaces/user-from-csvfile';
@@ -25,6 +25,12 @@ export class AddBulkUsersComponent implements OnInit {
 
   closeSidenav(): void {
     this.closeSidenavEvent.emit();
+  }
+
+  uploadFile() {
+    this.fileControl.valueChanges.subscribe(async (files: any) => {
+      const formattedFile = await this.usersService.uploadCSVFile(files);
+    });
   }
 
   ngOnInit() {

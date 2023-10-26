@@ -294,6 +294,15 @@ export class UsersService {
     return of(this.usersFromCSVFile);
   }
 
+  uploadCSVFile(file: File): Promise<any> {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = reject;
+    });
+  }
+
   getInactiveUsers(): Observable<UsersListTable[]> {
     return of(this.allUsers).pipe(
       map((users) => users.filter((user) => user.status === false))
