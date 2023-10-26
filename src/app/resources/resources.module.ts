@@ -11,6 +11,7 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {NgIf, NgFor} from '@angular/common';
+import { AddTaskComponent } from './tables/add-task/add-task.component';
 import { ResourceTableComponent } from './tables/resource-table/resource-table.component';
 
 const routes: Routes = [
@@ -24,6 +25,7 @@ const routes: Routes = [
   declarations: [
     ResourcesComponent,
     ResourceTableComponent,
+    AddTaskComponent,
   ],
   imports: [
     CommonModule,

@@ -1,8 +1,8 @@
-<!-- <mat-sidenav-container class="sidenav-container" *ngIf="showSidenav">
+<mat-sidenav-container class="sidenav-container" *ngIf="showSidenav">
     <mat-sidenav-content>
         <app-add-task [showSidenav]="showSidenav" (showSidenavChange)="showSidenav = $event"></app-add-task>
     </mat-sidenav-content>
-</mat-sidenav-container> -->
+</mat-sidenav-container>
 
 <div class="resources-container">
 <mat-card class="card-container">
@@ -39,7 +39,7 @@
             </mat-tab>
         </mat-tab-group>
         
-        <button mat-raised-button class="tab-button" *ngIf="activeTable === 'Tasks'">Add Task</button>
+        <button mat-raised-button class="tab-button" *ngIf="activeTable === 'Tasks'" (click)="toggleSidenav()">Add Task</button>
         <button mat-raised-button class="tab-button" *ngIf="activeTable === 'Courses'">Add Course</button>
         <button mat-raised-button class="tab-button" *ngIf="activeTable === 'Avatars'">Add Avatar</button>
         <button mat-raised-button class="tab-button" *ngIf="activeTable === 'Industries'">Add Industry</button>
