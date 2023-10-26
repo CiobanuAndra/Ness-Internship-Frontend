@@ -1,6 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
+import { UsersService } from 'src/app/services/users.service';
+import { UserFromCSVFile } from 'src/app/interfaces/user-from-csvfile';
 
 @Component({
   selector: 'app-add-bulk-users',
@@ -17,19 +19,22 @@ export class AddBulkUsersComponent implements OnInit {
   });
 
   displayedColumns: string[] = ['firstname', 'lastname', 'email'];
-  dataSource = new MatTableDataSource<any>();
+  dataSource = new MatTableDataSource<UserFromCSVFile>();
 
-  constructor() {}
+  constructor(private usersService: UsersService) {}
 
   closeSidenav(): void {
     this.closeSidenavEvent.emit();
   }
 
   ngOnInit() {
-    this.dataSource.data = [
-      { firstname: 'John', lastname: 'Doe', email: 'john.doe@example.com' },
-      { firstname: 'Jane', lastname: 'Smith', email: 'jane.smith@example.com' },
-      { firstname: '...', lastname: '...', email: '...' },
-    ];
+    this.usersService.getUsersFromCSVFile().subscribe((values) => {
+      this.dataSource.data = values;
+      this.dataSource.data.push({
+        firstname: '...',
+        lastname: '...',
+        email: '...',
+      });
+    });
   }
 }

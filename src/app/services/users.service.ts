@@ -3,6 +3,7 @@ import { UserRequireAttention } from '../interfaces/user-require-attention.model
 import { UserCard } from '../interfaces/user-card.model';
 import { BehaviorSubject, Observable, map, of } from 'rxjs';
 import { UsersListTable } from '../interfaces/users-list-table';
+import { UserFromCSVFile } from '../interfaces/user-from-csvfile';
 
 @Injectable({
   providedIn: 'root',
@@ -264,6 +265,11 @@ export class UsersService {
     },
   ];
 
+  usersFromCSVFile: UserFromCSVFile[] = [
+    { firstname: 'John', lastname: 'Doe', email: 'john.doe@example.com' },
+    { firstname: 'Jane', lastname: 'Smith', email: 'jane.smith@example.com' },
+  ];
+
   usersSubject$: BehaviorSubject<UserRequireAttention[]> = new BehaviorSubject<
     UserRequireAttention[]
   >(this.usersRequireAttention);
@@ -282,6 +288,10 @@ export class UsersService {
 
   getAllUsers(): Observable<UsersListTable[]> {
     return of(this.allUsers);
+  }
+
+  getUsersFromCSVFile(): Observable<UserFromCSVFile[]> {
+    return of(this.usersFromCSVFile);
   }
 
   getInactiveUsers(): Observable<UsersListTable[]> {
