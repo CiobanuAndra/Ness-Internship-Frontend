@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
@@ -9,6 +10,12 @@ import { MatTableDataSource } from '@angular/material/table';
 export class AddBulkUsersComponent implements OnInit {
   @Input() opened!: boolean;
   @Output() closeSidenavEvent = new EventEmitter<void>();
+
+  fileControl = new FormControl(null);
+  fileForm = new FormGroup({
+    file: this.fileControl,
+  });
+
   displayedColumns: string[] = ['firstname', 'lastname', 'email'];
   dataSource = new MatTableDataSource<any>();
 

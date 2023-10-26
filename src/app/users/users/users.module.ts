@@ -12,6 +12,8 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { DatePipe } from '@angular/common';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { AddBulkUsersComponent } from '../sidenavs/add-bulk-users/add-bulk-users.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { NgxMatFileInputModule } from '@angular-material-components/file-input';
 
 @NgModule({
   declarations: [UsersComponent, AddBulkUsersComponent],
@@ -26,6 +28,8 @@ import { AddBulkUsersComponent } from '../sidenavs/add-bulk-users/add-bulk-users
     MatSortModule,
     MatPaginatorModule,
     MatSidenavModule,
+    ReactiveFormsModule,
+    NgxMatFileInputModule,
   ],
   exports: [UsersComponent, AddBulkUsersComponent],
   providers: [DatePipe],

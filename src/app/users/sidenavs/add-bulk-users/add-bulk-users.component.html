@@ -9,20 +9,19 @@
       ></mat-icon>
     </div>
     <div class="add-bulk-users__details__title__input">
-      <div class="add-bulk-users__details__title__input__div">
-        <input
-          matInput
-          placeholder="CSV File"
-          type="text"
-          class="add-bulk-users__details__title__input__div__input"
-        />
-        <mat-icon svgIcon="upload"></mat-icon>
-      </div>
-      <mat-hint class="add-bulk-users__details__title__input__hint"
-        >File format: .CSV, example of file below</mat-hint
-      >
+      <mat-form-field class="add-bulk-users__details__title__input__upload">
+        <ngx-mat-file-input
+          [formControl]="fileControl"
+          [placeholder]="'CSV File'"
+          accept=".csv"
+        >
+          <mat-icon ngxMatFileInputIcon svgIcon="upload"></mat-icon>
+        </ngx-mat-file-input>
+        <mat-hint class="add-bulk-users__details__title__input__upload__hint"
+          >File format:.CSV, example of file below</mat-hint
+        >
+      </mat-form-field>
     </div>
-
     <div>
       <div class="add-bulk-users__details__table">
         <table mat-table [dataSource]="dataSource">

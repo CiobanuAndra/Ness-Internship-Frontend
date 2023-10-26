@@ -13,9 +13,16 @@
   height: $height;
 }
 
+.aside-open {
+  width: 100%;
+  height: 100%;
+  background-color: #e6e7e9;
+  filter: brightness(0.7);
+  transition: filter 0.5s;
+}
+
 .users-list {
   margin: 0 auto;
-  margin-top: 1rem;
   @include dimensions(92%, 40%);
 
   &__title {

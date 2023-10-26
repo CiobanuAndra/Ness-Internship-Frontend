@@ -13,6 +13,7 @@ import { ngxCsv } from 'ngx-csv/ngx-csv';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
+import { ResourcesService } from '../services/resources.service';
 
 @Component({
   selector: 'app-users',
@@ -45,14 +46,14 @@ export class UsersComponent implements AfterViewInit {
     'settings',
   ];
 
-  constructor(private userService: UsersService) {}
+  constructor(
+    private userService: UsersService,
+    private resourcesService: ResourcesService
+  ) {}
 
-  closeBulkUsersSidenav() {
-    this.opened = false;
-  }
-
-  openBulkUsersSidenav() {
-    this.opened = true;
+  toggleBulkUsersSidenav() {
+    this.opened = !this.opened;
+    this.resourcesService.setSidenavVisibility(this.opened);
   }
 
   filterActiveUsers(): void {

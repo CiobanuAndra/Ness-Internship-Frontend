@@ -4,13 +4,14 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  gap: 37rem;
+  gap: 34rem;
 
   &__details {
     &__table {
       width: 39.875rem;
-      box-shadow: 0px 1px 5px 0px #0000001f;
+      box-shadow: 0px 5px 5px 5px #0000001f;
       margin-left: 0.75rem;
+      margin-top: 1rem;
     }
 
     &__title {
@@ -29,32 +30,24 @@
       &__input {
         margin-left: 0.75rem;
         margin-top: 1rem;
+        display: flex;
+        flex-direction: row;
+        gap: 2rem;
 
-        &__div {
-          display: flex;
-          flex-direction: row;
-          align-items: center;
+        &__icon {
+          margin-top: 4rem;
+        }
 
-          &__input {
-            border: none;
-            height: 2.5625rem;
-            margin-bottom: 0.3125rem;
-            color: rgba(0, 0, 0, 0.87);
+        &__upload {
+          width: 95%;
+
+          &__hint {
+            color: rgba(0, 0, 0, 0.6);
+            font-size: 0.8rem;
             font-style: normal;
-            font-weight: normal;
-            font-size: 1rem;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.42);
-            width: 95%;
-
-            &__hint {
-              color: rgba(0, 0, 0, 0.6);
-              font-family: Roboto;
-              font-size: 0.75rem;
-              font-style: normal;
-              font-weight: 400;
-              line-height: 1.25rem;
-              letter-spacing: 0.4px;
-            }
+            font-weight: 400;
+            line-height: 1.25rem;
+            letter-spacing: 0.4px;
           }
         }
       }
@@ -62,28 +55,32 @@
   }
 
   &__buttons {
-    width: 227px;
-    height: 36px;
-    gap: 16px;
+    width: 14.188rem;
+    height: 2.25rem;
+    gap: 1rem;
     display: flex;
-    margin-left: 12px;
+    margin-left: 0.75rem;
 
     &__check-file {
-      width: 119px;
-      height: 36px;
-      padding: 0px 16px;
-      border-radius: 4px;
+      width: 7.438rem;
+      height: 2.25rem;
+      padding: 0rem 1rem;
+      border-radius: 0.25rem;
       background-color: $primary-color;
       color: $white-color;
     }
 
     &__cancel {
-      width: 92px;
-      height: 36px;
-      padding: 0 16px;
-      border-radius: 4px;
+      width: 5.75rem;
+      height: 2.25rem;
+      padding: 0rem 1rem;
+      border-radius: 0.25rem;
       background-color: $light-gray-color;
       border: none;
     }
   }
+}
+
+::ng-deep.mdc-text-field--filled:not(.mdc-text-field--disabled) {
+  background-color: white;
 }
