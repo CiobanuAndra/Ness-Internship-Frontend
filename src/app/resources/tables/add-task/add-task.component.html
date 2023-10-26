@@ -90,23 +90,81 @@
         </mat-step>
       </div>
 
+
+      <!-- PAS 1 UP -->
+      
       <mat-step [stepControl]="secondFormGroup" [optional]="isOptional">
         <form [formGroup]="secondFormGroup">
           <ng-template matStepLabel>Details</ng-template>
-          <mat-form-field>
-            <input
+          <hr class="stepper-divider" />
+          <div class="type-container">
+            <span>Type</span>
+            <div class="type-buttons">
+              <button mat-button
+                [ngClass]="isSingleButtonClick ? 'next-button' : 'cancel-button'"
+                (click)="toggleSingle()">
+                {{ 'single' | uppercase }}
+              </button>
+      
+              <button mat-button
+                [ngClass]="isMultipleButtonClick ? 'next-button' : 'cancel-button'"
+                (click)="toggleMultiple()">
+                {{ 'multiple' | uppercase }}
+              </button>
+
+            </div>
+
+          </div>
+          <div class="details-content">
+
+          <div class="details-input" >
+            <div class="single-container" *ngIf="isSingleButtonClick; else multipleTemplate">
+              <input
               matInput
-              placeholder="Address"
-              formControlName="secondCtrl"
-              required
+              placeholder="Add Link"
+              type="text"
+              formControlName="link"
+              class="custom-input"
             />
-          </mat-form-field>
-          <div>
-            <button mat-button matStepperPrevious>Back</button>
-            <button mat-button matStepperNext>Next</button>
+            <hr class="stepper-divider" />
+            </div>
+
+            <ng-template #multipleTemplate>
+              <div class="multiple-container">
+                <h1>Multiple Container</h1>
+              </div>
+            </ng-template>
+          </div>
+          </div>
+            
+          <div class="details-buttons">
+            <div class="toggle-step-buttons">
+            <button
+              mat-button
+              matStepperNext
+              matStepperPrevious
+              class="cancel-button"
+            >
+            {{ 'previous step' | uppercase }}
+            </button>
+            <button mat-button class="next-button">
+              {{ 'next step' | uppercase }}
+            </button>
+          </div>
+            <button
+            mat-button
+            matStepperNext
+            class="cancel-button"
+            (click)="closeDialog()"
+          >
+          {{ 'cancel' | uppercase }}
+          </button>
           </div>
         </form>
       </mat-step>
+
+
+      <!-- PAS 3 DOWN -->
 
       <mat-step>
         <ng-template matStepLabel>

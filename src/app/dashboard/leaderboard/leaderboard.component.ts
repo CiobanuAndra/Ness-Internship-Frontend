@@ -15,7 +15,7 @@ export class LeaderboardComponent implements OnInit {
   usersInProgress: UserCard[] = [];
   usersInDone: UserCard[] = [];
   leaderboardTabsEnum = LeaderboardTabsEnum;
-  maxUsersToShow: number = 12;
+  maxUsersToShow: number = 8;
 
   constructor(private userService: UsersService, private router: Router) {}
 

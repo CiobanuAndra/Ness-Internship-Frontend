@@ -9,7 +9,7 @@
 .leaderboard-section {
   border-radius: 0.25rem;
   width: 33.75rem;
-  height: 56.814rem;
+  height: 36.407rem;
   background-color: $white-color;
   box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.12), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 1px 0px rgba(0, 0, 0, 0.20);
 
@@ -83,11 +83,5 @@
     align-items: center;
     flex-direction: column;
     height: 28.407rem;
-  }
-}
-
-@media screen and (max-height: 791px) {
-  .leaderboard-section {
-    height: 40rem;
   }
 }

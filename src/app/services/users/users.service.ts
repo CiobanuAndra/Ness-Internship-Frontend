@@ -148,13 +148,9 @@ export class UsersService {
     { status: false, name: 'Aaron Frey', tasks: 3, points: 1100, rank: 3 },
     { status: false, name: 'John Smith', tasks: 4, points: 1000, rank: 4 },
     { status: false, name: 'Valery Greg', tasks: 10, points: 300, rank: 10 },
-    { status: false, name: 'Bill Van', tasks: 1, points: 1300, rank: 1 },
-    { status: false, name: 'Mike Chris', tasks: 2, points: 1200, rank: 2 },
-    { status: false, name: 'Aaron Frey', tasks: 3, points: 1100, rank: 3 },
-    { status: false, name: 'John Smith', tasks: 4, points: 1000, rank: 4 },
-    { status: false, name: 'Valery Greg', tasks: 10, points: 300, rank: 10 },
-    { status: false, name: 'Bill Van', tasks: 1, points: 1300, rank: 1 },
-    { status: false, name: 'Mike Chris', tasks: 2, points: 1200, rank: 2 },
+    { status: false, name: 'Mike Chris', tasks: 12, points: 900, rank: 11 },
+    { status: false, name: 'Albert Leaf', tasks: 13, points: 800, rank: 12 },
+    { status: false, name: 'Lexi Ray', tasks: 14, points: 700, rank: 13 },
   ];
 
   totalCourses: number = 15;

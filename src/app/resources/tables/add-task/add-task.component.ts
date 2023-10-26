@@ -2,6 +2,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatStepper } from '@angular/material/stepper';
 import { ResourcesService } from 'src/app/services/resources/resources.service';
+import { HostListener } from '@angular/core';
 
 @Component({
   selector: 'app-add-task',
@@ -19,6 +20,8 @@ export class AddTaskComponent {
   isOptional = false;
   firstInputValue: string = '';
   numericRegex: string = '^[0-9]+';
+  isSingleButtonClick: boolean = true;
+  isMultipleButtonClick: boolean = false;
 
   constructor(private formBuilder: FormBuilder, private resourcesService: ResourcesService) {}
 
@@ -29,7 +32,7 @@ export class AddTaskComponent {
       order: ['', [Validators.required, Validators.pattern(this.numericRegex)]],
     });
     this.secondFormGroup = this.formBuilder.group({
-      secondCtrl: ['', [Validators.required]],
+      link: ['', [Validators.required]],
     });
 
   this.checkValueChanges();
@@ -39,6 +42,12 @@ export class AddTaskComponent {
     this.showSidenav = false;
     this.showSidenavChange.emit(this.showSidenav);
     this.resourcesService.setSidenavVisibility(false);
+  }
+
+  @HostListener('document:keydown', ['$event'])
+  handleKeyboardEvent(event: KeyboardEvent) {
+    if (event.key === 'Escape' || event.key === 'Esc' || event.keyCode === 27) {
+    }
   }
 
   moveToDetailsStepper(stepper: MatStepper): void {
@@ -66,5 +75,15 @@ export class AddTaskComponent {
     this.firstFormGroup.get('order')!.valueChanges.subscribe(orderValue => {
       this.showOrderAlert = !new RegExp(this.numericRegex).test(orderValue);
     });
+  }
+
+  toggleSingle(): void {
+   this.isSingleButtonClick = true;
+   this.isMultipleButtonClick = false;
+  }
+
+  toggleMultiple():void {
+    this.isSingleButtonClick = false;
+    this.isMultipleButtonClick = true;
   }
 }
