@@ -138,21 +138,21 @@
     </mat-table>
 
     <!-- State: No Data -->
-    <div *ngIf="selectedTable === 'Tasks' && dataSourceTasks.data.length === 0">
+    <div *ngIf="selectedTable === tableTasks && dataSourceTasks.data.length === 0">
         <div class="table-with-no-data">
             <img src="assets/icons/task.svg" alt="task-icon" class="task-icon">
             <p class="no-data-message">No tasks to display!</p>
         </div>
     </div>
     
-    <div *ngIf="selectedTable === 'Courses' && dataSourceCourses.data.length === 0">
+    <div *ngIf="selectedTable === tableCourses && dataSourceCourses.data.length === 0">
         <div class="table-with-no-data">
             <img src="assets/icons/course.svg" alt="task-icon" class="task-icon">
             <p class="no-data-message">No courses to display!</p>
         </div>
     </div>
     
-    <div *ngIf="selectedTable === 'Avatars' && dataSourceAvatars.data.length === 0">
+    <div *ngIf="selectedTable === tableAvatars && dataSourceAvatars.data.length === 0">
         <div class="table-with-no-data">
             <img src="assets/icons/avatar.svg" alt="task-icon" class="task-icon">
             <p class="no-data-message">No avatars to display!</p>
