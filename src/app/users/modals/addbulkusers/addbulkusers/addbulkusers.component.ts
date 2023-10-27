@@ -18,7 +18,7 @@ export class AddbulkusersComponent implements OnInit{
   dataSourceAttention = new MatTableDataSource<UserModal>;
   dataSourceConfirmation = new MatTableDataSource<UserModal>;
 
-  usersAttention =0;
+  usersAttention = 0;
   usersConfirmation = 0;
   usersToUpdate = 0;
   

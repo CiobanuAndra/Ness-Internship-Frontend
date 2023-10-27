@@ -4,7 +4,7 @@
     </mat-sidenav-content>
 </mat-sidenav-container>
 
-<div class="resources-container">
+<div class="resources-container" [ngClass]="{'open': showSidenav}">
 <mat-card class="card-container">
     <mat-card-header class="card-header">
         <mat-card-title class="card-title">
@@ -14,27 +14,27 @@
     <mat-divider></mat-divider>
     <div class="tabs-container">
         <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start" (selectedIndexChange)="updateActiveTabTitle($event)">
-            <mat-tab label="TASKS"> 
+            <mat-tab label="TASKS" [disabled]="showSidenav"> 
                 <mat-divider></mat-divider>
                 <div class="table-container">
                     <app-resource-table [selectedTable]="selectedTableTasks"></app-resource-table>
                 </div>
             </mat-tab>
 
-            <mat-tab label="COURSES">
+            <mat-tab label="COURSES" [disabled]="showSidenav">
                 <mat-divider></mat-divider>
                 <div class="table-container">
                     <app-resource-table [selectedTable]="selectedTableCourses"></app-resource-table>
                 </div>
             </mat-tab>
             
-            <mat-tab label="AVATARS"> 
+            <mat-tab label="AVATARS" [disabled]="showSidenav"> 
                 <mat-divider></mat-divider>
                 <div class="table-container">
                     <app-resource-table [selectedTable]="selectedTableAvatars"></app-resource-table>
                 </div>
             </mat-tab>
-            <mat-tab label="INDUSTRIES"> 
+            <mat-tab label="INDUSTRIES" [disabled]="showSidenav"> 
                 <mat-divider></mat-divider>
             </mat-tab>
         </mat-tab-group>

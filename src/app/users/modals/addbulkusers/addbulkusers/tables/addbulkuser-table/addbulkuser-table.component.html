@@ -1,6 +1,6 @@
 <div class="table-container">
 <!-- Require Attention Table -->
-<table mat-table *ngIf="selectedTableAttention === 'Attention'" [dataSource]="dataSource" multiTemplateDataRows class="mat-elevation-z8" matSort (matSortChange)="announceSortChange($event)">
+<table mat-table *ngIf="selectedTableAttention === tableAttention" [dataSource]="dataSource" multiTemplateDataRows class="mat-elevation-z8" matSort (matSortChange)="announceSortChange($event)">
     <ng-container matColumnDef="{{column}}" *ngFor="let column of columnsToDisplayAttention">
       <th mat-header-cell class="header-cell" *matHeaderCellDef mat-sort-header sortActionDescription="Sort by column"> {{column}} </th>
       <td mat-cell *matCellDef="let element"> {{element[column]}} </td>
@@ -46,7 +46,7 @@
   </table>
   
   <!-- State: No Data -->
-  <div *ngIf="selectedTableAttention === 'Attention' && dataSource.data.length === 0">
+  <div *ngIf="selectedTableAttention === tableAttention && dataSource.data.length === 0">
       <div class="table-with-no-data">
           <img src="assets/icons/avatar.svg" alt="task-icon" class="task-icon">
           <p class="no-data-message">No user require attention!</p>
@@ -55,7 +55,7 @@
 
 
   <!-- Await Confirmation table -->
-    <mat-table *ngIf="selectedTableConfirmation === 'Confirmation'" [dataSource]="dataSource" matSort (matSortChange)="announceSortChange($event)" class="mat-elevation-z8">
+    <mat-table *ngIf="selectedTableConfirmation === tableConfirmation" [dataSource]="dataSource" matSort (matSortChange)="announceSortChange($event)" class="mat-elevation-z8">
         <ng-container matColumnDef="name">
             <mat-header-cell class="header-cell" *matHeaderCellDef mat-sort-header sortActionDescription="Sort by name">name</mat-header-cell>
             <mat-cell *matCellDef="let user;"> {{ user.name }}</mat-cell>
@@ -84,7 +84,7 @@
 </div>
 
 <!-- State: No Data -->
-<div *ngIf="selectedTableConfirmation === 'Confirmation' && dataSource.data.length === 0">
+<div *ngIf="selectedTableConfirmation === tableConfirmation && dataSource.data.length === 0">
     <div class="table-with-no-data">
         <img src="assets/icons/avatar.svg" alt="task-icon" class="task-icon">
         <p class="no-data-message">No user await confirmation!</p>

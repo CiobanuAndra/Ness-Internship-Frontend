@@ -13,9 +13,9 @@ import { ngxCsv } from 'ngx-csv/ngx-csv';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
-import { ResourcesService } from '../services/resources/resources.service';
 import { MatDialog } from '@angular/material/dialog';
 import { AddbulkusersComponent } from './modals/addbulkusers/addbulkusers/addbulkusers.component';
+import { ResourcesService } from '../services/resources/resources.service';
 
 @Component({
   selector: 'app-users',
@@ -24,6 +24,8 @@ import { AddbulkusersComponent } from './modals/addbulkusers/addbulkusers/addbul
 })
 
 export class UsersComponent implements AfterViewInit {
+  showSidenav = false;
+
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild('sidenav') sidenav!: ElementRef;
@@ -55,9 +57,12 @@ export class UsersComponent implements AfterViewInit {
     this.opened = !this.opened;
     this.resourcesService.setSidenavVisibility(this.opened);
   }
-
-  //ASIDE
   
+  //ASIDE
+  toggleSidenav() {
+    this.showSidenav = !this.showSidenav;
+    this.resourcesService.setSidenavVisibility(this.showSidenav);
+  };
 
   //MODAL
   openDialog() {

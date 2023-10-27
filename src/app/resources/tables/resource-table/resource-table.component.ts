@@ -4,6 +4,7 @@ import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Observable } from 'rxjs';
 import { ResourceTableAvatars, ResourceTableCourses, ResourceTableTasks } from 'src/app/enums/resource-table';
+import { TabTitle } from 'src/app/enums/tab-title';
 import { Avatar } from 'src/app/interfaces/resources/avatar.model';
 import { Course } from 'src/app/interfaces/resources/course.model';
 import { Task } from 'src/app/interfaces/resources/task.model';
@@ -16,6 +17,14 @@ import { ResourcesService } from 'src/app/services/resources/resources.service';
 })
 export class ResourceTableComponent {
   @Input() selectedTable = '';
+
+  @ViewChild(MatSort) sortTasks!:MatSort;
+  @ViewChild(MatSort) sortCourses!:MatSort;
+  @ViewChild(MatSort) sortAvatars!:MatSort;
+
+  tableTasks = TabTitle.Tasks;
+  tableCourses = TabTitle.Courses;
+  tableAvatars = TabTitle.Avatars;
 
   dataSourceTasks = new MatTableDataSource<Task>;
   dataSourceCourses = new MatTableDataSource<Course>;
@@ -37,17 +46,14 @@ export class ResourceTableComponent {
 
   loadData(): void {
     if (this.selectedTable === 'Tasks') {
-      console.log(this.selectedTable);
       this.fetchTasks().subscribe(data => {
         this.dataSourceTasks.data = data;
       });
     } else if (this.selectedTable === 'Courses') {
-      console.log(this.selectedTable);
       this.fetchCourses().subscribe(data => {
         this.dataSourceCourses.data = data;
       });
     } else if (this.selectedTable === 'Avatars') {
-      console.log(this.selectedTable);
       this.fetchAvatars().subscribe(data => {
         this.dataSourceAvatars.data = data;
       });
@@ -67,10 +73,6 @@ export class ResourceTableComponent {
   };
 
   //Sorting
-  @ViewChild(MatSort) sortTasks!:MatSort;
-  @ViewChild(MatSort) sortCourses!:MatSort;
-  @ViewChild(MatSort) sortAvatars!:MatSort;
-
   ngAfterViewInit(): void {
     this.dataSourceTasks.sort = this.sortTasks;
     this.dataSourceCourses.sort = this.sortCourses;

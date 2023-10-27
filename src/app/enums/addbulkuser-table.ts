@@ -10,3 +10,8 @@ export enum AwaitConfirmationTable {
     email = 'email',
     options = 'options',
 }
+
+export enum TableHeaders {
+    attention = 'Attention',
+    confirmation = 'Confirmation',
+}

@@ -10,6 +10,7 @@ import { UserRequireAttention } from '../../interfaces/user-require-attention.mo
   providedIn: 'root',
 })
 export class UsersService {
+  private showSidenav = false;
   constructor() {}
 
   usersRequireAttention: UserRequireAttention[] = [
@@ -328,7 +329,6 @@ export class UsersService {
   updateUsersRequireAttention(users: UserRequireAttention[]) {
     this.usersSubject$.next(users);
   }
-
 
   public loadUsersLeaderboard(): Observable<UserCard[]> {
     return of(this.usersLeaderboard);

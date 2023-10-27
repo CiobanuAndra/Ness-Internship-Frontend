@@ -1,6 +1,4 @@
 import { Component, ViewChild } from '@angular/core';
-import { MediaMatcher } from '@angular/cdk/layout';
-import { ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { ResourcesService } from '../services/resources/resources.service';
 import { MatDialog } from '@angular/material/dialog';
 import { TabTitle } from '../enums/tab-title';
@@ -12,18 +10,17 @@ import { ResourceTableComponent } from './tables/resource-table/resource-table.c
   styleUrls: ['./resources.component.scss']
 })
 export class ResourcesComponent {
-  // Tab headers
+  @ViewChild(ResourceTableComponent) child!:ResourceTableComponent;
+
   activeTable = 'Tasks';
   showSidenav = false;
   isDialogOpen = false;
 
-  selectedTableTasks = 'Tasks';
-  selectedTableCourses = 'Courses';
-  selectedTableAvatars = 'Avatars';
+  selectedTableTasks = TabTitle.Tasks;
+  selectedTableCourses = TabTitle.Courses;
+  selectedTableAvatars = TabTitle.Avatars;
 
-  @ViewChild(ResourceTableComponent) child!:ResourceTableComponent;
- 
-  constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher, private resourcesService: ResourcesService, private dialog: MatDialog) {}
+  constructor(private resourcesService: ResourcesService) {}
  
   parseEnumToArray(enumObject: any) {
     return Object.values(enumObject).filter(value => isNaN(Number(value)));
@@ -31,7 +28,6 @@ export class ResourcesComponent {
 
   updateActiveTabTitle(selectedIndex: number): void {
     const tabLabels: string[] = this.parseEnumToArray(TabTitle) as string[];
-    console.log(tabLabels);
     this.activeTable = tabLabels[selectedIndex];
     this.child.loadData();
   };

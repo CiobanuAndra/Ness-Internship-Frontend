@@ -3,7 +3,7 @@ import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { AwaitConfirmationTable, RequireAttentionTable } from 'src/app/enums/addbulkuser-table';
+import { AwaitConfirmationTable, RequireAttentionTable, TableHeaders } from 'src/app/enums/addbulkuser-table';
 import { UserModal } from 'src/app/interfaces/users/user-modal.model';
 import { UsersService } from 'src/app/services/users/users.service';
 
@@ -37,6 +37,9 @@ export class AddbulkuserTableComponent{
   columnsToDisplayAttention: string[] = this.parseEnumToArray(RequireAttentionTable) as string[];
   columnsToDisplayWithExpand = ['expand', ...this.columnsToDisplayAttention, 'options'];
   columnsToDisplayConfirmation = this.parseEnumToArray(AwaitConfirmationTable);
+
+  tableAttention  = TableHeaders.attention;
+  tableConfirmation = TableHeaders.confirmation;
 
   parseEnumToArray(enumObject: any) {
     return Object.values(enumObject).filter(value => isNaN(Number(value)));
