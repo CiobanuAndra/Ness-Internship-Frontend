@@ -7,7 +7,7 @@
 @import "../../../styleguide.scss";
 
 .form {
-  @include set-size(33.75rem, 18.938rem);
+  @include set-size(100%, 100%);
   border-radius: 0.25rem;
   box-shadow: 5px 5px 10px $black-color(0, 0, 0, 0.3);
   background-color: $white-color;
