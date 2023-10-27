@@ -21,20 +21,23 @@
     </div>
   </div>
 
-  <div class="leaderboard-table">
+  <div>
     <mat-table #table [dataSource]="dataSource" matSort>
-      <div class="name-container">
-        <ng-container matColumnDef="name">
-          <mat-cell
-            *matHeaderCellDef
-            mat-sort-header
-            sortActionDescription="Sort by name"
-          >
-            Name
-          </mat-cell>
-          <mat-cell *matCellDef="let element"> {{ element.name }}</mat-cell>
-        </ng-container>
-      </div>
+      <ng-container matColumnDef="name" class="">
+        <mat-cell
+          *matHeaderCellDef
+          mat-sort-header
+          sortActionDescription="Sort by name"
+        >
+          Name
+        </mat-cell>
+        <mat-cell
+          class="leaderboard-table-container__name"
+          *matCellDef="let element"
+        >
+          {{ element.name }}
+        </mat-cell>
+      </ng-container>
 
       <div class="tasksLeft-container">
         <ng-container matColumnDef="tasks">

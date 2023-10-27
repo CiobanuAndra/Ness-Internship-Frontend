@@ -60,7 +60,7 @@
         <th
           mat-header-cell
           *matHeaderCellDef
-          class="users-list__mat-columnDef-name"
+          class="users-list__mat-columnDef-name__td"
           mat-sort-header="name"
         >
           NAME
@@ -151,12 +151,12 @@
     >
     </mat-paginator>
   </div>
-</div>
 
-<!-- ASIDES -->
-<mat-sidenav-container class="sidenav-container" *ngIf="showSidenav">
-  <app-addnewuser
-    [showSidenav]="showSidenav"
-    (showSidenavChange)="showSidenav = $event"
-  ></app-addnewuser>
-</mat-sidenav-container>
+  <!-- ASIDES -->
+  <mat-sidenav-container class="sidenav-container" *ngIf="showSidenav">
+    <app-addnewuser
+      [showSidenav]="showSidenav"
+      (showSidenavChange)="showSidenav = $event"
+    ></app-addnewuser>
+  </mat-sidenav-container>
+</div>

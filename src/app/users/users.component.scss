@@ -121,6 +121,9 @@
   }
 
   &__mat-columnDef-name {
+    &__td {
+      color: $primary-color !important;
+    }
     display: flex;
     align-items: center;
     justify-content: space-between;
