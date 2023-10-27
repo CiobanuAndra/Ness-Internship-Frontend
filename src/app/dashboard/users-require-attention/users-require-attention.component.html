@@ -47,9 +47,14 @@
         </div>
       </div>
       <mat-icon
+        [matMenuTriggerFor]="menu"
         class="users-require-attention__users__points-icon"
         svgIcon="points"
       ></mat-icon>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item>View Profile</button>
+        <button mat-menu-item>Extend Time</button>
+      </mat-menu>
     </div>
   </div>
   <div
