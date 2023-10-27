@@ -14,6 +14,8 @@ import { ResourcesModule } from './resources/resources.module';
 import { UsersModule } from './users/users.module';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { InterceptorService } from './services/interceptors/interceptor-service.interceptor';
+import { LogInModule } from './log-in/log-in.module';
+
 
 @NgModule({
   declarations: [AppComponent, NavbarComponent, InitialsCustomepipePipe],
@@ -28,6 +30,7 @@ import { InterceptorService } from './services/interceptors/interceptor-service.
     DashboardModule,
     ResourcesModule,
     UsersModule,
+    LogInModule
   ],
   exports: [RouterModule],
   providers: [{
