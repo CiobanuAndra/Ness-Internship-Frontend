@@ -1,8 +1,8 @@
 import {
   AfterViewInit,
+  ChangeDetectorRef,
   Component,
   ElementRef,
-  Renderer2,
   ViewChild,
 } from '@angular/core';
 import { UsersService } from '../services/users/users.service';
@@ -52,8 +52,9 @@ export class UsersComponent implements AfterViewInit {
 
   constructor(
     private userService: UsersService,
-    public dialog: MatDialog,
-    private resourcesService: ResourcesService
+    private cdr: ChangeDetectorRef,
+    private resourcesService: ResourcesService,
+    private dialog: MatDialog
   ) {}
 
   toggleBulkUsersSidenav() {
@@ -79,18 +80,21 @@ export class UsersComponent implements AfterViewInit {
   filterActiveUsers(): void {
     this.userService.getActiveUsers().subscribe((values) => {
       this.dataSource.data = values;
+      this.cdr.detectChanges();
     });
   }
 
   filterInactiveUsers(): void {
     this.userService.getInactiveUsers().subscribe((values) => {
       this.dataSource.data = values;
+      this.cdr.detectChanges();
     });
   }
 
   filterAllUsers(): void {
     this.userService.getAllUsers().subscribe((values) => {
       this.dataSource.data = values;
+      this.cdr.detectChanges();
     });
   }
 

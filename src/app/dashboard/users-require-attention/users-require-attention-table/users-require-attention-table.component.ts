@@ -1,4 +1,9 @@
-import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectorRef,
+  Component,
+  ViewChild,
+} from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -19,13 +24,17 @@ export class UsersRequireAttentionTableComponent implements AfterViewInit {
   totalCourses: number = 0;
   displayedColumns: string[] = ['name', 'tasksLeft', 'timeLeft', 'buttons'];
 
-  constructor(private usersService: UsersService) {}
+  constructor(
+    private usersService: UsersService,
+    private cdr: ChangeDetectorRef
+  ) {}
 
   filterActiveUsers(): void {
     this.usersService
       .filterActiveUsersRequireAttention()
       .subscribe((values) => {
         this.dataSource.data = values;
+        this.cdr.detectChanges();
       });
   }
 
@@ -34,6 +43,7 @@ export class UsersRequireAttentionTableComponent implements AfterViewInit {
       .filterInactiveUsersRequireAttention()
       .subscribe((values) => {
         this.dataSource.data = values;
+        this.cdr.detectChanges();
       });
   }
 
@@ -55,7 +65,9 @@ export class UsersRequireAttentionTableComponent implements AfterViewInit {
     this.dataSource.paginator = this.paginator;
     this.usersService.getUsersRequireAttention().subscribe((values) => {
       this.dataSource.data = values;
+      this.cdr.detectChanges();
     });
     this.totalCourses = this.usersService.totalCourses;
+    this.cdr.detectChanges();
   }
 }

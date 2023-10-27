@@ -1,11 +1,11 @@
 @import "../../../../styleguide.scss";
 
 .users-require-attention {
-  margin: 0 auto;
-  margin-top: 1rem;
-  width: 103.75rem;
-  height: 58.5rem;
   border-radius: 0.25rem;
+  max-width: 1660px;
+  margin: 0 auto;
+  width: 90%;
+  height: 85%;
 
   &__title {
     background-color: $white-color;
