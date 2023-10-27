@@ -325,7 +325,6 @@ export class UsersService {
     this.usersSubject$.next(users);
   }
 
-
   public loadUsersLeaderboard(): Observable<UserCard[]> {
     return of(this.usersLeaderboard);
   }
