@@ -3,6 +3,7 @@ import { AddbulkuserTableComponent } from './tables/addbulkuser-table/addbulkuse
 import { UserModal } from 'src/app/interfaces/users/user-modal.model';
 import { UsersService } from 'src/app/services/users/users.service';
 import { MatTableDataSource } from '@angular/material/table';
+import { TableHeaders } from 'src/app/enums/addbulkuser-table';
 
 @Component({
   selector: 'app-addbulkusers',
@@ -12,8 +13,8 @@ import { MatTableDataSource } from '@angular/material/table';
 export class AddbulkusersComponent implements OnInit{
   @ViewChild(AddbulkuserTableComponent) child!:AddbulkuserTableComponent;
 
-  selectedTableAttention = 'Attention';
-  selectedTableConfirmation = 'Confirmation';
+  selectedTableAttention = TableHeaders.attention;
+  selectedTableConfirmation = TableHeaders.confirmation;
 
   dataSourceAttention = new MatTableDataSource<UserModal>;
   dataSourceConfirmation = new MatTableDataSource<UserModal>;
