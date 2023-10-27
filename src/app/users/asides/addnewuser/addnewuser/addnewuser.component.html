@@ -12,11 +12,24 @@
         <mat-divider></mat-divider>
 
         <div class="content-container">
-
+            <div class="form" [formGroup]="addNewUserForm">
+                <div class="field">
+                    <label class="label">name</label>
+                    <input type="text" class="input" formControlName="name">
+                </div>
+                <div class="field">
+                    <label class="label">surname</label>
+                    <input type="text" class="input" formControlName="surname">
+                </div>
+                <div class="field">
+                    <label class="label">email</label>
+                    <input type="text" class="input" formControlName="email">
+                </div>
+            </div>
         </div>
 
         <div class="footer-container">
-            <button mat-raised-button class="addUser-button">add user</button>
+            <button mat-raised-button class="addUser-button" (click)="onSubmit()">add user</button>
             <button mat-raised-button class="cancel-button" (click)="closeAside()">cancel</button> 
         </div>
 </mat-sidenav-content>
