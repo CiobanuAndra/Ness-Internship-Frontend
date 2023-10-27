@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AddBulkUsersComponent } from './users/sidenavs/add-bulk-users/add-bulk-users.component';
 
 const routes: Routes = [
   {
@@ -17,10 +16,6 @@ const routes: Routes = [
     path: 'resources',
     loadChildren: () =>
       import('./resources/resources.module').then((m) => m.ResourcesModule),
-  },
-  {
-    path: 'add-bluck-users',
-    component: AddBulkUsersComponent,
   },
 ];
 

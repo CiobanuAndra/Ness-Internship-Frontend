@@ -16,7 +16,7 @@
 .aside-open {
   width: 100%;
   height: 100%;
-  background-color: #e6e7e9;
+  background-color: $light-gray-color;
   filter: brightness(0.7);
   transition: filter 0.5s;
 }

@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
 import { UsersService } from 'src/app/services/users.service';
-import { UserFromCSVFile } from 'src/app/interfaces/user-from-csvfile';
+import { UsersListTable } from 'src/app/interfaces/users-list-table';
 
 @Component({
   selector: 'app-add-bulk-users',
@@ -14,12 +14,9 @@ export class AddBulkUsersComponent implements OnInit {
   @Output() closeSidenavEvent = new EventEmitter<void>();
 
   fileControl = new FormControl(null);
-  fileForm = new FormGroup({
-    file: this.fileControl,
-  });
 
   displayedColumns: string[] = ['firstname', 'lastname', 'email'];
-  dataSource = new MatTableDataSource<UserFromCSVFile>();
+  dataSource = new MatTableDataSource<UsersListTable>();
 
   constructor(private usersService: UsersService) {}
 
@@ -40,6 +37,10 @@ export class AddBulkUsersComponent implements OnInit {
         firstname: '...',
         lastname: '...',
         email: '...',
+        status: true,
+        coursesCompleted: 0,
+        leftDays: 0,
+        dateAdded: new Date(),
       });
     });
   }
