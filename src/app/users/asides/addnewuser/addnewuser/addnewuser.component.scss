@@ -16,26 +16,54 @@
 }
 
 .content-container {
-    height: 85%;
+    height: 84%;
+
+    .form {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 1rem;
+        color: $dark-gray-color;
+
+        .form-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+
+            .field-3 {
+                grid-column: 1 / -1;
+            }
+        }
+        
+        ::ng-deep .mdc-text-field {
+            background-color: #fafafa !important;
+        }
+
+        .invalid {
+            color: red;
+        }
+
+        .footer-container {
+            height: 5%;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0 1rem 0 0;
+        
+            .addUser-button, .cancel-button {
+                text-transform: uppercase;
+            }
+        
+            .addUser-button {
+                background-color: #00195F;
+                color: #fff;    
+            }
+        
+            .cancel-button {
+                background-color: #F5F5F5;
+            }
+        }
+    }
 }
 
-.footer-container {
-    height: 5%;
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    padding: 0 1rem 0 1rem;
-
-    .addUser-button, .cancel-button {
-        text-transform: uppercase;
-    }
-
-    .addUser-button {
-        background-color: #00195F;
-        color: #fff;    
-    }
-
-    .cancel-button {
-        background-color: #F5F5F5;
-    }
-}
