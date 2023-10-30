@@ -1,13 +1,9 @@
 import { LiveAnnouncer } from '@angular/cdk/a11y';
-import { Component, Input, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { Observable } from 'rxjs';
 import { ResourceTableAvatars, ResourceTableCourses, ResourceTableTasks } from 'src/app/enums/resource-table';
-import { TabTitle } from 'src/app/enums/tab-title';
-import { Avatar } from 'src/app/interfaces/resources/avatar.model';
-import { Course } from 'src/app/interfaces/resources/course.model';
-import { Task } from 'src/app/interfaces/resources/task.model';
+import { tabTitle } from 'src/app/enums/tab-title';
 import { ResourcesService } from 'src/app/services/resources/resources.service';
 
 @Component({
@@ -23,9 +19,9 @@ export class ResourceTableComponent {
   @Input() selectedTable = '';
   @Input() dataSource!: MatTableDataSource<any>;
 
-  tableTasks = TabTitle.Tasks;
-  tableCourses = TabTitle.Courses;
-  tableAvatars = TabTitle.Avatars;
+  tableTasks = tabTitle.tasks;
+  tableCourses = tabTitle.courses;
+  tableAvatars = tabTitle.avatars;
   
   columnsToDisplayTasks = this.parseEnumToArray(ResourceTableTasks);
   columnsToDisplayCourses = this.parseEnumToArray(ResourceTableCourses);

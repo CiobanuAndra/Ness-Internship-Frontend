@@ -1,7 +1,7 @@
-export enum TabTitle {
-    Tasks = 'Tasks',
-    Courses = 'Courses',
-    Avatars = 'Avatars',
-    Industries = 'Industries',
+export const tabTitle = {
+    tasks: 'Tasks',
+    courses: 'Courses',
+    avatars: 'Avatars',
+    industries: 'Industries',
   }
   

@@ -1,10 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ResourcesService } from '../services/resources/resources.service';
-import { TabTitle } from '../enums/tab-title';
 import { MatTableDataSource } from '@angular/material/table';
 import { Task } from '../interfaces/resources/task.model';
 import { Avatar } from '../interfaces/resources/avatar.model';
 import { Course } from '../interfaces/resources/course.model';
+import { tabTitle } from '../enums/tab-title';
  
 @Component({
   selector: 'app-resources',
@@ -16,10 +16,10 @@ export class ResourcesComponent implements OnInit{
   showSidenav = false;
   isDialogOpen = false;
 
-  selectedTableTasks = TabTitle.Tasks;
-  selectedTableCourses = TabTitle.Courses;
-  selectedTableAvatars = TabTitle.Avatars;
-  selectedTableIndustries = TabTitle.Industries;
+  selectedTableTasks = tabTitle.tasks;
+  selectedTableCourses = tabTitle.courses;
+  selectedTableAvatars = tabTitle.avatars;
+  selectedTableIndustries = tabTitle.industries;
 
   dataSourceTasks = new MatTableDataSource<Task>;
   dataSourceCourses = new MatTableDataSource<Course>;
@@ -61,7 +61,7 @@ export class ResourcesComponent implements OnInit{
   }
 
   updateActiveTabTitle(selectedIndex: number): void {
-    const tabLabels: string[] = this.parseEnumToArray(TabTitle) as string[];
+    const tabLabels: string[] = this.parseEnumToArray(tabTitle) as string[];
     this.activeTable = tabLabels[selectedIndex];
     this.loadData();
   };
