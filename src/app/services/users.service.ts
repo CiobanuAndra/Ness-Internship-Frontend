@@ -264,8 +264,6 @@ export class UsersService {
     },
   ];
 
-  usersEmpty: UsersListTable[] = [];
-
   usersSubject$: BehaviorSubject<UserRequireAttention[]> = new BehaviorSubject<
     UserRequireAttention[]
   >(this.usersRequireAttention);

@@ -9,11 +9,28 @@
       class="users-require-attention__mat-tab-group-div__mat-tab-group"
     >
       <mat-tab label="IN PROGRESS"> </mat-tab>
-      <mat-tab label="DONE"> </mat-tab>
+      <mat-tab label="ONBOARDING CLOSED"> </mat-tab>
     </mat-tab-group>
   </div>
 
-  <table mat-table [dataSource]="dataSource" matSort>
+  <div
+    class="users-require-attention__no-data"
+    *ngIf="dataSource.data.length === 0"
+  >
+    <img
+      src="assets/icons/users.svg"
+      alt="Users Icon"
+      class="users-list__no-data__img"
+    />
+    <span>No users added yet.</span>
+  </div>
+
+  <table
+    mat-table
+    [dataSource]="dataSource"
+    matSort
+    *ngIf="dataSource.data.length > 0"
+  >
     <ng-container matColumnDef="name">
       <th
         mat-header-cell
@@ -72,6 +89,7 @@
     <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
   </table>
   <mat-paginator
+    *ngIf="dataSource.data.length > 0"
     [length]="15"
     [pageSize]="15"
     [pageSizeOptions]="[5, 10, 15]"

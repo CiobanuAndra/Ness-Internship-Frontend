@@ -7,6 +7,20 @@
   width: 90%;
   height: 85%;
 
+  &__no-data {
+    width: 100%;
+    height: 85%;
+    background-color: $white-color;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    &__img {
+      width: 10rem;
+      height: 10rem;
+    }
+  }
   &__title {
     background-color: $white-color;
     height: 3.813rem;
@@ -21,7 +35,7 @@
     background-color: $white-color;
 
     mat-tab-group {
-      width: 22.5rem;
+      width: 24rem;
     }
   }
 
