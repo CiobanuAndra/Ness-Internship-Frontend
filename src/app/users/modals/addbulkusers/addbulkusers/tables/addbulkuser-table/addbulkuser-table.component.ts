@@ -41,11 +41,11 @@ export class AddbulkuserTableComponent{
   tableAttention  = TableHeaders.attention;
   tableConfirmation = TableHeaders.confirmation;
 
+  constructor(private liveAnnouncer: LiveAnnouncer, private usersService: UsersService) {}
+
   parseEnumToArray(enumObject: any) {
     return Object.values(enumObject).filter(value => isNaN(Number(value)));
   }
-
-  constructor(private liveAnnouncer: LiveAnnouncer, private usersService: UsersService) {}
   
   //Sorting
   @ViewChild(MatSort) sortAttention!:MatSort;

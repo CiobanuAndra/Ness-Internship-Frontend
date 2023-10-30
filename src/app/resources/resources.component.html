@@ -17,21 +17,21 @@
             <mat-tab label="TASKS" [disabled]="showSidenav"> 
                 <mat-divider></mat-divider>
                 <div class="table-container">
-                    <app-resource-table [selectedTable]="selectedTableTasks"></app-resource-table>
+                    <app-resource-table [dataSourceTask]="dataSourceTasks" [selectedTable]="selectedTableTasks"></app-resource-table>
                 </div>
             </mat-tab>
 
             <mat-tab label="COURSES" [disabled]="showSidenav">
                 <mat-divider></mat-divider>
                 <div class="table-container">
-                    <app-resource-table [selectedTable]="selectedTableCourses"></app-resource-table>
+                    <app-resource-table [dataSourceCourse]="dataSourceCourses" [selectedTable]="selectedTableCourses"></app-resource-table>
                 </div>
             </mat-tab>
             
             <mat-tab label="AVATARS" [disabled]="showSidenav"> 
                 <mat-divider></mat-divider>
                 <div class="table-container">
-                    <app-resource-table [selectedTable]="selectedTableAvatars"></app-resource-table>
+                    <app-resource-table [dataSourceAvatar]="dataSourceAvatars" [selectedTable]="selectedTableAvatars"></app-resource-table>
                 </div>
             </mat-tab>
             <mat-tab label="INDUSTRIES" [disabled]="showSidenav"> 
@@ -39,10 +39,10 @@
             </mat-tab>
         </mat-tab-group>
         
-        <button mat-raised-button class="tab-button" *ngIf="activeTable === 'Tasks'" (click)="toggleSidenav()">Add Task</button>
-        <button mat-raised-button class="tab-button" *ngIf="activeTable === 'Courses'">Add Course</button>
-        <button mat-raised-button class="tab-button" *ngIf="activeTable === 'Avatars'">Add Avatar</button>
-        <button mat-raised-button class="tab-button" *ngIf="activeTable === 'Industries'">Add Industry</button>
+        <button mat-raised-button class="tab-button" *ngIf="activeTable === selectedTableTasks" (click)="toggleSidenav()">Add Task</button>
+        <button mat-raised-button class="tab-button" *ngIf="activeTable === selectedTableCourses">Add Course</button>
+        <button mat-raised-button class="tab-button" *ngIf="activeTable === selectedTableAvatars">Add Avatar</button>
+        <button mat-raised-button class="tab-button" *ngIf="activeTable === selectedTableIndustries">Add Industry</button>
     </div>
 </mat-card>
 </div>

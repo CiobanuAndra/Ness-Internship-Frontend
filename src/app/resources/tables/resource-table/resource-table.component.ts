@@ -17,6 +17,9 @@ import { ResourcesService } from 'src/app/services/resources/resources.service';
 })
 export class ResourceTableComponent {
   @Input() selectedTable = '';
+  @Input() dataSourceTask!: MatTableDataSource<Task>;
+  @Input() dataSourceCourse!: MatTableDataSource<Course>;
+  @Input() dataSourceAvatar!: MatTableDataSource<Avatar>;
 
   @ViewChild(MatSort) sortTasks!:MatSort;
   @ViewChild(MatSort) sortCourses!:MatSort;
@@ -25,58 +28,22 @@ export class ResourceTableComponent {
   tableTasks = TabTitle.Tasks;
   tableCourses = TabTitle.Courses;
   tableAvatars = TabTitle.Avatars;
-
-  dataSourceTasks = new MatTableDataSource<Task>;
-  dataSourceCourses = new MatTableDataSource<Course>;
-  dataSourceAvatars = new MatTableDataSource<Avatar>;
   
   columnsToDisplayTasks = this.parseEnumToArray(ResourceTableTasks);
   columnsToDisplayCourses = this.parseEnumToArray(ResourceTableCourses);
   columnsToDisplayAvatars = this.parseEnumToArray(ResourceTableAvatars);
 
+  constructor(private liveAnnouncer: LiveAnnouncer, private resourcesService: ResourcesService) {}
+
   parseEnumToArray(enumObject: any) {
     return Object.values(enumObject).filter(value => isNaN(Number(value)));
   }
 
-  constructor(private liveAnnouncer: LiveAnnouncer, private resourcesService: ResourcesService) {}
-
-  ngOnInit(): void {
-    this.loadData();
-  };
-
-  loadData(): void {
-    if (this.selectedTable === 'Tasks') {
-      this.fetchTasks().subscribe(data => {
-        this.dataSourceTasks.data = data;
-      });
-    } else if (this.selectedTable === 'Courses') {
-      this.fetchCourses().subscribe(data => {
-        this.dataSourceCourses.data = data;
-      });
-    } else if (this.selectedTable === 'Avatars') {
-      this.fetchAvatars().subscribe(data => {
-        this.dataSourceAvatars.data = data;
-      });
-    }
-  }
-
-  fetchTasks():Observable<Task[]> {
-    return this.resourcesService.loadTasks();
-  };
-
-  fetchCourses():Observable<Course[]> {
-    return this.resourcesService.loadCourses();
-  };
-  
-  fetchAvatars():Observable<Avatar[]> {
-    return this.resourcesService.loadAvatars();
-  };
-
   //Sorting
   ngAfterViewInit(): void {
-    this.dataSourceTasks.sort = this.sortTasks;
-    this.dataSourceCourses.sort = this.sortCourses;
-    this.dataSourceAvatars.sort = this.sortAvatars;
+    this.dataSourceTask.sort = this.sortTasks;
+    this.dataSourceCourse.sort = this.sortCourses;
+    this.dataSourceAvatar.sort = this.sortAvatars;
   };
 
   announceSortChange(sortState: Sort) {
