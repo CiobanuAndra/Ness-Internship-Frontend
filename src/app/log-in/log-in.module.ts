@@ -2,7 +2,8 @@ import { NgModule, OnInit, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LogInComponent } from './log-in/log-in.component';
 import { RouterModule, Routes } from '@angular/router';
-import { NavbarComponent } from '../navbar/navbar.component';
+import {MatCardModule} from '@angular/material/card';
+import {Component} from '@angular/core';
 
 const routes: Routes = [
   {
@@ -23,7 +24,13 @@ const routes: Routes = [
   // providers: [UsersService],
   exports: [LogInComponent],
 })
-export class LogInModule{ 
-  // @Input navbar: NavbarComponent;
-
+export class LogInModule implements OnInit{ 
+  // @Input('changedNavbar') navbar: NavbarComponent;
+  // public changeNavbar(){
+  //   this.navbar.show=false;
+  // }
+ 
+  ngOnInit(): void {
+    
+  }
 }

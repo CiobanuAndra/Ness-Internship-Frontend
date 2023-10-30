@@ -7,9 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTabsModule } from '@angular/material/tabs';
 import { RouterModule } from '@angular/router';
-import { NavbarComponent } from './navbar/navbar.component';
 import { DashboardModule } from './dashboard/dashboard.module';
-import { InitialsCustomepipePipe } from './pipes/initials-customepipe.pipe';
 import { ResourcesModule } from './resources/resources.module';
 import { UsersModule } from './users/users.module';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -18,7 +16,7 @@ import { LogInModule } from './log-in/log-in.module';
 
 
 @NgModule({
-  declarations: [AppComponent, NavbarComponent, InitialsCustomepipePipe],
+  declarations: [AppComponent],
 
   imports: [
     BrowserModule,
@@ -30,7 +28,7 @@ import { LogInModule } from './log-in/log-in.module';
     DashboardModule,
     ResourcesModule,
     UsersModule,
-    LogInModule
+    LogInModule,
   ],
   exports: [RouterModule],
   providers: [{

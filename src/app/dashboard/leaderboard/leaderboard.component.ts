@@ -50,6 +50,6 @@ export class LeaderboardComponent implements OnInit {
   }
 
   viewAllUsers(): void {
-    this.router.navigate(['leaderboard-table']);
+    this.router.navigate(['/main-page/leaderboard-table']);
   }
 }
