@@ -1,7 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, Validators } from '@angular/forms';
-import { ThemePalette } from '@angular/material/core';
-import { ResourcesService } from 'src/app/services/resources/resources.service';
 
 @Component({
   selector: 'app-addnewuser',
@@ -17,7 +15,7 @@ export class AddnewuserComponent {
   isSurnameInputInteracted = false;
   isEmailInputInteracted = false;
 
-  constructor(private resourcesService: ResourcesService, private formBuilder:FormBuilder) {}
+  constructor(private formBuilder:FormBuilder) {}
 
   addNewUserForm = this.formBuilder.group({
     name: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
@@ -99,6 +97,5 @@ export class AddnewuserComponent {
   closeAside(): void {
     this.showSidenav = false;
     this.showSidenavChange.emit(this.showSidenav);
-    this.resourcesService.setSidenavVisibility(false);
   }
 }
