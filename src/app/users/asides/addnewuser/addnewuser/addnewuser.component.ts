@@ -19,22 +19,10 @@ export class AddnewuserComponent {
   constructor(private formBuilder:FormBuilder, private resourcesService: ResourcesService) {}
 
   addNewUserForm = this.formBuilder.group({
-    name: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
-    surname: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
+    name: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20), this.containsSpecialChars]],
+    surname: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20), this.containsSpecialChars]],
     email: ['', [Validators.required, Validators.email, this.emailDomain, Validators.minLength(10), Validators.maxLength(20)]],
   });
-
-  //check if email has ness domain
-  emailDomain(control: AbstractControl): {[Key: string]: any} | null {
-    const email: string = control.value;
-    const domain = email.substring(email.lastIndexOf('@') + 1);
-
-    if(domain.toLowerCase() === 'ness.com') {
-      return null;
-    } else {
-      return {'emailDomain': true};
-    }
-  }
 
   //error messages
   getErrorMessageName(): string {
@@ -44,6 +32,8 @@ export class AddnewuserComponent {
       return 'This name its too short';
     } else if(this.addNewUserForm.get('name')?.hasError('maxlength')) {
       return 'This name its too long';
+    } else if(this.addNewUserForm.get('name')?.hasError('containsSpecialChars')) {
+      return 'Name has special characters';
     } else return 'Name';
   };
 
@@ -54,6 +44,8 @@ export class AddnewuserComponent {
       return 'This surname its too short';
     } else if(this.addNewUserForm.get('surname')?.hasError('maxlength')) {
       return 'This surname its too long';
+    } else if(this.addNewUserForm.get('surname')?.hasError('containsSpecialChars')) {
+      return 'Name has special characters';
     } else return 'Name';
   };
 
@@ -70,6 +62,30 @@ export class AddnewuserComponent {
       return 'This email its too long';
     } else return 'Email';
   };
+
+  //check if email has ness domain
+  emailDomain(control: AbstractControl): {[Key: string]: any} | null {
+    const email: string = control.value;
+    const domain = email.substring(email.lastIndexOf('@') + 1);
+
+    if(domain.toLowerCase() === 'ness.com') {
+      return null;
+    } else {
+      return {'emailDomain': true};
+    }
+  }
+
+  //check for special characters
+  containsSpecialChars(control: AbstractControl): { [key: string]: boolean } | null {
+    const specialChars = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
+    const value = control.value;
+  
+    if (value && specialChars.test(value)) {
+      return { containsSpecialChars: true };
+    }
+  
+    return null;
+  }
 
   //change styles when an error comes in
   checkDisplayError(formControl: AbstractControl<any, any> | null, isSubmitted:boolean): boolean {
