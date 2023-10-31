@@ -11,8 +11,10 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {NgIf, NgFor} from '@angular/common';
-import { AddTaskComponent } from './tables/add-task/add-task.component';
+import { MultipleTaskComponent } from './tables/multiple-task/multiple-task.component';
+import { SingleTaskComponent } from './tables/single-task/single-task.component';
 import { ResourceTableComponent } from './tables/resource-table/resource-table.component';
+import { AddTaskComponent } from './tables/add-task/add-task.component';
 
 const routes: Routes = [
   {
@@ -26,6 +28,8 @@ const routes: Routes = [
     ResourcesComponent,
     ResourceTableComponent,
     AddTaskComponent,
+    MultipleTaskComponent,
+    SingleTaskComponent,
   ],
   imports: [
     CommonModule,

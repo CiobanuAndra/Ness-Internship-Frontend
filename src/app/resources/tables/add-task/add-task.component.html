@@ -26,9 +26,7 @@
               <mat-hint class="hint-title">Title</mat-hint>
               <div
                 class="alert"
-                [style.visibility]="
-                showTitleAlert ? 'visible' : 'hidden'
-                "
+                [style.visibility]="showTitleAlert ? 'visible' : 'hidden'"
               >
                 Please add a title
               </div>
@@ -44,7 +42,7 @@
                 <div
                   class="alert"
                   [style.visibility]="
-                  showDescriptionAlert ? 'visible' : 'hidden'
+                    showDescriptionAlert ? 'visible' : 'hidden'
                   "
                 >
                   Please add a description
@@ -64,9 +62,7 @@
                 >
                 <div
                   class="alert"
-                  [style.visibility]="
-                  showOrderAlert ? 'visible' : 'hidden'
-                  "
+                  [style.visibility]="showOrderAlert ? 'visible' : 'hidden'"
                 >
                   Please specify a valid order value
                 </div>
@@ -75,8 +71,12 @@
             <div></div>
           </form>
           <div class="general-buttons">
-            <button mat-button class="next-button" (click)="moveToDetailsStepper(stepper)">
-              {{ 'next step' | uppercase }}
+            <button
+              mat-button
+              class="next-button"
+              (click)="moveToDetailsStepper(stepper)"
+            >
+              {{ "next step" | uppercase }}
             </button>
             <button
               mat-button
@@ -84,87 +84,83 @@
               class="cancel-button"
               (click)="closeDialog()"
             >
-            {{ 'cancel' | uppercase }}
+              {{ "cancel" | uppercase }}
             </button>
           </div>
         </mat-step>
       </div>
 
-
-      <!-- PAS 1 UP -->
-      
-      <mat-step [stepControl]="secondFormGroup" [optional]="isOptional">
+      <mat-step [stepControl]="secondFormGroup">
         <form [formGroup]="secondFormGroup">
           <ng-template matStepLabel>Details</ng-template>
           <hr class="stepper-divider" />
           <div class="type-container">
             <span>Type</span>
             <div class="type-buttons">
-              <button mat-button
-                [ngClass]="isSingleButtonClick ? 'next-button' : 'cancel-button'"
-                (click)="toggleSingle()">
-                {{ 'single' | uppercase }}
+              <button
+                mat-button
+                [ngClass]="
+                  isSingleButtonClick ? 'next-button' : 'cancel-button'
+                "
+                (click)="toggleFormType(true)"
+              >
+                {{ "single" | uppercase }}
               </button>
-      
-              <button mat-button
-                [ngClass]="isMultipleButtonClick ? 'next-button' : 'cancel-button'"
-                (click)="toggleMultiple()">
-                {{ 'multiple' | uppercase }}
+              <button
+                mat-button
+                [ngClass]="
+                  isMultipleButtonClick ? 'next-button' : 'cancel-button'
+                "
+                (click)="toggleFormType(false)"
+              >
+                {{ "with courses" | uppercase }}
               </button>
-
             </div>
-
           </div>
           <div class="details-content">
-
-          <div class="details-input" >
-            <div class="single-container" *ngIf="isSingleButtonClick; else multipleTemplate">
-              <input
-              matInput
-              placeholder="Add Link"
-              type="text"
-              formControlName="link"
-              class="custom-input"
-            />
-            <hr class="stepper-divider" />
-            </div>
-
-            <ng-template #multipleTemplate>
-              <div class="multiple-container">
-                <h1>Multiple Container</h1>
+            <div class="details-input">
+              <div *ngIf="isSingleButtonClick; else multipleTemplate">
+                <app-single-task
+                  [secondFormGroup]="secondFormGroup"
+                ></app-single-task>
               </div>
-            </ng-template>
+
+              <ng-template #multipleTemplate>
+                <app-multiple-task
+                  [secondFormGroup]="secondFormGroup"
+                ></app-multiple-task>
+              </ng-template>
+            </div>
           </div>
-          </div>
-            
           <div class="details-buttons">
             <div class="toggle-step-buttons">
+              <button
+                mat-button
+                matStepperNext
+                matStepperPrevious
+                class="cancel-button"
+              >
+                {{ "previous step" | uppercase }}
+              </button>
+              <button
+                mat-button
+                class="next-button"
+                (click)="checkSingleOrMultiple(stepper)"
+              >
+                {{ "next step" | uppercase }}
+              </button>
+            </div>
             <button
               mat-button
               matStepperNext
-              matStepperPrevious
               class="cancel-button"
+              (click)="closeDialog()"
             >
-            {{ 'previous step' | uppercase }}
+              {{ "cancel" | uppercase }}
             </button>
-            <button mat-button class="next-button">
-              {{ 'next step' | uppercase }}
-            </button>
-          </div>
-            <button
-            mat-button
-            matStepperNext
-            class="cancel-button"
-            (click)="closeDialog()"
-          >
-          {{ 'cancel' | uppercase }}
-          </button>
           </div>
         </form>
       </mat-step>
-
-
-      <!-- PAS 3 DOWN -->
 
       <mat-step>
         <ng-template matStepLabel>
