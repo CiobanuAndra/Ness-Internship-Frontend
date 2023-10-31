@@ -33,7 +33,7 @@ export class UsersRequireAttentionTableComponent implements AfterViewInit {
     this.usersService
       .filterActiveUsersRequireAttention()
       .subscribe((values) => {
-        this.dataSource.data = values;
+        this.dataSource.data = structuredClone(values);
         this.cdr.detectChanges();
       });
   }
@@ -42,7 +42,7 @@ export class UsersRequireAttentionTableComponent implements AfterViewInit {
     this.usersService
       .filterInactiveUsersRequireAttention()
       .subscribe((values) => {
-        this.dataSource.data = values;
+        this.dataSource.data = structuredClone(values);
         this.cdr.detectChanges();
       });
   }

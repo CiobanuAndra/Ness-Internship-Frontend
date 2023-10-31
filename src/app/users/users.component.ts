@@ -79,21 +79,21 @@ export class UsersComponent implements AfterViewInit {
 
   filterActiveUsers(): void {
     this.userService.getActiveUsers().subscribe((values) => {
-      this.dataSource.data = values;
+      this.dataSource.data = structuredClone(values);
       this.cdr.detectChanges();
     });
   }
 
   filterInactiveUsers(): void {
     this.userService.getInactiveUsers().subscribe((values) => {
-      this.dataSource.data = values;
+      this.dataSource.data = structuredClone(values);
       this.cdr.detectChanges();
     });
   }
 
   filterAllUsers(): void {
     this.userService.getAllUsers().subscribe((values) => {
-      this.dataSource.data = values;
+      this.dataSource.data = structuredClone(values);
       this.cdr.detectChanges();
     });
   }
