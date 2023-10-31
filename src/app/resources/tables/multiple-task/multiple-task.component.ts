@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ResourcesService } from 'src/app/services/resources.service';
 import { Course } from 'src/app/interfaces/resources/course.model';
 import { FormGroup } from '@angular/forms';
@@ -6,7 +6,7 @@ import { FormGroup } from '@angular/forms';
 @Component({
   selector: 'app-multiple-task',
   templateUrl: './multiple-task.component.html',
-  styleUrls: ['./multiple-task.component.scss']
+  styleUrls: ['./multiple-task.component.scss'],
 })
 export class MultipleTaskComponent {
   @Input() secondFormGroup!: FormGroup;
@@ -18,10 +18,11 @@ export class MultipleTaskComponent {
 
   ngOnInit(): void {
     this.resourcesService.loadCourses().subscribe((courses) => {
-      const filteredCourses = courses.filter((course) => course.task === "");
+      const filteredCourses = courses.filter((course) => course.task === '');
       this.courses = filteredCourses;
     });
   }
+
   onCourseSelected(event: Event): void {
     const selectElement = event.target as HTMLSelectElement;
     const selectedOptionIndex = parseInt(selectElement.value, 10);
@@ -37,16 +38,20 @@ export class MultipleTaskComponent {
   }
 
   removeCourse(index: number): void {
+    if (index >= 0 && index < this.selectedCourses.length) {
+      this.selectedCourses.splice(index, 1);
+      this.updateSelectedCoursesControl();
+    }
+  }
+
+  private updateSelectedCoursesControl() {
     if (this.secondFormGroup) {
-      const selectedCoursesControl = this.secondFormGroup.get('selectedCourses');
+      const selectedCoursesControl =
+        this.secondFormGroup.get('selectedCourses');
       if (selectedCoursesControl) {
-        if (index >= 0 && index < this.selectedCourses.length) {
-          this.selectedCourses.splice(index, 1);
-          selectedCoursesControl.setValue('');
-          selectedCoursesControl.updateValueAndValidity();
-        }
+        selectedCoursesControl.setValue([...this.selectedCourses]);
+        selectedCoursesControl.updateValueAndValidity();
       }
     }
   }
-  
 }

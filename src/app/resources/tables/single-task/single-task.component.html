@@ -29,12 +29,12 @@
         placeholder="0"
         formControlName="durationHour"
         [ngStyle]="{
-          'border-bottom': showDurationError
+          'border-bottom': showDurationFieldEmptyError
             ? '1px solid #FF5252'
             : '1px solid rgba(0, 0, 0, 0.42)'
         }"
       />
-      <mat-hint class="hint-title" *ngIf="!showDurationError"
+      <mat-hint class="hint-title" *ngIf="!showDurationFieldEmptyError"
         >Leave empty or less than 1 hour</mat-hint
       >
     </div>
@@ -47,17 +47,17 @@
         placeholder="00"
         formControlName="durationMinutes"
         [ngStyle]="{
-          'border-bottom': showDurationError
+          'border-bottom': showDurationFieldEmptyError
             ? '1px solid #FF5252'
             : '1px solid rgba(0, 0, 0, 0.42)'
         }"
       />
-      <mat-hint class="hint-title" *ngIf="!showDurationError"
+      <mat-hint class="hint-title" *ngIf="!showDurationFieldEmptyError"
         >Duration in minutes</mat-hint
       >
     </div>
   </div>
-  <span class="error-message" *ngIf="showDurationError"
+  <span class="error-message" *ngIf="showDurationFieldEmptyError"
     >This field is required. Please enter a valid task duration.</span
   >
 
@@ -73,16 +73,14 @@
         formControlName="unlockHour"
         [ngStyle]="{
           'border-bottom':
-            showUnlockError || showUnlockMinutesError
+          showUnlockFieldEmptyError || showUnlockTimeExceedsDurationError
               ? '1px solid #FF5252'
               : '1px solid rgba(0, 0, 0, 0.42)'
         }"
       />
       <mat-hint
         class="hint-title"
-        *ngIf="
-          !showUnlockError && !showUnlockHourError && !showUnlockMinutesError
-        "
+        *ngIf="!showUnlockFieldEmptyError && !showUnlockTimeExceedsDurationError"
         >Time to unlock lets the user mark the course as completed after the
         selected time; leave empty or less than 1 hour.</mat-hint
       >
@@ -97,24 +95,22 @@
         formControlName="unlockMinutes"
         [ngStyle]="{
           'border-bottom':
-            showUnlockError || showUnlockMinutesError
+            showUnlockFieldEmptyError || showUnlockTimeExceedsDurationError
               ? '1px solid #FF5252'
               : '1px solid rgba(0, 0, 0, 0.42)'
         }"
       />
       <mat-hint
         class="hint-title"
-        *ngIf="
-          !showUnlockError && !showUnlockHourError && !showUnlockMinutesError
-        "
+        *ngIf="!showUnlockFieldEmptyError && !showUnlockTimeExceedsDurationError"
         >Duration in minutes</mat-hint
       >
     </div>
   </div>
-  <span class="error-message" *ngIf="showUnlockError"
+  <span class="error-message" *ngIf="showUnlockFieldEmptyError"
     >This field is required. Please enter a valid time to unlock.
   </span>
-  <span class="error-message" *ngIf="showUnlockMinutesError"
+  <span class="error-message" *ngIf="showUnlockTimeExceedsDurationError"
     >Time to unlock must be equal or less than task’s duration.</span
   >
 </div>

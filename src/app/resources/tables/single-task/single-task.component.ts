@@ -10,12 +10,11 @@ import { ViewChild } from '@angular/core';
 })
 export class SingleTaskComponent {
   @Input() secondFormGroup!: FormGroup;
-  @Output() onSingleFormValid = new EventEmitter<boolean>();
+  @Output() onSingleFormValid = new EventEmitter<boolean>;
   showLinkError = false;
-  showDurationError = false;
-  showUnlockError = false;
-  showUnlockHourError = false;
-  showUnlockMinutesError = false;
+  showDurationFieldEmptyError = false;
+  showUnlockFieldEmptyError = false;
+  showUnlockTimeExceedsDurationError = false;
 
   @ViewChild(MatStepper) stepper!: MatStepper;
 
@@ -34,9 +33,9 @@ export class SingleTaskComponent {
       }
 
       if (!durationHourControl.value && !durationMinutesControl.value) {
-        this.showDurationError = true;
+        this.showDurationFieldEmptyError = true;
       } else {
-        this.showDurationError = false;
+        this.showDurationFieldEmptyError = false;
 
         if (!durationHourControl.value) {
           durationHourControl.setValue(0);
@@ -46,11 +45,10 @@ export class SingleTaskComponent {
       }
 
       if (!unlockHourControl.value && !unlockMinutesControl.value) {
-        this.showUnlockError = true;
-        this.showUnlockHourError = false;
-        this.showUnlockMinutesError = false;
+        this.showUnlockFieldEmptyError = true;
+        this.showUnlockTimeExceedsDurationError = false; // Remove the showUnlockHourError assignment
       } else {
-        this.showUnlockError = false;
+        this.showUnlockFieldEmptyError = false;
 
         if (!unlockHourControl.value) {
           unlockHourControl.setValue(0);
@@ -62,12 +60,12 @@ export class SingleTaskComponent {
           unlockHourControl.value > durationHourControl.value ||
           (unlockHourControl.value === durationHourControl.value && unlockMinutesControl.value > durationMinutesControl.value)
         ) {
-          this.showUnlockMinutesError = true;
+          this.showUnlockTimeExceedsDurationError = true;
         } else {
-          this.showUnlockMinutesError = false;
+          this.showUnlockTimeExceedsDurationError = false;
         }
 
-        return !this.showLinkError && !this.showDurationError && !this.showUnlockError && !this.showUnlockMinutesError;
+        return !this.showLinkError && !this.showDurationFieldEmptyError && !this.showUnlockFieldEmptyError && !this.showUnlockTimeExceedsDurationError;
       }
     }
     return false;

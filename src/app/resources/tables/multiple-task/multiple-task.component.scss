@@ -1,10 +1,9 @@
 .multiple-container {
-    overflow-y: auto;
-    max-height: 60vh;
-    padding: 8px;
-}
+  overflow-y: auto;
+  max-height: 60vh;
+  padding: 8px;
 
-.course-select {
+  .course-select {
     height: 61px;
     width: 100%;
     color: rgba(0, 0, 0, 0.64);
@@ -18,7 +17,7 @@
   }
 
   .error-message {
-    color: #FF5252;
+    color: #ff5252;
     font-family: Roboto;
     font-size: 12px;
     font-style: normal;
@@ -26,16 +25,17 @@
     line-height: 20px;
     letter-spacing: 0.4px;
   }
-  
-  .course-option-container {
-    display: flex;
-    justify-content: space-between;
-    box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.12), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 1px 0px rgba(0, 0, 0, 0.20);
-    width: 100%;
-    background: #FFF;
-    margin-top: 1rem;
-    flex-direction: column;
-  }
+}
+
+.course-option-container {
+  display: flex;
+  justify-content: space-between;
+  box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.12),
+    0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 1px 0px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  background: #fff;
+  margin-top: 1rem;
+  flex-direction: column;
 
   .main-course-content {
     display: flex;
@@ -43,38 +43,38 @@
     align-items: center;
     height: 61px;
     border-radius: 4px;
-    padding: 8px 8px 8px 8px;
-    box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.12), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 1px 0px rgba(0, 0, 0, 0.20);
+    padding: 8px;
+
+    .course-title-container {
+      align-self: flex-start;
+      width: 100%;
+      height: 50%;
+
+      .course-title {
+        color: #0e0f11;
+        font-family: Roboto;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 24px;
+        letter-spacing: 0.5px;
+      }
+    }
+
+    .course-details {
+      margin-top: 8px;
+      align-self: flex-end;
+      width: 100%;
+      height: 50%;
+      display: flex;
+      gap: 10px;
+
+      .course-details-item {
+        height: 100%;
+      }
+    }
+    .delete-course {
+      cursor: pointer;
+    }
   }
-
-.course-title-container {
-    align-self: flex-start;
-    width: 100%;
-    height: 50%;
-}
-
-.course-title {
-    color: #0E0F11;
-    font-family: Roboto;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 24px;
-    letter-spacing: 0.5px;
-}
-.course-details {
-    margin-top: 8px;
-    align-self: flex-end;
-    width: 100%;
-    height: 50%;
-    display: flex;
-    gap: 10px;
-}
-
-.delete-course {
-    cursor: pointer;
-}
-
-.course-details-item {
-    height: 100%;
 }

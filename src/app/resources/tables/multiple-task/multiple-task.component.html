@@ -1,35 +1,61 @@
 <div class="multiple-container" [formGroup]="secondFormGroup">
-  <select name="course" id="course" (change)="onCourseSelected($event)" [ngStyle]="{'border-bottom': showErrorMessage ? '1px solid #FF5252' : '1px solid rgba(0, 0, 0, 0.42)'}" class="course-select" formControlName="selectedCourses">
-    <option value="" selected disabled hidden>Select a course</option>
-    <option *ngFor="let course of courses; let i = index" [value]="i">{{ course.name }}</option>
+  <select
+    name="course"
+    id="course"
+    (change)="onCourseSelected($event)"
+    [ngStyle]="{
+      'border-bottom': showErrorMessage
+        ? '1px solid #FF5252'
+        : '1px solid rgba(0, 0, 0, 0.42)'
+    }"
+    class="course-select"
+    formControlName="selectedCourses"
+  >
+    <option value="" disabled hidden>Select a course</option>
+    <option *ngFor="let course of courses; let i = index" [value]="i">
+      {{ course.name }}
+    </option>
   </select>
-    <p class="error-message" *ngIf="showErrorMessage">You have to select atleast 1 course to continue</p>
 
-          
-    <div class="course-option-container" *ngFor="let course of selectedCourses; let i = index">
-      <div class="main-course-content">
-        <div class="course-option-content" >
-          <div class="course-title-container">
-            <span class="course-title">{{course.name}}</span>
+  <p class="error-message" *ngIf="showErrorMessage">
+    You have to select atleast 1 course to continue
+  </p>
+
+  <div
+    class="course-option-container"
+    *ngFor="let course of selectedCourses; let i = index"
+  >
+    <div class="main-course-content">
+      <div class="course-option-content">
+        <div class="course-title-container">
+          <span class="course-title">{{ course.name }}</span>
+        </div>
+        <div class="course-details">
+          <div class="course-details-item">
+            <span>{{ course.length }} Minutes</span>
           </div>
-          <div class="course-details">
-            <div class="course-details-item"><span>{{course.length}} Minutes</span></div>
-            <div class="course-details-item"><span>∙</span></div>
-            <div class="course-details-item"><span>{{course.fileType}}</span></div>
-            <div class="course-details-item"><span>∙</span></div>
-            <div class="course-details-item"><span>{{course.rewards}} Diamonds</span></div>
-            <div class="course-details-item"><span>∙</span></div>
-            <div class="course-details-item"><span>{{course.points}} Points</span></div>
+          <div class="course-details-item"><span>∙</span></div>
+          <div class="course-details-item">
+            <span>{{ course.fileType }}</span>
+          </div>
+          <div class="course-details-item"><span>∙</span></div>
+          <div class="course-details-item">
+            <span>{{ course.rewards }} Diamonds</span>
+          </div>
+          <div class="course-details-item"><span>∙</span></div>
+          <div class="course-details-item">
+            <span>{{ course.points }} Points</span>
           </div>
         </div>
-        <div class="delete-course">
-            <img class="remove-course" src="assets/icons/remove.svg" alt="Remove Course Icon" (click)="removeCourse(i)"/>
-        </div>
       </div>
-
+      <div class="delete-course">
+        <img
+          class="remove-course"
+          src="assets/icons/remove.svg"
+          alt="Remove Course Icon"
+          (click)="removeCourse(i)"
+        />
       </div>
+    </div>
   </div>
-
-
-  
-  
+</div>

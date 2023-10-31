@@ -5,6 +5,7 @@ import {
   EventEmitter,
   ViewChild,
 } from '@angular/core';
+import { FormType} from 'src/app/enums/form-type';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatStepper } from '@angular/material/stepper';
 import { ResourcesService } from 'src/app/services/resources/resources.service';
@@ -29,7 +30,7 @@ export class AddTaskComponent {
   httpsUrlPattern = '^(https?://[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}(?:/\\S*)?)$';
   isSingleButtonClick: boolean = true;
   isMultipleButtonClick: boolean = false;
-  selectedFormType: 'SINGLE' | 'WITH COURSES' = 'SINGLE';
+  selectedFormType: FormType = FormType.SINGLE;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -56,8 +57,7 @@ export class AddTaskComponent {
     this.checkValueChanges();
   }
 
-  @ViewChild(MultipleTaskComponent)
-  multipleTaskComponent!: MultipleTaskComponent;
+  @ViewChild(MultipleTaskComponent) multipleTaskComponent!: MultipleTaskComponent;
   @ViewChild(SingleTaskComponent) singleTaskComponent!: SingleTaskComponent;
   @ViewChild('stepper') stepper!: MatStepper;
 
@@ -106,45 +106,26 @@ export class AddTaskComponent {
   toggleFormType(isSingle: boolean): void {
     this.isSingleButtonClick = isSingle;
     this.isMultipleButtonClick = !isSingle;
-    this.selectedFormType = isSingle ? 'SINGLE' : 'WITH COURSES';
-
-    if (isSingle) {
-      this.secondFormGroup.setControl(
-        'link',
-        this.formBuilder.control('', [Validators.required])
-      );
-      this.secondFormGroup.setControl(
-        'durationHour',
-        this.formBuilder.control('', [Validators.required])
-      );
-      this.secondFormGroup.setControl(
-        'durationMinutes',
-        this.formBuilder.control('', [Validators.required])
-      );
-      this.secondFormGroup.setControl(
-        'unlockHour',
-        this.formBuilder.control('', [Validators.required])
-      );
-      this.secondFormGroup.setControl(
-        'unlockMinutes',
-        this.formBuilder.control('', [Validators.required])
-      );
-      this.secondFormGroup.removeControl('selectedCourses');
-    } else {
-      this.secondFormGroup.setControl(
-        'selectedCourses',
-        this.formBuilder.control([], [Validators.required])
-      );
-      this.secondFormGroup.removeControl('link');
-      this.secondFormGroup.removeControl('durationHour');
-      this.secondFormGroup.removeControl('durationMinutes');
-      this.secondFormGroup.removeControl('unlockHour');
-      this.secondFormGroup.removeControl('unlockMinutes');
-    }
+    this.selectedFormType = isSingle ? FormType.SINGLE : FormType.WITH_COURSES;
+  
+    const config: { [key: string]: any } = isSingle
+      ? {
+          link: this.formBuilder.control('', [Validators.required, Validators.pattern(this.httpsUrlPattern)]),
+          durationHour: this.formBuilder.control('', [Validators.required]),
+          durationMinutes: this.formBuilder.control('', [Validators.required]),
+          unlockHour: this.formBuilder.control('', [Validators.required]),
+          unlockMinutes: this.formBuilder.control('', [Validators.required]),
+        }
+      : {
+          selectedCourses: this.formBuilder.control([], [Validators.required]),
+        };
+  
+    this.secondFormGroup = this.formBuilder.group(config);
   }
+  
 
   checkSingleOrMultiple(stepper: MatStepper): void {
-    if (this.selectedFormType === 'WITH COURSES') {
+    if (this.selectedFormType === FormType.WITH_COURSES) {
       if (this.multipleTaskComponent) {
         if (this.multipleTaskComponent.selectedCourses.length === 0) {
           this.multipleTaskComponent.showErrorMessage = true;
@@ -153,10 +134,11 @@ export class AddTaskComponent {
           stepper.next();
         }
       }
-    } else if (this.selectedFormType === 'SINGLE') {
+    } else if (this.selectedFormType === FormType.SINGLE) {
       if (this.singleTaskComponent.checkSingleForm()) {
         stepper.next();
       }
     }
   }
+  
 }
