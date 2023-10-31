@@ -26,7 +26,7 @@ export class AddBulkUsersComponent implements OnInit {
 
   addFromListener() {
     this.fileControl.valueChanges.subscribe(async (files: any) => {
-      const formattedFile = await this.usersService.uploadCSVFile(files);
+      await this.usersService.uploadCSVFile(files);
     });
   }
 
@@ -43,6 +43,5 @@ export class AddBulkUsersComponent implements OnInit {
         dateAdded: new Date(),
       });
     });
-    this.addFromListener();
   }
 }
