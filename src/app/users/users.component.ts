@@ -1,4 +1,10 @@
-import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  Renderer2,
+  ViewChild,
+} from '@angular/core';
 import { UsersService } from '../services/users.service';
 import { UsersListTable } from '../interfaces/users-list-table';
 import { UsersFilter } from '../enums/users-filter';
@@ -7,6 +13,7 @@ import { ngxCsv } from 'ngx-csv/ngx-csv';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
+import { ResourcesService } from '../services/resources.service';
 
 @Component({
   selector: 'app-users',
@@ -16,16 +23,20 @@ import { MatPaginator } from '@angular/material/paginator';
 export class UsersComponent implements AfterViewInit {
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild('sidenav') sidenav!: ElementRef;
 
   dataSource = new MatTableDataSource<UsersListTable>();
+  opened: boolean = false;
   UsersFilterValues = Object(UsersFilter);
+  totalCourses = 0;
+  sidenavOpen = false;
+
   UsersFilterIndex = {
     [UsersFilter.ALL]: 0,
     [UsersFilter.ACTIVE]: 1,
     [UsersFilter.INACTIVE]: 2,
   };
   selectedTabIndex: number = this.UsersFilterIndex[UsersFilter.ALL];
-  totalCourses = 0;
   displayedColumns: string[] = [
     'name',
     'status',
@@ -35,7 +46,15 @@ export class UsersComponent implements AfterViewInit {
     'settings',
   ];
 
-  constructor(private userService: UsersService) {}
+  constructor(
+    private userService: UsersService,
+    private resourcesService: ResourcesService
+  ) {}
+
+  toggleBulkUsersSidenav() {
+    this.opened = !this.opened;
+    this.resourcesService.setSidenavVisibility(this.opened);
+  }
 
   filterActiveUsers(): void {
     this.userService.getActiveUsers().subscribe((values) => {
@@ -95,6 +114,7 @@ export class UsersComponent implements AfterViewInit {
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
     this.totalCourses = this.userService.totalCourses;
+
     this.filterAllUsers();
   }
 }

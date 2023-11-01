@@ -158,109 +158,160 @@ export class UsersService {
 
   allUsers: UsersListTable[] = [
     {
-      name: 'Alex Muller',
+      firstname: 'Alex',
+      lastname: 'Muller',
+      email: 'allex.muller@example.com',
       status: true,
       coursesCompleted: 8,
-      leftDays: 4,
-      dateAdded: new Date('2023-10-30'),
+      leftDays: 5,
+      dateAdded: new Date('2023-10-15'),
     },
     {
-      name: 'Eduard Rosu',
-      status: true,
-      coursesCompleted: 2,
-      leftDays: 10,
-      dateAdded: new Date('2023-09-15'),
-    },
-    {
-      name: 'Alex Muller',
+      firstname: 'Alex',
+      lastname: 'Muller',
+      email: 'allex.muller@example.com',
       status: false,
-      coursesCompleted: 15,
-      leftDays: 1,
-      dateAdded: new Date('2023-08-07'),
-    },
-    {
-      name: 'Ioan Bucataru',
-      status: true,
-      coursesCompleted: 2,
-      leftDays: 9,
-      dateAdded: new Date('2023-07-22'),
-    },
-    {
-      name: 'Alex Muller',
-      status: true,
-      coursesCompleted: 7,
-      leftDays: 0,
-      dateAdded: new Date(),
-    },
-    {
-      name: 'Alex Muller',
-      status: false,
-      coursesCompleted: 15,
-      leftDays: 10,
-      dateAdded: new Date(),
-    },
-    {
-      name: 'Magda Paicu',
-      status: true,
-      coursesCompleted: 5,
-      leftDays: 10,
-      dateAdded: new Date(),
-    },
-    {
-      name: 'Alex Muller',
-      status: true,
-      coursesCompleted: 7,
-      leftDays: 7,
-      dateAdded: new Date(),
-    },
-    {
-      name: 'Alex Muller',
-      status: false,
-      coursesCompleted: 14,
-      leftDays: 10,
-      dateAdded: new Date(),
-    },
-    {
-      name: 'Alex Muller',
-      status: true,
-      coursesCompleted: 8,
-      leftDays: 12,
-      dateAdded: new Date(),
-    },
-    {
-      name: 'Eduard Rosu',
-      status: true,
-      coursesCompleted: 9,
-      leftDays: 10,
-      dateAdded: new Date(),
-    },
-    {
-      name: 'Florin Bodogan',
-      status: true,
-      coursesCompleted: 11,
-      leftDays: 3,
-      dateAdded: new Date(),
-    },
-    {
-      name: 'Andra Ciobanu',
-      status: true,
-      coursesCompleted: 2,
-      leftDays: 15,
-      dateAdded: new Date(),
-    },
-    {
-      name: 'Vlad Cristea',
-      status: true,
       coursesCompleted: 3,
-      leftDays: 6,
-      dateAdded: new Date(),
+      leftDays: 12,
+      dateAdded: new Date('2023-09-20'),
     },
     {
-      name: 'Andra Ciobanu',
+      firstname: 'Alex',
+      lastname: 'Muller',
+      email: 'allex.muller@example.com',
+      status: true,
+      coursesCompleted: 12,
+      leftDays: 2,
+      dateAdded: new Date('2023-10-01'),
+    },
+    {
+      firstname: 'Alex',
+      lastname: 'Muller',
+      email: 'allex.muller@example.com',
+      status: true,
+      coursesCompleted: 8,
+      leftDays: 5,
+      dateAdded: new Date('2023-10-15'),
+    },
+    {
+      firstname: 'Alex',
+      lastname: 'Muller',
+      email: 'allex.muller@example.com',
       status: false,
-      coursesCompleted: 5,
-      leftDays: 10,
-      dateAdded: new Date(),
+      coursesCompleted: 3,
+      leftDays: 12,
+      dateAdded: new Date('2023-09-20'),
+    },
+    {
+      firstname: 'Alex',
+      lastname: 'Muller',
+      email: 'allex.muller@example.com',
+      status: true,
+      coursesCompleted: 12,
+      leftDays: 2,
+      dateAdded: new Date('2023-10-01'),
+    },
+    {
+      firstname: 'Alex',
+      lastname: 'Muller',
+      email: 'allex.muller@example.com',
+      status: true,
+      coursesCompleted: 8,
+      leftDays: 5,
+      dateAdded: new Date('2023-10-15'),
+    },
+    {
+      firstname: 'Alex',
+      lastname: 'Muller',
+      email: 'allex.muller@example.com',
+      status: false,
+      coursesCompleted: 3,
+      leftDays: 12,
+      dateAdded: new Date('2023-09-20'),
+    },
+    {
+      firstname: 'Alex',
+      lastname: 'Muller',
+      email: 'allex.muller@example.com',
+      status: true,
+      coursesCompleted: 12,
+      leftDays: 2,
+      dateAdded: new Date('2023-10-01'),
+    },
+    {
+      firstname: 'Alex',
+      lastname: 'Muller',
+      email: 'allex.muller@example.com',
+      status: true,
+      coursesCompleted: 8,
+      leftDays: 5,
+      dateAdded: new Date('2023-10-15'),
+    },
+    {
+      firstname: 'Alex',
+      lastname: 'Muller',
+      email: 'allex.muller@example.com',
+      status: false,
+      coursesCompleted: 3,
+      leftDays: 12,
+      dateAdded: new Date('2023-09-20'),
+    },
+    {
+      firstname: 'Alex',
+      lastname: 'Muller',
+      email: 'allex.muller@example.com',
+      status: true,
+      coursesCompleted: 12,
+      leftDays: 2,
+      dateAdded: new Date('2023-10-01'),
+    },
+    {
+      firstname: 'Alex',
+      lastname: 'Muller',
+      email: 'allex.muller@example.com',
+      status: true,
+      coursesCompleted: 8,
+      leftDays: 5,
+      dateAdded: new Date('2023-10-15'),
+    },
+    {
+      firstname: 'Alex',
+      lastname: 'Muller',
+      email: 'allex.muller@example.com',
+      status: false,
+      coursesCompleted: 3,
+      leftDays: 12,
+      dateAdded: new Date('2023-09-20'),
+    },
+    {
+      firstname: 'Alex',
+      lastname: 'Muller',
+      email: 'allex.muller@example.com',
+      status: true,
+      coursesCompleted: 12,
+      leftDays: 2,
+      dateAdded: new Date('2023-10-01'),
+    },
+  ];
+
+  usersFromCSVFile: UsersListTable[] = [
+    {
+      firstname: 'Alex',
+      lastname: 'Muller',
+      email: 'allex.muller@example.com',
+      status: true,
+      coursesCompleted: 8,
+      leftDays: 5,
+      dateAdded: new Date('2023-10-15'),
+    },
+    {
+      firstname: 'Alex',
+      lastname: 'Muller',
+      email: 'allex.muller@example.com',
+      status: false,
+      coursesCompleted: 3,
+      leftDays: 12,
+      dateAdded: new Date('2023-09-20'),
     },
   ];
 
@@ -282,6 +333,19 @@ export class UsersService {
 
   getAllUsers(): Observable<UsersListTable[]> {
     return of(this.allUsers);
+  }
+
+  getUsersFromCSVFile(): Observable<UsersListTable[]> {
+    return of(this.usersFromCSVFile);
+  }
+
+  uploadCSVFile(file: File): Promise<any> {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = reject;
+    });
   }
 
   getInactiveUsers(): Observable<UsersListTable[]> {

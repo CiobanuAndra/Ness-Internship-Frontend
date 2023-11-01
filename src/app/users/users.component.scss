@@ -13,9 +13,16 @@
   height: $height;
 }
 
+.aside-open {
+  width: 100%;
+  height: 100%;
+  background-color: $light-gray-color;
+  filter: brightness(0.7);
+  transition: filter 0.5s;
+}
+
 .users-list {
   margin: 0 auto;
-  margin-top: 1rem;
   @include dimensions(92%, 40%);
 
   &__title {
@@ -54,6 +61,7 @@
           0.25rem
         );
       }
+
       &__add-bulk-users {
         @include button-style(
           10.063rem,
@@ -62,6 +70,7 @@
           none,
           0.25rem
         );
+
         &__p {
           margin-top: 0.7rem;
           color: $white-color;
@@ -125,4 +134,14 @@
 .line {
   @include dimensions(100%, 0.063rem);
   background-color: $medium-gray-color;
+}
+
+.mat-sidenav-container {
+  z-index: 10000;
+  top: 0;
+  right: 0;
+  position: absolute;
+  background-color: $white-color;
+  width: 41.875rem;
+  height: 100%;
 }

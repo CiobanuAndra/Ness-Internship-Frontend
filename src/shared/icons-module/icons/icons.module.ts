@@ -21,7 +21,9 @@ export class IconsModule {
       .addSvgIcon('no-data', this.setPath(`${this.path}/no-data.svg`))
       .addSvgIcon('points-black', this.setPath(`${this.path}/points-black.svg`))
       .addSvgIcon('points', this.setPath(`${this.path}/points.svg`))
-      .addSvgIcon('span', this.setPath(`${this.path}/span.svg`));
+      .addSvgIcon('span', this.setPath(`${this.path}/span.svg`))
+      .addSvgIcon('upload', this.setPath(`${this.path}/upload.svg`))
+      .addSvgIcon('close', this.setPath(`${this.path}/close.svg`));
   }
 
   private setPath(url: string): SafeResourceUrl {

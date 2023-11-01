@@ -10,9 +10,13 @@ import { IconsModule } from 'src/shared/icons-module/icons/icons.module';
 import { MatSortModule } from '@angular/material/sort';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { DatePipe } from '@angular/common';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { AddBulkUsersComponent } from '../sidenavs/add-bulk-users/add-bulk-users.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { NgxMatFileInputModule } from '@angular-material-components/file-input';
 
 @NgModule({
-  declarations: [UsersComponent],
+  declarations: [UsersComponent, AddBulkUsersComponent],
   imports: [
     CommonModule,
     UsersRoutingModule,
@@ -23,8 +27,11 @@ import { DatePipe } from '@angular/common';
     IconsModule,
     MatSortModule,
     MatPaginatorModule,
+    MatSidenavModule,
+    ReactiveFormsModule,
+    NgxMatFileInputModule,
   ],
-  exports: [UsersComponent],
+  exports: [UsersComponent, AddBulkUsersComponent],
   providers: [DatePipe],
 })
 export class UsersModule {}

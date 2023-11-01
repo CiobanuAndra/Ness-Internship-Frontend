@@ -1,0 +1,58 @@
+<div class="add-bulk-users">
+  <div class="add-bulk-users__details">
+    <div class="add-bulk-users__details__title">
+      <span>Add Bulk Users</span>
+      <mat-icon
+        [svgIcon]="'close'"
+        (click)="closeSidenav()"
+        class="add-bulk-users__details__title__icon"
+      ></mat-icon>
+    </div>
+    <div class="add-bulk-users__details__title__input">
+      <mat-form-field class="add-bulk-users__details__title__input__upload">
+        <ngx-mat-file-input
+          accept=".csv"
+          [formControl]="fileControl"
+          [placeholder]="'CSV File'"
+        >
+          <mat-icon ngxMatFileInputIcon svgIcon="upload"></mat-icon>
+        </ngx-mat-file-input>
+        <mat-hint class="add-bulk-users__details__title__input__upload__hint"
+          >File format:.CSV, example of file below</mat-hint
+        >
+      </mat-form-field>
+    </div>
+    <div>
+      <div class="add-bulk-users__details__table">
+        <table mat-table [dataSource]="dataSource">
+          <ng-container matColumnDef="firstname">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.firstname }}
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="lastname">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let element">{{ element.lastname }}</td>
+            <span>...</span>
+          </ng-container>
+          <ng-container matColumnDef="email">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let element">{{ element.email }}</td>
+            <span>...</span>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div class="add-bulk-users__buttons">
+      <button class="add-bulk-users__buttons__check-file">CHECK FILE</button>
+      <button class="add-bulk-users__buttons__cancel" (click)="closeSidenav()">
+        CANCEL
+      </button>
+    </div>
+  </div>
+</div>

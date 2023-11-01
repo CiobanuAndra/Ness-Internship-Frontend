@@ -21,7 +21,7 @@
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": ["zone.js"],
-            "allowedCommonJsDependencies": ["lodash"],
+            "allowedCommonJsDependencies": ["ngx-csv/ngx-csv"],
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
 

@@ -1,7 +1,7 @@
-import { UsersFilter } from '../enums/users-filter';
-
 export interface UsersListTable {
-  name: string;
+  firstname: string;
+  lastname: string;
+  email: string;
   status: boolean;
   coursesCompleted: number;
   leftDays: number;
