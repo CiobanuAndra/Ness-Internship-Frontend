@@ -1,5 +1,3 @@
-@import "/src/styleguide.scss";
-
 .header-cell {
     text-transform: uppercase;
 }
@@ -12,4 +10,12 @@
 
 .mat-column-icon, .mat-column-options {  
     flex: 0 0 5%;
+}
+
+.mat-column-linked_to {
+    flex: 0 0 50%;
+}
+
+.mat-column-name-course {
+    flex: 0 0 25%;
 }

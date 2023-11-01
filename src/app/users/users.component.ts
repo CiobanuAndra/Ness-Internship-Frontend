@@ -5,7 +5,7 @@ import {
   Renderer2,
   ViewChild,
 } from '@angular/core';
-import { UsersService } from '../services/users.service';
+import { UsersService } from '../services/users/users.service';
 import { UsersListTable } from '../interfaces/users-list-table';
 import { UsersFilter } from '../enums/users-filter';
 import { MatTabChangeEvent } from '@angular/material/tabs';
@@ -13,14 +13,19 @@ import { ngxCsv } from 'ngx-csv/ngx-csv';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
-import { ResourcesService } from '../services/resources.service';
+import { MatDialog } from '@angular/material/dialog';
+import { AddbulkusersComponent } from './modals/addbulkusers/addbulkusers/addbulkusers.component';
+import { ResourcesService } from '../services/resources/resources.service';
 
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.scss'],
 })
+
 export class UsersComponent implements AfterViewInit {
+  showSidenav = false;
+
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild('sidenav') sidenav!: ElementRef;
@@ -45,15 +50,29 @@ export class UsersComponent implements AfterViewInit {
     'dateAdded',
     'settings',
   ];
-
-  constructor(
-    private userService: UsersService,
-    private resourcesService: ResourcesService
-  ) {}
+  
+  constructor(private userService: UsersService, public dialog: MatDialog, private resourcesService: ResourcesService) {}
 
   toggleBulkUsersSidenav() {
     this.opened = !this.opened;
     this.resourcesService.setSidenavVisibility(this.opened);
+  }
+  
+  //ASIDE
+  toggleSidenav() {
+    this.showSidenav = !this.showSidenav;
+    this.resourcesService.setSidenavVisibility(this.showSidenav);
+  };
+
+  //MODAL
+  openDialog() {
+    const dialogRef = this.dialog.open(AddbulkusersComponent, {
+      autoFocus: false,
+    });
+    
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
   }
 
   filterActiveUsers(): void {

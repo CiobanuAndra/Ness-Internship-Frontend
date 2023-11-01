@@ -13,10 +13,17 @@
   height: $height;
 }
 
+
 .aside-open {
   width: 100%;
   height: 100%;
   background-color: $light-gray-color;
+}
+
+.open {
+  width: 100%;
+  height: calc(100% - 5rem);
+  background-color: #E6E7E9;
   filter: brightness(0.7);
   transition: filter 0.5s;
 }
@@ -145,3 +152,28 @@
   width: 41.875rem;
   height: 100%;
 }
+
+//aside
+.example-container {
+  width: 500px;
+  height: 300px;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+}
+
+.example-sidenav-content {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.example-sidenav {
+  padding: 20px;
+}
+
+.sidenav-container {
+  position: absolute;
+  top: 0;
+  right: 0;
+  @include dimensions(40%, 100%);
+} 

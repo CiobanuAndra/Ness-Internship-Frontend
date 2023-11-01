@@ -1,0 +1,41 @@
+@import "/src/styleguide.scss";
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    height: 5%;
+
+    .sidenav-header {
+        color: #0E0F11;
+        font-weight: 500;
+        font-size: 1rem;
+        text-transform: capitalize;
+    }
+}
+
+.content-container {
+    height: 85%;
+}
+
+.footer-container {
+    height: 5%;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0 1rem 0 1rem;
+
+    .addUser-button, .cancel-button {
+        text-transform: uppercase;
+    }
+
+    .addUser-button {
+        background-color: #00195F;
+        color: #fff;    
+    }
+
+    .cancel-button {
+        background-color: #F5F5F5;
+    }
+}

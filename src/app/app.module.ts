@@ -7,12 +7,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTabsModule } from '@angular/material/tabs';
 import { RouterModule } from '@angular/router';
-import { MatTableModule } from '@angular/material/table';
 import { NavbarComponent } from './navbar/navbar.component';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { InitialsCustomepipePipe } from './pipes/initials-customepipe.pipe';
 import { ResourcesModule } from './resources/resources.module';
-import { UsersModule } from './users/users/users.module';
+import { UsersModule } from './users/users.module';
 
 @NgModule({
   declarations: [AppComponent, NavbarComponent, InitialsCustomepipePipe],
@@ -24,7 +23,6 @@ import { UsersModule } from './users/users/users.module';
     MaterialModule,
     MatIconModule,
     MatTabsModule,
-    MatTableModule,
     DashboardModule,
     ResourcesModule,
     UsersModule,

@@ -1,7 +1,7 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatStepper } from '@angular/material/stepper';
-import { ResourcesService } from 'src/app/services/resources.service';
+import { ResourcesService } from 'src/app/services/resources/resources.service';
 
 @Component({
   selector: 'app-add-task',
