@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { ResourcesService } from 'src/app/services/resources.service';
+import { ResourcesService } from 'src/app/services/resources/resources.service';
 import { Course } from 'src/app/interfaces/resources/course.model';
 import { FormGroup } from '@angular/forms';
 
