@@ -9,7 +9,7 @@
 .leaderboard-section {
   border-radius: 0.25rem;
   width: 33.75rem;
-  height: 56.814rem;
+  height: 36.407rem;
   background-color: $white-color;
   box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.12), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 1px 0px rgba(0, 0, 0, 0.20);
 
@@ -19,7 +19,7 @@
     align-items: center;
     border-bottom: 0.063rem solid $medium-gray-color;
     line-height: 1.5rem;
-    height: 61px;
+    height: 3.813rem;
     padding: 0 1rem;
     background: $white-color;
 
@@ -51,13 +51,13 @@
     display: flex;
     justify-content: space-between;
     background-color: $white-color;
-    height: 48px;
+    height: 3rem;
   }
 
   .tab {
     flex: 1;
     text-align: center;
-    color: #00195F;
+    color: $primary-color;
     transition: color 0.3s ease;
     cursor: pointer;
     padding: 0.75rem 0;
@@ -66,7 +66,7 @@
   .tab.active-tab {
     position: relative;
     color: #00195F;
-    border-bottom: 0.125rem solid #00195F;
+    border-bottom: 0.125rem solid $primary-color;
   }
 
   .done-tab {
@@ -83,11 +83,5 @@
     align-items: center;
     flex-direction: column;
     height: 28.407rem;
-  }
-}
-
-@media screen and (max-height: 791px) {
-  .leaderboard-section {
-    height: 40rem;
   }
 }

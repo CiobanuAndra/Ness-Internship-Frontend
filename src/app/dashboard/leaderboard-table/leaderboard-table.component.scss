@@ -7,14 +7,12 @@
 
 .leaderboard-table-container {
   width: calc(100% - 4rem);
-  padding: 1rem 2rem;
+  padding: 0rem 2rem;
 }
 
 .leaderboard__header {
   border-radius: 0.25rem;
   background-color: $white-color;
-  box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.12),
-    0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 1px 0px rgba(0, 0, 0, 0.2);
 
   &__details {
     display: flex;
@@ -119,6 +117,6 @@ mat-paginator {
   flex-direction: column;
   margin: 0 auto;
   background: $white-color;
-  height: 30.25rem;
+  height: 28.25rem;
   width: 100%;
 }

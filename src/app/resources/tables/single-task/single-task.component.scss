@@ -1,0 +1,73 @@
+@import "/src/styleguide.scss";
+
+.link-container {
+  width: 100%;
+}
+
+.stepper-divider {
+  height: 1px;
+  background: rgba(0, 0, 0, 0.12);
+  width: 100%;
+  margin-top: 2rem;
+}
+   
+  .custom-input {
+  font-family: Roboto;
+  border: none;
+  height: 2.5625rem;
+  color: rgba(0, 0, 0, 0.87);
+  font-style: normal;
+  font-weight: normal;
+  font-size: 1rem;
+  width: 100%;
+  padding: 0;
+}  
+
+.duration-text {
+  color: rgba(0, 0, 0, 0.87);
+  font-family: Roboto;
+  font-size: 0.875rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.25rem;
+  letter-spacing: 0.016rem;
+  margin-top: 1rem;
+} 
+
+.duration-container, .unlock-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.625rem;
+}
+
+.hour-container,
+.minutes-container, .hour-container-unlock, .minutes-container-unlock {
+  width: 50%;
+  height: 3.813rem;
+}
+
+.hint-title {
+  color: rgba(0, 0, 0, 0.6);
+  font-family: Roboto;
+  font-size: 0.75rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.25rem;
+  letter-spacing: 0.025rem;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  opacity: 1;
+}
+
+.error-message {
+  color: $error-color;
+  font-family: Roboto;
+  font-size: 0.75rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.25rem;
+  letter-spacing: 0.025rem;
+}

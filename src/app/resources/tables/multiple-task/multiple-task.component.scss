@@ -1,0 +1,82 @@
+@import "/src/styleguide.scss";
+
+.multiple-container {
+  overflow-y: auto;
+  max-height: 60vh;
+  padding: 0.5rem;
+
+  .course-select {
+    height: 3.8125rem;
+    width: 100%;
+    color: rgba(0, 0, 0, 0.64);
+    font-family: Roboto;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.5rem;
+    letter-spacing: 0.031rem;
+    border: none;
+  }
+
+  .error-message {
+    color: $error-color;
+    font-family: Roboto;
+    font-size: 0.75rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.25rem;
+    letter-spacing: 0.025rem;
+  }
+}
+
+.course-option-container {
+  display: flex;
+  justify-content: space-between;
+  box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.12),
+    0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 1px 0px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  background: $white-color;
+  margin-top: 1rem;
+  flex-direction: column;
+
+  .main-course-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 3.8125rem;
+    border-radius: 0.25rem;
+    padding: 0.5rem;
+
+    .course-title-container {
+      align-self: flex-start;
+      width: 100%;
+      height: 50%;
+
+      .course-title {
+        color: $black-color;
+        font-family: Roboto;
+        font-size: 1rem;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 1.5rem;
+        letter-spacing: 0.031rem;
+      }
+    }
+
+    .course-details {
+      margin-top: 8px;
+      align-self: flex-end;
+      width: 100%;
+      height: 50%;
+      display: flex;
+      gap: 0.625rem;
+
+      .course-details-item {
+        height: 100%;
+      }
+    }
+    .delete-course {
+      cursor: pointer;
+    }
+  }
+}
