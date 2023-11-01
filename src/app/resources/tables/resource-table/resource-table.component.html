@@ -1,6 +1,6 @@
 <div class="table-container">
     <!-- Tasks Table -->
-    <mat-table *ngIf="selectedTable === tableTasks" [dataSource]="dataSourceTask" matSort (matSortChange)="announceSortChange($event)" class="mat-elevation-z8">
+    <mat-table *ngIf="selectedTable === tableTasks" [dataSource]="dataSource" matSort (matSortChange)="announceSortChange($event)" class="mat-elevation-z8">
         <ng-container matColumnDef="icon">
             <mat-header-cell *matHeaderCellDef></mat-header-cell>
             <mat-cell *matCellDef="let task;"> 
@@ -58,7 +58,7 @@
     </mat-table>
 
     <!-- Courses Table -->
-    <mat-table *ngIf="selectedTable === tableCourses" [dataSource]="dataSourceCourse" matSort (matSortChange)="announceSortChange($event)" class="mat-elevation-z8">
+    <mat-table *ngIf="selectedTable === tableCourses" [dataSource]="dataSource" matSort (matSortChange)="announceSortChange($event)" class="mat-elevation-z8">
         <ng-container matColumnDef="name">
             <mat-header-cell class="header-cell" *matHeaderCellDef mat-sort-header sortActionDescription="Sort by name">name</mat-header-cell>
             <mat-cell *matCellDef="let course;"> {{ course.name }}</mat-cell>
@@ -106,7 +106,7 @@
     </mat-table>
 
     <!-- Avatars Table -->
-    <mat-table  *ngIf="selectedTable === tableAvatars" [dataSource]="dataSourceAvatar" matSort (matSortChange)="announceSortChange($event)" class="mat-elevation-z8">
+    <mat-table  *ngIf="selectedTable === tableAvatars" [dataSource]="dataSource" matSort (matSortChange)="announceSortChange($event)" class="mat-elevation-z8">
         <ng-container matColumnDef="name">
             <mat-header-cell class="header-cell" *matHeaderCellDef mat-sort-header sortActionDescription="Sort by name">name</mat-header-cell>
             <mat-cell *matCellDef="let avatar;"> {{ avatar.name }}</mat-cell>
@@ -138,21 +138,21 @@
     </mat-table>
 
     <!-- State: No Data -->
-    <div *ngIf="selectedTable === tableTasks && dataSourceTask.data.length === 0">
+    <div *ngIf="selectedTable === tableTasks && dataSource.data.length === 0">
         <div class="table-with-no-data">
             <img src="assets/icons/task.svg" alt="task-icon" class="task-icon">
             <p class="no-data-message">No tasks to display!</p>
         </div>
     </div>
     
-    <div *ngIf="selectedTable === tableCourses && dataSourceCourse.data.length === 0">
+    <div *ngIf="selectedTable === tableCourses && dataSource.data.length === 0">
         <div class="table-with-no-data">
             <img src="assets/icons/course.svg" alt="task-icon" class="task-icon">
             <p class="no-data-message">No courses to display!</p>
         </div>
     </div>
     
-    <div *ngIf="selectedTable === tableAvatars && dataSourceAvatar.data.length === 0">
+    <div *ngIf="selectedTable === tableAvatars && dataSource.data.length === 0">
         <div class="table-with-no-data">
             <img src="assets/icons/avatar.svg" alt="task-icon" class="task-icon">
             <p class="no-data-message">No avatars to display!</p>

@@ -1,6 +1,6 @@
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
-import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { AwaitConfirmationTable, RequireAttentionTable, TableHeaders } from 'src/app/enums/addbulkuser-table';
@@ -27,12 +27,15 @@ import { UsersService } from 'src/app/services/users/users.service';
 })
 
 export class AddbulkuserTableComponent{
+  @ViewChild(MatSort) sortAttention!:MatSort;
+  @ViewChild(MatSort) sortConfirmation!:MatSort;
+  
   @Input() selectedTableAttention = '';
   @Input() selectedTableConfirmation = '';
 
   @Input() dataSource!: MatTableDataSource<UserModal>;
 
-  expandedElement: UserModal[] | null | undefined = [];
+  expandedElement: UserModal[] = [];
 
   columnsToDisplayAttention: string[] = this.parseEnumToArray(RequireAttentionTable) as string[];
   columnsToDisplayWithExpand = ['expand', ...this.columnsToDisplayAttention, 'options'];
@@ -46,11 +49,8 @@ export class AddbulkuserTableComponent{
   parseEnumToArray(enumObject: any) {
     return Object.values(enumObject).filter(value => isNaN(Number(value)));
   }
-  
-  //Sorting
-  @ViewChild(MatSort) sortAttention!:MatSort;
-  @ViewChild(MatSort) sortConfirmation!:MatSort;
 
+  //Sorting
   ngAfterViewInit(): void {
     this.dataSource.sort = this.sortAttention;
     this.dataSource.sort = this.sortConfirmation;
@@ -65,51 +65,21 @@ export class AddbulkuserTableComponent{
   };
 
   //Open multiple rows at the same time
-  expandAllRows() {
+  expandMultipleRows() {
     for (const element of this.dataSource.data) {
-      if (!this.isExpanded(element)) {
+      if (!this.checkExpanded(element)) {
         this.pushPopElement(element);
       }
     }
-  }
+  };
 
-   checkExpanded(element: UserModal): boolean {
-    let flag = false;
-    if (this.expandedElement !== null) {
-      if (Array.isArray(this.expandedElement)) {
-        this.expandedElement.forEach((e) => {
-          if (e === element) {
-            flag = true;
-          }
-        });
-      }
-    }
-    return flag;
+  checkExpanded(element: UserModal): boolean {
+    return this.expandedElement.includes(element);
   };
   
   pushPopElement(element: UserModal) {
-    if (this.expandedElement !== null) {
-      if (Array.isArray(this.expandedElement)) {
-        const index = this.expandedElement.indexOf(element);
-        if (index === -1) {
-          this.expandedElement.push(element);
-        } else {
-          this.expandedElement.splice(index, 1);
-        }
-      } else {
-        console.error("this.expandedElement is not an array");
-      }
-    } else {
-      console.error("this.expandedElement is null");
-    }
-  };
-
-  //toggle for arrow buttons
-  isExpanded(element: UserModal): boolean {
-    if (Array.isArray(this.expandedElement)) {
-      return this.expandedElement.includes(element);
-    }
-    return false;
+    const index = this.expandedElement.indexOf(element);
+    index === -1 ? this.expandedElement.push(element) : this.expandedElement.splice(index, 1);
   };
 
   //Stop extend row event for options button

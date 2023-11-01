@@ -17,21 +17,21 @@
             <mat-tab label="TASKS" [disabled]="showSidenav"> 
                 <mat-divider></mat-divider>
                 <div class="table-container">
-                    <app-resource-table [dataSourceTask]="dataSourceTasks" [selectedTable]="selectedTableTasks"></app-resource-table>
+                    <app-resource-table [dataSource]="dataSourceTasks" [selectedTable]="selectedTableTasks"></app-resource-table>
                 </div>
             </mat-tab>
 
             <mat-tab label="COURSES" [disabled]="showSidenav">
                 <mat-divider></mat-divider>
                 <div class="table-container">
-                    <app-resource-table [dataSourceCourse]="dataSourceCourses" [selectedTable]="selectedTableCourses"></app-resource-table>
+                    <app-resource-table [dataSource]="dataSourceCourses" [selectedTable]="selectedTableCourses"></app-resource-table>
                 </div>
             </mat-tab>
             
             <mat-tab label="AVATARS" [disabled]="showSidenav"> 
                 <mat-divider></mat-divider>
                 <div class="table-container">
-                    <app-resource-table [dataSourceAvatar]="dataSourceAvatars" [selectedTable]="selectedTableAvatars"></app-resource-table>
+                    <app-resource-table [dataSource]="dataSourceAvatars" [selectedTable]="selectedTableAvatars"></app-resource-table>
                 </div>
             </mat-tab>
             <mat-tab label="INDUSTRIES" [disabled]="showSidenav"> 

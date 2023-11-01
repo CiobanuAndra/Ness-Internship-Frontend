@@ -16,14 +16,12 @@ import { ResourcesService } from 'src/app/services/resources/resources.service';
   styleUrls: ['./resource-table.component.scss']
 })
 export class ResourceTableComponent {
-  @Input() selectedTable = '';
-  @Input() dataSourceTask!: MatTableDataSource<Task>;
-  @Input() dataSourceCourse!: MatTableDataSource<Course>;
-  @Input() dataSourceAvatar!: MatTableDataSource<Avatar>;
-
   @ViewChild(MatSort) sortTasks!:MatSort;
   @ViewChild(MatSort) sortCourses!:MatSort;
   @ViewChild(MatSort) sortAvatars!:MatSort;
+
+  @Input() selectedTable = '';
+  @Input() dataSource!: MatTableDataSource<any>;
 
   tableTasks = TabTitle.Tasks;
   tableCourses = TabTitle.Courses;
@@ -41,9 +39,9 @@ export class ResourceTableComponent {
 
   //Sorting
   ngAfterViewInit(): void {
-    this.dataSourceTask.sort = this.sortTasks;
-    this.dataSourceCourse.sort = this.sortCourses;
-    this.dataSourceAvatar.sort = this.sortAvatars;
+    this.dataSource.sort = this.sortTasks;
+    this.dataSource.sort = this.sortCourses;
+    this.dataSource.sort = this.sortAvatars;
   };
 
   announceSortChange(sortState: Sort) {

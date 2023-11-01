@@ -28,20 +28,20 @@ export class AddbulkusersComponent implements OnInit{
   ngOnInit(): void {
     this.fetchUserAwaitModal();
     this.fetchUserRequireModal();
-  }
+  };
   
   //Check if tables have users with problems and if no proceed to submit
   public addUsers(): void {
     this.usersService.loadUsersRequireModal().subscribe(
       (users: UserModal[]) => {
         if (users.length > 0) {
-          this.child.expandAllRows();
+          this.child.expandMultipleRows();
         } else {
           //Proceed to send data
         }
       }
     );
-  }
+  };
 
   fetchUserRequireModal(): void {
     this.usersService.loadUsersRequireModal().subscribe(data => {
