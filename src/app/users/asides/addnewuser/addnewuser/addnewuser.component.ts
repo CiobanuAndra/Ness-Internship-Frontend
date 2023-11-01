@@ -1,6 +1,9 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, Validators } from '@angular/forms';
+import { catchError, throwError } from 'rxjs';
+import { UserModal } from 'src/app/interfaces/users/user-modal.model';
 import { ResourcesService } from 'src/app/services/resources/resources.service';
+import { UsersService } from 'src/app/services/users/users.service';
 
 @Component({
   selector: 'app-addnewuser',
@@ -16,7 +19,7 @@ export class AddnewuserComponent {
   isSurnameInputInteracted = false;
   isEmailInputInteracted = false;
 
-  constructor(private formBuilder:FormBuilder, private resourcesService: ResourcesService) {}
+  constructor(private formBuilder:FormBuilder, private resourcesService: ResourcesService, private usersService: UsersService) {}
 
   addNewUserForm = this.formBuilder.group({
     name: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20), this.containsSpecialChars]],
@@ -96,18 +99,21 @@ export class AddnewuserComponent {
   };
 
   //submit addNewUserForm 
-  onSubmit():void {
+  onSubmit(userData: any):void {
     this.isSubmitted = true;
     this.isNameInputInteracted = true;
     this.isSurnameInputInteracted = true;
     this.isEmailInputInteracted = true;
+
+    //hardcoded ID
+    const userId = '1';
 
     if(this.addNewUserForm.invalid) {
       this.getErrorMessageEmail();
       this.getErrorMessageName();
       this.getErrorMessageSurname();
     } else {
-      //proceed to add a new user
+      this.usersService.addNewUser(userData, userId).subscribe();
     }
   };
 

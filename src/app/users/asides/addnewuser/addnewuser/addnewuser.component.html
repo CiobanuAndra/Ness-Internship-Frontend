@@ -10,7 +10,7 @@
         <mat-divider></mat-divider>
 
         <div class="content-container">
-            <form class="form" [formGroup]="addNewUserForm" (ngSubmit)="onSubmit()">
+            <form class="form" [formGroup]="addNewUserForm">
                 <div class="form-container">
                     <mat-form-field class="field-1">
                         <input matInput type="text" class="input" formControlName="name" placeholder="Name" (blur)="isNameInputInteracted = true">
@@ -27,7 +27,7 @@
                 </div>
 
                 <div class="footer-container">
-                    <button mat-raised-button class="addUser-button" (click)="onSubmit()">add user</button>
+                    <button mat-raised-button class="addUser-button" (click)="onSubmit(addNewUserForm.value)">add user</button>
                     <button mat-raised-button class="cancel-button" (click)="closeAside()">cancel</button> 
                 </div>
             </form>

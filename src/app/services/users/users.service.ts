@@ -1,16 +1,23 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, map, of } from 'rxjs';
+import { BehaviorSubject, Observable, catchError, map, of, throwError } from 'rxjs';
 import { UsersListTable } from '../../interfaces/users-list-table';
 import { UserCard } from '../../interfaces/users/user-card.model';
 import { UserModal } from '../../interfaces/users/user-modal.model';
 import { UserRequireAttention } from '../../interfaces/user-require-attention.model';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UsersService {
-  private showSidenav = false;
-  constructor() {}
+  //ENDPOINTS
+  url1 = 'localhost:3000/api/user/admin';
+
+  httpOptions: { headers: HttpHeaders } = {
+    headers: new HttpHeaders({ "Content-Type": "application/json" }),
+  };
+  
+  constructor(private http: HttpClient) {}
 
   usersRequireAttention: UserRequireAttention[] = [
     {
@@ -403,6 +410,15 @@ export class UsersService {
   public loadUsersAwaitModal(): Observable<UserModal[]> {
     return of(this.usersModalAwait);
   }
+
+  //HTTP REQUESTS
+  addNewUser(userData: any, userId: string): Observable<any> {
+    return this.http.post<UserModal>(`${this.url1}?id=${userId}`, {name: userData.name, surname: userData.surname, email: userData.email}, this.httpOptions)
+    .pipe(catchError(error => {
+      const errorMessage = 'Something didnt work: ' + error;
+      return throwError(errorMessage);
+    }));
+  };
 
   getTotalCourses() {
     return of(this.totalCourses);
