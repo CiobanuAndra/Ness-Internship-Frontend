@@ -1,29 +1,31 @@
+@import "/src/styleguide.scss";
+
 .multiple-container {
   overflow-y: auto;
   max-height: 60vh;
-  padding: 8px;
+  padding: 0.5rem;
 
   .course-select {
-    height: 61px;
+    height: 3.8125rem;
     width: 100%;
     color: rgba(0, 0, 0, 0.64);
     font-family: Roboto;
     font-size: 16px;
     font-style: normal;
     font-weight: 400;
-    line-height: 24px;
-    letter-spacing: 0.5px;
+    line-height: 1.5rem;
+    letter-spacing: 0.031rem;
     border: none;
   }
 
   .error-message {
-    color: #ff5252;
+    color: $error-color;
     font-family: Roboto;
-    font-size: 12px;
+    font-size: 0.75rem;
     font-style: normal;
     font-weight: 400;
-    line-height: 20px;
-    letter-spacing: 0.4px;
+    line-height: 1.25rem;
+    letter-spacing: 0.025rem;
   }
 }
 
@@ -33,7 +35,7 @@
   box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.12),
     0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 1px 0px rgba(0, 0, 0, 0.2);
   width: 100%;
-  background: #fff;
+  background: $white-color;
   margin-top: 1rem;
   flex-direction: column;
 
@@ -41,9 +43,9 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 61px;
-    border-radius: 4px;
-    padding: 8px;
+    height: 3.8125rem;
+    border-radius: 0.25rem;
+    padding: 0.5rem;
 
     .course-title-container {
       align-self: flex-start;
@@ -51,13 +53,13 @@
       height: 50%;
 
       .course-title {
-        color: #0e0f11;
+        color: $black-color;
         font-family: Roboto;
-        font-size: 16px;
+        font-size: 1rem;
         font-style: normal;
         font-weight: 400;
-        line-height: 24px;
-        letter-spacing: 0.5px;
+        line-height: 1.5rem;
+        letter-spacing: 0.031rem;
       }
     }
 
@@ -67,7 +69,7 @@
       width: 100%;
       height: 50%;
       display: flex;
-      gap: 10px;
+      gap: 0.625rem;
 
       .course-details-item {
         height: 100%;

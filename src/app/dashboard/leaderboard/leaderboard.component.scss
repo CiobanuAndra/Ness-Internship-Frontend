@@ -19,7 +19,7 @@
     align-items: center;
     border-bottom: 0.063rem solid $medium-gray-color;
     line-height: 1.5rem;
-    height: 61px;
+    height: 3.813rem;
     padding: 0 1rem;
     background: $white-color;
 
@@ -51,13 +51,13 @@
     display: flex;
     justify-content: space-between;
     background-color: $white-color;
-    height: 48px;
+    height: 3rem;
   }
 
   .tab {
     flex: 1;
     text-align: center;
-    color: #00195F;
+    color: $primary-color;
     transition: color 0.3s ease;
     cursor: pointer;
     padding: 0.75rem 0;
@@ -66,7 +66,7 @@
   .tab.active-tab {
     position: relative;
     color: #00195F;
-    border-bottom: 0.125rem solid #00195F;
+    border-bottom: 0.125rem solid $primary-color;
   }
 
   .done-tab {

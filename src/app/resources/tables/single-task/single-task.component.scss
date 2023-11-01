@@ -1,3 +1,5 @@
+@import "/src/styleguide.scss";
+
 .link-container {
   width: 100%;
 }
@@ -24,11 +26,11 @@
 .duration-text {
   color: rgba(0, 0, 0, 0.87);
   font-family: Roboto;
-  font-size: 14px;
+  font-size: 0.875rem;
   font-style: normal;
   font-weight: 400;
-  line-height: 20px;
-  letter-spacing: 0.25px;
+  line-height: 1.25rem;
+  letter-spacing: 0.016rem;
   margin-top: 1rem;
 } 
 
@@ -36,13 +38,13 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 10px;
+  gap: 0.625rem;
 }
 
 .hour-container,
 .minutes-container, .hour-container-unlock, .minutes-container-unlock {
   width: 50%;
-  height: 61px;
+  height: 3.813rem;
 }
 
 .hint-title {
@@ -52,7 +54,7 @@
   font-style: normal;
   font-weight: 400;
   line-height: 1.25rem;
-  letter-spacing: 0.4px;
+  letter-spacing: 0.025rem;
 }
 
 input[type="number"]::-webkit-inner-spin-button,
@@ -61,11 +63,11 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 .error-message {
-  color: #FF5252;
+  color: $error-color;
   font-family: Roboto;
-  font-size: 12px;
+  font-size: 0.75rem;
   font-style: normal;
   font-weight: 400;
-  line-height: 20px;
-  letter-spacing: 0.4px;
+  line-height: 1.25rem;
+  letter-spacing: 0.025rem;
 }

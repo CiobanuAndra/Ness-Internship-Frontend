@@ -1,10 +1,4 @@
-import {
-  Component,
-  Input,
-  Output,
-  EventEmitter,
-  ViewChild,
-} from '@angular/core';
+import { Component, Input, Output, EventEmitter, ViewChild } from '@angular/core';
 import { FormType} from 'src/app/enums/form-type';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatStepper } from '@angular/material/stepper';
@@ -19,6 +13,9 @@ import { SingleTaskComponent } from '../single-task/single-task.component';
   styleUrls: ['./add-task.component.scss'],
 })
 export class AddTaskComponent {
+  @ViewChild(MultipleTaskComponent) multipleTaskComponent!: MultipleTaskComponent;
+  @ViewChild(SingleTaskComponent) singleTaskComponent!: SingleTaskComponent;
+  @ViewChild('stepper') stepper!: MatStepper;
   @Input() showSidenav!: boolean;
   @Output() showSidenavChange = new EventEmitter<boolean>();
   showTitleAlert = false;
@@ -57,10 +54,6 @@ export class AddTaskComponent {
     this.checkValueChanges();
   }
 
-  @ViewChild(MultipleTaskComponent) multipleTaskComponent!: MultipleTaskComponent;
-  @ViewChild(SingleTaskComponent) singleTaskComponent!: SingleTaskComponent;
-  @ViewChild('stepper') stepper!: MatStepper;
-
   closeDialog(): void {
     this.showSidenav = false;
     this.showSidenavChange.emit(this.showSidenav);
@@ -70,6 +63,7 @@ export class AddTaskComponent {
   @HostListener('document:keydown', ['$event'])
   handleKeyboardEvent(event: KeyboardEvent) {
     if (event.key === 'Escape' || event.key === 'Esc' || event.keyCode === 27) {
+      this.closeDialog();
     }
   }
 
@@ -89,7 +83,7 @@ export class AddTaskComponent {
     }
   }
 
-  private checkValueChanges(): void {
+  checkValueChanges(): void {
     this.firstFormGroup.get('title')!.valueChanges.subscribe((titleValue) => {
       this.showTitleAlert = titleValue.trim() === '';
     });
@@ -119,26 +113,27 @@ export class AddTaskComponent {
       : {
           selectedCourses: this.formBuilder.control([], [Validators.required]),
         };
-  
+
     this.secondFormGroup = this.formBuilder.group(config);
   }
   
-
   checkSingleOrMultiple(stepper: MatStepper): void {
-    if (this.selectedFormType === FormType.WITH_COURSES) {
-      if (this.multipleTaskComponent) {
-        if (this.multipleTaskComponent.selectedCourses.length === 0) {
-          this.multipleTaskComponent.showErrorMessage = true;
-        } else if (this.multipleTaskComponent.selectedCourses.length > 0) {
-          this.multipleTaskComponent.showErrorMessage = false;
+    switch (this.selectedFormType) {
+      case FormType.WITH_COURSES:
+        this.multipleTaskComponent?.selectedCourses.length === 0
+        ? (this.multipleTaskComponent.showErrorMessage = true)
+        : (this.multipleTaskComponent.showErrorMessage = false);
+
+        if (!this.multipleTaskComponent?.showErrorMessage) {
+        stepper.next();
+    }
+        break;
+  
+      case FormType.SINGLE:
+        if (this.singleTaskComponent.checkSingleForm()) {
           stepper.next();
         }
-      }
-    } else if (this.selectedFormType === FormType.SINGLE) {
-      if (this.singleTaskComponent.checkSingleForm()) {
-        stepper.next();
-      }
+        break;
     }
   }
-  
 }

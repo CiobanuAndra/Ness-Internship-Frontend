@@ -18,24 +18,20 @@ export class MultipleTaskComponent {
 
   ngOnInit(): void {
     this.resourcesService.loadCourses().subscribe((courses) => {
-      const filteredCourses = courses.filter((course) => course.task === '');
-      this.courses = filteredCourses;
+      this.courses = courses.filter((course) => course.task === '');
     });
   }
 
   onCourseSelected(event: Event): void {
     const selectElement = event.target as HTMLSelectElement;
     const selectedOptionIndex = parseInt(selectElement.value, 10);
-
-    if (selectedOptionIndex >= 0) {
-      const selectedOption = this.courses[selectedOptionIndex];
-
-      if (!this.selectedCourses.includes(selectedOption)) {
-        this.selectedCourses.push(selectedOption);
-        this.showErrorMessage = false;
-      }
+    const selectedOption = this.courses[selectedOptionIndex];
+  
+    if (selectedOptionIndex >= 0 && !this.selectedCourses.includes(selectedOption)) {
+      this.selectedCourses.push(selectedOption);
+      this.showErrorMessage = false;
     }
-  }
+  }  
 
   removeCourse(index: number): void {
     if (index >= 0 && index < this.selectedCourses.length) {
@@ -45,13 +41,10 @@ export class MultipleTaskComponent {
   }
 
   private updateSelectedCoursesControl() {
-    if (this.secondFormGroup) {
-      const selectedCoursesControl =
-        this.secondFormGroup.get('selectedCourses');
-      if (selectedCoursesControl) {
-        selectedCoursesControl.setValue([...this.selectedCourses]);
-        selectedCoursesControl.updateValueAndValidity();
-      }
+    const selectedCoursesControl = this.secondFormGroup?.get('selectedCourses');
+  
+    if (selectedCoursesControl) {
+      selectedCoursesControl.patchValue([...this.selectedCourses]);
     }
   }
 }

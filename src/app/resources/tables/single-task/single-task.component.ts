@@ -9,6 +9,7 @@ import { ViewChild } from '@angular/core';
   styleUrls: ['./single-task.component.scss']
 })
 export class SingleTaskComponent {
+  @ViewChild(MatStepper) stepper!: MatStepper;
   @Input() secondFormGroup!: FormGroup;
   @Output() onSingleFormValid = new EventEmitter<boolean>;
   showLinkError = false;
@@ -16,58 +17,34 @@ export class SingleTaskComponent {
   showUnlockFieldEmptyError = false;
   showUnlockTimeExceedsDurationError = false;
 
-  @ViewChild(MatStepper) stepper!: MatStepper;
-
   checkSingleForm(): boolean {
     const linkControl = this.secondFormGroup.get('link');
     const durationHourControl = this.secondFormGroup.get('durationHour');
     const durationMinutesControl = this.secondFormGroup.get('durationMinutes');
     const unlockHourControl = this.secondFormGroup.get('unlockHour');
     const unlockMinutesControl = this.secondFormGroup.get('unlockMinutes');
-
+  
     if (linkControl && durationHourControl && durationMinutesControl && unlockHourControl && unlockMinutesControl) {
-      if (linkControl.valid) {
-        this.showLinkError = false;
-      } else {
-        this.showLinkError = true;
-      }
-
-      if (!durationHourControl.value && !durationMinutesControl.value) {
-        this.showDurationFieldEmptyError = true;
-      } else {
-        this.showDurationFieldEmptyError = false;
-
-        if (!durationHourControl.value) {
-          durationHourControl.setValue(0);
-        } else if (!durationMinutesControl.value) {
-          durationMinutesControl.setValue(0);
-        }
-      }
-
-      if (!unlockHourControl.value && !unlockMinutesControl.value) {
-        this.showUnlockFieldEmptyError = true;
-        this.showUnlockTimeExceedsDurationError = false; // Remove the showUnlockHourError assignment
-      } else {
-        this.showUnlockFieldEmptyError = false;
-
-        if (!unlockHourControl.value) {
-          unlockHourControl.setValue(0);
-        } else if (!unlockMinutesControl.value) {
-          unlockMinutesControl.setValue(0);
-        }
-
-        if (
-          unlockHourControl.value > durationHourControl.value ||
-          (unlockHourControl.value === durationHourControl.value && unlockMinutesControl.value > durationMinutesControl.value)
-        ) {
-          this.showUnlockTimeExceedsDurationError = true;
-        } else {
-          this.showUnlockTimeExceedsDurationError = false;
-        }
-
-        return !this.showLinkError && !this.showDurationFieldEmptyError && !this.showUnlockFieldEmptyError && !this.showUnlockTimeExceedsDurationError;
-      }
+      this.showLinkError = !linkControl.valid;
+      this.showDurationFieldEmptyError = !durationHourControl.value && !durationMinutesControl.value;
+  
+      durationHourControl.setValue(durationHourControl.value || 0);
+      durationMinutesControl.setValue(durationMinutesControl.value || 0);
+  
+      this.showUnlockFieldEmptyError = !unlockHourControl.value && !unlockMinutesControl.value;
+  
+      unlockHourControl.setValue(unlockHourControl.value || 0);
+      unlockMinutesControl.setValue(unlockMinutesControl.value || 0);
+  
+      const unlockTimeExceedsDuration =
+        unlockHourControl.value > durationHourControl.value ||
+        (unlockHourControl.value === durationHourControl.value && unlockMinutesControl.value > durationMinutesControl.value);
+  
+      this.showUnlockTimeExceedsDurationError = unlockTimeExceedsDuration;
+  
+      return !this.showLinkError && !this.showDurationFieldEmptyError && !this.showUnlockFieldEmptyError && !unlockTimeExceedsDuration;
     }
+    
     return false;
   }
 }
