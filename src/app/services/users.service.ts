@@ -304,4 +304,8 @@ export class UsersService {
       map((users) => users.filter((user) => user.status === false))
     );
   }
+
+  getTotalCourses() {
+    return of(this.totalCourses);
+  }
 }
