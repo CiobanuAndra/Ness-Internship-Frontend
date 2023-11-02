@@ -7,7 +7,11 @@
 
 .leaderboard-table-container {
   width: calc(100% - 4rem);
-  padding: 0rem 2rem;
+  padding: 1rem 2rem;
+
+  &__name {
+    color: $primary-color;
+  }
 }
 
 .leaderboard__header {

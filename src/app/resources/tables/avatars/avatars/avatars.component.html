@@ -1,0 +1,73 @@
+<div class="table-container">
+  <mat-table
+    [dataSource]="dataSource"
+    matSort
+    (matSortChange)="announceSortChange($event)"
+    class="mat-elevation-z8"
+  >
+    <ng-container matColumnDef="name">
+      <mat-header-cell
+        class="header-cell"
+        *matHeaderCellDef
+        mat-sort-header
+        sortActionDescription="Sort by name"
+        >name</mat-header-cell
+      >
+      <mat-cell class="table-container__name" *matCellDef="let avatar">
+        {{ avatar.name }}</mat-cell
+      >
+    </ng-container>
+    <ng-container matColumnDef="linked_to">
+      <mat-header-cell
+        class="header-cell"
+        *matHeaderCellDef
+        mat-sort-header
+        sortActionDescription="Sort by linked_to"
+        >linked to</mat-header-cell
+      >
+      <mat-cell *matCellDef="let avatar"> {{ avatar.linked_to }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="default">
+      <mat-header-cell
+        class="header-cell"
+        *matHeaderCellDef
+        mat-sort-header
+        sortActionDescription="Sort by default"
+        >default</mat-header-cell
+      >
+      <mat-cell *matCellDef="let avatar">
+        {{ avatar.default ? "Yes" : "No" }}</mat-cell
+      >
+    </ng-container>
+    <ng-container matColumnDef="addedBy">
+      <mat-header-cell
+        class="header-cell"
+        *matHeaderCellDef
+        mat-sort-header
+        sortActionDescription="Sort by addedBy"
+        >added by</mat-header-cell
+      >
+      <mat-cell *matCellDef="let avatar"> {{ avatar.addedBy }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="options">
+      <mat-header-cell *matHeaderCellDef></mat-header-cell>
+      <mat-cell *matCellDef="let avatar">
+        <button mat-icon-button>
+          <mat-icon>more_vert</mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="columnsToDisplay"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: columnsToDisplay"></mat-row>
+  </mat-table>
+
+  <!-- State: No Data -->
+  <div *ngIf="dataSource.data.length === 0">
+    <div class="table-with-no-data">
+      <img src="assets/icons/avatar.svg" alt="task-icon" class="task-icon" />
+      <p class="no-data-message">No avatars to display!</p>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,19 @@
+@import "/src/styleguide.scss";
+
+.header-cell {
+  text-transform: uppercase;
+}
+
+.mat-column-name {
+  flex: 0 0 25%;
+}
+
+.mat-column-options {
+  flex: 0 0 5%;
+}
+
+.table-container {
+  &__name {
+    color: $primary-color;
+  }
+}

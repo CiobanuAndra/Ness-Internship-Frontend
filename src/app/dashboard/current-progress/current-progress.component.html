@@ -14,7 +14,7 @@
       </mat-form-field>
     </div>
   </div>
-  <div *ngIf="chartData.length > 0">
+  <div *ngIf="chartData.length > 0" class="chart-container">
     <div id="donutchart" class="donutchart"></div>
     <div class="legend">
       <div *ngFor="let item of legendItems" class="legend__colors">

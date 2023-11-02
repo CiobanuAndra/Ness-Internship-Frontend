@@ -19,6 +19,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { HttpClientModule } from '@angular/common/http';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { MatMenuModule } from '@angular/material/menu';
 
 @NgModule({
   declarations: [],
@@ -45,6 +46,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
     MatSidenavModule,
     MatExpansionModule,
     MatSidenavModule,
+    MatMenuModule,
   ],
   providers: [MatIconRegistry],
 })

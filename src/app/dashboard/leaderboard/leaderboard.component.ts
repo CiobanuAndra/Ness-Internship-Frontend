@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UsersService } from 'src/app/services/users/users.service';
 import { UserCard } from 'src/app/interfaces/users/user-card.model';
 import { map } from 'rxjs';
-import { LeaderboardTabsEnum } from '../enum/leaderboard-tabs.enum';
+import { LeaderboardTabsEnum } from '../../enums/leaderboard-tabs.enum';
 import { Router } from '@angular/router';
 
 @Component({

@@ -13,36 +13,29 @@
   height: $height;
 }
 
-
 .aside-open {
   width: 100%;
   height: 100%;
+  filter: brightness(0.7);
+  transition: filter 0.5s;
   background-color: $light-gray-color;
 }
 
-.open {
-  width: 100%;
-  height: calc(100% - 5rem);
-  background-color: #E6E7E9;
-  filter: brightness(0.7);
-  transition: filter 0.5s;
-}
-
 .users-list {
+  max-width: 1660px;
   margin: 0 auto;
-  @include dimensions(92%, 40%);
+  width: 100%;
+  height: 85%;
 
   &__title {
     display: flex;
-    flex-direction: row;
     align-items: center;
-    text-align: center;
-    border-bottom: 0.063rem solid $medium-gray-color;
     line-height: 1.75rem;
     @include dimensions(null, 3.813rem);
+    background: $white-color;
     padding: 0 1rem;
     background: $white-color;
-    gap: 80rem;
+    justify-content: space-between;
 
     &__buttons {
       display: flex;
@@ -121,6 +114,9 @@
   }
 
   &__mat-columnDef-name {
+    &__td {
+      color: $primary-color !important;
+    }
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -134,7 +130,7 @@
   }
 
   &__mat-columnDef-taskCompleted {
-    @include dimensions(12.5rem, null);
+    @include dimensions(16.5rem, null);
   }
 }
 
@@ -153,7 +149,6 @@
   height: 100%;
 }
 
-//aside
 .example-container {
   width: 500px;
   height: 300px;
@@ -176,4 +171,4 @@
   top: 0;
   right: 0;
   @include dimensions(40%, 100%);
-} 
+}

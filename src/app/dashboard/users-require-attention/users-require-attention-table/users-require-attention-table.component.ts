@@ -1,4 +1,9 @@
-import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectorRef,
+  Component,
+  ViewChild,
+} from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -19,13 +24,17 @@ export class UsersRequireAttentionTableComponent implements AfterViewInit {
   totalCourses: number = 0;
   displayedColumns: string[] = ['name', 'tasksLeft', 'timeLeft', 'buttons'];
 
-  constructor(private usersService: UsersService) {}
+  constructor(
+    private usersService: UsersService,
+    private cd: ChangeDetectorRef
+  ) {}
 
   filterActiveUsers(): void {
     this.usersService
       .filterActiveUsersRequireAttention()
       .subscribe((values) => {
-        this.dataSource.data = values;
+        this.dataSource.data = structuredClone(values);
+        this.cd.detectChanges();
       });
   }
 
@@ -33,7 +42,8 @@ export class UsersRequireAttentionTableComponent implements AfterViewInit {
     this.usersService
       .filterInactiveUsersRequireAttention()
       .subscribe((values) => {
-        this.dataSource.data = values;
+        this.dataSource.data = structuredClone(values);
+        this.cd.detectChanges();
       });
   }
 
@@ -56,6 +66,9 @@ export class UsersRequireAttentionTableComponent implements AfterViewInit {
     this.usersService.getUsersRequireAttention().subscribe((values) => {
       this.dataSource.data = values;
     });
-    this.totalCourses = this.usersService.totalCourses;
+    this.usersService.getTotalCourses().subscribe((val) => {
+      this.totalCourses = structuredClone(val);
+      this.cd.detectChanges();
+    });
   }
 }

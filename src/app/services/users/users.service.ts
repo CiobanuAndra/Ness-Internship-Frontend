@@ -370,24 +370,42 @@ export class UsersService {
   }
   //modals
   usersModalRequire: UserModal[] = [
-    { name: 'Mustas1', surname: 'Abdul1', email: '1412421@ness.com', message: "No Email Adress"},
-    { name: 'Mustas2', surname: 'Abdul2', email: '1512512@ness.com', message: "No Email Adress"},
-    { name: 'Mustas2', surname: 'Abdul2', email: '1512512@ness.com', message: "No Email Adress"},
-  ];  
-  
+    {
+      name: 'Mustas1',
+      surname: 'Abdul1',
+      email: '1412421@ness.com',
+      message: 'No Email Adress',
+    },
+    {
+      name: 'Mustas2',
+      surname: 'Abdul2',
+      email: '1512512@ness.com',
+      message: 'No Email Adress',
+    },
+    {
+      name: 'Mustas2',
+      surname: 'Abdul2',
+      email: '1512512@ness.com',
+      message: 'No Email Adress',
+    },
+  ];
+
   usersModalAwait: UserModal[] = [
-    { name: 'Mustas1', surname: 'Abdul1', email: '15132512@ness.com'},
-    { name: 'Mustas2', surname: 'Abdul2', email: '15132512@ness.com'},
-    { name: 'Mustas3', surname: 'Abdul', email: '15125512@ness.com'},
-    { name: 'Mustas', surname: 'Rajesh', email: '15125412@ness.com'},
-  ];  
-  
+    { name: 'Mustas1', surname: 'Abdul1', email: '15132512@ness.com' },
+    { name: 'Mustas2', surname: 'Abdul2', email: '15132512@ness.com' },
+    { name: 'Mustas3', surname: 'Abdul', email: '15125512@ness.com' },
+    { name: 'Mustas', surname: 'Rajesh', email: '15125412@ness.com' },
+  ];
+
   public loadUsersRequireModal(): Observable<UserModal[]> {
     return of(this.usersModalRequire);
-  };
-  
+  }
+
   public loadUsersAwaitModal(): Observable<UserModal[]> {
     return of(this.usersModalAwait);
-  };
-}
+  }
 
+  getTotalCourses() {
+    return of(this.totalCourses);
+  }
+}

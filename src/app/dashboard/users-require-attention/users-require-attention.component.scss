@@ -6,7 +6,7 @@
   margin-top: $margin-top;
 }
 .users-require-attention {
-  @include set-size(33.75rem, 18.938rem);
+  @include set-size(100%, 100%);
   border-radius: 0.25rem;
   background-color: $primary-color;
 
