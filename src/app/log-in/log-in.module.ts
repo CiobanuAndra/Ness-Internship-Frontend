@@ -4,6 +4,7 @@ import { LogInComponent } from './log-in/log-in.component';
 import { RouterModule, Routes } from '@angular/router';
 import {MatCardModule} from '@angular/material/card';
 import {Component} from '@angular/core';
+import {MatInputModule} from '@angular/material/input';
 
 const routes: Routes = [
   {
@@ -19,6 +20,8 @@ const routes: Routes = [
   ],
   imports: [
     CommonModule,
+    MatCardModule,
+    MatInputModule,
     RouterModule.forChild(routes),
   ],
   // providers: [UsersService],
@@ -29,7 +32,6 @@ export class LogInModule implements OnInit{
   // public changeNavbar(){
   //   this.navbar.show=false;
   // }
- 
   ngOnInit(): void {
     
   }
