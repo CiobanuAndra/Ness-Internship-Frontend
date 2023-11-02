@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
 import { UsersService } from 'src/app/services/users/users.service';
 import { UsersListTable } from 'src/app/interfaces/users-list-table';
@@ -14,7 +14,6 @@ export class AddBulkUsersComponent implements OnInit {
   @Output() closeSidenavEvent = new EventEmitter<void>();
 
   fileControl = new FormControl(null);
-
   displayedColumns: string[] = ['firstname', 'lastname', 'email'];
   dataSource = new MatTableDataSource<UsersListTable>();
 
@@ -31,18 +30,20 @@ export class AddBulkUsersComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.usersService.getUsersFromCSVFile().subscribe((values) => {
-      this.dataSource.data = values;
-      this.dataSource.data.push({
-        firstname: '...',
-        lastname: '...',
-        email: '...',
-        status: true,
-        coursesCompleted: 0,
-        leftDays: 0,
-        dateAdded: new Date(),
+    this.usersService
+      .getUsersFromCSVFile()
+      .subscribe((values: UsersListTable[]) => {
+        this.dataSource.data = values;
+        this.dataSource.data.push({
+          firstname: '...',
+          lastname: '...',
+          email: '...',
+          status: true,
+          coursesCompleted: 0,
+          leftDays: 0,
+          dateAdded: new Date(),
+        });
       });
-    });
     this.addFromListener();
   }
 }

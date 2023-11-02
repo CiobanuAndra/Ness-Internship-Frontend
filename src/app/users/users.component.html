@@ -21,13 +21,17 @@
         >
           EXPORT CSV
         </button>
-        <button mat-button class="users-list__title__buttons__add-user" (click)="toggleSidenav()">
+        <button
+          mat-button
+          class="users-list__title__buttons__add-user"
+          (click)="toggleSidenav()"
+        >
           ADD USER
         </button>
         <button mat-button class="users-list__title__buttons__add-bulk-users">
           <p
             class="users-list__title__buttons__add-bulk-users__p"
-            (click)="openDialog()"
+            (click)="toggleBulkUsersSidenav()"
           >
             ADD BULK USERS
           </p>
@@ -151,5 +155,8 @@
 
 <!-- ASIDES -->
 <mat-sidenav-container class="sidenav-container" *ngIf="showSidenav">
-  <app-addnewuser [showSidenav]="showSidenav" (showSidenavChange)="showSidenav = $event"></app-addnewuser>
+  <app-addnewuser
+    [showSidenav]="showSidenav"
+    (showSidenavChange)="showSidenav = $event"
+  ></app-addnewuser>
 </mat-sidenav-container>

@@ -8,13 +8,16 @@ import { AddbulkusersComponent } from './modals/addbulkusers/addbulkusers/addbul
 import { AddBulkUsersComponent } from './sidenavs/add-bulk-users/add-bulk-users.component';
 import { AddnewuserComponent } from './asides/addnewuser/addnewuser/addnewuser.component';
 import { AddbulkuserTableComponent } from './modals/addbulkusers/addbulkusers/tables/addbulkuser-table/addbulkuser-table.component';
+import { IconsModule } from 'src/shared/icons-module/icons/icons.module';
+import { NgxMatFileInputModule } from '@angular-material-components/file-input';
+import { ReactiveFormsModule } from '@angular/forms';
 
 const routes: Routes = [
   {
     path: '',
     component: UsersComponent,
   },
-]
+];
 
 @NgModule({
   declarations: [
@@ -26,10 +29,13 @@ const routes: Routes = [
   ],
   imports: [
     CommonModule,
+    ReactiveFormsModule,
+    IconsModule,
     MaterialModule,
     HttpClientModule,
+    NgxMatFileInputModule,
     RouterModule.forChild(routes),
   ],
-  exports: [ UsersComponent ],
+  exports: [UsersComponent, AddBulkUsersComponent],
 })
 export class UsersModule {}

@@ -14,15 +14,14 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatDialog } from '@angular/material/dialog';
-import { AddbulkusersComponent } from './modals/addbulkusers/addbulkusers/addbulkusers.component';
 import { ResourcesService } from '../services/resources/resources.service';
+import { AddBulkUsersComponent } from './sidenavs/add-bulk-users/add-bulk-users.component';
 
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.scss'],
 })
-
 export class UsersComponent implements AfterViewInit {
   showSidenav = false;
 
@@ -50,27 +49,29 @@ export class UsersComponent implements AfterViewInit {
     'dateAdded',
     'settings',
   ];
-  
-  constructor(private userService: UsersService, public dialog: MatDialog, private resourcesService: ResourcesService) {}
+
+  constructor(
+    private userService: UsersService,
+    public dialog: MatDialog,
+    private resourcesService: ResourcesService
+  ) {}
 
   toggleBulkUsersSidenav() {
     this.opened = !this.opened;
     this.resourcesService.setSidenavVisibility(this.opened);
   }
-  
-  //ASIDE
+
   toggleSidenav() {
     this.showSidenav = !this.showSidenav;
     this.resourcesService.setSidenavVisibility(this.showSidenav);
-  };
+  }
 
-  //MODAL
-  openDialog() {
-    const dialogRef = this.dialog.open(AddbulkusersComponent, {
+  openAddBulkUsers() {
+    const dialogRef = this.dialog.open(AddBulkUsersComponent, {
       autoFocus: false,
     });
-    
-    dialogRef.afterClosed().subscribe(result => {
+
+    dialogRef.afterClosed().subscribe((result) => {
       console.log(`Dialog result: ${result}`);
     });
   }
