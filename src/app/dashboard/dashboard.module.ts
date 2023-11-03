@@ -10,6 +10,7 @@ import { LeaderboardListComponent } from './leaderboard-list/leaderboard-list.co
 import { LeaderboardListItemComponent } from './leaderboard-list-item/leaderboard-list-item.component';
 import { UserProgressTableComponent } from './user-progress-table/user-progress-table.component';
 import { LeaderboardTableComponent } from './leaderboard-table/leaderboard-table.component';
+
 import { MatTableModule } from '@angular/material/table';
 import { RouterModule, Routes } from '@angular/router';
 import { CurrentProgressComponent } from './current-progress/current-progress.component';

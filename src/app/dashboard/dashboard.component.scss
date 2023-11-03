@@ -2,15 +2,15 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 85%;
+    height: 90%;
 }
 
 .container {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(3, 1fr);
-    width: 95%;
-    height: 95%;
+    width: 85%;
+    height: 100%;
     gap: 20px;
 }
 

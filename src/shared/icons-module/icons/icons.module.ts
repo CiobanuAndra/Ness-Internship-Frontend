@@ -23,7 +23,8 @@ export class IconsModule {
       .addSvgIcon('points', this.setPath(`${this.path}/points.svg`))
       .addSvgIcon('span', this.setPath(`${this.path}/span.svg`))
       .addSvgIcon('upload', this.setPath(`${this.path}/upload.svg`))
-      .addSvgIcon('close', this.setPath(`${this.path}/close.svg`));
+      .addSvgIcon('close', this.setPath(`${this.path}/close.svg`))
+      .addSvgIcon('users', this.setPath(`${this.path}/users.svg`))
   }
 
   private setPath(url: string): SafeResourceUrl {

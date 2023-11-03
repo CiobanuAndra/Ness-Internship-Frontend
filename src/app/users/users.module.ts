@@ -9,7 +9,7 @@ import { AddBulkUsersComponent } from './sidenavs/add-bulk-users/add-bulk-users.
 import { AddnewuserComponent } from './asides/addnewuser/addnewuser/addnewuser.component';
 import { AddbulkuserTableComponent } from './modals/addbulkusers/addbulkusers/tables/addbulkuser-table/addbulkuser-table.component';
 import { IconsModule } from 'src/shared/icons-module/icons/icons.module';
-import { NgxMatFileInputModule } from '@angular-material-components/file-input';
+import { NgxMatFileInputModule } from 'node_modules/@angular-material-components/file-input';
 import { ReactiveFormsModule } from '@angular/forms';
 
 const routes: Routes = [
