@@ -3,6 +3,7 @@ import {
   ChangeDetectorRef,
   Component,
   ElementRef,
+  OnInit,
   ViewChild,
 } from '@angular/core';
 import { UsersService } from '../services/users/users.service';
@@ -16,13 +17,15 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatDialog } from '@angular/material/dialog';
 import { ResourcesService } from '../services/resources/resources.service';
 import { AddBulkUsersComponent } from './sidenavs/add-bulk-users/add-bulk-users.component';
+import { environment } from 'src/environments/environment';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.scss'],
 })
-export class UsersComponent implements AfterViewInit {
+export class UsersComponent implements AfterViewInit, OnInit {
   showSidenav = false;
 
   @ViewChild(MatSort) sort!: MatSort;
@@ -49,12 +52,14 @@ export class UsersComponent implements AfterViewInit {
     'dateAdded',
     'settings',
   ];
+  users: any = [];
 
   constructor(
     private userService: UsersService,
     private cdr: ChangeDetectorRef,
     private resourcesService: ResourcesService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private http: HttpClient
   ) {}
 
   toggleBulkUsersSidenav() {
@@ -130,6 +135,12 @@ export class UsersComponent implements AfterViewInit {
     new ngxCsv(this.dataSource.data, 'UsersList', options);
   }
 
+  getAllUsers() {
+    this.userService.getUsers().subscribe((val) => {
+      console.log(val);
+    });
+  }
+
   ngAfterViewInit(): void {
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
@@ -139,5 +150,9 @@ export class UsersComponent implements AfterViewInit {
     });
 
     this.filterAllUsers();
+  }
+
+  ngOnInit() {
+    this.getAllUsers();
   }
 }

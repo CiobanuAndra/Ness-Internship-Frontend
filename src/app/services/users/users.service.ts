@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, catchError, map, of, throwError } from 'rxjs';
+import { BehaviorSubject, Observable, map, of } from 'rxjs';
 import { UsersListTable } from '../../interfaces/users-list-table';
 import { UserCard } from '../../interfaces/users/user-card.model';
 import { UserModal } from '../../interfaces/users/user-modal.model';
@@ -12,12 +12,16 @@ import { UserResponse } from 'src/app/interfaces/user-response';
   providedIn: 'root',
 })
 export class UsersService {
-  //ENDPOINTS
   urlAddUser = environment.baseUserURL;
+  baseUrl: string = 'http://localhost:3000/api/user';
 
   private showSidenav = false;
   getUsersURL = 'http://localhost:3000/api/user';
   constructor(private http: HttpClient) {}
+
+  getUsers(): Observable<any> {
+    return this.http.get(`${this.baseUrl}`);
+  }
 
   usersRequireAttention: UserRequireAttention[] = [
     {
@@ -256,8 +260,11 @@ export class UsersService {
 
   //HTTP REQUESTS
   addNewUser(userData: UserModal, userId: string): Observable<UserModal> {
-    return this.http.post<UserModal>(`${this.urlAddUser}/admin?id=${userId}`, userData);
-  };
+    return this.http.post<UserModal>(
+      `${this.urlAddUser}/admin?id=${userId}`,
+      userData
+    );
+  }
 
   getTotalCourses() {
     return of(this.totalCourses);
