@@ -9,33 +9,26 @@
         </mat-card-header>
 
         <mat-card-content class="log-in__card__content">
-            <form class="form-log-in">
+
+            <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="form-log-in" >
                 <mat-form-field class="form-log-in__email">
-                        <input matInput placeholder="Email" formControlName="emailFormControl">
+                        <input matInput placeholder="Email" formControlName="emailFormControl" name="emailFormControl" required>
                         <mat-hint class="form-log-in__email__hint">Email</mat-hint>
-                        <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
-                        Please enter a valid email address
-                        </mat-error>
-                        <mat-error *ngIf="emailFormControl.hasError('required')">
-                        Email is <strong>required</strong>
-                        </mat-error>
                 </mat-form-field>
-    
-                <mat-form-field class="form-log-in__password">
-                        <input matInput placeholder="Password" formControlName="passwordFormControl">
-                        <mat-error *ngIf="passwordFormControl.hasError('password') && !passwordFormControl.hasError('required')">
-                        Please enter a valid password
-                        </mat-error>
-                        <mat-error *ngIf="emailFormControl.hasError('required')">
-                        Password is <strong>required</strong>
-                        </mat-error>
-                </mat-form-field>
+
+                <div class="form-log-in__password__container">
+                    <mat-form-field class="form-log-in__password">
+                            <input matInput placeholder="Password" formControlName="passwordFormControl" required [type]="hide ? 'password' : 'text'">
+                    </mat-form-field>
+                    <mat-icon
+                    class="icon"
+                    matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}
+                    </mat-icon>
+                </div>
+                <button mat-button type="submit">LOG IN</button>
             </form>
+            
         </mat-card-content>
-    
-        <mat-card-actions class="log-in__card__button">
-        <button mat-button>LOG IN</button>
-        </mat-card-actions>
     </mat-card>
 </div>
 

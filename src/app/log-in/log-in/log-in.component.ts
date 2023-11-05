@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {FormControl, Validators} from '@angular/forms';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 
 
 @Component({
@@ -8,12 +8,22 @@ import {FormControl, Validators} from '@angular/forms';
   styleUrls: ['./log-in.component.scss']
 })
 export class LogInComponent {
-  emailFormControl = new FormControl('', [
-    Validators.required,
-    Validators.email,
-  ]);
-  passwordFormControl = new FormControl('', [
-    Validators.required,
-    Validators.minLength(6),
-  ]);
+
+  hide = true;
+//Prima varianta//
+      loginForm = new FormGroup({
+      emailFormControl : new FormControl('', [
+        Validators.required,
+        Validators.email,
+      ]),
+
+      passwordFormControl : new FormControl('', [
+        Validators.required,
+        Validators.minLength(6),
+      ]),
+  });
+
+  onSubmit(){
+    console.log('user logged')
+  }
 }
