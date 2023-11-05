@@ -26,14 +26,6 @@ const routes: Routes = [
     path: '',
     component: DashboardComponent,
   },
-  // {
-  //   path: 'leaderboard-table',
-  //   component: LeaderboardTableComponent,
-  // },
-  // {
-  //   path: 'users-require-attention-table',
-  //   component: UsersRequireAttentionTableComponent,
-  // },
 ];
 
 @NgModule({
