@@ -8,7 +8,7 @@
 
 <div class="navbarContainerAdmin grid-container" *ngIf="show;else onlyLogo" [ngClass]="{'open': showSidenav()}">
     <div class="navbar container">
-        <div class="logo">
+        <div class="logo" (click)="openPageModal('main-page/dashboard')">
             <img src="../../assets/Logo Ness2.svg" alt="Logo" class="logo">
         </div>
 
