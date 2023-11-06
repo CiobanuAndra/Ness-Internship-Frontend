@@ -5,13 +5,14 @@ import { UserCard } from '../../interfaces/users/user-card.model';
 import { UserModal } from '../../interfaces/users/user-modal.model';
 import { UserRequireAttention } from '../../interfaces/user-require-attention.model';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UsersService {
   //ENDPOINTS
-  url1 = 'localhost:3000/api/user/admin';
+  urlAddUser = environment.baseUserURL;
 
   httpOptions: { headers: HttpHeaders } = {
     headers: new HttpHeaders({ "Content-Type": "application/json" }),
@@ -412,12 +413,8 @@ export class UsersService {
   }
 
   //HTTP REQUESTS
-  addNewUser(userData: any, userId: string): Observable<any> {
-    return this.http.post<UserModal>(`${this.url1}?id=${userId}`, {name: userData.name, surname: userData.surname, email: userData.email}, this.httpOptions)
-    .pipe(catchError(error => {
-      const errorMessage = 'Something didnt work: ' + error;
-      return throwError(errorMessage);
-    }));
+  addNewUser(userData: UserModal, userId: string): Observable<UserModal> {
+    return this.http.post<UserModal>(`${this.urlAddUser}/admin?id=${userId}`, userData, this.httpOptions);
   };
 
   getTotalCourses() {

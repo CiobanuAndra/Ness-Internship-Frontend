@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, Validators } from '@angular/forms';
-import { catchError, throwError } from 'rxjs';
+import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { UserModal } from 'src/app/interfaces/users/user-modal.model';
 import { ResourcesService } from 'src/app/services/resources/resources.service';
 import { UsersService } from 'src/app/services/users/users.service';
@@ -19,23 +19,34 @@ export class AddnewuserComponent {
   isSurnameInputInteracted = false;
   isEmailInputInteracted = false;
 
-  constructor(private formBuilder:FormBuilder, private resourcesService: ResourcesService, private usersService: UsersService) {}
+  errorMessage = '';
+
+  horizontalPosition: MatSnackBarHorizontalPosition = 'center';
+  verticalPosition: MatSnackBarVerticalPosition = 'top';
+
+  constructor(private formBuilder: FormBuilder, private resourcesService: ResourcesService, private usersService: UsersService, private snackBar: MatSnackBar) { }
 
   addNewUserForm = this.formBuilder.group({
-    name: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20), this.containsSpecialChars]],
-    surname: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20), this.containsSpecialChars]],
-    email: ['', [Validators.required, Validators.email, this.emailDomain, Validators.minLength(10), Validators.maxLength(20)]],
+    name: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20), this.specialChars]],
+    surname: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20), this.specialChars]],
+    email: ['', [Validators.required, Validators.email, this.emailDomain]],
   });
 
   //error messages
+  getErrorsMessage(): void {
+    this.getErrorMessageEmail();
+    this.getErrorMessageName();
+    this.getErrorMessageSurname();
+  }
+
   getErrorMessageName(): string {
     if (this.addNewUserForm.get('name')?.hasError('required')) {
       return 'It is necessary to enter a name';
-    } else if(this.addNewUserForm.get('name')?.hasError('minlength')) {
+    } else if (this.addNewUserForm.get('name')?.hasError('minlength')) {
       return 'This name its too short';
-    } else if(this.addNewUserForm.get('name')?.hasError('maxlength')) {
+    } else if (this.addNewUserForm.get('name')?.hasError('maxlength')) {
       return 'This name its too long';
-    } else if(this.addNewUserForm.get('name')?.hasError('containsSpecialChars')) {
+    } else if (this.addNewUserForm.get('name')?.hasError('specialChars')) {
       return 'Name has special characters';
     } else return 'Name';
   };
@@ -43,11 +54,11 @@ export class AddnewuserComponent {
   getErrorMessageSurname(): string {
     if (this.addNewUserForm.get('surname')?.hasError('required')) {
       return 'It is necessary to enter a surname';
-    } else if(this.addNewUserForm.get('surname')?.hasError('minlength')) {
+    } else if (this.addNewUserForm.get('surname')?.hasError('minlength')) {
       return 'This surname its too short';
-    } else if(this.addNewUserForm.get('surname')?.hasError('maxlength')) {
+    } else if (this.addNewUserForm.get('surname')?.hasError('maxlength')) {
       return 'This surname its too long';
-    } else if(this.addNewUserForm.get('surname')?.hasError('containsSpecialChars')) {
+    } else if (this.addNewUserForm.get('surname')?.hasError('specialChars')) {
       return 'Name has special characters';
     } else return 'Name';
   };
@@ -55,66 +66,71 @@ export class AddnewuserComponent {
   getErrorMessageEmail(): string {
     if (this.addNewUserForm.get('email')?.hasError('required')) {
       return 'It is necessary to enter an email';
-    } else if(this.addNewUserForm.get('email')?.hasError('email')) {
+    } else if (this.addNewUserForm.get('email')?.hasError('email')) {
       return 'This is not an email';
-    } else if(this.addNewUserForm.get('email')?.hasError('emailDomain')) {
+    } else if (this.addNewUserForm.get('email')?.hasError('emailDomain')) {
       return 'This is not an email from Ness organization';
-    } else if(this.addNewUserForm.get('email')?.hasError('minlength')) {
-      return 'This email its too short';
-    } else if(this.addNewUserForm.get('email')?.hasError('maxlength')) {
-      return 'This email its too long';
     } else return 'Email';
   };
 
   //check if email has ness domain
-  emailDomain(control: AbstractControl): {[Key: string]: any} | null {
-    const email: string = control.value;
-    const domain = email.substring(email.lastIndexOf('@') + 1);
+  emailDomain(control: AbstractControl): { [Key: string]: any } | null {
+    const domain = control.value ? control.value.substring(control.value.lastIndexOf('@') + 1) : null;
 
-    if(domain.toLowerCase() === 'ness.com') {
-      return null;
-    } else {
-      return {'emailDomain': true};
-    }
+    return domain && domain.toLowerCase() === 'ness.com' ? null : { 'emailDomain': true };
   }
 
   //check for special characters
-  containsSpecialChars(control: AbstractControl): { [key: string]: boolean } | null {
-    const specialChars = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
-    const value = control.value;
-  
-    if (value && specialChars.test(value)) {
-      return { containsSpecialChars: true };
-    }
-  
-    return null;
+  specialChars(control: AbstractControl): { [key: string]: boolean } | null {
+    const specialChars = /[!@#$%^&*`()_+\-=\[\]{};':"\\|,.<>\/?~]/;
+
+    return (control.value && specialChars.test(control.value)) ? { containsSpecialChars: true } : null;
   }
 
   //change styles when an error comes in
-  checkDisplayError(formControl: AbstractControl<any, any> | null, isSubmitted:boolean): boolean {
-    if(formControl === null) {
-      return false;
-    }
-    return (formControl.invalid && (formControl.dirty || formControl.touched || isSubmitted));
+  checkDisplayError(formControl: AbstractControl<any, any> | null, isSubmitted: boolean): boolean {
+    return formControl === null ? false : (formControl.invalid && (formControl.dirty || formControl.touched || isSubmitted));
+  };
+
+  toggleInteractions(state: boolean): void {
+    this.isSubmitted = state;
+    this.isNameInputInteracted = state;
+    this.isSurnameInputInteracted = state;
+    this.isEmailInputInteracted = state;
   };
 
   //submit addNewUserForm 
-  onSubmit(userData: any):void {
-    this.isSubmitted = true;
-    this.isNameInputInteracted = true;
-    this.isSurnameInputInteracted = true;
-    this.isEmailInputInteracted = true;
-
+  onSubmit(): void {
+    if (this.addNewUserForm.invalid) {
+      this.getErrorsMessage();
+      this.toggleInteractions(true);
+      return;
+    }
+    const userData = {
+      ...this.addNewUserForm.value as UserModal
+    }
     //hardcoded ID
     const userId = '1';
 
-    if(this.addNewUserForm.invalid) {
-      this.getErrorMessageEmail();
-      this.getErrorMessageName();
-      this.getErrorMessageSurname();
-    } else {
-      this.usersService.addNewUser(userData, userId).subscribe();
-    }
+    this.usersService.addNewUser(userData, userId).subscribe(
+      {
+        next: () => {
+          this.toastMessage('User added successfully!', 'green-snackbar');
+          this.closeAside();
+        },
+        error: (error) => {
+          this.toastMessage(error.message, 'red-snackbar');
+        }
+      })
+  };
+
+  toastMessage(message: string, colorClass: string): void {
+    this.snackBar.open(message, '', {
+      horizontalPosition: this.horizontalPosition,
+      verticalPosition: this.verticalPosition,
+      duration: 3000,
+      panelClass: colorClass
+    });
   };
 
   closeAside(): void {

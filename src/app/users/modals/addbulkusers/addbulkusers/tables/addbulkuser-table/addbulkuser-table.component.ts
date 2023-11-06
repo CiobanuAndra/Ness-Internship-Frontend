@@ -48,7 +48,8 @@ export class AddbulkuserTableComponent{
 
   parseEnumToArray(enumObject: any) {
     return Object.values(enumObject).filter(value => isNaN(Number(value)));
-  }
+  };
+
   //Sorting
   ngAfterViewInit(): void {
     this.dataSource.sort = this.sortAttention;

@@ -12,6 +12,8 @@ import { DashboardModule } from './dashboard/dashboard.module';
 import { InitialsCustomepipePipe } from './pipes/initials-customepipe.pipe';
 import { ResourcesModule } from './resources/resources.module';
 import { UsersModule } from './users/users.module';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { InterceptorService } from './services/interceptors/interceptor-service.interceptor';
 
 @NgModule({
   declarations: [AppComponent, NavbarComponent, InitialsCustomepipePipe],
@@ -28,7 +30,11 @@ import { UsersModule } from './users/users.module';
     UsersModule,
   ],
   exports: [RouterModule],
-  providers: [],
+  providers: [{
+    provide: HTTP_INTERCEPTORS, 
+    useClass: InterceptorService,
+    multi: true
+  }], 
   bootstrap: [AppComponent],
 })
 export class AppModule {}
