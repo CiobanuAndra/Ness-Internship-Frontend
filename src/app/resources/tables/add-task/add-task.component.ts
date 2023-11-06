@@ -6,6 +6,7 @@ import { ResourcesService } from 'src/app/services/resources/resources.service';
 import { HostListener } from '@angular/core';
 import { MultipleTaskComponent } from '../multiple-task/multiple-task.component';
 import { SingleTaskComponent } from '../single-task/single-task.component';
+import { DialogService } from 'src/app/services/users/dialog.service';
 
 @Component({
   selector: 'app-add-task',
@@ -17,6 +18,7 @@ export class AddTaskComponent {
   @ViewChild(SingleTaskComponent) singleTaskComponent!: SingleTaskComponent;
   @ViewChild('stepper') stepper!: MatStepper;
   @Input() showSidenav!: boolean;
+  @Input() isDialogOpen = false; 
   @Output() showSidenavChange = new EventEmitter<boolean>();
   showTitleAlert = false;
   showDescriptionAlert = false;
@@ -31,7 +33,8 @@ export class AddTaskComponent {
 
   constructor(
     private formBuilder: FormBuilder,
-    private resourcesService: ResourcesService
+    private resourcesService: ResourcesService,
+    private dialogService: DialogService
   ) {}
 
   ngOnInit() {
@@ -55,9 +58,15 @@ export class AddTaskComponent {
   }
 
   closeDialog(): void {
-    this.showSidenav = false;
-    this.showSidenavChange.emit(this.showSidenav);
-    this.resourcesService.setSidenavVisibility(false);
+    this.isDialogOpen = true;
+    this.dialogService.openConfirmationDialog().then((result) => {
+      this.isDialogOpen = false;
+      if (result) {
+        this.showSidenav = false;
+        this.showSidenavChange.emit(this.showSidenav);
+        this.resourcesService.setSidenavVisibility(false);
+      }
+    });
   }
 
   @HostListener('document:keydown', ['$event'])

@@ -1,9 +1,15 @@
 @import "/src/styleguide.scss";
 
+.add-task-container.open {
+  background-color: #fff;
+  filter: brightness(0.7);
+  transition: filter 0.5s;
+}
+
 .add-task-container {
   display: flex;
   flex-direction: column;
-  height: 100%;
+  min-height: 100vh;
 
   .add-task-header {
     display: flex;
@@ -47,7 +53,6 @@
     justify-content: space-between;
     align-items: flex-end;
     padding: 0.025rem;
-    margin-top: 1.25rem;
 }
     .next-button {
       font-family: Roboto;
@@ -80,7 +85,6 @@
   .general-stepper-inputs {
     display: flex;
     flex-direction: column;
-    height: 70vh;
 
     .description-textarea {
       resize: none;
@@ -133,6 +137,10 @@
   background-color: $primary-color;
 }
 
+:host ::ng-deep .mat-horizontal-content-container {
+  padding: 0.25rem 0.5rem 0.25rem 0.5rem;
+}
+
 .type-container {
   display: flex;
   align-items: center;
@@ -155,7 +163,6 @@
 }
 
 .details-content {
-  height: 65vh;
   width: 100%;
 }
 
@@ -173,4 +180,44 @@
 
 .details-buttons .cancel-button {
   align-self: flex-end;
+}
+
+@media (max-height: 700px) {
+  .general-stepper-inputs {
+    height: 70vh;
+  }
+
+  .details-content {
+    height: 65vh;
+  }
+}
+
+@media (min-height: 701px) and (max-height: 950px) {
+  .general-stepper-inputs {
+    height: 75vh;
+  }
+
+  .details-content {
+    height: 65vh;
+  }
+}
+
+@media (min-height: 951px) and (max-height: 1200px) {
+  .general-stepper-inputs {
+    height: 80vh;
+  }
+
+  .details-content {
+    height: 75vh;
+  }
+}
+
+@media (min-height: 1201px) {
+  .general-stepper-inputs {
+    height: 85vh;
+  }
+
+  .details-content {
+    height: 85vh;
+  }
 }

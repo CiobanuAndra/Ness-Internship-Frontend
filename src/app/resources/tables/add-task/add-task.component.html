@@ -1,4 +1,4 @@
-<div class="add-task-container">
+<div class="add-task-container" [ngClass]="{'open': isDialogOpen}">
   <div class="add-task-header">
     <span>Add Task</span>
     <button mat-icon-button (click)="closeDialog()">
@@ -80,7 +80,6 @@
             </button>
             <button
               mat-button
-              matStepperNext
               class="cancel-button"
               (click)="closeDialog()"
             >
@@ -136,7 +135,6 @@
             <div class="toggle-step-buttons">
               <button
                 mat-button
-                matStepperNext
                 matStepperPrevious
                 class="cancel-button"
               >
@@ -152,7 +150,6 @@
             </div>
             <button
               mat-button
-              matStepperNext
               class="cancel-button"
               (click)="closeDialog()"
             >

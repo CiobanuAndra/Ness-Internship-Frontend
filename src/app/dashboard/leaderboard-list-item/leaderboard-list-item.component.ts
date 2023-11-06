@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { UserCard } from 'src/app/interfaces/users/user-card.model';
 
 @Component({
@@ -6,7 +6,7 @@ import { UserCard } from 'src/app/interfaces/users/user-card.model';
   templateUrl: './leaderboard-list-item.component.html',
   styleUrls: ['./leaderboard-list-item.component.scss'],
 })
-export class LeaderboardListItemComponent {
+export class LeaderboardListItemComponent{
   @Input() user!: UserCard;
   @Input() status!: number;
 }

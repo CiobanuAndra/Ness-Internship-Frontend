@@ -1,0 +1,31 @@
+<div class="dialog-container">
+    <div class="dialog-header">
+        <span class="alert-message">Alert</span>
+        <mat-icon class="close-icon" [mat-dialog-close]="false">close</mat-icon>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="content-dialog">
+    <span>You are about to close upload.</span>
+    <br>
+    <span>Are you sure you want to close bulk upload? The file uploaded and modification done will not be saved</span>
+    <div class="dialog-buttons">
+
+        <button
+          mat-button
+          class="next-button"
+          [mat-dialog-close]="true"
+        >
+          {{ "confirm" | uppercase }}
+        </button>
+        <button
+        mat-button
+        matStepperNext
+        matStepperPrevious
+        class="cancel-button"
+        [mat-dialog-close]="false"
+      >
+        {{ "cancel" | uppercase }}
+      </button>
+      </div>
+</div>
+  </div>
