@@ -41,31 +41,31 @@ export class AddnewuserComponent {
 
   getErrorMessageName(): string {
     if (this.addNewUserForm.get('name')?.hasError('required')) {
-      return 'It is necessary to enter a name';
+      return 'Enter a name';
     } else if (this.addNewUserForm.get('name')?.hasError('minlength')) {
       return 'This name its too short';
     } else if (this.addNewUserForm.get('name')?.hasError('maxlength')) {
       return 'This name its too long';
     } else if (this.addNewUserForm.get('name')?.hasError('specialChars')) {
-      return 'Name has special characters';
+      return 'No special characters';
     } else return 'Name';
   };
 
   getErrorMessageSurname(): string {
     if (this.addNewUserForm.get('surname')?.hasError('required')) {
-      return 'It is necessary to enter a surname';
+      return 'Enter a surname';
     } else if (this.addNewUserForm.get('surname')?.hasError('minlength')) {
       return 'This surname its too short';
     } else if (this.addNewUserForm.get('surname')?.hasError('maxlength')) {
       return 'This surname its too long';
     } else if (this.addNewUserForm.get('surname')?.hasError('specialChars')) {
-      return 'Name has special characters';
-    } else return 'Name';
+      return 'No special characters';
+    } else return 'Surname';
   };
 
   getErrorMessageEmail(): string {
     if (this.addNewUserForm.get('email')?.hasError('required')) {
-      return 'It is necessary to enter an email';
+      return 'Enter an email';
     } else if (this.addNewUserForm.get('email')?.hasError('email')) {
       return 'This is not an email';
     } else if (this.addNewUserForm.get('email')?.hasError('emailDomain')) {
@@ -84,7 +84,7 @@ export class AddnewuserComponent {
   specialChars(control: AbstractControl): { [key: string]: boolean } | null {
     const specialChars = /[!@#$%^&*`()_+\-=\[\]{};':"\\|,.<>\/?~]/;
 
-    return (control.value && specialChars.test(control.value)) ? { containsSpecialChars: true } : null;
+    return (control.value && specialChars.test(control.value)) ? { specialChars: true } : null;
   }
 
   //change styles when an error comes in
