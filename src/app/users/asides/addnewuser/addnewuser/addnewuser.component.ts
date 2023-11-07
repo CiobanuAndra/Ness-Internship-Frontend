@@ -106,9 +106,11 @@ export class AddnewuserComponent {
       this.toggleInteractions(true);
       return;
     }
+
     const userData = {
       ...this.addNewUserForm.value as UserModal
     }
+    
     //hardcoded ID
     const userId = '1';
 
@@ -137,5 +139,5 @@ export class AddnewuserComponent {
     this.showSidenav = false;
     this.showSidenavChange.emit(this.showSidenav);
     this.resourcesService.setSidenavVisibility(false);
-  }
+  };
 }
