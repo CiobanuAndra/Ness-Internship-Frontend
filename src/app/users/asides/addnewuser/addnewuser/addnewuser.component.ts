@@ -1,9 +1,11 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
+import { SnackBarPosition } from 'src/app/enums/snackbarposition';
 import { UserModal } from 'src/app/interfaces/users/user-modal.model';
 import { ResourcesService } from 'src/app/services/resources/resources.service';
 import { UsersService } from 'src/app/services/users/users.service';
+import { emailDomain, specialChars } from 'src/app/utils/formUtils';
 
 @Component({
   selector: 'app-addnewuser',
@@ -21,15 +23,15 @@ export class AddnewuserComponent {
 
   errorMessage = '';
 
-  horizontalPosition: MatSnackBarHorizontalPosition = 'center';
-  verticalPosition: MatSnackBarVerticalPosition = 'top';
+  horizontalPosition: MatSnackBarHorizontalPosition = SnackBarPosition.positionCenter;
+  verticalPosition: MatSnackBarVerticalPosition = SnackBarPosition.positionTop;
 
   constructor(private formBuilder: FormBuilder, private resourcesService: ResourcesService, private usersService: UsersService, private snackBar: MatSnackBar) { }
 
   addNewUserForm = this.formBuilder.group({
-    name: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20), this.specialChars]],
-    surname: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20), this.specialChars]],
-    email: ['', [Validators.required, Validators.email, this.emailDomain]],
+    name: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20), specialChars]],
+    surname: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20), specialChars]],
+    email: ['', [Validators.required, Validators.email, emailDomain]],
   });
 
   //error messages
@@ -72,20 +74,6 @@ export class AddnewuserComponent {
       return 'This is not an email from Ness organization';
     } else return 'Email';
   };
-
-  //check if email has ness domain
-  emailDomain(control: AbstractControl): { [Key: string]: any } | null {
-    const domain = control.value ? control.value.substring(control.value.lastIndexOf('@') + 1) : null;
-
-    return domain && domain.toLowerCase() === 'ness.com' ? null : { 'emailDomain': true };
-  }
-
-  //check for special characters
-  specialChars(control: AbstractControl): { [key: string]: boolean } | null {
-    const specialChars = /[!@#$%^&*`()_+\-=\[\]{};':"\\|,.<>\/?~]/;
-
-    return (control.value && specialChars.test(control.value)) ? { 'specialChars': true } : null;
-  }
 
   //change styles when an error comes in
   checkDisplayError(formControl: AbstractControl<any, any> | null, isSubmitted: boolean): boolean {

@@ -5,7 +5,13 @@ import { Observable, catchError, throwError } from 'rxjs';
 @Injectable()
 export class InterceptorService implements HttpInterceptor {
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    return next.handle(request)
+    const modifiedRequest = request.clone({
+      setHeaders: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    return next.handle(modifiedRequest)
       .pipe(
         catchError((error: HttpErrorResponse) => {
           let errorMessage = 'Something bad happened; Please try again later.';
@@ -23,5 +29,5 @@ export class InterceptorService implements HttpInterceptor {
           return throwError(() => new Error(errorMessage));
         })
       )
-  }
+  };
 };

@@ -14,10 +14,6 @@ export class UsersService {
   //ENDPOINTS
   urlAddUser = environment.baseUserURL;
 
-  httpOptions: { headers: HttpHeaders } = {
-    headers: new HttpHeaders({ "Content-Type": "application/json" }),
-  };
-  
   constructor(private http: HttpClient) {}
 
   usersRequireAttention: UserRequireAttention[] = [
@@ -414,7 +410,7 @@ export class UsersService {
 
   //HTTP REQUESTS
   addNewUser(userData: UserModal, userId: string): Observable<UserModal> {
-    return this.http.post<UserModal>(`${this.urlAddUser}/admin?id=${userId}`, userData, this.httpOptions);
+    return this.http.post<UserModal>(`${this.urlAddUser}/admin?id=${userId}`, userData);
   };
 
   getTotalCourses() {
