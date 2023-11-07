@@ -17,7 +17,7 @@ import { CurrentProgressComponent } from './current-progress/current-progress.co
 import { UsersService } from '../services/users/users.service';
 import { GoogleChartsModule } from 'angular-google-charts';
 import { UsersRequireAttentionTableComponent } from './users-require-attention/users-require-attention-table/users-require-attention-table.component';
-import { NavbarComponent } from '../navbar/navbar.component';
+import { NavbarLayoutComponent } from '../navbar/navbar-layout.component';
 import { InitialsCustomepipePipe } from '../pipes/initials-customepipe.pipe';
 
 
@@ -38,9 +38,7 @@ const routes: Routes = [
     LeaderboardTableComponent,
     CurrentProgressComponent,
     LeaderboardComponent,
-    UsersRequireAttentionTableComponent,
-    NavbarComponent,
-    InitialsCustomepipePipe
+    UsersRequireAttentionTableComponent
   ],
   imports: [
     CommonModule,

@@ -13,10 +13,12 @@ import { UsersModule } from './users/users.module';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { InterceptorService } from './services/interceptors/interceptor-service.interceptor';
 import { LogInModule } from './log-in/log-in.module';
+import {NavbarLayoutComponent} from "./navbar/navbar-layout.component";
+import {InitialsCustomepipePipe} from "./pipes/initials-customepipe.pipe";
 
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, NavbarLayoutComponent, InitialsCustomepipePipe],
 
   imports: [
     BrowserModule,

@@ -4,17 +4,18 @@ import { ResourcesService } from '../services/resources/resources.service';
 
 @Component({
   selector: 'app-navbar',
-  templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.scss']
-  
+  templateUrl: './navbar-layout.component.html',
+  styleUrls: ['./navbar-layout.component.scss']
+
 })
-export class NavbarComponent {
+export class NavbarLayoutComponent {
+  constructor(private router: Router, private resourcesService: ResourcesService){}
+  openPageModal(path:string){
+    this.router.navigate([`${path}`]);
+  }
   show=true;
   title = 'admin-fe';
   currentUser= "Ciobanu andra";
-
-  constructor(private router: Router, private resourcesService: ResourcesService){}
-  
   showSidenav(): boolean {
     return this.resourcesService.getShowSidenav();
   }
