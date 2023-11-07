@@ -84,7 +84,7 @@ export class AddnewuserComponent {
   specialChars(control: AbstractControl): { [key: string]: boolean } | null {
     const specialChars = /[!@#$%^&*`()_+\-=\[\]{};':"\\|,.<>\/?~]/;
 
-    return (control.value && specialChars.test(control.value)) ? { specialChars: true } : null;
+    return (control.value && specialChars.test(control.value)) ? { 'specialChars': true } : null;
   }
 
   //change styles when an error comes in
