@@ -1,17 +1,17 @@
 export enum RequireAttentionTable {
-    name = 'name',
-    surname = 'surname',
-    email = 'email',
+    NAME = 'name',
+    SURNAME = 'surname',
+    EMAIL = 'email',
 }
 
 export enum AwaitConfirmationTable {
-    name = 'name',
-    surname = 'surname',
-    email = 'email',
-    options = 'options',
+    NAME = 'name',
+    SURNAME = 'surname',
+    EMAIL = 'email',
+    OPTIONS = 'options',
 }
 
-export enum TableHeaders {
-    attention = 'Attention',
-    confirmation = 'Confirmation',
-}
+export const tableHeaders = {
+    attention: 'Attention',
+    confirmation: 'Confirmation',
+};

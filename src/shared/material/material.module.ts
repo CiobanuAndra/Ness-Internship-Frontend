@@ -20,6 +20,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [],
@@ -47,6 +48,7 @@ import { MatMenuModule } from '@angular/material/menu';
     MatExpansionModule,
     MatSidenavModule,
     MatMenuModule,
+    MatSnackBarModule
   ],
   providers: [MatIconRegistry],
 })

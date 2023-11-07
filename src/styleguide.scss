@@ -111,3 +111,20 @@ $error-color: #ff5252;
   line-height: 24px;
   letter-spacing: 0.5px;
 }
+
+//customize toast message
+.mat-mdc-snack-bar-container {
+  simple-snack-bar.mat-mdc-simple-snack-bar.ng-star-inserted {
+    text-align: center;
+  }
+
+  &.green-snackbar {
+    --mdc-snackbar-container-color: #149211;
+    --mdc-snackbar-supporting-text-color: #fff;
+  }
+  
+  &.red-snackbar {
+    --mdc-snackbar-container-color: #e42323;
+    --mdc-snackbar-supporting-text-color: #fff;
+  }
+}

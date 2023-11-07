@@ -39,7 +39,6 @@
 
     &__buttons {
       display: flex;
-      flex-direction: row;
       gap: 1rem;
 
       &__export-csv {
@@ -170,5 +169,5 @@
   position: absolute;
   top: 0;
   right: 0;
-  @include dimensions(40%, 100%);
+  @include dimensions(35%, 100%);
 }

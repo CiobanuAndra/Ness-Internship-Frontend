@@ -1,17 +1,20 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, map, of } from 'rxjs';
+import { BehaviorSubject, Observable, catchError, map, of, throwError } from 'rxjs';
 import { UsersListTable } from '../../interfaces/users-list-table';
-import { User } from '../../interfaces/users/user.model';
 import { UserCard } from '../../interfaces/users/user-card.model';
 import { UserModal } from '../../interfaces/users/user-modal.model';
 import { UserRequireAttention } from '../../interfaces/user-require-attention.model';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UsersService {
-  private showSidenav = false;
-  constructor() {}
+  //ENDPOINTS
+  urlAddUser = environment.baseUserURL;
+
+  constructor(private http: HttpClient) {}
 
   usersRequireAttention: UserRequireAttention[] = [
     {
@@ -404,6 +407,11 @@ export class UsersService {
   public loadUsersAwaitModal(): Observable<UserModal[]> {
     return of(this.usersModalAwait);
   }
+
+  //HTTP REQUESTS
+  addNewUser(userData: UserModal, userId: string): Observable<UserModal> {
+    return this.http.post<UserModal>(`${this.urlAddUser}/admin?id=${userId}`, userData);
+  };
 
   getTotalCourses() {
     return of(this.totalCourses);
