@@ -24,11 +24,8 @@
                 class="custom-input"
               />
               <mat-hint class="hint-title">Title</mat-hint>
-              <div
-                class="alert"
-                [style.visibility]="showTitleAlert ? 'visible' : 'hidden'"
-              >
-                Please add a title
+              <div class="alert" [style.visibility]="showTitleAlert ? 'visible' : 'hidden'">
+                {{addTaskTitleError}}
               </div>
 
               <div class="general-stepper-textarea">
@@ -37,7 +34,7 @@
                   placeholder="Description"
                   formControlName="description"
                   rows="6"
-                  cols="70"
+                  cols="65"
                 ></textarea>
                 <div
                   class="alert"
@@ -45,7 +42,7 @@
                     showDescriptionAlert ? 'visible' : 'hidden'
                   "
                 >
-                  Please add a description
+                  {{addTaskDescriptionError}}
                 </div>
               </div>
 
