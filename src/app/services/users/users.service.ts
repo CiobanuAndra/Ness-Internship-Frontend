@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, map, of } from 'rxjs';
 import { UsersListTable } from '../../interfaces/users-list-table';
-import { UserCard } from '../../interfaces/users/user-card.model';
 import { UserModal } from '../../interfaces/users/user-modal.model';
 import { UserRequireAttention } from '../../interfaces/user-require-attention.model';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { UserResponse } from 'src/app/interfaces/user-response';
+import { HttpClient } from '@angular/common/http';
+import { User } from 'src/app/interfaces/users/user';
 
 @Injectable({
   providedIn: 'root',
@@ -21,6 +21,10 @@ export class UsersService {
 
   getUsers(): Observable<any> {
     return this.http.get(`${this.baseUrl}`);
+  }
+
+  getAllUsers(): Observable<any> {
+    return this.http.get<User>(`${this.baseUrl}`);
   }
 
   usersRequireAttention: UserRequireAttention[] = [
@@ -82,74 +86,6 @@ export class UsersService {
     },
   ];
 
-  totalCourses: number = 15;
-
-  allUsers: UsersListTable[] = [
-    {
-      firstname: 'Alex',
-      lastname: 'Muller',
-      email: 'allex.muller@example.com',
-      status: true,
-      coursesCompleted: 8,
-      leftDays: 5,
-      dateAdded: new Date('2023-10-15'),
-    },
-    {
-      firstname: 'Alex',
-      lastname: 'Muller',
-      email: 'allex.muller@example.com',
-      status: false,
-      coursesCompleted: 3,
-      leftDays: 12,
-      dateAdded: new Date('2023-09-20'),
-    },
-    {
-      firstname: 'Alex',
-      lastname: 'Muller',
-      email: 'allex.muller@example.com',
-      status: true,
-      coursesCompleted: 12,
-      leftDays: 2,
-      dateAdded: new Date('2023-10-01'),
-    },
-    {
-      firstname: 'Alex',
-      lastname: 'Muller',
-      email: 'allex.muller@example.com',
-      status: true,
-      coursesCompleted: 8,
-      leftDays: 5,
-      dateAdded: new Date('2023-10-15'),
-    },
-    {
-      firstname: 'Alex',
-      lastname: 'Muller',
-      email: 'allex.muller@example.com',
-      status: false,
-      coursesCompleted: 3,
-      leftDays: 12,
-      dateAdded: new Date('2023-09-20'),
-    },
-    {
-      firstname: 'Alex',
-      lastname: 'Muller',
-      email: 'allex.muller@example.com',
-      status: true,
-      coursesCompleted: 12,
-      leftDays: 2,
-      dateAdded: new Date('2023-10-01'),
-    },
-    {
-      firstname: 'Alex',
-      lastname: 'Muller',
-      email: 'allex.muller@example.com',
-      status: true,
-      coursesCompleted: 8,
-      leftDays: 5,
-      dateAdded: new Date('2023-10-15'),
-    },
-  ];
-
   usersFromCSVFile: UsersListTable[] = [
     {
       firstname: 'Alex',
@@ -183,10 +119,6 @@ export class UsersService {
     this.usersSubject$.next(users);
   }
 
-  getAllUsers(): Observable<UsersListTable[]> {
-    return of(this.allUsers);
-  }
-
   getUsersFromCSVFile(): Observable<UsersListTable[]> {
     return of(this.usersFromCSVFile);
   }
@@ -200,23 +132,13 @@ export class UsersService {
     });
   }
 
-  getInactiveUsers(): Observable<UsersListTable[]> {
-    return of(this.allUsers).pipe(
-      map((users) => users.filter((user) => user.status === false))
-    );
-  }
-  getActiveUsers(): Observable<UsersListTable[]> {
-    return of(this.allUsers).pipe(
-      map((users) => users.filter((user) => user.status === true))
-    );
-  }
-
-  filterActiveUsersRequireAttention(): Observable<UserRequireAttention[]> {
+  filterActiveUsersRequireAttention(): Observable<any[]> {
     return of(this.usersRequireAttention).pipe(
       map((users) => users.filter((user) => user.status === true))
     );
   }
-  filterInactiveUsersRequireAttention(): Observable<UserRequireAttention[]> {
+
+  filterInactiveUsersRequireAttention(): Observable<any[]> {
     return of(this.usersRequireAttention).pipe(
       map((users) => users.filter((user) => user.status === false))
     );
@@ -266,12 +188,9 @@ export class UsersService {
     );
   }
 
-  getTotalCourses() {
-    return of(this.totalCourses);
-  }
-
   getAllUsersAPI(): Observable<UserResponse> {
-    return this.http.get<UserResponse>(this.getUsersURL, { responseType: 'json' });
+    return this.http.get<UserResponse>(this.getUsersURL, {
+      responseType: 'json',
+    });
   }
-  
 }

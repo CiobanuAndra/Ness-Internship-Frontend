@@ -66,9 +66,5 @@ export class UsersRequireAttentionTableComponent implements AfterViewInit {
     this.usersService.getUsersRequireAttention().subscribe((values) => {
       this.dataSource.data = values;
     });
-    this.usersService.getTotalCourses().subscribe((val) => {
-      this.totalCourses = structuredClone(val);
-      this.cd.detectChanges();
-    });
   }
 }
