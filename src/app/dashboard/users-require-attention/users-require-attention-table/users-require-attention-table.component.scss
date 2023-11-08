@@ -71,3 +71,12 @@
     height: 3rem;
   }
 }
+
+//RESPONSIVENESS
+@media(max-height:57.5em){
+  .users-require-attention {
+    &__name {
+      width: 30rem;
+    }
+  }
+}
