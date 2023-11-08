@@ -4,18 +4,12 @@
       <p class="leaderboard__header__text">Leaderboard</p>
     </div>
     <div class="my-custom-tabs">
-      <div
-        class="tab in-progress-tab"
-        [class.active-tab]="activeTab === leaderboardTabsEnum.InProgress"
-        (click)="setActiveTab(leaderboardTabsEnum.InProgress)"
-      >
+      <div class="tab in-progress-tab" [class.active-tab]="activeTab === leaderboardTabsEnum.InProgress"
+        (click)="setActiveTab(leaderboardTabsEnum.InProgress)">
         IN PROGRESS
       </div>
-      <div
-        class="tab done-tab"
-        [class.active-tab]="activeTab === leaderboardTabsEnum.Done"
-        (click)="setActiveTab(leaderboardTabsEnum.Done)"
-      >
+      <div class="tab done-tab" [class.active-tab]="activeTab === leaderboardTabsEnum.Done"
+        (click)="setActiveTab(leaderboardTabsEnum.Done)">
         DONE
       </div>
     </div>
@@ -24,28 +18,17 @@
   <div>
     <mat-table #table [dataSource]="dataSource" matSort>
       <ng-container matColumnDef="name" class="">
-        <mat-cell
-          *matHeaderCellDef
-          mat-sort-header
-          sortActionDescription="Sort by name"
-        >
+        <mat-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by name">
           Name
         </mat-cell>
-        <mat-cell
-          class="leaderboard-table-container__name"
-          *matCellDef="let element"
-        >
+        <mat-cell class="leaderboard-table-container__name" *matCellDef="let element">
           {{ element.name }}
         </mat-cell>
       </ng-container>
 
       <div class="tasksLeft-container">
         <ng-container matColumnDef="tasks">
-          <mat-header-cell
-            *matHeaderCellDef
-            mat-sort-header
-            sortActionDescription="Sort by tasks"
-          >
+          <mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by tasks">
             Tasks left
           </mat-header-cell>
           <mat-cell *matCellDef="let element"> {{ element.tasks }} </mat-cell>
@@ -54,11 +37,7 @@
 
       <div class="points-container">
         <ng-container matColumnDef="points">
-          <mat-header-cell
-            *matHeaderCellDef
-            mat-sort-header
-            sortActionDescription="Sort by points"
-          >
+          <mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by points">
             Points
           </mat-header-cell>
           <mat-cell *matCellDef="let element"> {{ element.points }} </mat-cell>
@@ -67,21 +46,13 @@
 
       <div class="rank-container">
         <ng-container matColumnDef="rank">
-          <mat-header-cell
-            *matHeaderCellDef
-            mat-sort-header
-            sortActionDescription="Sort by rank"
-          >
+          <mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by rank">
             <div class="text-container">Rank</div>
           </mat-header-cell>
           <mat-cell *matCellDef="let element">
             <div class="rank-container-image">
               <span>{{ element.rank }}</span>
-              <img
-                class="three-dots"
-                src="assets/icons/blue-points.svg"
-                alt="Users Icon"
-              />
+              <img class="three-dots" src="assets/icons/blue-points.svg" alt="Users Icon" />
             </div>
           </mat-cell>
         </ng-container>
@@ -91,39 +62,31 @@
       <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
     </mat-table>
 
-    <ng-container
-      *ngIf="
+    <ng-container *ngIf="
         (activeTab === leaderboardTabsEnum.InProgress &&
           !usersInProgress.length) ||
         (activeTab === leaderboardTabsEnum.Done && !usersInDone.length)
-      "
-    >
+      ">
       <div class="no-users-container">
         <img src="assets/icons/users.svg" alt="Users Icon" />
         <p>
           No users in
           {{
-            activeTab === leaderboardTabsEnum.InProgress ? "progress" : "done"
+          activeTab === leaderboardTabsEnum.InProgress ? "progress" : "done"
           }}
         </p>
       </div>
     </ng-container>
 
-    <mat-paginator
-      *ngIf="
+    <mat-paginator *ngIf="
         (activeTab === leaderboardTabsEnum.InProgress &&
           usersInProgress.length) ||
         (activeTab === leaderboardTabsEnum.Done && usersInDone.length)
-      "
-      #paginator
-      [pageSize]="15"
-      [pageSizeOptions]="[15, 25, 50]"
-      [length]="
+      " #paginator [pageSize]="15" [pageSizeOptions]="[15, 25, 50]" [length]="
         activeTab === leaderboardTabsEnum.InProgress
           ? usersInProgress.length
           : usersInDone.length
-      "
-    >
+      ">
     </mat-paginator>
   </div>
 </div>

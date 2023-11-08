@@ -1,106 +1,57 @@
-<div class="users-list">
-  <div class="users-list__title">
-    <p class="users-list__title-text">Users Progress</p>
-    <div class="users-list__title__buttons">
-      <button mat-button class="users-list__title__buttons__add-user"  (click)="viewAllUsers()">
-        VIEW ALL USERS
-      </button>
+<mat-card class="card-container">
+  <mat-card-header class="card-header">
+    <mat-card-title class="card-title">
+      Users Progress
+    </mat-card-title>
+    <button mat-button class="users-list__title__buttons__add-user" (click)="viewAllUsers()">
+      VIEW ALL USERS
+    </button>
+  </mat-card-header>
+  <mat-divider></mat-divider>
+
+  <!-- ////////////// -->
+  <mat-table [dataSource]="dataSource" matSort (matSortChange)="announceSortChange($event)" class="mat-elevation-z8">
+    <ng-container matColumnDef="name">
+      <mat-header-cell class="header-cell" *matHeaderCellDef mat-sort-header
+        sortActionDescription="Sort by name">name</mat-header-cell>
+      <mat-cell *matCellDef="let element;"> {{ element.name }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="taskCompleted">
+      <mat-header-cell class="header-cell" *matHeaderCellDef mat-sort-header
+        sortActionDescription="Sort by tasks completed">tasks completed</mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{ element.taskCompleted }}/{{ totalCourses }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="timeLeft">
+      <mat-header-cell class="header-cell" *matHeaderCellDef mat-sort-header
+        sortActionDescription="Sort by time left">time left</mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{ element.timeLeft }} Days</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="dateRegistered">
+      <mat-header-cell class="header-cell" *matHeaderCellDef mat-sort-header
+        sortActionDescription="Sort by dateRegistered">date registered</mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{ element.dateRegistered | date : "dd.MM.yyyy - hh:mm a" }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="options">
+      <mat-header-cell *matHeaderCellDef></mat-header-cell>
+      <mat-cell *matCellDef="let avatar">
+        <button mat-icon-button>
+          <mat-icon>more_vert</mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="columnsToDisplay"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: columnsToDisplay"></mat-row>
+  </mat-table>
+  <!-- /////////////// -->
+
+  <!-- State: No Data -->
+  <div *ngIf="dataSource.data.length === 0">
+    <div class="table-with-no-data">
+      <img src="assets/icons/avatar.svg" alt="user-icon">
+      <p class="no-data-message">No tasks to display!</p>
     </div>
   </div>
 
-  <mat-table
-    [dataSource]="dataSource"
-    class="users-list__table"
-    matSort
-    matSortDirection="asc"
-    matSortActive="id"
-  >
-
-    <ng-container matColumnDef="name" >
-      <th
-        mat-header-cell
-        *matHeaderCellDef
-        class="users-list__mat-columnDef-name"
-        mat-sort-header="name"
-      >
-        NAME
-      </th>
-      <td mat-cell *matCellDef="let element" class="users-list__table__name"
-      >{{ element.name }}</td>
-    </ng-container>
-
-    <ng-container matColumnDef="taskCompleted">
-      <th
-        mat-header-cell
-        *matHeaderCellDef
-        class="users-list__mat-columnDef-taskCompleted"
-        mat-sort-header="taskCompleted"
-      >
-        TASKS COMPLETED
-      </th>
-      <td mat-cell *matCellDef="let element"
-      >
-        {{ element.taskCompleted }}/{{ totalCourses }}
-      </td>
-    </ng-container>
-
-    <ng-container matColumnDef="timeLeft">
-      <th
-        mat-header-cell
-        *matHeaderCellDef
-        class="users-list__mat-columnDef-timeLeft"
-        mat-sort-header="timeLeft"
-      >
-        TIME LEFT
-      </th>
-      <td mat-cell *matCellDef="let element"
-      >{{ element.timeLeft }} Days</td>
-    </ng-container>
-
-    <ng-container matColumnDef="dateRegistered">
-      <th
-        mat-header-cell
-        *matHeaderCellDef
-        class="users-list__mat-columnDef-dateRegistered"
-        mat-sort-header="dateRegistered"
-      >
-        DATE REGISTERED
-      </th>
-      <td mat-cell *matCellDef="let element"
-      >
-        {{ element.dateRegistered | date : "dd.MM.yyyy - hh:mm a" }}
-      </td>
-    </ng-container>
-
-    <ng-container matColumnDef="settings">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header="settings"></th>
-      <td mat-cell *matCellDef="let element">
-        <mat-icon
-          class="users-list__settings-icon"
-          svgIcon="points-black"
-        ></mat-icon>
-      </td>
-    </ng-container>
-
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-
-    <tr
-      mat-row
-      *matRowDef="let row; columns: displayedColumns"
-      class="users-list__table__row"
-    ></tr>
-
-  </mat-table>
-
-  <div
-  *ngIf="allUsersProgress.length == 0"
-  class="users-require-attention__no-users"
-  >
-    <mat-icon
-      class="users-require-attention__no-users__icon"
-      svgIcon="users"
-    ></mat-icon>
-    <h1>No users aded yet.</h1>
-  </div>
-  <div class="line"></div>
-</div>
+</mat-card>

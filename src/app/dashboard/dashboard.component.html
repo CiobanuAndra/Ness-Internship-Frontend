@@ -1,10 +1,16 @@
-<div class="grid-container">
-  <div class="container">
-    <app-users-require-attention class="col1"></app-users-require-attention>
-    <app-current-progress class="col2"></app-current-progress>
-    <app-leaderboard class="leaderboard-container"></app-leaderboard>
-    <app-user-progress-table
-      class="userProgressTable"
-    ></app-user-progress-table>
+<div class="dashboard-container">
+  <div class="grid-container">
+    <div class="users-require-attention">
+      <app-users-require-attention></app-users-require-attention>
+    </div>
+    <div class="current-progress">
+      <app-current-progress></app-current-progress>
+    </div>
+    <div class="leaderboard-container">
+      <app-leaderboard></app-leaderboard>
+    </div>
+    <div class="userProgressTable">
+      <app-user-progress-table></app-user-progress-table>
+    </div>
   </div>
 </div>

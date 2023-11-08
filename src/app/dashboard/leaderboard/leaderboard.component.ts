@@ -15,9 +15,18 @@ export class LeaderboardComponent implements OnInit {
   usersInProgress: UserCard[] = [];
   usersInDone: UserCard[] = [];
   leaderboardTabsEnum = LeaderboardTabsEnum;
-  maxUsersToShow: number = 8;
+  screenHeight: number;
 
-  constructor(private userService: UsersService, private router: Router) {}
+  maxUsersToShow: number;
+
+  constructor(private userService: UsersService, private router: Router) {
+    this.screenHeight = window.innerHeight;
+    if (this.screenHeight >= 960) {
+      this.maxUsersToShow = 14;
+    } else if (this.screenHeight >= 750) {
+      this.maxUsersToShow = 10;
+    } else this.maxUsersToShow = 7;
+  }
 
   ngOnInit() {
     this.userService

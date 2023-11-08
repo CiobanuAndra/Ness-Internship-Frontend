@@ -1,57 +1,36 @@
 <div class="leaderboard-section">
   <div class="leaderboard-section__header">
-    <p class="leaderboard-section__header__text">Leaderboard</p>
-    <button
-      type="button"
-      mat-button
-      class="form__view__all__users__button"
-      (click)="viewAllUsers()"
-    >
+    <div class="leaderboard-section__header__text">Leaderboard</div>
+    <button type="button" mat-button class="form__view__all__users__button" (click)="viewAllUsers()">
       {{ "view all" | uppercase }}
     </button>
   </div>
   <div class="my-custom-tabs">
-    <div
-      class="tab in-progress-tab"
-      [class.active-tab]="activeTab === leaderboardTabsEnum.InProgress"
-      (click)="activeTab = leaderboardTabsEnum.InProgress"
-    >
+    <div class="tab in-progress-tab" [class.active-tab]="activeTab === leaderboardTabsEnum.InProgress"
+      (click)="activeTab = leaderboardTabsEnum.InProgress">
       IN PROGRESS
     </div>
-    <div
-      class="tab done-tab"
-      [class.active-tab]="activeTab === leaderboardTabsEnum.Done"
-      (click)="activeTab = leaderboardTabsEnum.Done"
-    >
+    <div class="tab done-tab" [class.active-tab]="activeTab === leaderboardTabsEnum.Done"
+      (click)="activeTab = leaderboardTabsEnum.Done">
       DONE
     </div>
   </div>
 
-  <ng-container
-    *ngIf="
+  <ng-container *ngIf="
       activeTab === leaderboardTabsEnum.InProgress && usersInProgress.length
-    "
-  >
-    <app-leaderboard-list
-      [leaderboardUsers]="usersInProgress"
-    ></app-leaderboard-list>
+    ">
+    <app-leaderboard-list [leaderboardUsers]="usersInProgress"></app-leaderboard-list>
   </ng-container>
 
-  <ng-container
-    *ngIf="activeTab === leaderboardTabsEnum.Done && usersInDone.length"
-  >
-    <app-leaderboard-list
-      [leaderboardUsers]="usersInDone"
-    ></app-leaderboard-list>
+  <ng-container *ngIf="activeTab === leaderboardTabsEnum.Done && usersInDone.length">
+    <app-leaderboard-list [leaderboardUsers]="usersInDone"></app-leaderboard-list>
   </ng-container>
 
-  <ng-container
-    *ngIf="
+  <ng-container *ngIf="
       (activeTab === leaderboardTabsEnum.InProgress &&
         !usersInProgress.length) ||
       (activeTab === leaderboardTabsEnum.Done && !usersInDone.length)
-    "
-  >
+    ">
     <div class="no-users-container">
       <img src="assets/icons/users.svg" alt="Users Icon" />
       <p>

@@ -3,10 +3,7 @@
     <div>Current Progress</div>
     <div>
       <mat-form-field class="form__title__mat-form-field">
-        <mat-select
-          [(ngModel)]="selectedLastDays"
-          (ngModelChange)="updateChart()"
-        >
+        <mat-select [(ngModel)]="selectedLastDays" (ngModelChange)="updateChart()">
           <mat-option *ngFor="let option of lastDays" [value]="option">
             Last {{ option }} days
           </mat-option>
@@ -16,16 +13,13 @@
   </div>
   <div *ngIf="chartData.length > 0" class="chart-container">
     <div id="donutchart" class="donutchart"></div>
+    <div id="center-text" class="center-text">{{ currentHoverValue }}</div>
     <div class="legend">
       <div *ngFor="let item of legendItems" class="legend__colors">
-        <div
-          class="legend__colors__color"
-          [style.backgroundColor]="item.color"
-        ></div>
+        <div class="legend__colors__color" [style.backgroundColor]="item.color"></div>
         {{ item.name }}
       </div>
     </div>
-    <div id="center-text" class="center-text">{{ currentHoverValue }}</div>
   </div>
   <div class="form__no-data" *ngIf="chartData.length === 0">
     <mat-icon class="form__no-data__icon" svgIcon="no-data"></mat-icon>
