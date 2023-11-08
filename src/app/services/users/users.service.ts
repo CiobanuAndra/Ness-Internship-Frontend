@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, map, of } from 'rxjs';
+import { Observable, map, of } from 'rxjs';
 import { UsersListTable } from '../../interfaces/users-list-table';
 import { UserModal } from '../../interfaces/users/user-modal.model';
 import { UserRequireAttention } from '../../interfaces/user-require-attention.model';
@@ -13,7 +13,7 @@ import { User } from 'src/app/interfaces/users/user';
 })
 export class UsersService {
   urlAddUser = environment.baseUserURL;
-  baseUrl: string = 'http://localhost:3000/api/user';
+  baseUrl = environment.baseUserURL;
 
   private showSidenav = false;
   getUsersURL = 'http://localhost:3000/api/user';
@@ -107,18 +107,6 @@ export class UsersService {
     },
   ];
 
-  usersSubject$: BehaviorSubject<UserRequireAttention[]> = new BehaviorSubject<
-    UserRequireAttention[]
-  >(this.usersRequireAttention);
-
-  getUsersRequireAttention(): Observable<UserRequireAttention[]> {
-    return this.usersSubject$.asObservable();
-  }
-
-  updateUsersRequireAttention(users: UserRequireAttention[]) {
-    this.usersSubject$.next(users);
-  }
-
   getUsersFromCSVFile(): Observable<UsersListTable[]> {
     return of(this.usersFromCSVFile);
   }
@@ -132,17 +120,6 @@ export class UsersService {
     });
   }
 
-  filterActiveUsersRequireAttention(): Observable<any[]> {
-    return of(this.usersRequireAttention).pipe(
-      map((users) => users.filter((user) => user.status === true))
-    );
-  }
-
-  filterInactiveUsersRequireAttention(): Observable<any[]> {
-    return of(this.usersRequireAttention).pipe(
-      map((users) => users.filter((user) => user.status === false))
-    );
-  }
   //modals
   usersModalRequire: UserModal[] = [
     {

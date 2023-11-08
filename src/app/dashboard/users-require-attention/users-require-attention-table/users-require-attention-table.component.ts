@@ -1,9 +1,4 @@
-import {
-  AfterViewInit,
-  ChangeDetectorRef,
-  Component,
-  ViewChild,
-} from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -16,7 +11,9 @@ import { UsersService } from 'src/app/services/users/users.service';
   templateUrl: './users-require-attention-table.component.html',
   styleUrls: ['./users-require-attention-table.component.scss'],
 })
-export class UsersRequireAttentionTableComponent implements AfterViewInit {
+export class UsersRequireAttentionTableComponent
+  implements AfterViewInit, OnInit
+{
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -24,28 +21,11 @@ export class UsersRequireAttentionTableComponent implements AfterViewInit {
   totalCourses: number = 0;
   displayedColumns: string[] = ['name', 'tasksLeft', 'timeLeft', 'buttons'];
 
-  constructor(
-    private usersService: UsersService,
-    private cd: ChangeDetectorRef
-  ) {}
+  constructor(private usersService: UsersService) {}
 
-  filterActiveUsers(): void {
-    this.usersService
-      .filterActiveUsersRequireAttention()
-      .subscribe((values) => {
-        this.dataSource.data = structuredClone(values);
-        this.cd.detectChanges();
-      });
-  }
+  filterActiveUsers(): void {}
 
-  filterInactiveUsers(): void {
-    this.usersService
-      .filterInactiveUsersRequireAttention()
-      .subscribe((values) => {
-        this.dataSource.data = structuredClone(values);
-        this.cd.detectChanges();
-      });
-  }
+  filterInactiveUsers(): void {}
 
   onTabChange(event: MatTabChangeEvent): void {
     switch (event.index) {
@@ -63,8 +43,11 @@ export class UsersRequireAttentionTableComponent implements AfterViewInit {
   ngAfterViewInit(): void {
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
+  }
+
+  ngOnInit() {
     this.usersService.getUsersRequireAttention().subscribe((values) => {
-      this.dataSource.data = values;
+      this.dataSource.data = values.users;
     });
   }
 }

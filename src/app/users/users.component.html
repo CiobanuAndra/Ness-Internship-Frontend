@@ -100,9 +100,7 @@
         >
           TIME LEFT
         </th>
-        <td mat-cell *matCellDef="let element">
-          {{ calculateRemainingDays(element.activationEndDate) }} Days
-        </td>
+        <td mat-cell *matCellDef="let element">{{ element.leftDays }} Days</td>
       </ng-container>
       <ng-container matColumnDef="activationStartDate">
         <th

@@ -1,6 +1,5 @@
 import {
   AfterViewInit,
-  ChangeDetectorRef,
   Component,
   ElementRef,
   OnInit,
@@ -16,7 +15,6 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatDialog } from '@angular/material/dialog';
 import { ResourcesService } from '../services/resources/resources.service';
 import { AddBulkUsersComponent } from './sidenavs/add-bulk-users/add-bulk-users.component';
-import { HttpClient } from '@angular/common/http';
 import { User } from '../interfaces/users/user';
 
 @Component({
@@ -55,10 +53,8 @@ export class UsersComponent implements AfterViewInit, OnInit {
 
   constructor(
     private userService: UsersService,
-    private cdr: ChangeDetectorRef,
     private resourcesService: ResourcesService,
-    private dialog: MatDialog,
-    private http: HttpClient
+    private dialog: MatDialog
   ) {}
 
   toggleBulkUsersSidenav() {
@@ -85,28 +81,26 @@ export class UsersComponent implements AfterViewInit, OnInit {
   }
 
   filterActiveUsers() {
-    this.userService.getAllUsers().subscribe((resp) => {
-      const usersActivated: User[] = resp.users.filter(
-        (user: { hasPlatformAccess: boolean }) =>
-          user.hasPlatformAccess === true
-      );
-      this.dataSource.data = usersActivated;
+    this.userService.filterActiveUsers().subscribe((filteredUsers) => {
+      this.dataSource.data = filteredUsers;
     });
   }
 
   filterInactiveUsers() {
-    this.userService.getAllUsers().subscribe((resp) => {
-      const usersActivated: User[] = resp.users.filter(
-        (user: { hasPlatformAccess: boolean }) =>
-          user.hasPlatformAccess === false
-      );
-      this.dataSource.data = usersActivated;
+    this.userService.filterInactiveUsers().subscribe((filteredUsers) => {
+      this.dataSource.data = filteredUsers;
     });
   }
 
   filterAllUsers(): void {
     this.userService.getAllUsers().subscribe((values) => {
-      this.dataSource.data = values.users;
+      const usersWithLeftDays = values.users.map(
+        (user: { activationEndDate: Date }) => ({
+          ...user,
+          leftDays: this.calculateRemainingDays(user.activationEndDate),
+        })
+      );
+      this.dataSource.data = usersWithLeftDays;
     });
   }
 

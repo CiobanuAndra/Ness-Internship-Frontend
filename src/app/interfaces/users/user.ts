@@ -18,4 +18,5 @@ export interface User {
   completedTasks?: number;
   score?: number;
   rank?: number;
+  leftDays?: number;
 }
