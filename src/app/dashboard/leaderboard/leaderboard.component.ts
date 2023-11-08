@@ -22,7 +22,7 @@ export class LeaderboardComponent implements OnInit {
     this.screenHeight = window.innerHeight;
     if (this.screenHeight >= 960) {
       this.maxUsersToShow = 14;
-    } else if (this.screenHeight >= 750) {
+    } else if (this.screenHeight >= 752) {
       this.maxUsersToShow = 10;
     } else this.maxUsersToShow = 7;
   }

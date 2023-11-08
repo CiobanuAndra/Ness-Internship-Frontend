@@ -28,7 +28,7 @@ export class UsersRequireAttentionComponent implements OnInit {
 
   getUsersRequireAttention(): void {
     this.usersService.getUsersRequireAttention().subscribe((values) => {
-      this.screenHeight > 750? this.usersRequireAttention = values.slice(0, 3) : this.usersRequireAttention = values.slice(0, 2);
+      this.screenHeight >= 750? this.usersRequireAttention = values.slice(0, 3) : this.usersRequireAttention = values.slice(0, 2);
       this.allUsersRequireAttention = values;
     }); 
   }
