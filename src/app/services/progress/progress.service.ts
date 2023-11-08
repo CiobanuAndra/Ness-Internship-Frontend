@@ -2,55 +2,86 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { LastDaysProgress } from 'src/app/enums/last-days-progress';
 import { ProgressStatus } from 'src/app/enums/progress-status';
-
 @Injectable({
   providedIn: 'root',
 })
 export class ProgressService {
   constructor() {}
 
-  dataForLast7Days = [
-    [ProgressStatus.Register, 10],
-    [ProgressStatus.Finished, 80],
-    [ProgressStatus.InProgress, 5],
-    [ProgressStatus.NotStarted, 5],
+  categoryColors: { [category: string]: string } = {
+    [ProgressStatus.Register]: '#00195f',
+    [ProgressStatus.Finished]: '#149211',
+    [ProgressStatus.InProgress]: '#C1BA00',
+    [ProgressStatus.NotStarted]: '#CCD1DF',
+  };
+
+  dataForLast7Days: [string, number][] = [
+    ['Register', 10],
+    ['Finished', 80],
+    ['InProgress', 5],
+    ['NotStarted', 5],
   ];
 
-  dataForLast14Days = [
-    [ProgressStatus.Register, 15],
-    [ProgressStatus.Finished, 30],
-    [ProgressStatus.InProgress, 10],
-    [ProgressStatus.NotStarted, 45],
+  dataForLast14Days: [string, number][] = [
+    ['Register', 15],
+    ['Finished', 30],
+    ['InProgress', 10],
+    ['NotStarted', 45],
   ];
 
-  dataForLast21Days = [
-    [ProgressStatus.Register, 1],
-    [ProgressStatus.Finished, 2],
-    [ProgressStatus.InProgress, 90],
-    [ProgressStatus.NotStarted, 7],
+  dataForLast21Days: [string, number][] = [
+    ['Register', 1],
+    ['Finished', 2],
+    ['InProgress', 90],
+    ['NotStarted', 7],
   ];
 
-  dataForLast30Days = [
-    [ProgressStatus.Register, 25],
-    [ProgressStatus.Finished, 25],
-    [ProgressStatus.InProgress, 25],
-    [ProgressStatus.NotStarted, 25],
+  dataForLast30Days: [string, number][] = [
+    ['Register', 25],
+    ['Finished', 25],
+    ['InProgress', 25],
+    ['NotStarted', 25],
   ];
 
-  getDataForSelectedLastDays(
+  getChartDataForLastDays(
     selectedLastDays: LastDaysProgress
-  ): Observable<any> {
+  ): Observable<[string, number, string][]> {
+    let data: [string, number, string][];
+
     switch (selectedLastDays) {
       case LastDaysProgress.SevenDays:
-        return of(this.dataForLast7Days);
+        data = this.dataForLast7Days.map(([category, value]) => [
+          category,
+          value,
+          this.categoryColors[category],
+        ]);
+        console.log(data);
+        break;
       case LastDaysProgress.FourteenDays:
-        return of(this.dataForLast14Days);
+        data = this.dataForLast14Days.map(([category, value]) => [
+          category,
+          value,
+          this.categoryColors[category],
+        ]);
+        break;
       case LastDaysProgress.TwentyOneDays:
-        return of(this.dataForLast21Days);
+        data = this.dataForLast21Days.map(([category, value]) => [
+          category,
+          value,
+          this.categoryColors[category],
+        ]);
+        break;
       case LastDaysProgress.ThirtyDays:
-        return of(this.dataForLast30Days);
+        data = this.dataForLast30Days.map(([category, value]) => [
+          category,
+          value,
+          this.categoryColors[category],
+        ]);
+        break;
       default:
-        return of([]);
+        data = [];
     }
+
+    return of(data);
   }
 }

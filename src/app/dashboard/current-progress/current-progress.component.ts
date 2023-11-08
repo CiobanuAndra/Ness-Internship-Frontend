@@ -11,7 +11,7 @@ export class CurrentProgressComponent implements OnInit {
   constructor(private progress: ProgressService) {}
   selectedLastDays: LastDaysProgress = LastDaysProgress.SevenDays;
   currentHoverValue: string = '';
-  chartData: any = [];
+  chartData: [string, number, string][] = [];
 
   lastDays = Object.values(LastDaysProgress).filter(
     (value) => typeof value === 'number'
@@ -29,9 +29,8 @@ export class CurrentProgressComponent implements OnInit {
     google.charts.setOnLoadCallback(() => this.drawChart());
 
     this.progress
-      .getDataForSelectedLastDays(this.selectedLastDays)
+      .getChartDataForLastDays(this.selectedLastDays)
       .subscribe((values) => {
-        values.unshift(['', '']);
         this.chartData = values;
         this.drawChart();
         this.currentHoverValue = '';
@@ -40,9 +39,8 @@ export class CurrentProgressComponent implements OnInit {
 
   updateChart(): void {
     this.progress
-      .getDataForSelectedLastDays(this.selectedLastDays)
+      .getChartDataForLastDays(this.selectedLastDays)
       .subscribe((values) => {
-        values.unshift(['', '']);
         this.chartData = values;
         this.drawChart();
         this.currentHoverValue = '';
@@ -56,15 +54,20 @@ export class CurrentProgressComponent implements OnInit {
         typeof google !== 'undefined' &&
         typeof google.visualization !== 'undefined'
       ) {
-        var data = google.visualization.arrayToDataTable(this.chartData);
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Category');
+        data.addColumn('number', 'Value');
+        data.addColumn({ type: 'string', role: 'style' });
+        data.addRows(this.chartData);
 
         var options: google.visualization.PieChartOptions = {
           pieHole: 0.78,
-          colors: ['#00195f', '#149211', '#C1BA00', '#CCD1DF'],
+          colors: this.chartData.map(([, , color]) => color),
           legend: 'none',
           pieSliceText: 'none',
           tooltip: { trigger: 'none' },
         };
+
         var chart = new google.visualization.PieChart(chartContainer);
 
         google.visualization.events.addListener(

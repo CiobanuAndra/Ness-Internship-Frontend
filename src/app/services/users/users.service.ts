@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Observable, map, of } from 'rxjs';
 import { UsersListTable } from '../../interfaces/users-list-table';
 import { UserModal } from '../../interfaces/users/user-modal.model';
-import { UserRequireAttention } from '../../interfaces/user-require-attention.model';
 import { environment } from 'src/environments/environment';
 import { UserResponse } from 'src/app/interfaces/user-response';
 import { HttpClient } from '@angular/common/http';
@@ -27,64 +26,29 @@ export class UsersService {
     return this.http.get<User>(`${this.baseUrl}`);
   }
 
-  usersRequireAttention: UserRequireAttention[] = [
-    {
-      name: 'Andrei Artene',
-      leftDays: 4,
-      pastDays: 2,
-      tasksLeft: 3,
-      status: true,
-    },
-    {
-      name: 'Vasile Ion',
-      leftDays: 1,
-      pastDays: 4,
-      tasksLeft: 5,
-      status: true,
-    },
-    {
-      name: 'Mark Willerhower',
-      leftDays: 2,
-      pastDays: 4,
-      tasksLeft: 4,
-      status: true,
-    },
-    {
-      name: 'Andrei Artene',
-      leftDays: 4,
-      pastDays: 2,
-      tasksLeft: 3,
-      status: true,
-    },
-    {
-      name: 'Vasile Ion',
-      leftDays: 1,
-      pastDays: 4,
-      tasksLeft: 5,
-      status: true,
-    },
-    {
-      name: 'Mark Willerhower',
-      leftDays: 2,
-      pastDays: 4,
-      tasksLeft: 4,
-      status: false,
-    },
-    {
-      name: 'Vasile Ion',
-      leftDays: 1,
-      pastDays: 4,
-      tasksLeft: 5,
-      status: true,
-    },
-    {
-      name: 'Mark Willerhower',
-      leftDays: 2,
-      pastDays: 4,
-      tasksLeft: 4,
-      status: false,
-    },
-  ];
+  getUsersRequireAttention(): Observable<any> {
+    return this.http.get<User>(`${this.baseUrl}`);
+  }
+
+  filterActiveUsers(): Observable<User[]> {
+    return this.getAllUsers().pipe(
+      map((resp) =>
+        resp.users.filter(
+          (user: { isDeactivated: boolean }) => user.isDeactivated === true
+        )
+      )
+    );
+  }
+
+  filterInactiveUsers(): Observable<User[]> {
+    return this.getAllUsers().pipe(
+      map((resp) =>
+        resp.users.filter(
+          (user: { isDeactivated: boolean }) => user.isDeactivated === false
+        )
+      )
+    );
+  }
 
   usersFromCSVFile: UsersListTable[] = [
     {

@@ -81,14 +81,26 @@ export class UsersComponent implements AfterViewInit, OnInit {
   }
 
   filterActiveUsers() {
-    this.userService.filterActiveUsers().subscribe((filteredUsers) => {
-      this.dataSource.data = filteredUsers;
+    this.userService.filterActiveUsers().subscribe((users) => {
+      const activeUsersWithLeftDays = users.map(
+        (user: { activationEndDate: Date }) => ({
+          ...user,
+          leftDays: this.calculateRemainingDays(user.activationEndDate),
+        })
+      );
+      this.dataSource.data = activeUsersWithLeftDays;
     });
   }
 
   filterInactiveUsers() {
     this.userService.filterInactiveUsers().subscribe((filteredUsers) => {
-      this.dataSource.data = filteredUsers;
+      const inactiveUserWithLeftDays = filteredUsers.map(
+        (user: { activationEndDate: Date }) => ({
+          ...user,
+          leftDays: this.calculateRemainingDays(user.activationEndDate),
+        })
+      );
+      this.dataSource.data = inactiveUserWithLeftDays;
     });
   }
 

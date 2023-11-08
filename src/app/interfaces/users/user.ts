@@ -13,7 +13,7 @@ export interface User {
   hasPlatformAccess?: boolean;
   isDeactivated?: boolean;
   activationStartDate?: Date;
-  activationEndDate?: Date;
+  activationEndDate: Date;
   totalTasks?: number;
   completedTasks?: number;
   score?: number;
