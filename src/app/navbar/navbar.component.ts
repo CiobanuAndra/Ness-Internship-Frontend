@@ -9,14 +9,12 @@ import { ResourcesService } from '../services/resources/resources.service';
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent {
-  constructor(private router: Router, private resourcesService: ResourcesService){}
-  openPageModal(path:string){
-    this.router.navigate([`${path}`]);
-  }
   show=true;
   title = 'admin-fe';
   currentUser= "Ciobanu andra";
 
+  constructor(private router: Router, private resourcesService: ResourcesService){}
+  
   showSidenav(): boolean {
     return this.resourcesService.getShowSidenav();
   }

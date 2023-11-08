@@ -65,7 +65,7 @@ export class UsersComponent implements AfterViewInit {
   toggleSidenav() {
     this.showSidenav = !this.showSidenav;
     this.resourcesService.setSidenavVisibility(this.showSidenav);
-  }
+  };
 
   openAddBulkUsers() {
     const dialogRef = this.dialog.open(AddBulkUsersComponent, {

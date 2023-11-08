@@ -1,15 +1,4 @@
-<mat-sidenav-container *ngIf="opened" class="mat-sidenav-container">
-  <mat-sidenav>Start</mat-sidenav>
-  <mat-sidenav-content>
-    <app-add-bulk-users
-      #sidenav
-      [opened]="opened"
-      (closeSidenavEvent)="toggleBulkUsersSidenav()"
-    ></app-add-bulk-users>
-  </mat-sidenav-content>
-</mat-sidenav-container>
-
-<div [ngClass]="{ 'aside-open': opened }">
+<div [ngClass]="{ 'aside-open': opened || showSidenav }">
   <div class="users-list">
     <div class="users-list__title">
       <p class="users-list__title-text">Users</p>
@@ -151,12 +140,23 @@
     >
     </mat-paginator>
   </div>
-
-  <!-- ASIDES -->
-  <mat-sidenav-container class="sidenav-container" *ngIf="showSidenav">
-    <app-addnewuser
-      [showSidenav]="showSidenav"
-      (showSidenavChange)="showSidenav = $event"
-    ></app-addnewuser>
-  </mat-sidenav-container>
 </div>
+
+ <!-- ASIDES -->
+ <mat-sidenav-container *ngIf="opened" class="mat-sidenav-container">
+  <mat-sidenav>Start</mat-sidenav>
+  <mat-sidenav-content>
+    <app-add-bulk-users
+      #sidenav
+      [opened]="opened"
+      (closeSidenavEvent)="toggleBulkUsersSidenav()"
+    ></app-add-bulk-users>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+
+ <mat-sidenav-container class="sidenav-container" *ngIf="showSidenav">
+  <app-addnewuser
+    [showSidenav]="showSidenav"
+    (showSidenavChange)="showSidenav = $event"
+  ></app-addnewuser>
+</mat-sidenav-container>
