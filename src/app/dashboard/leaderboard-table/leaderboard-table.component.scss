@@ -6,8 +6,8 @@
 }
 
 .leaderboard-table-container {
-  width: calc(100% - 4rem);
-  padding: 1rem 2rem;
+  width: 90%;
+  margin: 0 auto;
 
   &__name {
     color: $primary-color;
@@ -123,4 +123,10 @@ mat-paginator {
   background: $white-color;
   height: 28.25rem;
   width: 100%;
+}
+
+@media(max-height:47em){
+  .no-users-container {
+    height: 20rem !important;
+  }
 }

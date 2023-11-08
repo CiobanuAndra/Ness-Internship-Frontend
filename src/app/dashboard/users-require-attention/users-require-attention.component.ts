@@ -13,15 +13,23 @@ export class UsersRequireAttentionComponent implements OnInit {
   usersRequireAttention: UserRequireAttention[] = [];
   allUsersRequireAttention: UserRequireAttention[] = [];
 
-  constructor(private usersService: UsersService, private router: Router) {}
+  screenHeight: number;
+
+  constructor(private usersService: UsersService, private router: Router) {
+    this.screenHeight = window.innerHeight;
+  }
 
   navigateToUsersRequireAttentionTable() {
     this.router.navigate(['/users-require-attention-table']);
   }
   ngOnInit(): void {
+    this.getUsersRequireAttention();
+  }
+
+  getUsersRequireAttention(): void {
     this.usersService.getUsersRequireAttention().subscribe((values) => {
-      this.usersRequireAttention = values.slice(0, 3);
+      this.screenHeight > 750? this.usersRequireAttention = values.slice(0, 3) : this.usersRequireAttention = values.slice(0, 2);
       this.allUsersRequireAttention = values;
-    });
+    }); 
   }
 }

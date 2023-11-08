@@ -4,52 +4,28 @@
   </div>
   <mat-divider></mat-divider>
   <div class="users-require-attention__mat-tab-group-div">
-    <mat-tab-group
-      (selectedTabChange)="onTabChange($event)"
-      class="users-require-attention__mat-tab-group-div__mat-tab-group"
-    >
+    <mat-tab-group (selectedTabChange)="onTabChange($event)"
+      class="users-require-attention__mat-tab-group-div__mat-tab-group">
       <mat-tab label="IN PROGRESS"> </mat-tab>
       <mat-tab label="ONBOARDING CLOSED"> </mat-tab>
     </mat-tab-group>
   </div>
 
-  <div
-    class="users-require-attention__no-data"
-    *ngIf="dataSource.data.length === 0"
-  >
-    <img
-      src="assets/icons/users.svg"
-      alt="Users Icon"
-      class="users-list__no-data__img"
-    />
+  <div class="users-require-attention__no-data" *ngIf="dataSource.data.length === 0">
+    <img src="assets/icons/users.svg" alt="Users Icon" class="users-list__no-data__img" />
     <span>No users added yet.</span>
   </div>
 
-  <table
-    mat-table
-    [dataSource]="dataSource"
-    matSort
-    *ngIf="dataSource.data.length > 0"
-  >
+  <table mat-table [dataSource]="dataSource" matSort *ngIf="dataSource.data.length > 0">
     <ng-container matColumnDef="name">
-      <th
-        mat-header-cell
-        *matHeaderCellDef
-        mat-sort-header="name"
-        class="users-require-attention__name"
-      >
+      <th mat-header-cell *matHeaderCellDef mat-sort-header="name" class="users-require-attention__name">
         NAME
       </th>
       <td mat-cell *matCellDef="let element">{{ element.name }}</td>
     </ng-container>
 
     <ng-container matColumnDef="tasksLeft">
-      <th
-        mat-header-cell
-        *matHeaderCellDef
-        mat-sort-header="tasksLeft"
-        class="users-require-attention__tasks-left"
-      >
+      <th mat-header-cell *matHeaderCellDef mat-sort-header="tasksLeft" class="users-require-attention__tasks-left">
         TASKS LEFT
       </th>
       <td mat-cell *matCellDef="let element">
@@ -58,23 +34,14 @@
     </ng-container>
 
     <ng-container matColumnDef="timeLeft">
-      <th
-        mat-header-cell
-        *matHeaderCellDef
-        mat-sort-header="leftDays"
-        class="users-require-attention__time-left"
-      >
+      <th mat-header-cell *matHeaderCellDef mat-sort-header="leftDays" class="users-require-attention__time-left">
         TIME LEFT
       </th>
       <td mat-cell *matCellDef="let element">{{ element.leftDays }} Days</td>
     </ng-container>
 
     <ng-container matColumnDef="buttons">
-      <th
-        mat-header-cell
-        *matHeaderCellDef
-        class="users-require-attention__buttons"
-      ></th>
+      <th mat-header-cell *matHeaderCellDef class="users-require-attention__buttons"></th>
       <td mat-cell *matCellDef="let element">
         <button mat-button class="users-require-attention__button-view-profile">
           VIEW PROFILE
@@ -88,12 +55,7 @@
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
   </table>
-  <mat-paginator
-    *ngIf="dataSource.data.length > 0"
-    [length]="15"
-    [pageSize]="15"
-    [pageSizeOptions]="[5, 10, 15]"
-    aria-label="Rows per page"
-  >
+  <mat-paginator *ngIf="dataSource.data.length > 0" [length]="15" [pageSize]="15" [pageSizeOptions]="[5, 10, 15]"
+    aria-label="Rows per page">
   </mat-paginator>
 </div>

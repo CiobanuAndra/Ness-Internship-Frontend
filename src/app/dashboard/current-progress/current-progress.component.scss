@@ -7,7 +7,6 @@
 @import "../../../styleguide.scss";
 
 .form {
-  @include set-size(100%, 100%);
   border-radius: 0.25rem;
   box-shadow: 5px 5px 10px $black-color(0, 0, 0, 0.3);
   background-color: $white-color;
@@ -15,7 +14,8 @@
   &__title {
     border-bottom: 0.063rem solid $medium-gray-color;
     padding: 0rem 1rem 0rem 1rem;
-    height: 3.813rem;
+    font-size: 15px;
+    height: 3.74rem;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -44,54 +44,61 @@
   }
 }
 
-.center-text {
-  position: absolute;
-  top: 6.8rem;
-  left: 17rem;
-  transform: translate(-50%, -50%);
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: #333;
-
-  &__input {
-    border: none;
-    width: 2rem;
-    outline: none;
-  }
+.donutchart {
+  height: 10rem;
+  padding-bottom: 0.9rem;
 }
 
-.legend {
-  position: absolute;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  width: 24.375rem;
-  height: 1.25rem;
-  position: absolute;
-  top: 12.3rem;
-  left: 5rem;
-  right: 5rem;
-  gap: 0.75rem;
+.chart-container {
+  position: relative;
+  
+  .center-text {
+    position: absolute;
+    top: 47%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1rem;
+    font-weight: bold;
+    color: #333;
+  }
 
-  &__colors {
+  .legend {
+    position: absolute;
+    top: 80%;
+    left: 50%;
+    transform: translate(-50%, 50%);
     display: flex;
-    gap: 0.125rem;
-    &__color {
-      width: 0.938rem;
-      height: 0.938rem;
-      margin-top: 0.2rem;
+    align-items: center;
+    justify-content:center;
+    width: fit-content;
+    font-size: 12px;
+    width: 100%;
+    gap: 0.5rem;
+  
+    &__colors {
+      display: flex;
+      gap: 0.125rem;
+      &__color {
+        width: 0.938rem;
+        height: 0.8rem;
+          margin-top: 0.2rem;
+      }
     }
   }
 }
 
-.chart-container {
-  position: relative; /* Add this to make it a positioning context */
-}
+//RESPONSIVENESS
+@media(max-height:47em){
+  .donutchart {
+    height: 7rem;
+    padding-bottom: 0.35rem;
+  }
 
-.donutchart {
-  position: relative;
-  width: 25rem;
-  height: 13.75rem;
-  margin-left: 4.375rem;
+  .center-text {
+    top: 50% !important;
+  }
+
+  .legend {
+    top: 70% !important;
+  }
 }

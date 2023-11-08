@@ -3,5 +3,5 @@ export const displayedColumns = [
     'taskCompleted',
     'timeLeft',
     'dateRegistered',
-    'settings',
+    'options',
 ];
