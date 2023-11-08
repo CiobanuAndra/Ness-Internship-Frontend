@@ -19,6 +19,7 @@
   filter: brightness(0.7);
   transition: filter 0.5s;
   background-color: $light-gray-color;
+  pointer-events: none !important;
 }
 
 .users-list {
