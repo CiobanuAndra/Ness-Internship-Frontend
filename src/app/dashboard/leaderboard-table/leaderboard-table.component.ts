@@ -6,7 +6,9 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { MatSort, Sort } from '@angular/material/sort';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
+import { leaderboardUserMapper } from 'src/app/utils/userMapper';
+import { UserResponse } from 'src/app/interfaces/user-response';
 
 @Component({
   selector: 'app-leaderboard-table',
@@ -64,20 +66,17 @@ export class LeaderboardTableComponent implements OnInit {
   private getUsers() {
     this.userService.getAllUsersAPI()
       .pipe(
-        map((data: any) => {
-          const users: UserCard[] = data.users.map((user: any) => ({
-            name: `${user.name} ${user.surname}`,
-            totalTasks: user.totalTasks,
-            completedTasks: user.completedTasks,
-            points: user.score,
-            rank: user.rank,
-          }));
-          return users;
-        })
+        map((data: any) => data.users.map((user: any) => leaderboardUserMapper(user))),
+        map((users: UserCard[]) => {
+          return {
+            inProgress: users.filter((user: any) => user.completedTasks < user.totalTasks),
+            inDone: users.filter((user: any) => user.completedTasks === user.totalTasks),
+          };
+        }),
       )
-      .subscribe((users: UserCard[]) => {
-        this.usersInProgress = users.filter((user) => user.completedTasks < user.totalTasks);
-        this.usersInDone = users.filter((user) => user.completedTasks === user.totalTasks);
+      .subscribe(({inProgress, inDone}) => {
+        this.usersInProgress = inProgress;
+        this.usersInDone = inDone;
   
         this.dataSource = new MatTableDataSource<UserCard>(
           this.activeTab === LeaderboardTabsEnum.InProgress ? this.usersInProgress : this.usersInDone

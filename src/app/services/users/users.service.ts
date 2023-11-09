@@ -6,6 +6,7 @@ import { UserModal } from '../../interfaces/users/user-modal.model';
 import { UserRequireAttention } from '../../interfaces/user-require-attention.model';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import { UserResponse } from 'src/app/interfaces/user-response';
 
 @Injectable({
   providedIn: 'root',
@@ -262,8 +263,8 @@ export class UsersService {
     return of(this.totalCourses);
   }
 
-  getAllUsersAPI(): Observable<UserCard> {
-    return this.http.get<UserCard>(this.getUsersURL, { responseType: 'json' });
+  getAllUsersAPI(): Observable<UserResponse> {
+    return this.http.get<UserResponse>(this.getUsersURL, { responseType: 'json' });
   }
   
 }

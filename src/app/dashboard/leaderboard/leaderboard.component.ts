@@ -4,6 +4,7 @@ import { UserCard } from 'src/app/interfaces/users/user-card.model';
 import { LeaderboardTabsEnum } from '../../enums/leaderboard-tabs.enum';
 import { Router } from '@angular/router';
 import { map } from 'rxjs/operators';
+import { dashboardUserMapper } from 'src/app/utils/userMapper';
 
 @Component({
   selector: 'app-leaderboard',
@@ -33,27 +34,29 @@ export class LeaderboardComponent implements OnInit {
   }
 
   getAllUsers(): void {
-    this.userService.getAllUsersAPI()
+    
+    this.userService
+      .getAllUsersAPI()
       .pipe(
-        map((data: any) => {
-          return data.users.map((user: any) => ({
-            name: user.name,
-            status: user.totalTasks - user.completedTasks === 0,
-            totalTasks: user.totalTasks,
-            completedTasks: user.completedTasks,
-            points: user.score,
-            rank: user.rank,
-          }));
-        })
+        map((data: any) => data.users.map((user: any) => dashboardUserMapper(user))),
+        map((user: any) => {
+          return {
+            userInProgress: this.sortAndFilterUsers(user, false),
+            userInDone: this.sortAndFilterUsers(user, true),
+          };
+        }),
       )
-      .subscribe((users: UserCard[]) => {
-        this.usersInProgress = this.sortAndFilterUsers(users, false);
-        this.usersInDone = this.sortAndFilterUsers(users, true);
+      .subscribe(({userInProgress, userInDone}) => {
+        this.usersInProgress = userInProgress;
+        this.usersInDone = userInDone;
       });
   }
 
   private sortAndFilterUsers(users: UserCard[], status: boolean): UserCard[] {
-    return users.filter((user) => user.status === status).slice(0, this.maxUsersToShow).sort((a, b) => a.rank - b.rank);
+    return users
+      .filter((user) => user.status === status)
+      .slice(0, this.maxUsersToShow)
+      .sort((a, b) => a.rank - b.rank);
   }
 
   viewAllUsers(): void {
