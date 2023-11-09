@@ -8,21 +8,20 @@ import { ProgressService } from 'src/app/services/progress/progress.service';
   styleUrls: ['./current-progress.component.scss'],
 })
 export class CurrentProgressComponent implements OnInit {
-  constructor(private progress: ProgressService) {}
   selectedLastDays: LastDaysProgress = LastDaysProgress.SevenDays;
   currentHoverValue: string = '';
   chartData: [string, number, string][] = [];
-
   lastDays = Object.values(LastDaysProgress).filter(
     (value) => typeof value === 'number'
   );
-
   legendItems = [
     { name: 'Register', color: '#00195f' },
     { name: 'Finished', color: '#149211' },
     { name: 'In Progress', color: '#C1BA00' },
     { name: 'Not Started', color: '#CCD1DF' },
   ];
+
+  constructor(private progress: ProgressService) {}
 
   ngOnInit(): void {
     google.charts.load('current', { packages: ['corechart'] });

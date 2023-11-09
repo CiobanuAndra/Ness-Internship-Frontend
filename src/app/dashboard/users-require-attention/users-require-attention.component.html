@@ -28,7 +28,7 @@
               class="users-require-attention__users__user__details__days__file"
               svgIcon="file"
             ></mat-icon>
-            <div>{{ user.leftDays + " Left" }}</div>
+            <div>{{ user.completedTasks + " Left" }}</div>
             <div
               class="users-require-attention__users__user__details__days__point"
             >
@@ -42,7 +42,7 @@
               class="users-require-attention__users__user__details__days__clock"
               svgIcon="clock"
             ></mat-icon>
-            <div>{{ user + " Days" }}</div>
+            <div>{{ user.completedTasks + " Days" }}</div>
           </div>
         </div>
       </div>

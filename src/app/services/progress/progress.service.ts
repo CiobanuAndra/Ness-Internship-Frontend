@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { LastDaysProgress } from 'src/app/enums/last-days-progress';
 import { ProgressStatus } from 'src/app/enums/progress-status';
+
 @Injectable({
   providedIn: 'root',
 })
@@ -55,7 +56,6 @@ export class ProgressService {
           value,
           this.categoryColors[category],
         ]);
-        console.log(data);
         break;
       case LastDaysProgress.FourteenDays:
         data = this.dataForLast14Days.map(([category, value]) => [
@@ -81,7 +81,6 @@ export class ProgressService {
       default:
         data = [];
     }
-
     return of(data);
   }
 }

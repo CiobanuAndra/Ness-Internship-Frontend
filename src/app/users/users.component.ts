@@ -49,7 +49,6 @@ export class UsersComponent implements AfterViewInit, OnInit {
     'activationStartDate',
     'settings',
   ];
-  users: any = [];
 
   constructor(
     private userService: UsersService,
