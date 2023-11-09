@@ -14,13 +14,8 @@ export class UsersService {
   urlAddUser = environment.baseUserURL;
   baseUrl = environment.baseUserURL;
 
-  private showSidenav = false;
   getUsersURL = 'http://localhost:3000/api/user';
   constructor(private http: HttpClient) {}
-
-  getUsers(): Observable<any> {
-    return this.http.get(`${this.baseUrl}`);
-  }
 
   getAllUsers(): Observable<any> {
     return this.http.get<User>(`${this.baseUrl}`);
