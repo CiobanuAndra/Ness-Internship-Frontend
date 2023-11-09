@@ -1,7 +1,9 @@
 export interface UserCard {
     status: boolean;
     name: string;
-    tasks: number;
-    points: number;
+    surname?: string,
+    totalTasks: number;
+    completedTasks: number;
+    score: number;
     rank: number;
   }

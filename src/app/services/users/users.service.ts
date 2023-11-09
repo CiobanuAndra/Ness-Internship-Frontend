@@ -6,6 +6,7 @@ import { UserModal } from '../../interfaces/users/user-modal.model';
 import { UserRequireAttention } from '../../interfaces/user-require-attention.model';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import { UserResponse } from 'src/app/interfaces/user-response';
 
 @Injectable({
   providedIn: 'root',
@@ -14,6 +15,8 @@ export class UsersService {
   //ENDPOINTS
   urlAddUser = environment.baseUserURL;
 
+  private showSidenav = false;
+  getUsersURL = 'http://localhost:3000/api/user';
   constructor(private http: HttpClient) {}
 
   usersRequireAttention: UserRequireAttention[] = [
@@ -73,17 +76,6 @@ export class UsersService {
       tasksLeft: 4,
       status: false,
     },
-  ];
-
-  usersLeaderboard: UserCard[] = [
-    { status: false, name: 'Bill Van', tasks: 1, points: 1300, rank: 1 },
-    { status: false, name: 'Mike Chris', tasks: 2, points: 1200, rank: 2 },
-    { status: false, name: 'Aaron Frey', tasks: 3, points: 1100, rank: 3 },
-    { status: false, name: 'John Smith', tasks: 4, points: 1000, rank: 4 },
-    { status: false, name: 'Valery Greg', tasks: 10, points: 300, rank: 10 },
-    { status: false, name: 'Mike Chris', tasks: 12, points: 900, rank: 11 },
-    { status: false, name: 'Albert Leaf', tasks: 13, points: 800, rank: 12 },
-    { status: false, name: 'Lexi Ray', tasks: 14, points: 700, rank: 13 },
   ];
 
   totalCourses: number = 15;
@@ -187,10 +179,6 @@ export class UsersService {
     this.usersSubject$.next(users);
   }
 
-  public loadUsersLeaderboard(): Observable<UserCard[]> {
-    return of(this.usersLeaderboard);
-  }
-
   getAllUsers(): Observable<UsersListTable[]> {
     return of(this.allUsers);
   }
@@ -274,4 +262,9 @@ export class UsersService {
   getTotalCourses() {
     return of(this.totalCourses);
   }
+
+  getAllUsersAPI(): Observable<UserResponse> {
+    return this.http.get<UserResponse>(this.getUsersURL, { responseType: 'json' });
+  }
+  
 }

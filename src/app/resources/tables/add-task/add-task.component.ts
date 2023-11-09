@@ -6,6 +6,8 @@ import { ResourcesService } from 'src/app/services/resources/resources.service';
 import { HostListener } from '@angular/core';
 import { MultipleTaskComponent } from '../multiple-task/multiple-task.component';
 import { SingleTaskComponent } from '../single-task/single-task.component';
+import { DialogService } from 'src/app/services/users/dialog.service';
+import { AddTaskTitleError, AddTaskDescriptionError } from 'src/app/enums/addtask-error';
 
 @Component({
   selector: 'app-add-task',
@@ -17,6 +19,7 @@ export class AddTaskComponent {
   @ViewChild(SingleTaskComponent) singleTaskComponent!: SingleTaskComponent;
   @ViewChild('stepper') stepper!: MatStepper;
   @Input() showSidenav!: boolean;
+  @Input() isDialogOpen = false; 
   @Output() showSidenavChange = new EventEmitter<boolean>();
   showTitleAlert = false;
   showDescriptionAlert = false;
@@ -28,16 +31,19 @@ export class AddTaskComponent {
   isSingleButtonClick: boolean = true;
   isMultipleButtonClick: boolean = false;
   selectedFormType: FormType = FormType.SINGLE;
+  addTaskTitleError: AddTaskTitleError = AddTaskTitleError.titleRequired;
+  addTaskDescriptionError: AddTaskDescriptionError = AddTaskDescriptionError.descriptionRequired
 
   constructor(
     private formBuilder: FormBuilder,
-    private resourcesService: ResourcesService
+    private resourcesService: ResourcesService,
+    private dialogService: DialogService
   ) {}
 
   ngOnInit() {
     this.firstFormGroup = this.formBuilder.group({
-      title: ['', [Validators.required]],
-      description: ['', [Validators.required]],
+      title: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(200)]],
+      description: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(800)]],
       order: ['', [Validators.required, Validators.pattern(this.numericRegex)]],
     });
     this.secondFormGroup = this.formBuilder.group({
@@ -55,9 +61,15 @@ export class AddTaskComponent {
   }
 
   closeDialog(): void {
-    this.showSidenav = false;
-    this.showSidenavChange.emit(this.showSidenav);
-    this.resourcesService.setSidenavVisibility(false);
+    this.isDialogOpen = true;
+    this.dialogService.openConfirmationDialog().then((result) => {
+      this.isDialogOpen = false;
+      if (result) {
+        this.showSidenav = false;
+        this.showSidenavChange.emit(this.showSidenav);
+        this.resourcesService.setSidenavVisibility(false);
+      }
+    });
   }
 
   @HostListener('document:keydown', ['$event'])
@@ -84,19 +96,37 @@ export class AddTaskComponent {
   }
 
   checkValueChanges(): void {
-    this.firstFormGroup.get('title')!.valueChanges.subscribe((titleValue) => {
-      this.showTitleAlert = titleValue.trim() === '';
+    const titleControl = this.firstFormGroup.get('title')!;
+    const descriptionControl = this.firstFormGroup.get('description')!;
+    const orderControl = this.firstFormGroup.get('order')!;
+  
+    titleControl.valueChanges.subscribe((titleValue) => {
+      const isTitleEmpty = titleValue.trim() === '';
+      const isTitleLengthInvalid = titleValue.trim().length < 2 || titleValue.trim().length > 200;
+      this.showTitleAlert = isTitleEmpty || isTitleLengthInvalid;
+      this.addTaskTitleError = isTitleEmpty
+        ? AddTaskTitleError.titleRequired
+        : isTitleLengthInvalid
+        ? AddTaskTitleError.titleLength
+        : AddTaskTitleError.noError;
     });
-    this.firstFormGroup
-      .get('description')!
-      .valueChanges.subscribe((descriptionValue) => {
-        this.showDescriptionAlert = descriptionValue.trim() === '';
-      });
-    this.firstFormGroup.get('order')!.valueChanges.subscribe((orderValue) => {
+  
+    descriptionControl.valueChanges.subscribe((descriptionValue) => {
+      const isDescriptionEmpty = descriptionValue.trim() === '';
+      const isDescriptionLengthInvalid = descriptionValue.trim().length < 2 || descriptionValue.trim().length > 800;
+      this.showDescriptionAlert = isDescriptionEmpty || isDescriptionLengthInvalid;
+      this.addTaskDescriptionError = isDescriptionEmpty
+        ? AddTaskDescriptionError.descriptionRequired
+        : isDescriptionLengthInvalid
+        ? AddTaskDescriptionError.descriptionLength
+        : AddTaskDescriptionError.noError;
+    });
+  
+    orderControl.valueChanges.subscribe((orderValue) => {
       this.showOrderAlert = !new RegExp(this.numericRegex).test(orderValue);
     });
-  }
-
+  }  
+  
   toggleFormType(isSingle: boolean): void {
     this.isSingleButtonClick = isSingle;
     this.isMultipleButtonClick = !isSingle;

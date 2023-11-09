@@ -11,6 +11,7 @@ import { AddbulkuserTableComponent } from './modals/addbulkusers/addbulkusers/ta
 import { IconsModule } from 'src/shared/icons-module/icons/icons.module';
 import { NgxMatFileInputModule } from 'node_modules/@angular-material-components/file-input';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MatConfirmDialogComponent } from './dialog/mat-confirm-dialog/mat-confirm-dialog.component';
 
 const routes: Routes = [
   {
@@ -26,6 +27,7 @@ const routes: Routes = [
     AddnewuserComponent,
     AddbulkuserTableComponent,
     AddBulkUsersComponent,
+    MatConfirmDialogComponent,
   ],
   imports: [
     CommonModule,

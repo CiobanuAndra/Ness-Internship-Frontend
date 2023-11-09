@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { UsersService } from 'src/app/services/users/users.service';
 import { UserCard } from 'src/app/interfaces/users/user-card.model';
-import { map } from 'rxjs';
 import { LeaderboardTabsEnum } from '../../enums/leaderboard-tabs.enum';
 import { Router } from '@angular/router';
+import { map } from 'rxjs/operators';
+import { dashboardUserMapper } from 'src/app/utils/userMapper';
 
 @Component({
   selector: 'app-leaderboard',
@@ -23,30 +24,39 @@ export class LeaderboardComponent implements OnInit {
     this.screenHeight = window.innerHeight;
     if (this.screenHeight >= 960) {
       this.maxUsersToShow = 14;
-    } else if (this.screenHeight >= 750) {
+    } else if (this.screenHeight >= 752) {
       this.maxUsersToShow = 10;
     } else this.maxUsersToShow = 7;
   }
 
   ngOnInit() {
+    this.getAllUsers();
+  }
+
+  getAllUsers(): void {
+    
     this.userService
-      .loadUsersLeaderboard()
+      .getAllUsersAPI()
       .pipe(
-        map((leaderboard) => {
+        map((data: any) => data.users.map((user: any) => dashboardUserMapper(user))),
+        map((user: any) => {
           return {
-            usersInProgress: leaderboard
-              .filter((user) => !user.status)
-              .slice(0, this.maxUsersToShow),
-            usersInDone: leaderboard
-              .filter((user) => user.status)
-              .slice(0, this.maxUsersToShow),
+            userInProgress: this.sortAndFilterUsers(user, false),
+            userInDone: this.sortAndFilterUsers(user, true),
           };
-        })
+        }),
       )
-      .subscribe(({ usersInProgress, usersInDone }) => {
-        this.usersInProgress = usersInProgress;
-        this.usersInDone = usersInDone;
+      .subscribe(({userInProgress, userInDone}) => {
+        this.usersInProgress = userInProgress;
+        this.usersInDone = userInDone;
       });
+  }
+
+  private sortAndFilterUsers(users: UserCard[], status: boolean): UserCard[] {
+    return users
+      .filter((user) => user.status === status)
+      .slice(0, this.maxUsersToShow)
+      .sort((a, b) => a.rank - b.rank);
   }
 
   viewAllUsers(): void {

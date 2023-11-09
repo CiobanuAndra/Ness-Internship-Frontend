@@ -1,4 +1,4 @@
-<div class="add-task-container">
+<div class="add-task-container" [ngClass]="{'open': isDialogOpen}">
   <div class="add-task-header">
     <span>Add Task</span>
     <button mat-icon-button (click)="closeDialog()">
@@ -24,11 +24,8 @@
                 class="custom-input"
               />
               <mat-hint class="hint-title">Title</mat-hint>
-              <div
-                class="alert"
-                [style.visibility]="showTitleAlert ? 'visible' : 'hidden'"
-              >
-                Please add a title
+              <div class="alert" [style.visibility]="showTitleAlert ? 'visible' : 'hidden'">
+                {{addTaskTitleError}}
               </div>
 
               <div class="general-stepper-textarea">
@@ -37,7 +34,7 @@
                   placeholder="Description"
                   formControlName="description"
                   rows="6"
-                  cols="70"
+                  cols="65"
                 ></textarea>
                 <div
                   class="alert"
@@ -45,7 +42,7 @@
                     showDescriptionAlert ? 'visible' : 'hidden'
                   "
                 >
-                  Please add a description
+                  {{addTaskDescriptionError}}
                 </div>
               </div>
 
@@ -80,7 +77,6 @@
             </button>
             <button
               mat-button
-              matStepperNext
               class="cancel-button"
               (click)="closeDialog()"
             >
@@ -136,7 +132,6 @@
             <div class="toggle-step-buttons">
               <button
                 mat-button
-                matStepperNext
                 matStepperPrevious
                 class="cancel-button"
               >
@@ -152,7 +147,6 @@
             </div>
             <button
               mat-button
-              matStepperNext
               class="cancel-button"
               (click)="closeDialog()"
             >

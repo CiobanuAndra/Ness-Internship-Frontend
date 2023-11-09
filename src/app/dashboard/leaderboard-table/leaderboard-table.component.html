@@ -17,8 +17,12 @@
 
   <div>
     <mat-table #table [dataSource]="dataSource" matSort>
-      <ng-container matColumnDef="name" class="">
-        <mat-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by name">
+      <ng-container matColumnDef="name">
+        <mat-cell
+          *matHeaderCellDef
+          mat-sort-header
+          sortActionDescription="Sort by name"
+        >
           Name
         </mat-cell>
         <mat-cell class="leaderboard-table-container__name" *matCellDef="let element">
@@ -31,7 +35,7 @@
           <mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by tasks">
             Tasks left
           </mat-header-cell>
-          <mat-cell *matCellDef="let element"> {{ element.tasks }} </mat-cell>
+          <mat-cell *matCellDef="let element"> {{ element.completedTasks }}  / {{element.totalTasks}}</mat-cell>
         </ng-container>
       </div>
 
@@ -78,15 +82,13 @@
       </div>
     </ng-container>
 
-    <mat-paginator *ngIf="
-        (activeTab === leaderboardTabsEnum.InProgress &&
-          usersInProgress.length) ||
-        (activeTab === leaderboardTabsEnum.Done && usersInDone.length)
-      " #paginator [pageSize]="15" [pageSizeOptions]="[15, 25, 50]" [length]="
-        activeTab === leaderboardTabsEnum.InProgress
-          ? usersInProgress.length
-          : usersInDone.length
-      ">
-    </mat-paginator>
+    <mat-paginator
+    *ngIf="dataSource"
+    [pageSize]="15"
+    [pageSizeOptions]="[5, 10, 15]"
+    [length]="activeTab === leaderboardTabsEnum.InProgress ? usersInProgress.length : usersInDone.length"
+    (page)="onPageChange($event)"
+  ></mat-paginator>
+  
   </div>
 </div>
