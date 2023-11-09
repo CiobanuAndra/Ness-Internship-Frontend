@@ -1,0 +1,101 @@
+@import "/src/styleguide.scss";
+
+.logo {
+    height: 3rem;
+    width: 3rem;
+    cursor: pointer;
+    position: absolute;
+    z-index: 1;
+    left: 8.2rem;
+    top: 8px;
+}
+
+.log-in{
+    background-image: url('../../../assets/images/Background@3x.png');
+    background-color: #cccccc;
+    height: 100%;
+    width: 100%;
+    background-repeat: no-repeat;
+    display: flex;
+    background-size: cover;
+    align-items: center;
+    position: relative;
+   
+    &__card{
+        display: block;
+        margin-left: 8.2rem;
+        margin-right: auto;
+        width: 400px;
+        height: 283px;
+        align-self: center;
+        justify-self: center;
+
+        &__header{
+            box-sizing: border-box;
+            height: 61px;
+            padding-bottom: 16px;
+            font-size: 15px;
+            border-bottom: 1px solid $light-gray-color;
+        }
+
+        &__content{
+
+            .form-log-in{
+
+                &__email{
+                    width: 100%;
+                    ::ng-deep .mat-mdc-text-field-wrapper{
+                        background-color: inherit;
+                        padding: 0px;
+                    }
+
+                    ::ng-deep .mat-mdc-form-field-hint-wrapper{
+                        padding: 0px;
+                    }
+                    mat-hint{
+                        color: $dark-gray-color;
+
+                    }
+
+                }
+
+                &__password__container{
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                    .form-log-in__password{
+                        width: calc(100% - 24px);
+
+                        ::ng-deep .mat-mdc-text-field-wrapper{
+                            background-color: inherit;
+                            padding: 0px;
+                        }
+
+                       
+                        ::-ms-reveal {
+                            display: none;
+                        }
+                    }
+                    mat-icon{
+                        cursor: pointer;
+                        color: $dark-gray-color;
+                        height: 24px;
+                        width: auto;
+                        padding-bottom: 15px;
+                    }
+                }
+                button{
+                    padding: 0px;
+                    margin-top: 16px;
+                    height: 36px;
+                    width: 82px;
+                    background-color: $primary-color;
+                    color: $white-color;
+                    border-radius: 5px;
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+}
+

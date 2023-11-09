@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DashboardComponent } from './dashboard.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 import { UsersRequireAttentionComponent } from './users-require-attention/users-require-attention.component';
 import { IconsModule } from 'src/shared/icons-module/icons/icons.module';
 import { HttpClientModule } from '@angular/common/http';
@@ -17,19 +17,14 @@ import { CurrentProgressComponent } from './current-progress/current-progress.co
 import { UsersService } from '../services/users/users.service';
 import { GoogleChartsModule } from 'angular-google-charts';
 import { UsersRequireAttentionTableComponent } from './users-require-attention/users-require-attention-table/users-require-attention-table.component';
+import { NavbarLayoutComponent } from '../navbar/navbar-layout.component';
+import { InitialsCustomepipePipe } from '../pipes/initials-customepipe.pipe';
+
 
 const routes: Routes = [
   {
     path: '',
     component: DashboardComponent,
-  },
-  {
-    path: 'leaderboard-table',
-    component: LeaderboardTableComponent,
-  },
-  {
-    path: 'users-require-attention-table',
-    component: UsersRequireAttentionTableComponent,
   },
 ];
 
@@ -43,7 +38,7 @@ const routes: Routes = [
     LeaderboardTableComponent,
     CurrentProgressComponent,
     LeaderboardComponent,
-    UsersRequireAttentionTableComponent,
+    UsersRequireAttentionTableComponent
   ],
   imports: [
     CommonModule,

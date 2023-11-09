@@ -1,0 +1,35 @@
+<img src="../../assets/Logo Ness2.svg" alt="Logo" class="logo">
+
+<div class="log-in">
+   
+    <mat-card class="log-in__card">
+
+        <mat-card-header class="log-in__card__header">
+            <p>Log In</p>
+        </mat-card-header>
+
+        <mat-card-content class="log-in__card__content">
+
+            <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="form-log-in" >
+                <mat-form-field class="form-log-in__email">
+                        <input matInput placeholder="Email" formControlName="emailFormControl" name="emailFormControl" required>
+                        <mat-hint class="form-log-in__email__hint">Email</mat-hint>
+                </mat-form-field>
+
+                <div class="form-log-in__password__container">
+                    <mat-form-field class="form-log-in__password">
+                            <input matInput placeholder="Password" formControlName="passwordFormControl" required [type]="hide ? 'password' : 'text'">
+                    </mat-form-field>
+                    <mat-icon
+                    class="icon"
+                    matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}
+                    </mat-icon>
+                </div>
+                <button mat-button type="submit">LOG IN</button>
+            </form>
+            
+        </mat-card-content>
+    </mat-card>
+</div>
+
+

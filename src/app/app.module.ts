@@ -7,16 +7,18 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTabsModule } from '@angular/material/tabs';
 import { RouterModule } from '@angular/router';
-import { NavbarComponent } from './navbar/navbar.component';
 import { DashboardModule } from './dashboard/dashboard.module';
-import { InitialsCustomepipePipe } from './pipes/initials-customepipe.pipe';
 import { ResourcesModule } from './resources/resources.module';
 import { UsersModule } from './users/users.module';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { InterceptorService } from './services/interceptors/interceptor-service.interceptor';
+import { LogInModule } from './log-in/log-in.module';
+import {NavbarLayoutComponent} from "./navbar/navbar-layout.component";
+import {InitialsCustomepipePipe} from "./pipes/initials-customepipe.pipe";
+
 
 @NgModule({
-  declarations: [AppComponent, NavbarComponent, InitialsCustomepipePipe],
+  declarations: [AppComponent, NavbarLayoutComponent, InitialsCustomepipePipe],
 
   imports: [
     BrowserModule,
@@ -28,6 +30,7 @@ import { InterceptorService } from './services/interceptors/interceptor-service.
     DashboardModule,
     ResourcesModule,
     UsersModule,
+    LogInModule,
   ],
   exports: [RouterModule],
   providers: [{

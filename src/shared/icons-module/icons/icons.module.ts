@@ -25,6 +25,7 @@ export class IconsModule {
       .addSvgIcon('upload', this.setPath(`${this.path}/upload.svg`))
       .addSvgIcon('close', this.setPath(`${this.path}/close.svg`))
       .addSvgIcon('users', this.setPath(`${this.path}/users.svg`))
+      .addSvgIcon('eye', this.setPath(`${this.path}/eye.svg`));
   }
 
   private setPath(url: string): SafeResourceUrl {

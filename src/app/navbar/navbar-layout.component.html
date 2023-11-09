@@ -1,0 +1,26 @@
+<ng-template #onlyLogo >
+    <div class="containerLogoBig grid-container" >
+        <div class="containerLogoSmall container">
+            <img src="../../assets/Logo Ness2.svg" alt="Logo" class="logo">
+        </div>
+    </div>
+</ng-template>
+
+<div class="navbarContainerAdmin grid-container" *ngIf="show;else onlyLogo" [ngClass]="{'open': showSidenav()}">
+    <div class="navbar container">
+        <div class="logo" (click)="openPageModal('main-page/dashboard')">
+            <img src="../../assets/Logo Ness2.svg" alt="Logo" class="logo">
+        </div>
+
+        <ul class="buttonContainer">
+            <a><li class="list-item" routerLink="/dashboard" routerLinkActive="active">DASHBOARD</li></a>
+            <a><li class="list-item" routerLink="/users" routerLinkActive="active">USERS</li></a>
+            <a><li class="list-item" routerLink="/resources" routerLinkActive="active">RESOURCES</li></a>
+        </ul>
+
+        <div class="avatar">
+          <div>{{ currentUser | initialsCustomepipe }}</div>
+        </div>
+    </div>
+</div>
+<router-outlet></router-outlet>
