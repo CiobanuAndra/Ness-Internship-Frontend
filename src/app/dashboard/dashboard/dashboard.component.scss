@@ -15,25 +15,50 @@
     gap: 1rem;
 }
 
-.users-require-attention {
-   height: 100%;
-}
-
-.current-progress {
-   height: 100%;
+.users-require-attention, .current-progress, .leaderboard-container, .userProgressTable {
+    min-height: 100%;
 }
 
 .leaderboard-container {
-    height: 100%;
+    grid-row: span 2;
 }
 
 .userProgressTable {
     grid-column: 1/-2;
-    height: 100%;
 }
 
 //RESPONSIVENESS
-@media(max-height:57.5em){
+@media(max-height:63.75em){
+    .grid-container {
+        grid-template-rows: 22.5% 70%;
+    }
+}
+
+@media(max-height:63em){
+    .grid-container {
+        grid-template-rows: 23% 70%;
+    }
+}
+
+@media(max-height:60em){
+    .grid-container {
+        grid-template-rows: 24% 70%;
+    }
+}
+
+@media(max-height:57em){
+    .grid-container {
+        grid-template-rows: 27% 70%;
+    }
+}
+
+@media(max-height:52em){
+    .grid-container {
+        grid-template-rows: 28% 70%;
+    }
+}
+
+@media(max-height:50em){
     .grid-container {
         grid-template-rows: 30% 70%;
     }

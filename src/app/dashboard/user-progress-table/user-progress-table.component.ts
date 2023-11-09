@@ -40,7 +40,7 @@ export class UserProgressTableComponent implements AfterViewInit, OnInit {
     this.userService.getAllUsers().subscribe((values: UsersProgressTable[]) => {
       if(this.screenHeight > 900) {
         this.dataSource.data = values.slice(0, 11);
-      } else if(this.screenHeight > 750) {
+      } else if(this.screenHeight > 700) {
         this.dataSource.data = values.slice(0, 6);
       } else this.dataSource.data = values.slice(0, 4);
       this.allUsersProgress=values;

@@ -13,11 +13,7 @@ export class UsersRequireAttentionComponent implements OnInit {
   usersRequireAttention: UserRequireAttention[] = [];
   allUsersRequireAttention: UserRequireAttention[] = [];
 
-  screenHeight: number;
-
-  constructor(private usersService: UsersService, private router: Router) {
-    this.screenHeight = window.innerHeight;
-  }
+  constructor(private usersService: UsersService, private router: Router) {}
 
   navigateToUsersRequireAttentionTable() {
     this.router.navigate(['/users-require-attention-table']);
@@ -28,7 +24,7 @@ export class UsersRequireAttentionComponent implements OnInit {
 
   getUsersRequireAttention(): void {
     this.usersService.getUsersRequireAttention().subscribe((values) => {
-      this.screenHeight >= 750? this.usersRequireAttention = values.slice(0, 3) : this.usersRequireAttention = values.slice(0, 2);
+      this.usersRequireAttention = values.slice(0, 3);
       this.allUsersRequireAttention = values;
     }); 
   }
