@@ -1,0 +1,53 @@
+version: "3.9"
+services:
+  ni23-be-postgres:
+    container_name: ni23-be-postgres
+    image: postgres:latest
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    volumes:
+      - ../be-tools/db/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ni23-vol-postgres:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+  ni23-be-gamification:
+    container_name: ni23-be-gamification
+    build:
+      context: ../be-gamification/.
+    ports:
+      - "8282:8282"
+    links:
+      - ni23-be-postgres
+  ni23-be-tasks:
+    container_name: ni23-be-tasks
+    build:
+      context: ../be-tasks/.
+    ports:
+      - "8181:8181"
+    links:
+      - ni23-be-postgres
+  ni23-be-users:
+    container_name: ni23-be-users
+    build:
+      context: ../be-users/.
+    environment:
+      - DATABASE_URL="postgresql://postgres:postgres@ni23-be-postgres:5432/postgres?schema=ni23_be_users"
+    ports:
+      - "8083:8080"
+    links:
+      - ni23-be-postgres
+  ni23-fe-hr-admin:
+    container_name: ni23-fe-hr-admin
+    build:
+      context: .
+    ports:
+      - "3002:4200"
+    links:
+      - ni23-be-postgres
+      - ni23-be-gamification
+      - ni23-be-tasks
+      - ni23-be-users
+volumes:
+  ni23-vol-postgres:
+    driver: local
