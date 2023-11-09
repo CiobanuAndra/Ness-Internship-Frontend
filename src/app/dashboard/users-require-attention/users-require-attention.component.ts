@@ -20,7 +20,7 @@ export class UsersRequireAttentionComponent implements OnInit {
   }
 
   navigateToUsersRequireAttentionTable() {
-    this.router.navigate(['/main-page/users-require-attention-table']);
+    this.router.navigate(['/users-require-attention-table']);
   }
   ngOnInit(): void {
     this.getUsersRequireAttention();

@@ -1,10 +1,7 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {NavbarLayoutComponent} from './navbar/navbar-layout.component';
-
-import {
-  UsersRequireAttentionTableComponent
-} from './dashboard/users-require-attention/users-require-attention-table/users-require-attention-table.component'
+import { UsersRequireAttentionTableComponent } from './dashboard/users-require-attention/users-require-attention-table/users-require-attention-table.component'
 import {LeaderboardTableComponent} from './dashboard/leaderboard-table/leaderboard-table.component';
 
 
@@ -34,17 +31,28 @@ const routes: Routes = [
   },
   {
     path: 'users-require-attention-table',
-    component: UsersRequireAttentionTableComponent,
+    component: NavbarLayoutComponent,
+    children:[
+      {
+        path: '',
+        component: UsersRequireAttentionTableComponent,
+      },
+    ]
   },
   {
     path: 'leaderboard-table',
-    component: LeaderboardTableComponent,
+    component: NavbarLayoutComponent,
+    children:[
+      {
+        path: '',
+        component: LeaderboardTableComponent,
+      },
+    ]
   },
   {
     path: '**',
     redirectTo: '/dashboard'
   }
-
 ];
 
 @NgModule({
