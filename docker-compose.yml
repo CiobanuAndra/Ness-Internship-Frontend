@@ -43,6 +43,22 @@ services:
       context: .
     ports:
       - "3002:4200"
+    links:
+      - ni23-be-postgres
+      - ni23-be-gamification
+      - ni23-be-tasks
+      - ni23-be-users
+  ni23-fe-users:
+    container_name: ni23-fe-users
+    build:
+      context: .
+    ports:
+      - "3001:5173"
+    links:
+      - ni23-be-postgres
+      - ni23-be-gamification
+      - ni23-be-tasks
+      - ni23-be-users
 volumes:
   ni23-vol-postgres:
     driver: local
