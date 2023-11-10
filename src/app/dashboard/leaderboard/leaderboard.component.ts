@@ -3,7 +3,7 @@ import { UsersService } from 'src/app/services/users/users.service';
 import { UserCard } from 'src/app/interfaces/users/user-card.model';
 import { LeaderboardTabsEnum } from '../../enums/leaderboard-tabs.enum';
 import { Router } from '@angular/router';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import { dashboardUserMapper } from 'src/app/utils/userMapper';
 
 @Component({
@@ -19,11 +19,12 @@ export class LeaderboardComponent implements OnInit {
   screenHeight: number;
 
   maxUsersToShow: number;
+  currentUsersNumber: any;
 
   constructor(private userService: UsersService, private router: Router) {
     this.screenHeight = window.innerHeight;
     if (this.screenHeight >= 960) {
-      this.maxUsersToShow = 14;
+      this.maxUsersToShow = 13;
     } else if (this.screenHeight >= 700) {
       this.maxUsersToShow = 9;
     } else this.maxUsersToShow = 7;
@@ -45,6 +46,9 @@ export class LeaderboardComponent implements OnInit {
             userInDone: this.sortAndFilterUsers(user, true),
           };
         }),
+        tap(user => {
+          this.currentUsersNumber = user.userInDone;
+        })
       )
       .subscribe(({userInProgress, userInDone}) => {
         this.usersInProgress = userInProgress;

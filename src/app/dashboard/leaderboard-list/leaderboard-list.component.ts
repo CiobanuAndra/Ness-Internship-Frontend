@@ -8,6 +8,7 @@ import { UserCard } from 'src/app/interfaces/users/user-card.model';
 })
 export class LeaderboardListComponent implements OnInit {
   @Input() leaderboardUsers: UserCard[] = [];
+  @Input() currentUsersNumber!: number;
   constructor() {}
 
   ngOnInit() {

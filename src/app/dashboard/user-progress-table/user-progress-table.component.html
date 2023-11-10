@@ -10,7 +10,7 @@
   <mat-divider></mat-divider>
 
   <!-- ////////////// -->
-  <mat-table [dataSource]="dataSource" matSort (matSortChange)="announceSortChange($event)" class="mat-elevation-z8">
+  <mat-table [dataSource]="dataSource" matSort (matSortChange)="announceSortChange($event)" class="mat-elevation-z8 table">
     <ng-container matColumnDef="name">
       <mat-header-cell class="header-cell" *matHeaderCellDef mat-sort-header
         sortActionDescription="Sort by name">name</mat-header-cell>
@@ -42,7 +42,7 @@
     </ng-container>
 
     <mat-header-row *matHeaderRowDef="columnsToDisplay"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: columnsToDisplay"></mat-row>
+    <mat-row *matRowDef="let row; columns: columnsToDisplay" class="table-row"></mat-row>
   </mat-table>
   <!-- /////////////// -->
 

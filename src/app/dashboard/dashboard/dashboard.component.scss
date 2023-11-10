@@ -1,65 +1,24 @@
 .dashboard-container {
-    display: flex;
-    justify-content: center;
-    align-content: center;
-    padding: 0 1rem 1rem 1rem;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  padding: 0 1rem 1rem 1rem;
 }
 
 .grid-container {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: 21.5% 78.5%;
-    height: 100vh;
-    width: 90vw;
-    margin: 0 auto;
-    gap: 1rem;
-}
-
-.users-require-attention, .current-progress, .leaderboard-container, .userProgressTable {
-    min-height: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  width: 90vw;
+  margin: 0 auto;
+  gap: 1rem;
 }
 
 .leaderboard-container {
-    grid-row: span 2;
+  height: 100%;
+  grid-row: span 2;
 }
 
 .userProgressTable {
-    grid-column: 1/-2;
-}
-
-//RESPONSIVENESS
-@media(max-height:63.75em){
-    .grid-container {
-        grid-template-rows: 22.5% 70%;
-    }
-}
-
-@media(max-height:63em){
-    .grid-container {
-        grid-template-rows: 23% 70%;
-    }
-}
-
-@media(max-height:60em){
-    .grid-container {
-        grid-template-rows: 24% 70%;
-    }
-}
-
-@media(max-height:57em){
-    .grid-container {
-        grid-template-rows: 27% 70%;
-    }
-}
-
-@media(max-height:52em){
-    .grid-container {
-        grid-template-rows: 28% 70%;
-    }
-}
-
-@media(max-height:50em){
-    .grid-container {
-        grid-template-rows: 30% 70%;
-    }
+  height: 100%;
+  grid-column: 1/-2;
 }

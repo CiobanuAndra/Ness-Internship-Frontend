@@ -1,9 +1,10 @@
 @import '/src/styleguide.scss';
 
 .leaderboard-section {
+  height: 100%;
   border-radius: 0.25rem;
   background-color: $white-color;
-  box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.12), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 1px 0px rgba(0, 0, 0, 0.20);
+  box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.12), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 1px 0px rgba(0, 0, 0, 0.20);
 
   &__header {
     display: flex;
@@ -65,9 +66,9 @@
 
   .no-users-container {
     display: flex;
+    flex-direction: column  ;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
-    height: 25rem;
+    height: 85%;
   }
 }
