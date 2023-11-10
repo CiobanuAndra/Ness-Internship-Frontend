@@ -142,8 +142,8 @@
   </div>
 </div>
 
- <!-- ASIDES -->
- <mat-sidenav-container *ngIf="opened" class="mat-sidenav-container">
+<!-- ASIDES -->
+<mat-sidenav-container *ngIf="opened" class="mat-sidenav-container">
   <mat-sidenav>Start</mat-sidenav>
   <mat-sidenav-content>
     <app-add-bulk-users
@@ -154,7 +154,7 @@
   </mat-sidenav-content>
 </mat-sidenav-container>
 
- <mat-sidenav-container class="sidenav-container" *ngIf="showSidenav">
+<mat-sidenav-container class="sidenav-container" *ngIf="showSidenav">
   <app-addnewuser
     [showSidenav]="showSidenav"
     (showSidenavChange)="showSidenav = $event; filterAllUsers()"

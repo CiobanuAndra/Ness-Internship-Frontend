@@ -49,7 +49,12 @@
   </div>
   <div>
     <div class="add-bulk-users__buttons">
-      <button class="add-bulk-users__buttons__check-file">CHECK FILE</button>
+      <button
+        class="add-bulk-users__buttons__check-file"
+        (click)="openAddBulkUsers()"
+      >
+        CHECK FILE
+      </button>
       <button class="add-bulk-users__buttons__cancel" (click)="closeSidenav()">
         CANCEL
       </button>

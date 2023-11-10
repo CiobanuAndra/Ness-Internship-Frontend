@@ -5,6 +5,8 @@ import { UsersService } from 'src/app/services/users/users.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { tableHeaders } from 'src/app/enums/addbulkuser-table';
 import { Subject, takeUntil } from 'rxjs';
+import { MatDialog } from '@angular/material/dialog';
+import { AddBulkUsersComponent } from 'src/app/users/sidenavs/add-bulk-users/add-bulk-users.component';
 
 @Component({
   selector: 'app-addbulkusers',

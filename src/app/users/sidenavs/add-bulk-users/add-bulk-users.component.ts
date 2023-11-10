@@ -4,6 +4,8 @@ import { MatTableDataSource } from '@angular/material/table';
 import { UsersService } from 'src/app/services/users/users.service';
 import { UsersListTable } from 'src/app/interfaces/users-list-table';
 import { Subject, takeUntil } from 'rxjs';
+import { MatDialog } from '@angular/material/dialog';
+import { AddbulkusersComponent } from '../../modals/addbulkusers/addbulkusers/addbulkusers.component';
 
 @Component({
   selector: 'app-add-bulk-users',
@@ -19,7 +21,7 @@ export class AddBulkUsersComponent implements OnInit {
   dataSource = new MatTableDataSource<UsersListTable>();
   private destroy$ = new Subject<void>();
 
-  constructor(private usersService: UsersService) {}
+  constructor(private usersService: UsersService, private dialog: MatDialog) {}
 
   closeSidenav(): void {
     this.closeSidenavEvent.emit();
@@ -35,6 +37,12 @@ export class AddBulkUsersComponent implements OnInit {
           console.error('Error loading file.', error);
         }
       });
+  }
+
+  openAddBulkUsers() {
+    const dialogRef = this.dialog.open(AddbulkusersComponent, {
+      autoFocus: false,
+    });
   }
 
   ngOnInit() {
