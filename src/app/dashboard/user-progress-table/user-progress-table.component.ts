@@ -34,7 +34,6 @@ export class UserProgressTableComponent implements AfterViewInit, OnInit {
 
   ngOnInit(): void {
     this.filterAllUsers();
-    console.log(this.rowsToDisplay);
   };
 
   filterAllUsers(): void {
