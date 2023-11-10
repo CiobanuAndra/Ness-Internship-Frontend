@@ -1,4 +1,4 @@
-<div class="user-card">
+<div class="user-card" [ngStyle]="{'height': getHeightStyle()}">
   <div class="user-card__avatar">
     <img src="assets/icons/user.svg" alt="User Avatar" />
   </div>
@@ -9,18 +9,10 @@
     </div>
 
     <div class="user-card__data">
-      <img
-        class="user-card__icon"
-        src="assets/icons/blue-file.svg"
-        alt="Document Icon"
-      />
+      <img class="user-card__icon" src="assets/icons/blue-file.svg" alt="Document Icon" />
       <span class="user-card__days_left">{{ user.totalTasks - user.completedTasks }} Left</span>
       <span class="user-card__separator">∙</span>
-      <img
-        class="user-card__icon"
-        src="assets/icons/star.svg"
-        alt="Star Icon"
-      />
+      <img class="user-card__icon" src="assets/icons/star.svg" alt="Star Icon" />
       <span class="user-card__points">{{ user.score }} Points</span>
     </div>
   </div>

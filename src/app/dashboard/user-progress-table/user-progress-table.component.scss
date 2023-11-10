@@ -1,52 +1,55 @@
 @import "/src/styleguide.scss";
 
 .mat-elevation-z8 {
-  box-shadow: 0px 5px 5px -3px rgb(0 0 0 / 3%), 0px 8px 10px 1px rgb(0 0 0 / 3%), 0px 3px 14px 2px rgb(0 0 0 / 3%);
+  box-shadow: 0px 1px 5px 0px rgba(113, 113, 113, 0.12), 0px 2px 2px 0px rgba(157, 157, 157, 0.14), 0px 1px 1px 0px rgba(129, 129, 129, 0.2);
 }
 
-.header-cell {
-  text-transform: uppercase;
-}
+.card-container {
+  height: 100%;
+  border-radius: 0.25rem;
 
-.mat-column-name,
-.mat-column-taskCompleted,
-.mat-column-timeLeft,
-.mat-column-dateRegistered,
-.mat-column-settings {
-  font-size: 12px;
-}
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+    padding: 5px 1rem 5px 1rem;
 
-.mat-column-name {
-  flex: 0 0 20%;
-}
+    .card-title {
+      font-size: 15px;
+    }
+  }
 
-.mat-column-options {
-  flex: 0 0 10%;
-}
+  .table {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
 
-.card-header {
-  display: flex;
-  justify-content: space-between;
-  align-content: center;
-  padding: 5px 1rem 5px 1rem;
+    .header-cell {
+      text-transform: uppercase;
+    }
 
-  .card-title {
-    font-size: 15px;
+    .mat-column-name,
+    .mat-column-taskCompleted,
+    .mat-column-timeLeft,
+    .mat-column-dateRegistered,
+    .mat-column-settings {
+      font-size: 12px;
+    }
+
+    .mat-column-name {
+      flex: 0 0 35%;
+    }
+    
+    .mat-column-options {
+      flex: 0 0 10%;
+    }
+  }
+
+  .users-list__title__buttons__add-user {
+    background-color: #e6e7e9;
   }
 }
 
-.users-list__title__buttons__add-user {
-  background-color: #e6e7e9;
-}
 
-//RESPONSIVENESS
-@media(min-height:47em) {
 
-  .mat-column-name,
-  .mat-column-taskCompleted,
-  .mat-column-timeLeft,
-  .mat-column-dateRegistered,
-  .mat-column-settings {
-    font-size: 1rem;
-  }
-}

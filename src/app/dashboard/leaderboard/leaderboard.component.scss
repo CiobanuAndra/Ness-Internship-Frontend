@@ -1,9 +1,10 @@
 @import '/src/styleguide.scss';
 
 .leaderboard-section {
+  height: 100%;
   border-radius: 0.25rem;
   background-color: $white-color;
-  box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.12), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 1px 0px rgba(0, 0, 0, 0.20);
+  box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.12), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 1px 0px rgba(0, 0, 0, 0.20);
 
   &__header {
     display: flex;
@@ -65,23 +66,9 @@
 
   .no-users-container {
     display: flex;
+    flex-direction: column  ;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
-    height: 49.65rem;
-  }
-}
-
-
-//RESPONSIVENESS
-@media(max-height:55em){
-  .no-users-container {
-    height: 34rem !important;
-  }
-}
-
-@media(max-height:47em){
-  .no-users-container {
-    height: 25rem !important;
+    height: 85%;
   }
 }

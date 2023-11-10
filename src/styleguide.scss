@@ -128,3 +128,7 @@ $error-color: #ff5252;
     --mdc-snackbar-supporting-text-color: #fff;
   }
 }
+
+::ng-deep.mdc-text-field--filled:not(.mdc-text-field--disabled) {
+  background-color: white;
+}

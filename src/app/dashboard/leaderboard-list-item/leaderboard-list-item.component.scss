@@ -4,9 +4,7 @@
   display: grid;
   grid-template-columns: 15% 70% 15%;
   border-bottom: 0.063rem solid $medium-gray-color;
-  padding: 0 0.25rem;
   background: $white-color;
-  height: 3.52rem;
   box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.12), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 1px 0px rgba(0, 0, 0, 0.20);
 
   &__avatar {
@@ -62,30 +60,5 @@
     justify-content: center;
     align-items: center;
     gap: 0.25rem;
-  }
-}
-
-//RESPONSIVENESS
-@media(max-height:68em){
-  .user-card {
-    height: 3.49rem;
-  }
-}
-
-@media(max-height:62em){
-  .user-card {
-    height: 3.382rem;
-  }
-}
-
-@media(max-height:55em){
-  .user-card {
-    height: 3.35rem;
-  }
-}
-
-@media(max-height:47em){
-  .user-card {
-    height: 3.53rem;
   }
 }

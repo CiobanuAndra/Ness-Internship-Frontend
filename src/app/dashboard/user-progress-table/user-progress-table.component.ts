@@ -2,7 +2,6 @@ import { Component, ViewChild, AfterViewInit, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort, Sort } from '@angular/material/sort';
 import { UsersProgressService } from '../../services/users-progress/user-progress.service';
-import { UsersFilter } from '../../enums/users-filter';
 import { MatPaginator } from '@angular/material/paginator';
 import { UsersProgressTable } from '../../interfaces/user-pogress-model';
 import { Router } from '@angular/router';
@@ -25,6 +24,7 @@ export class UserProgressTableComponent implements AfterViewInit, OnInit {
   allUsersProgress: UsersProgressTable[] = [];
 
   columnsToDisplay = displayedColumns;
+  rowsToDisplay!: number;
 
   screenHeight: number;
 
@@ -38,10 +38,13 @@ export class UserProgressTableComponent implements AfterViewInit, OnInit {
 
   filterAllUsers(): void {
     this.userService.getAllUsers().subscribe((values: UsersProgressTable[]) => {
+      this.rowsToDisplay = values.length;
       if(this.screenHeight > 900) {
         this.dataSource.data = values.slice(0, 11);
-      } else if(this.screenHeight > 750) {
+        this.rowsToDisplay = values.slice(0, 11).length;
+      } else if(this.screenHeight > 700) {
         this.dataSource.data = values.slice(0, 6);
+        this.rowsToDisplay = values.slice(0, 6).length;
       } else this.dataSource.data = values.slice(0, 4);
       this.allUsersProgress=values;
     });
