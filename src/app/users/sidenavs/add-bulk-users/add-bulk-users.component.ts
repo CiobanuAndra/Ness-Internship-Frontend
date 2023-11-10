@@ -40,9 +40,10 @@ export class AddBulkUsersComponent implements OnInit {
   }
 
   openAddBulkUsers() {
-    const dialogRef = this.dialog.open(AddbulkusersComponent, {
+    this.dialog.open(AddbulkusersComponent, {
       autoFocus: false,
     });
+    this.closeSidenav();
   }
 
   ngOnInit() {
