@@ -59,6 +59,20 @@ services:
       - ni23-be-gamification
       - ni23-be-tasks
       - ni23-be-users
+  ni23-be-login:
+    container_name: ni23-be-login
+    build:
+      context: .
+    environment:
+      - DATABASE_HOST=ni23-be-postgres
+      - DATABASE_USER=postgres
+      - DATABASE_PASSWORD=postgres
+      - DATABASE_DBNAME=postgres
+      - DATABASE_SCHEMA=ni23_be_users
+    ports:
+      - "8084:8080"
+    links:
+      - ni23-be-postgres
 volumes:
   ni23-vol-postgres:
     driver: local
