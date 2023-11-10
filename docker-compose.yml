@@ -51,7 +51,7 @@ services:
   ni23-fe-users:
     container_name: ni23-fe-users
     build:
-      context: .
+      context: ../fe-users/.
     ports:
       - "3001:5173"
     links:
