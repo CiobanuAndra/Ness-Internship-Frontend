@@ -32,7 +32,6 @@ export class AddbulkusersComponent implements OnInit {
   constructor(private usersService: UsersService, @Inject(MAT_DIALOG_DATA) public data: any) {}
 
   ngOnInit(): void {
-    console.log(this.data.invalidUsers, this.data.validUsers)
     this.fetchUserAwaitModal();
     this.fetchUserRequireModal();
   }
