@@ -1,5 +1,12 @@
 import { Injectable } from '@angular/core';
-import { Observable, map, of } from 'rxjs';
+import {
+  BehaviorSubject,
+  Observable,
+  catchError,
+  map,
+  of,
+  throwError,
+} from 'rxjs';
 import { UsersListTable } from '../../interfaces/users-list-table';
 import { UserModal } from '../../interfaces/users/user-modal.model';
 import { environment } from 'src/environments/environment';
