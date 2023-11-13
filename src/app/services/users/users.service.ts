@@ -70,15 +70,6 @@ export class UsersService {
     return of(this.usersFromCSVFile);
   }
 
-  uploadCSVFile(file: File): Promise<any> {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = () => resolve(reader.result);
-      reader.onerror = reject;
-    });
-  }
-
   //modals
   usersModalRequire: UserModal[] = [
     {
@@ -128,5 +119,28 @@ export class UsersService {
     return this.http.get<UserResponse>(this.getUsersURL, {
       responseType: 'json',
     });
+  }
+
+  async uploadCSVFile(file: File) {
+    try {
+      const formData = new FormData();
+      formData.append('csvFile', file);
+
+      const response = await fetch(`${environment.baseUserURL}/extract`, {
+        method: 'POST',
+        body: formData,
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        console.log('Response:', data);
+        return data;
+      } else {
+        throw new Error('Error loading file.');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      throw error;
+    }
   }
 }

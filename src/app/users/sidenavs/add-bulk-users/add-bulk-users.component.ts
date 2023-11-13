@@ -25,7 +25,11 @@ export class AddBulkUsersComponent implements OnInit {
 
   addFromListener() {
     this.fileControl.valueChanges.subscribe(async (files: any) => {
-      await this.usersService.uploadCSVFile(files);
+      try {
+        await this.usersService.uploadCSVFile(files);
+      } catch (error) {
+        console.error('Error loading file.', error);
+      }
     });
   }
 
