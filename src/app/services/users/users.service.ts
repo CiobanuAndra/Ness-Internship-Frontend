@@ -169,7 +169,7 @@ export class UsersService {
   async uploadCSVFile(file: File) {
     try {
       const formData = new FormData();
-      formData.append('csvFile', file);
+      formData.append('users', file);
 
       const response = await fetch(`${environment.baseUserURL}/extract`, {
         method: 'POST',
