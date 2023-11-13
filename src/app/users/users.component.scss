@@ -145,8 +145,7 @@
   right: 0;
   position: absolute;
   background-color: $white-color;
-  width: 41.875rem;
-  height: 100%;
+  @include dimensions(35%, 100%);
 }
 
 .example-container {

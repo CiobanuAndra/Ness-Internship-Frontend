@@ -62,7 +62,7 @@ export class AddBulkUsersComponent implements OnInit {
           dateAdded: new Date(),
         });
       });
-    this.addFromListener();
+      this.addFromListener();
   }
 
   ngOnDestroy() {
