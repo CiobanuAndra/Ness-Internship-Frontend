@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UsersService } from 'src/app/services/users/users.service';
-import { User } from 'src/app/interfaces/users/user';
+import { UserRequireAttention } from 'src/app/interfaces/user-require-attention.model';
 
 @Component({
   selector: 'app-users-require-attention',
@@ -9,8 +9,8 @@ import { User } from 'src/app/interfaces/users/user';
   styleUrls: ['./users-require-attention.component.scss'],
 })
 export class UsersRequireAttentionComponent implements OnInit {
-  usersRequireAttention: User[] = [];
-  allUsersRequireAttention: User[] = [];
+  usersRequireAttention: UserRequireAttention[] = [];
+  allUsersRequireAttention: UserRequireAttention[] = [];
   screenHeight: number;
 
   constructor(private usersService: UsersService, private router: Router) {
@@ -28,9 +28,9 @@ export class UsersRequireAttentionComponent implements OnInit {
   getUsersRequireAttention(): void {
     this.usersService.getUsersRequireAttention().subscribe((values) => {
       this.screenHeight > 750
-        ? (this.usersRequireAttention = values.users.slice(0, 3))
-        : (this.usersRequireAttention = values.users.slice(0, 2));
-      this.allUsersRequireAttention = values.users;
+        ? (this.usersRequireAttention = values.slice(0, 3))
+        : (this.usersRequireAttention = values.slice(0, 2));
+      this.allUsersRequireAttention = values;
     });
   }
 }

@@ -47,7 +47,7 @@ export class UsersRequireAttentionTableComponent
 
   ngOnInit() {
     this.usersService.getUsersRequireAttention().subscribe((values) => {
-      this.dataSource.data = values.users;
+      this.dataSource.data = values;
     });
   }
 }

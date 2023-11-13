@@ -6,6 +6,7 @@ import { environment } from 'src/environments/environment';
 import { UserResponse } from 'src/app/interfaces/user-response';
 import { HttpClient } from '@angular/common/http';
 import { User } from 'src/app/interfaces/users/user';
+import { UserRequireAttention } from 'src/app/interfaces/user-require-attention.model';
 
 @Injectable({
   providedIn: 'root',
@@ -18,10 +19,6 @@ export class UsersService {
   constructor(private http: HttpClient) {}
 
   getAllUsers(): Observable<any> {
-    return this.http.get<User>(`${this.baseUrl}`);
-  }
-
-  getUsersRequireAttention(): Observable<any> {
     return this.http.get<User>(`${this.baseUrl}`);
   }
 
@@ -66,11 +63,55 @@ export class UsersService {
     },
   ];
 
+  usersRequireAttention: UserRequireAttention[] = [
+    {
+      name: 'Andrei Artene',
+      leftDays: 4,
+      pastDays: 2,
+      tasksLeft: 3,
+      status: true,
+    },
+    {
+      name: 'Vasile Ion',
+      leftDays: 1,
+      pastDays: 4,
+      tasksLeft: 5,
+      status: true,
+    },
+    {
+      name: 'Mark Willerhower',
+      leftDays: 2,
+      pastDays: 4,
+      tasksLeft: 4,
+      status: true,
+    },
+    {
+      name: 'Andrei Artene',
+      leftDays: 4,
+      pastDays: 2,
+      tasksLeft: 3,
+      status: true,
+    },
+    {
+      name: 'Vasile Ion',
+      leftDays: 1,
+      pastDays: 4,
+      tasksLeft: 5,
+      status: true,
+    },
+    {
+      name: 'Mark Willerhower',
+      leftDays: 2,
+      pastDays: 4,
+      tasksLeft: 4,
+      status: false,
+    },
+  ];
+
   getUsersFromCSVFile(): Observable<UsersListTable[]> {
     return of(this.usersFromCSVFile);
   }
 
-  //modals
   usersModalRequire: UserModal[] = [
     {
       name: 'Mustas1',
@@ -107,7 +148,6 @@ export class UsersService {
     return of(this.usersModalAwait);
   }
 
-  //HTTP REQUESTS
   addNewUser(userData: UserModal, userId: string): Observable<UserModal> {
     return this.http.post<UserModal>(
       `${this.urlAddUser}/admin?id=${userId}`,
@@ -142,5 +182,20 @@ export class UsersService {
       console.error('Error:', error);
       throw error;
     }
+  }
+
+  getUsersRequireAttention(): Observable<UserRequireAttention[]> {
+    return of(this.usersRequireAttention);
+  }
+
+  filterActiveUsersRequireAttention(): Observable<UserRequireAttention[]> {
+    return of(this.usersRequireAttention).pipe(
+      map((users) => users.filter((user) => user.status === true))
+    );
+  }
+  filterInactiveUsersRequireAttention(): Observable<UserRequireAttention[]> {
+    return of(this.usersRequireAttention).pipe(
+      map((users) => users.filter((user) => user.status === false))
+    );
   }
 }
