@@ -120,7 +120,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    @include dimensions(54.438rem, 3.5rem);
+    @include dimensions(30vw, 3.5rem);
   }
 
   &__mat-columnDef-status,

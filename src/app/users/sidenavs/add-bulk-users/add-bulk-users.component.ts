@@ -16,6 +16,9 @@ export class AddBulkUsersComponent implements OnInit {
   @Input() opened!: boolean;
   @Output() closeSidenavEvent = new EventEmitter<void>();
 
+  invalidUsersResponse = [];
+  validUsersResponse = [];
+
   fileControl = new FormControl(null);
   displayedColumns: string[] = ['firstname', 'lastname', 'email'];
   dataSource = new MatTableDataSource<UsersListTable>();
@@ -42,6 +45,10 @@ export class AddBulkUsersComponent implements OnInit {
   openAddBulkUsers() {
     this.dialog.open(AddbulkusersComponent, {
       autoFocus: false,
+      data: {
+        invalidUsers: this.invalidUsersResponse,
+        validUsers: this.validUsersResponse,
+      },
     });
     this.closeSidenav();
   }

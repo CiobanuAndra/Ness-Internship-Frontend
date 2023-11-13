@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, Inject, Input, OnInit, ViewChild } from '@angular/core';
 import { AddbulkuserTableComponent } from './tables/addbulkuser-table/addbulkuser-table.component';
 import { UserModal } from 'src/app/interfaces/users/user-modal.model';
 import { UsersService } from 'src/app/services/users/users.service';
@@ -7,6 +7,7 @@ import { tableHeaders } from 'src/app/enums/addbulkuser-table';
 import { Subject, takeUntil } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { AddBulkUsersComponent } from 'src/app/users/sidenavs/add-bulk-users/add-bulk-users.component';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-addbulkusers',
@@ -28,9 +29,10 @@ export class AddbulkusersComponent implements OnInit {
 
   private destroy$ = new Subject<void>();
 
-  constructor(private usersService: UsersService) {}
+  constructor(private usersService: UsersService, @Inject(MAT_DIALOG_DATA) public data: any) {}
 
   ngOnInit(): void {
+    console.log(this.data.invalidUsers, this.data.validUsers)
     this.fetchUserAwaitModal();
     this.fetchUserRequireModal();
   }
