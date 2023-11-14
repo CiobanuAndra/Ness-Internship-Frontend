@@ -25,7 +25,7 @@
     align-items: center;
 
     &__mat-form-field {
-      margin-top: 2rem;
+      margin-top: 1.25rem;
       height: 70px;
     }
 
@@ -55,7 +55,7 @@
 
 .chart-container {
   position: relative;
-  
+
   .center-text {
     position: absolute;
     top: 47%;
@@ -73,20 +73,36 @@
     transform: translate(-50%, 50%);
     display: flex;
     align-items: center;
-    justify-content:center;
+    justify-content: center;
     width: fit-content;
     font-size: 12px;
     width: 100%;
     gap: 0.5rem;
-  
+
     &__colors {
       display: flex;
       gap: 0.125rem;
       &__color {
         width: 0.938rem;
         height: 0.8rem;
-          margin-top: 0.2rem;
+        margin-top: 0.2rem;
       }
     }
+  }
+}
+
+//RESPONSIVENESS
+@media (max-height: 47em) {
+  .donutchart {
+    height: 7rem;
+    padding-bottom: 0.35rem;
+  }
+
+  .center-text {
+    top: 50% !important;
+  }
+
+  .legend {
+    top: 70% !important;
   }
 }

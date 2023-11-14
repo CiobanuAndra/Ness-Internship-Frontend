@@ -1,12 +1,11 @@
 import {
   AfterViewInit,
-  ChangeDetectorRef,
   Component,
   ElementRef,
+  OnInit,
   ViewChild,
 } from '@angular/core';
 import { UsersService } from '../services/users/users.service';
-import { UsersListTable } from '../interfaces/users-list-table';
 import { UsersFilter } from '../enums/users-filter';
 import { MatTabChangeEvent } from '@angular/material/tabs';
 import { ngxCsv } from 'ngx-csv/ngx-csv';
@@ -16,20 +15,21 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatDialog } from '@angular/material/dialog';
 import { ResourcesService } from '../services/resources/resources.service';
 import { AddBulkUsersComponent } from './sidenavs/add-bulk-users/add-bulk-users.component';
+import { User } from '../interfaces/users/user';
 
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.scss'],
 })
-export class UsersComponent implements AfterViewInit {
+export class UsersComponent implements AfterViewInit, OnInit {
   showSidenav = false;
 
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild('sidenav') sidenav!: ElementRef;
 
-  dataSource = new MatTableDataSource<UsersListTable>();
+  dataSource = new MatTableDataSource<User>([]);
   opened: boolean = false;
   UsersFilterValues = Object(UsersFilter);
   totalCourses = 0;
@@ -43,16 +43,15 @@ export class UsersComponent implements AfterViewInit {
   selectedTabIndex: number = this.UsersFilterIndex[UsersFilter.ALL];
   displayedColumns: string[] = [
     'name',
-    'status',
-    'coursesCompleted',
+    'hasPlatformAccess',
+    'completedTasks',
     'leftDays',
-    'dateAdded',
+    'activationStartDate',
     'settings',
   ];
 
   constructor(
     private userService: UsersService,
-    private cdr: ChangeDetectorRef,
     private resourcesService: ResourcesService,
     private dialog: MatDialog
   ) {}
@@ -73,24 +72,46 @@ export class UsersComponent implements AfterViewInit {
     });
   }
 
-  filterActiveUsers(): void {
-    this.userService.getActiveUsers().subscribe((values) => {
-      this.dataSource.data = structuredClone(values);
-      this.cdr.detectChanges();
+  calculateRemainingDays(activationEndDate: Date): number {
+    const currentDate = new Date();
+    const endDate = new Date(activationEndDate);
+    const timeDifference = endDate.getTime() - currentDate.getTime();
+    return Math.ceil(timeDifference / (1000 * 60 * 60 * 24));
+  }
+
+  filterActiveUsers() {
+    this.userService.filterActiveUsers().subscribe((users) => {
+      const activeUsersWithLeftDays = users.map(
+        (user: { activationEndDate: Date }) => ({
+          ...user,
+          leftDays: this.calculateRemainingDays(user.activationEndDate),
+        })
+      );
+      this.dataSource.data = activeUsersWithLeftDays;
     });
   }
 
-  filterInactiveUsers(): void {
-    this.userService.getInactiveUsers().subscribe((values) => {
-      this.dataSource.data = structuredClone(values);
-      this.cdr.detectChanges();
+  filterInactiveUsers() {
+    this.userService.filterInactiveUsers().subscribe((filteredUsers) => {
+      const inactiveUserWithLeftDays = filteredUsers.map(
+        (user: { activationEndDate: Date }) => ({
+          ...user,
+          leftDays: this.calculateRemainingDays(user.activationEndDate),
+        })
+      );
+      this.dataSource.data = inactiveUserWithLeftDays;
     });
   }
 
   filterAllUsers(): void {
     this.userService.getAllUsers().subscribe((values) => {
-      this.dataSource.data = structuredClone(values);
-      this.cdr.detectChanges();
+      const usersWithLeftDays = values.users.map(
+        (user: { activationEndDate: Date }) => ({
+          ...user,
+          leftDays: this.calculateRemainingDays(user.activationEndDate),
+        })
+      );
+      this.dataSource.data = usersWithLeftDays;
     });
   }
 
@@ -133,11 +154,9 @@ export class UsersComponent implements AfterViewInit {
   ngAfterViewInit(): void {
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
-    this.userService.getTotalCourses().subscribe((val) => {
-      this.totalCourses = structuredClone(val);
-      this.cdr.detectChanges();
-    });
+  }
 
+  ngOnInit() {
     this.filterAllUsers();
   }
 }

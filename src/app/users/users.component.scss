@@ -87,6 +87,7 @@
     &__status-active {
       color: green;
     }
+
     &__status-inactive {
       color: red;
     }
@@ -128,7 +129,7 @@
     @include dimensions(15rem, null);
   }
 
-  &__mat-columnDef-taskCompleted {
+  &__mat-columnDef-completedTasks {
     @include dimensions(16.5rem, null);
   }
 }

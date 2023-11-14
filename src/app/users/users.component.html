@@ -55,15 +55,15 @@
           NAME
         </th>
         <td mat-cell *matCellDef="let element">
-          {{ element.firstname }} {{ element.lastname }}
+          {{ element.name }}
         </td>
       </ng-container>
-      <ng-container matColumnDef="status">
+      <ng-container matColumnDef="hasPlatformAccess">
         <th
           mat-header-cell
           *matHeaderCellDef
           class="users-list__mat-columnDef-status"
-          mat-sort-header="status"
+          mat-sort-header="hasPlatformAccess"
         >
           STATUS
         </th>
@@ -71,24 +71,24 @@
           mat-cell
           *matCellDef="let element"
           [ngClass]="{
-            'users-list__table__status-active': element.status,
-            'users-list__table__status-inactive': !element.status
+            'users-list__table__status-active': element.hasPlatformAccess,
+            'users-list__table__status-inactive': !element.hasPlatformAccess
           }"
         >
-          {{ element.status ? " Active" : "Inactive" }}
+          {{ element.hasPlatformAccess ? " Active" : "Inactive" }}
         </td>
       </ng-container>
-      <ng-container matColumnDef="coursesCompleted">
+      <ng-container matColumnDef="completedTasks">
         <th
           mat-header-cell
           *matHeaderCellDef
-          class="users-list__mat-columnDef-taskCompleted"
-          mat-sort-header="coursesCompleted"
+          class="users-list__mat-columnDef-completedTasks"
+          mat-sort-header="completedTasks"
         >
           COURSES COMPLETED
         </th>
         <td mat-cell *matCellDef="let element">
-          {{ element.coursesCompleted }}/{{ totalCourses }}
+          {{ element.completedTasks }}/{{ element.totalTasks }}
         </td>
       </ng-container>
       <ng-container matColumnDef="leftDays">
@@ -102,17 +102,17 @@
         </th>
         <td mat-cell *matCellDef="let element">{{ element.leftDays }} Days</td>
       </ng-container>
-      <ng-container matColumnDef="dateAdded">
+      <ng-container matColumnDef="activationStartDate">
         <th
           mat-header-cell
           *matHeaderCellDef
           class="users-list__mat-columnDef-dateAdded"
-          mat-sort-header="dateAdded"
+          mat-sort-header="activationStartDate"
         >
           DATE ADDED
         </th>
         <td mat-cell *matCellDef="let element">
-          {{ element.dateAdded | date : "dd.MM.yyyy - hh:mm a" }}
+          {{ element.activationStartDate | date : "dd.MM.yyyy - hh:mm a" }}
         </td>
       </ng-container>
       <ng-container matColumnDef="settings">

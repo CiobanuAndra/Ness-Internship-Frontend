@@ -1,39 +1,70 @@
 <div class="users-require-attention">
   <div class="users-require-attention__title">
-    <span>{{ allUsersRequireAttention.length }} Users that require attention</span>
-    <button mat-button class="users-require-attention__title__button" (click)="navigateToUsersRequireAttentionTable()">
+    <span
+      >{{ allUsersRequireAttention.length }} Users that require attention</span
+    >
+    <button
+      mat-button
+      class="users-require-attention__title__button"
+      (click)="navigateToUsersRequireAttentionTable()"
+    >
       VIEW ALL
     </button>
   </div>
   <div *ngIf="usersRequireAttention.length > 0">
-    <div class="users-require-attention__users" *ngFor="let user of usersRequireAttention">
+    <div
+      class="users-require-attention__users"
+      *ngFor="let user of usersRequireAttention"
+    >
       <div class="users-require-attention__users__user">
-        <img class="users-require-attention__users__user__image" src="../../../assets/images/Avatar.png" />
+        <img
+          class="users-require-attention__users__user__image"
+          src="../../../assets/images/Avatar.png"
+        />
         <div class="users-require-attention__users__user__details">
           <div>{{ user.name }}</div>
           <div class="users-require-attention__users__user__details__days">
-            <mat-icon class="users-require-attention__users__user__details__days__file" svgIcon="file"></mat-icon>
+            <mat-icon
+              class="users-require-attention__users__user__details__days__file"
+              svgIcon="file"
+            ></mat-icon>
             <div>{{ user.leftDays + " Left" }}</div>
-            <div class="users-require-attention__users__user__details__days__point">
-              <div class="users-require-attention__users__user__details__days__point__p">
+            <div
+              class="users-require-attention__users__user__details__days__point"
+            >
+              <div
+                class="users-require-attention__users__user__details__days__point__p"
+              >
                 {{ "." }}
               </div>
             </div>
-            <mat-icon class="users-require-attention__users__user__details__days__clock" svgIcon="clock"></mat-icon>
+            <mat-icon
+              class="users-require-attention__users__user__details__days__clock"
+              svgIcon="clock"
+            ></mat-icon>
             <div>{{ user.pastDays + " Days" }}</div>
           </div>
         </div>
       </div>
-      <mat-icon [matMenuTriggerFor]="menu" class="users-require-attention__users__points-icon"
-        svgIcon="points"></mat-icon>
+      <mat-icon
+        [matMenuTriggerFor]="menu"
+        class="users-require-attention__users__points-icon"
+        svgIcon="points"
+      ></mat-icon>
       <mat-menu #menu="matMenu">
         <button mat-menu-item>View Profile</button>
         <button mat-menu-item>Extend Time</button>
       </mat-menu>
     </div>
   </div>
-  <div *ngIf="usersRequireAttention.length == 0" class="users-require-attention__no-users">
-    <mat-icon class="users-require-attention__no-users__icon" svgIcon="check"></mat-icon>
+  <div
+    *ngIf="usersRequireAttention.length == 0"
+    class="users-require-attention__no-users"
+  >
+    <mat-icon
+      class="users-require-attention__no-users__icon"
+      svgIcon="check"
+    ></mat-icon>
     <p>No users require attention.</p>
   </div>
 </div>

@@ -1,23 +1,67 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, catchError, map, of, throwError } from 'rxjs';
+import { Observable, map, of } from 'rxjs';
 import { UsersListTable } from '../../interfaces/users-list-table';
-import { UserCard } from '../../interfaces/users/user-card.model';
 import { UserModal } from '../../interfaces/users/user-modal.model';
-import { UserRequireAttention } from '../../interfaces/user-require-attention.model';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { UserResponse } from 'src/app/interfaces/user-response';
+import { HttpClient } from '@angular/common/http';
+import { User } from 'src/app/interfaces/users/user';
+import { UserRequireAttention } from 'src/app/interfaces/user-require-attention.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UsersService {
-  //ENDPOINTS
   urlAddUser = environment.baseUserURL;
+  baseUrl = environment.baseUserURL;
 
-  private showSidenav = false;
   getUsersURL = 'http://localhost:3000/api/user';
   constructor(private http: HttpClient) {}
+
+  getAllUsers(): Observable<any> {
+    return this.http.get<User>(`${this.baseUrl}`);
+  }
+
+  filterActiveUsers(): Observable<User[]> {
+    return this.getAllUsers().pipe(
+      map((resp) =>
+        resp.users.filter(
+          (user: { isDeactivated: boolean }) => user.isDeactivated === true
+        )
+      )
+    );
+  }
+
+  filterInactiveUsers(): Observable<User[]> {
+    return this.getAllUsers().pipe(
+      map((resp) =>
+        resp.users.filter(
+          (user: { isDeactivated: boolean }) => user.isDeactivated === false
+        )
+      )
+    );
+  }
+
+  usersFromCSVFile: UsersListTable[] = [
+    {
+      firstname: 'Alex',
+      lastname: 'Muller',
+      email: 'allex.muller@example.com',
+      status: true,
+      coursesCompleted: 8,
+      leftDays: 5,
+      dateAdded: new Date('2023-10-15'),
+    },
+    {
+      firstname: 'Alex',
+      lastname: 'Muller',
+      email: 'allex.muller@example.com',
+      status: false,
+      coursesCompleted: 3,
+      leftDays: 12,
+      dateAdded: new Date('2023-09-20'),
+    },
+  ];
 
   usersRequireAttention: UserRequireAttention[] = [
     {
@@ -62,162 +106,12 @@ export class UsersService {
       tasksLeft: 4,
       status: false,
     },
-    {
-      name: 'Vasile Ion',
-      leftDays: 1,
-      pastDays: 4,
-      tasksLeft: 5,
-      status: true,
-    },
-    {
-      name: 'Mark Willerhower',
-      leftDays: 2,
-      pastDays: 4,
-      tasksLeft: 4,
-      status: false,
-    },
   ];
-
-  totalCourses: number = 15;
-
-  allUsers: UsersListTable[] = [
-    {
-      firstname: 'Alex',
-      lastname: 'Muller',
-      email: 'allex.muller@example.com',
-      status: true,
-      coursesCompleted: 8,
-      leftDays: 5,
-      dateAdded: new Date('2023-10-15'),
-    },
-    {
-      firstname: 'Alex',
-      lastname: 'Muller',
-      email: 'allex.muller@example.com',
-      status: false,
-      coursesCompleted: 3,
-      leftDays: 12,
-      dateAdded: new Date('2023-09-20'),
-    },
-    {
-      firstname: 'Alex',
-      lastname: 'Muller',
-      email: 'allex.muller@example.com',
-      status: true,
-      coursesCompleted: 12,
-      leftDays: 2,
-      dateAdded: new Date('2023-10-01'),
-    },
-    {
-      firstname: 'Alex',
-      lastname: 'Muller',
-      email: 'allex.muller@example.com',
-      status: true,
-      coursesCompleted: 8,
-      leftDays: 5,
-      dateAdded: new Date('2023-10-15'),
-    },
-    {
-      firstname: 'Alex',
-      lastname: 'Muller',
-      email: 'allex.muller@example.com',
-      status: false,
-      coursesCompleted: 3,
-      leftDays: 12,
-      dateAdded: new Date('2023-09-20'),
-    },
-    {
-      firstname: 'Alex',
-      lastname: 'Muller',
-      email: 'allex.muller@example.com',
-      status: true,
-      coursesCompleted: 12,
-      leftDays: 2,
-      dateAdded: new Date('2023-10-01'),
-    },
-    {
-      firstname: 'Alex',
-      lastname: 'Muller',
-      email: 'allex.muller@example.com',
-      status: true,
-      coursesCompleted: 8,
-      leftDays: 5,
-      dateAdded: new Date('2023-10-15'),
-    },
-  ];
-
-  usersFromCSVFile: UsersListTable[] = [
-    {
-      firstname: 'Alex',
-      lastname: 'Muller',
-      email: 'allex.muller@example.com',
-      status: true,
-      coursesCompleted: 8,
-      leftDays: 5,
-      dateAdded: new Date('2023-10-15'),
-    },
-    {
-      firstname: 'Alex',
-      lastname: 'Muller',
-      email: 'allex.muller@example.com',
-      status: false,
-      coursesCompleted: 3,
-      leftDays: 12,
-      dateAdded: new Date('2023-09-20'),
-    },
-  ];
-
-  usersSubject$: BehaviorSubject<UserRequireAttention[]> = new BehaviorSubject<
-    UserRequireAttention[]
-  >(this.usersRequireAttention);
-
-  getUsersRequireAttention(): Observable<UserRequireAttention[]> {
-    return this.usersSubject$.asObservable();
-  }
-
-  updateUsersRequireAttention(users: UserRequireAttention[]) {
-    this.usersSubject$.next(users);
-  }
-
-  getAllUsers(): Observable<UsersListTable[]> {
-    return of(this.allUsers);
-  }
 
   getUsersFromCSVFile(): Observable<UsersListTable[]> {
     return of(this.usersFromCSVFile);
   }
 
-  uploadCSVFile(file: File): Promise<any> {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = () => resolve(reader.result);
-      reader.onerror = reject;
-    });
-  }
-
-  getInactiveUsers(): Observable<UsersListTable[]> {
-    return of(this.allUsers).pipe(
-      map((users) => users.filter((user) => user.status === false))
-    );
-  }
-  getActiveUsers(): Observable<UsersListTable[]> {
-    return of(this.allUsers).pipe(
-      map((users) => users.filter((user) => user.status === true))
-    );
-  }
-
-  filterActiveUsersRequireAttention(): Observable<UserRequireAttention[]> {
-    return of(this.usersRequireAttention).pipe(
-      map((users) => users.filter((user) => user.status === true))
-    );
-  }
-  filterInactiveUsersRequireAttention(): Observable<UserRequireAttention[]> {
-    return of(this.usersRequireAttention).pipe(
-      map((users) => users.filter((user) => user.status === false))
-    );
-  }
-  //modals
   usersModalRequire: UserModal[] = [
     {
       name: 'Mustas1',
@@ -254,17 +148,54 @@ export class UsersService {
     return of(this.usersModalAwait);
   }
 
-  //HTTP REQUESTS
   addNewUser(userData: UserModal, userId: string): Observable<UserModal> {
-    return this.http.post<UserModal>(`${this.urlAddUser}/admin?id=${userId}`, userData);
-  };
-
-  getTotalCourses() {
-    return of(this.totalCourses);
+    return this.http.post<UserModal>(
+      `${this.urlAddUser}/admin?id=${userId}`,
+      userData
+    );
   }
 
   getAllUsersAPI(): Observable<UserResponse> {
-    return this.http.get<UserResponse>(this.getUsersURL, { responseType: 'json' });
+    return this.http.get<UserResponse>(this.getUsersURL, {
+      responseType: 'json',
+    });
   }
-  
+
+  async uploadCSVFile(file: File) {
+    try {
+      const formData = new FormData();
+      formData.append('csvFile', file);
+
+      const response = await fetch(`${environment.baseUserURL}/extract`, {
+        method: 'POST',
+        body: formData,
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        console.log('Response:', data);
+        return data;
+      } else {
+        throw new Error('Error loading file.');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      throw error;
+    }
+  }
+
+  getUsersRequireAttention(): Observable<UserRequireAttention[]> {
+    return of(this.usersRequireAttention);
+  }
+
+  filterActiveUsersRequireAttention(): Observable<UserRequireAttention[]> {
+    return of(this.usersRequireAttention).pipe(
+      map((users) => users.filter((user) => user.status === true))
+    );
+  }
+  filterInactiveUsersRequireAttention(): Observable<UserRequireAttention[]> {
+    return of(this.usersRequireAttention).pipe(
+      map((users) => users.filter((user) => user.status === false))
+    );
+  }
 }
