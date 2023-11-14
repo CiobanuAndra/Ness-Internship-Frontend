@@ -21,13 +21,13 @@ export class CurrentProgressComponent implements OnInit {
     { name: 'Not Started', color: '#CCD1DF' },
   ];
 
-  constructor(private progress: ProgressService) {}
+  constructor(private progressService: ProgressService) {}
 
   ngOnInit(): void {
     google.charts.load('current', { packages: ['corechart'] });
     google.charts.setOnLoadCallback(() => this.drawChart());
 
-    this.progress
+    this.progressService
       .getChartDataForLastDays(this.selectedLastDays)
       .subscribe((values) => {
         this.chartData = values;
@@ -37,7 +37,7 @@ export class CurrentProgressComponent implements OnInit {
   }
 
   updateChart(): void {
-    this.progress
+    this.progressService
       .getChartDataForLastDays(this.selectedLastDays)
       .subscribe((values) => {
         this.chartData = values;

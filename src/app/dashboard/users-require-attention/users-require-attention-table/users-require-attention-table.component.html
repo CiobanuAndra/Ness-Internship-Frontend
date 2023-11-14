@@ -13,10 +13,7 @@
     </mat-tab-group>
   </div>
 
-  <div
-    class="users-require-attention__no-data"
-    *ngIf="dataSource.data.length === 0"
-  >
+  <div class="users-require-attention__no-data" *ngIf="!dataSource.data.length">
     <img
       src="assets/icons/users.svg"
       alt="Users Icon"
@@ -29,7 +26,7 @@
     mat-table
     [dataSource]="dataSource"
     matSort
-    *ngIf="dataSource.data.length > 0"
+    *ngIf="!dataSource.data.length"
   >
     <ng-container matColumnDef="name">
       <th
