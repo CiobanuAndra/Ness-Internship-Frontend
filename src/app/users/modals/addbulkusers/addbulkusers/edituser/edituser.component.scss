@@ -1,0 +1,56 @@
+.card-container {
+    height: 390px;
+    width: 540px;
+
+    .card-header {
+        display: flex;
+        justify-content: space-between;
+        align-content: center;
+        padding: 5px 1rem 5px 1rem;
+
+        .card-title {
+            font-size: 15px;
+            text-transform: capitalize;
+            padding-top: 9px;
+        }
+    }
+
+    .content-container {
+        .form {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            gap: 2.5rem;
+
+            .form-container {
+                display: flex;
+                flex-direction: column;
+                padding: 0 1rem 0 1rem;
+            }
+        }
+
+        .invalid {
+            color: red;
+        }
+
+        .footer-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0 1rem 0 1rem;
+        
+            .addUser-button, .cancel-button {
+                text-transform: uppercase;
+            }
+        
+            .addUser-button {
+                background-color: #00195F;
+                color: #fff;    
+            }
+        
+            .cancel-button {
+                background-color: #F5F5F5;
+            }
+        }
+    }
+}

@@ -31,7 +31,7 @@
         <ng-container matColumnDef="options">
             <th mat-header-cell *matHeaderCellDef></th>
             <td mat-cell *matCellDef="let element">
-                <button mat-icon-button (click)="stopPropagation($event)">
+                <button mat-icon-button (click)="stopPropagation($event)" (click)="openEditUser()">
                     <mat-icon>more_vert</mat-icon>
                 </button>
             </td>

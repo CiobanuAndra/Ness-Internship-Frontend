@@ -6,6 +6,8 @@ import { MatTableDataSource } from '@angular/material/table';
 import { AwaitConfirmationTable, RequireAttentionTable, tableHeaders} from 'src/app/enums/addbulkuser-table';
 import { UserModal } from 'src/app/interfaces/users/user-modal.model';
 import { UsersService } from 'src/app/services/users/users.service';
+import { EdituserComponent } from '../../edituser/edituser.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-addbulkuser-table',
@@ -48,7 +50,7 @@ export class AddbulkuserTableComponent{
   tableAttention  = tableHeaders.attention;
   tableConfirmation = tableHeaders.confirmation;
 
-  constructor(private liveAnnouncer: LiveAnnouncer, private usersService: UsersService) {}
+  constructor(private liveAnnouncer: LiveAnnouncer, private usersService: UsersService, private dialog: MatDialog) {}
 
   parseEnumToArray(enumObject: any) {
     return Object.values(enumObject).filter(value => isNaN(Number(value)));
@@ -90,4 +92,11 @@ export class AddbulkuserTableComponent{
   stopPropagation(event: Event): void {
     event.stopPropagation();
   };
+
+  //Open modal to edit rows data
+  openEditUser() {
+    this.dialog.open(EdituserComponent, {
+      autoFocus: false,
+    });
+  }
 }

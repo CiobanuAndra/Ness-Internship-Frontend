@@ -3,55 +3,30 @@
     <div class="users-list__title">
       <p class="users-list__title-text">Users</p>
       <div class="users-list__title__buttons">
-        <button
-          mat-button
-          class="users-list__title__buttons__export-csv"
-          (click)="downloadCsvFile()"
-        >
+        <button mat-button class="users-list__title__buttons__export-csv" (click)="downloadCsvFile()">
           EXPORT CSV
         </button>
-        <button
-          mat-button
-          class="users-list__title__buttons__add-user"
-          (click)="toggleSidenav()"
-        >
+        <button mat-button class="users-list__title__buttons__add-user" (click)="toggleSidenav()">
           ADD USER
         </button>
         <button mat-button class="users-list__title__buttons__add-bulk-users">
-          <p
-            class="users-list__title__buttons__add-bulk-users__p"
-            (click)="toggleBulkUsersSidenav()"
-          >
+          <p class="users-list__title__buttons__add-bulk-users__p" (click)="toggleBulkUsersSidenav()">
             ADD BULK USERS
           </p>
         </button>
       </div>
     </div>
     <div class="users-list__mat-tab-group-div">
-      <mat-tab-group
-        class="users-list__mat-tab-group-div__mat-tab-group"
-        [(selectedIndex)]="selectedTabIndex"
-        (selectedTabChange)="onTabChange($event)"
-      >
+      <mat-tab-group class="users-list__mat-tab-group-div__mat-tab-group" [(selectedIndex)]="selectedTabIndex"
+        (selectedTabChange)="onTabChange($event)">
         <mat-tab [label]="UsersFilterValues[0]"></mat-tab>
         <mat-tab [label]="UsersFilterValues[1]"></mat-tab>
         <mat-tab [label]="UsersFilterValues[2]"></mat-tab>
       </mat-tab-group>
     </div>
-    <mat-table
-      [dataSource]="dataSource"
-      class="users-list__table"
-      matSort
-      matSortDirection="asc"
-      matSortActive="id"
-    >
+    <mat-table [dataSource]="dataSource" class="users-list__table" matSort matSortDirection="asc" matSortActive="id">
       <ng-container matColumnDef="name">
-        <th
-          mat-header-cell
-          *matHeaderCellDef
-          class="users-list__mat-columnDef-name"
-          mat-sort-header="name"
-        >
+        <th mat-header-cell *matHeaderCellDef class="users-list__mat-columnDef-name" mat-sort-header="name">
           NAME
         </th>
         <td mat-cell *matCellDef="let element">
@@ -92,12 +67,7 @@
         </td>
       </ng-container>
       <ng-container matColumnDef="leftDays">
-        <th
-          mat-header-cell
-          *matHeaderCellDef
-          class="users-list__mat-columnDef-leftDays"
-          mat-sort-header="leftDays"
-        >
+        <th mat-header-cell *matHeaderCellDef class="users-list__mat-columnDef-leftDays" mat-sort-header="leftDays">
           TIME LEFT
         </th>
         <td mat-cell *matCellDef="let element">{{ element.leftDays }} Days</td>
@@ -118,26 +88,14 @@
       <ng-container matColumnDef="settings">
         <th mat-header-cell *matHeaderCellDef mat-sort-header="settings"></th>
         <td mat-cell *matCellDef="let element">
-          <mat-icon
-            class="users-list__settings-icon"
-            svgIcon="points-black"
-          ></mat-icon>
+          <mat-icon class="users-list__settings-icon" svgIcon="points-black"></mat-icon>
         </td>
       </ng-container>
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr
-        mat-row
-        *matRowDef="let row; columns: displayedColumns"
-        class="users-list__table__row"
-      ></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns" class="users-list__table__row"></tr>
     </mat-table>
     <div class="line"></div>
-    <mat-paginator
-      [length]="15"
-      [pageSize]="15"
-      [pageSizeOptions]="[5, 10, 15]"
-      aria-label="Rows per page"
-    >
+    <mat-paginator [length]="15" [pageSize]="15" [pageSizeOptions]="[5, 10, 15]" aria-label="Rows per page">
     </mat-paginator>
   </div>
 </div>
@@ -146,11 +104,7 @@
 <mat-sidenav-container *ngIf="opened" class="mat-sidenav-container">
   <mat-sidenav>Start</mat-sidenav>
   <mat-sidenav-content>
-    <app-add-bulk-users
-      #sidenav
-      [opened]="opened"
-      (closeSidenavEvent)="toggleBulkUsersSidenav()"
-    ></app-add-bulk-users>
+    <app-add-bulk-users #sidenav [opened]="opened" (closeSidenavEvent)="toggleBulkUsersSidenav()"></app-add-bulk-users>
   </mat-sidenav-content>
 </mat-sidenav-container>
 

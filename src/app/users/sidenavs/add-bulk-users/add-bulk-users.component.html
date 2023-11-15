@@ -2,24 +2,15 @@
   <div class="add-bulk-users__details">
     <div class="add-bulk-users__details__title">
       <span>Add Bulk Users</span>
-      <mat-icon
-        [svgIcon]="'close'"
-        (click)="closeSidenav()"
-        class="add-bulk-users__details__title__icon"
-      ></mat-icon>
+      <mat-icon [svgIcon]="'close'" (click)="closeSidenav()" class="add-bulk-users__details__title__icon"></mat-icon>
     </div>
     <div class="add-bulk-users__details__title__input">
       <mat-form-field class="add-bulk-users__details__title__input__upload">
-        <ngx-mat-file-input
-          accept=".csv"
-          [formControl]="fileControl"
-          [placeholder]="'CSV File'"
-        >
+        <ngx-mat-file-input accept=".csv" [formControl]="fileControl" [placeholder]="'CSV File'">
           <mat-icon ngxMatFileInputIcon svgIcon="upload"></mat-icon>
         </ngx-mat-file-input>
-        <mat-hint class="add-bulk-users__details__title__input__upload__hint"
-          >File format:.CSV, example of file below</mat-hint
-        >
+        <mat-hint class="add-bulk-users__details__title__input__upload__hint">File format:.CSV, example of file
+          below</mat-hint>
       </mat-form-field>
     </div>
     <div>
@@ -49,10 +40,7 @@
   </div>
   <div>
     <div class="add-bulk-users__buttons">
-      <button
-        class="add-bulk-users__buttons__check-file"
-        (click)="openAddBulkUsers()"
-      >
+      <button class="add-bulk-users__buttons__check-file" (click)="openAddBulkUsers()">
         CHECK FILE
       </button>
       <button class="add-bulk-users__buttons__cancel" (click)="closeSidenav()">
