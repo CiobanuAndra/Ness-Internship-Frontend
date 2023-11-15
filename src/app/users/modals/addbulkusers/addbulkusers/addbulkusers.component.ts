@@ -25,55 +25,70 @@ export class AddbulkusersComponent implements OnInit {
 
   usersAttention = 0;
   usersConfirmation = 0;
-  usersToUpdate = 0;
+  usersToUpload = 0;
 
-  private destroy$ = new Subject<void>();
+  usersToCheck = [];
+  combinedUsers = {};
 
-  constructor(private usersService: UsersService, @Inject(MAT_DIALOG_DATA) public data: any) {}
+  constructor(private usersService: UsersService, @Inject(MAT_DIALOG_DATA) public data: any) { }
 
   ngOnInit(): void {
+    this.fetchUsers();
+    this.concatArrays();
+  }
+
+  fetchUsers(): void {
     this.fetchUserAwaitModal();
     this.fetchUserRequireModal();
   }
 
-  //Check if tables have users with problems and if no proceed to submit
-  public addUsers(): void {
-    this.usersService
-      .loadUsersRequireModal()
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((users: UserModal[]) => {
-        if (users.length > 0) {
-          this.child.expandMultipleRows();
-        } else {
-          //Proceed to send data
-        }
-      });
-  }
-
   fetchUserRequireModal(): void {
-    this.usersService
-      .loadUsersRequireModal()
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((data) => {
-        this.dataSourceAttention.data = data;
-        this.usersAttention += data.length;
-        this.usersToUpdate += data.length;
-      });
-  }
+    this.dataSourceAttention.data = this.data.invalidUsers;
+    this.usersAttention += this.data.invalidUsers.length;
+    this.usersToUpload += this.usersAttention;
+  };
 
   fetchUserAwaitModal(): void {
-    this.usersService
-      .loadUsersAwaitModal()
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((data) => {
-        this.dataSourceConfirmation.data = data;
-        this.usersConfirmation = data.length;
-        this.usersToUpdate += data.length;
-      });
-  }
+    this.dataSourceConfirmation.data = this.data.validUsers;
+    this.usersConfirmation += this.data.validUsers.length;
+    this.usersToUpload += this.usersConfirmation;
+  };
 
-  ngOnDestroy() {
-    this.destroy$.next();
-    this.destroy$.complete();
-  }
+  concatArrays(): void {
+    const usersValid = this.data.validUsers.map((user: any) => ({
+      name: user.name,
+      surname: user.surname,
+      email: user.email,
+    }));
+
+    const usersInvalid = this.data.invalidUsers.map((user: any) => ({
+      name: user.user.name,
+      surname: user.user.surname,
+      email: user.user.email,
+    }));
+
+    this.combinedUsers = {
+      users: this.usersToCheck.concat(usersValid, usersInvalid),
+    }
+  };
+
+  //Check if tables have users with problems and if no proceed to submit
+  public addUsers(): void {
+    if (this.data.invalidUsers.length > 0) {
+      this.child.expandMultipleRows();
+      this.usersService.validateUsers(this.combinedUsers).subscribe({
+        next: (response) => {
+          this.data.invalidUsers = response.invalidUsers;
+          this.data.validUsers = response.validUsers;
+        }
+      })
+    }
+    else {
+      this.usersService.addBulkUsers(this.combinedUsers).subscribe({
+        next: (response) => {
+          console.log(response.message);
+        }
+      })
+    }
+  };
 }

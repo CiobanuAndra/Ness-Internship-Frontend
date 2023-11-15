@@ -158,7 +158,7 @@ export class UsersService {
       `${this.baseUserURL}/admin?id=${userId}`,
       userData
     );
-  }
+  };
 
   getAllUsersAPI(): Observable<UserResponse> {
     return this.http.get<UserResponse>(this.baseUserURL, {
