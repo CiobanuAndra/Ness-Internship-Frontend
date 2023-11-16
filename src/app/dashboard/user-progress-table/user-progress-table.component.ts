@@ -7,6 +7,7 @@ import { UsersProgressTable } from '../../interfaces/user-pogress-model';
 import { Router } from '@angular/router';
 import { displayedColumns } from './table-config';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-user-progress-table',
@@ -20,11 +21,10 @@ export class UserProgressTableComponent implements AfterViewInit, OnInit {
   totalCourses = 15;
   dataSource = new MatTableDataSource<UsersProgressTable>();
   allUsersProgress: UsersProgressTable[] = [];
-
   columnsToDisplay = displayedColumns;
   rowsToDisplay!: number;
-
   screenHeight: number;
+  private destroy$ = new Subject<void>();
 
   constructor(
     private userService: UsersProgressService,
@@ -39,17 +39,20 @@ export class UserProgressTableComponent implements AfterViewInit, OnInit {
   }
 
   filterAllUsers(): void {
-    this.userService.getAllUsers().subscribe((values: UsersProgressTable[]) => {
-      this.rowsToDisplay = values.length;
-      if (this.screenHeight > 900) {
-        this.dataSource.data = values.slice(0, 11);
-        this.rowsToDisplay = values.slice(0, 11).length;
-      } else if (this.screenHeight > 700) {
-        this.dataSource.data = values.slice(0, 6);
-        this.rowsToDisplay = values.slice(0, 6).length;
-      } else this.dataSource.data = values.slice(0, 4);
-      this.allUsersProgress = values;
-    });
+    this.userService
+      .getAllUsers()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((values: UsersProgressTable[]) => {
+        this.rowsToDisplay = values.length;
+        if (this.screenHeight > 900) {
+          this.dataSource.data = values.slice(0, 11);
+          this.rowsToDisplay = values.slice(0, 11).length;
+        } else if (this.screenHeight > 700) {
+          this.dataSource.data = values.slice(0, 6);
+          this.rowsToDisplay = values.slice(0, 6).length;
+        } else this.dataSource.data = values.slice(0, 4);
+        this.allUsersProgress = values;
+      });
   }
 
   ngAfterViewInit(): void {
@@ -67,5 +70,10 @@ export class UserProgressTableComponent implements AfterViewInit, OnInit {
     } else {
       this.liveAnnouncer.announce('Sorting cleared');
     }
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }

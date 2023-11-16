@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Subject, takeUntil } from 'rxjs';
 import { LastDaysProgress } from 'src/app/enums/last-days-progress';
 import { ProgressService } from 'src/app/services/progress/progress.service';
 
@@ -10,6 +11,7 @@ import { ProgressService } from 'src/app/services/progress/progress.service';
 export class CurrentProgressComponent implements OnInit {
   selectedLastDays: LastDaysProgress = LastDaysProgress.SevenDays;
   currentHoverValue: string = '';
+  private destroy$ = new Subject<void>();
   chartData: [string, number, string][] = [];
   lastDays = Object.values(LastDaysProgress).filter(
     (value) => typeof value === 'number'
@@ -29,6 +31,7 @@ export class CurrentProgressComponent implements OnInit {
 
     this.progressService
       .getChartDataForLastDays(this.selectedLastDays)
+      .pipe(takeUntil(this.destroy$))
       .subscribe((values) => {
         this.chartData = values;
         this.drawChart();
@@ -39,11 +42,17 @@ export class CurrentProgressComponent implements OnInit {
   updateChart(): void {
     this.progressService
       .getChartDataForLastDays(this.selectedLastDays)
+      .pipe(takeUntil(this.destroy$))
       .subscribe((values) => {
         this.chartData = values;
         this.drawChart();
         this.currentHoverValue = '';
       });
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   drawChart(): void {

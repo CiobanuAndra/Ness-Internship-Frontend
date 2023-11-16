@@ -3,6 +3,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatTabChangeEvent } from '@angular/material/tabs';
+import { Subject, takeUntil } from 'rxjs';
 import { UserRequireAttention } from 'src/app/interfaces/user-require-attention.model';
 import { UsersService } from 'src/app/services/users/users.service';
 
@@ -20,6 +21,7 @@ export class UsersRequireAttentionTableComponent
   dataSource = new MatTableDataSource<UserRequireAttention>();
   totalCourses: number = 0;
   displayedColumns: string[] = ['name', 'tasksLeft', 'timeLeft', 'buttons'];
+  private destroy$ = new Subject<void>();
 
   constructor(private usersService: UsersService) {}
 
@@ -46,8 +48,16 @@ export class UsersRequireAttentionTableComponent
   }
 
   ngOnInit() {
-    this.usersService.getUsersRequireAttention().subscribe((values) => {
-      this.dataSource.data = values;
-    });
+    this.usersService
+      .getUsersRequireAttention()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((values) => {
+        this.dataSource.data = values;
+      });
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }

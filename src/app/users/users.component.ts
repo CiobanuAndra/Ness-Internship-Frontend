@@ -16,6 +16,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ResourcesService } from '../services/resources/resources.service';
 import { AddBulkUsersComponent } from './sidenavs/add-bulk-users/add-bulk-users.component';
 import { User } from '../interfaces/users/user';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-users',
@@ -34,6 +35,7 @@ export class UsersComponent implements AfterViewInit, OnInit {
   UsersFilterValues = Object(UsersFilter);
   totalCourses = 0;
   sidenavOpen = false;
+  private destroy$ = new Subject<void>();
 
   UsersFilterIndex = {
     [UsersFilter.ALL]: 0,
@@ -64,7 +66,7 @@ export class UsersComponent implements AfterViewInit, OnInit {
   toggleSidenav() {
     this.showSidenav = !this.showSidenav;
     this.resourcesService.setSidenavVisibility(this.showSidenav);
-  };
+  }
 
   openAddBulkUsers() {
     const dialogRef = this.dialog.open(AddBulkUsersComponent, {
@@ -80,39 +82,48 @@ export class UsersComponent implements AfterViewInit, OnInit {
   }
 
   filterActiveUsers() {
-    this.userService.filterActiveUsers().subscribe((users) => {
-      const activeUsersWithLeftDays = users.map(
-        (user: { activationEndDate: Date }) => ({
-          ...user,
-          leftDays: this.calculateRemainingDays(user.activationEndDate),
-        })
-      );
-      this.dataSource.data = activeUsersWithLeftDays;
-    });
+    this.userService
+      .filterActiveUsers()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((users) => {
+        const activeUsersWithLeftDays = users.map(
+          (user: { activationEndDate: Date }) => ({
+            ...user,
+            leftDays: this.calculateRemainingDays(user.activationEndDate),
+          })
+        );
+        this.dataSource.data = activeUsersWithLeftDays;
+      });
   }
 
   filterInactiveUsers() {
-    this.userService.filterInactiveUsers().subscribe((filteredUsers) => {
-      const inactiveUserWithLeftDays = filteredUsers.map(
-        (user: { activationEndDate: Date }) => ({
-          ...user,
-          leftDays: this.calculateRemainingDays(user.activationEndDate),
-        })
-      );
-      this.dataSource.data = inactiveUserWithLeftDays;
-    });
+    this.userService
+      .filterInactiveUsers()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((filteredUsers) => {
+        const inactiveUserWithLeftDays = filteredUsers.map(
+          (user: { activationEndDate: Date }) => ({
+            ...user,
+            leftDays: this.calculateRemainingDays(user.activationEndDate),
+          })
+        );
+        this.dataSource.data = inactiveUserWithLeftDays;
+      });
   }
 
   filterAllUsers(): void {
-    this.userService.getAllUsers().subscribe((values) => {
-      const usersWithLeftDays = values.users.map(
-        (user: { activationEndDate: Date }) => ({
-          ...user,
-          leftDays: this.calculateRemainingDays(user.activationEndDate),
-        })
-      );
-      this.dataSource.data = usersWithLeftDays;
-    });
+    this.userService
+      .getAllUsers()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((values) => {
+        const usersWithLeftDays = values.users.map(
+          (user: { activationEndDate: Date }) => ({
+            ...user,
+            leftDays: this.calculateRemainingDays(user.activationEndDate),
+          })
+        );
+        this.dataSource.data = usersWithLeftDays;
+      });
   }
 
   onTabChange(event: MatTabChangeEvent): void {
@@ -158,5 +169,10 @@ export class UsersComponent implements AfterViewInit, OnInit {
 
   ngOnInit() {
     this.filterAllUsers();
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }

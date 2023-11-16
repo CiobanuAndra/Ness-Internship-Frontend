@@ -3,8 +3,9 @@ import { UsersService } from 'src/app/services/users/users.service';
 import { UserCard } from 'src/app/interfaces/users/user-card.model';
 import { LeaderboardTabsEnum } from '../../enums/leaderboard-tabs.enum';
 import { Router } from '@angular/router';
-import { map, tap } from 'rxjs/operators';
+import { map, takeUntil, tap } from 'rxjs/operators';
 import { dashboardUserMapper } from 'src/app/utils/userMapper';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-leaderboard',
@@ -17,9 +18,9 @@ export class LeaderboardComponent implements OnInit {
   usersInDone: UserCard[] = [];
   leaderboardTabsEnum = LeaderboardTabsEnum;
   screenHeight: number;
-
   maxUsersToShow: number;
   currentUsersNumber: any;
+  private destroy$ = new Subject<void>();
 
   constructor(private userService: UsersService, private router: Router) {
     this.screenHeight = window.innerHeight;
@@ -35,22 +36,24 @@ export class LeaderboardComponent implements OnInit {
   }
 
   getAllUsers(): void {
-    
     this.userService
       .getAllUsersAPI()
       .pipe(
-        map((data: any) => data.users.map((user: any) => dashboardUserMapper(user))),
+        map((data: any) =>
+          data.users.map((user: any) => dashboardUserMapper(user))
+        ),
         map((user: any) => {
           return {
             userInProgress: this.sortAndFilterUsers(user, false),
             userInDone: this.sortAndFilterUsers(user, true),
           };
         }),
-        tap(user => {
+        tap((user) => {
           this.currentUsersNumber = user.userInDone;
         })
       )
-      .subscribe(({userInProgress, userInDone}) => {
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(({ userInProgress, userInDone }) => {
         this.usersInProgress = userInProgress;
         this.usersInDone = userInDone;
       });
@@ -65,5 +68,10 @@ export class LeaderboardComponent implements OnInit {
 
   viewAllUsers(): void {
     this.router.navigate(['/leaderboard-table']);
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }

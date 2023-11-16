@@ -6,9 +6,10 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { MatSort, Sort } from '@angular/material/sort';
-import { map, tap } from 'rxjs/operators';
+import { map, takeUntil, tap } from 'rxjs/operators';
 import { leaderboardUserMapper } from 'src/app/utils/userMapper';
 import { UserResponse } from 'src/app/interfaces/user-response';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-leaderboard-table',
@@ -22,18 +23,19 @@ export class LeaderboardTableComponent implements OnInit {
   leaderboardTabsEnum = LeaderboardTabsEnum;
   displayedColumns = ['name', 'tasks', 'points', 'rank'];
   dataSource!: MatTableDataSource<UserCard>;
+  private destroy$ = new Subject<void>();
 
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(
     private userService: UsersService,
-    private liveAnnouncer: LiveAnnouncer,
+    private liveAnnouncer: LiveAnnouncer
   ) {}
 
   ngOnInit() {
-      this.getUsers();
-  }  
+    this.getUsers();
+  }
 
   announceSortChange(sortState: Sort): void {
     if (sortState.direction) {
@@ -45,7 +47,10 @@ export class LeaderboardTableComponent implements OnInit {
 
   setActiveTab(tab: LeaderboardTabsEnum): void {
     this.activeTab = tab;
-    this.dataSource.data = tab === LeaderboardTabsEnum.InProgress ? this.usersInProgress : this.usersInDone;
+    this.dataSource.data =
+      tab === LeaderboardTabsEnum.InProgress
+        ? this.usersInProgress
+        : this.usersInDone;
   }
 
   onPageChange(event: any) {
@@ -58,32 +63,47 @@ export class LeaderboardTableComponent implements OnInit {
     const startIndex = this.paginator.pageIndex * this.paginator.pageSize;
     const endIndex = startIndex + this.paginator.pageSize;
 
-    this.dataSource.data = this.activeTab === LeaderboardTabsEnum.InProgress
-      ? this.usersInProgress.slice(startIndex, endIndex)
-      : this.usersInDone.slice(startIndex, endIndex);
+    this.dataSource.data =
+      this.activeTab === LeaderboardTabsEnum.InProgress
+        ? this.usersInProgress.slice(startIndex, endIndex)
+        : this.usersInDone.slice(startIndex, endIndex);
   }
 
   private getUsers() {
-    this.userService.getAllUsersAPI()
+    this.userService
+      .getAllUsersAPI()
+      .pipe(takeUntil(this.destroy$))
       .pipe(
-        map((data: any) => data.users.map((user: any) => leaderboardUserMapper(user))),
+        map((data: any) =>
+          data.users.map((user: any) => leaderboardUserMapper(user))
+        ),
         map((users: UserCard[]) => {
           return {
-            inProgress: users.filter((user: any) => user.completedTasks < user.totalTasks),
-            inDone: users.filter((user: any) => user.completedTasks === user.totalTasks),
+            inProgress: users.filter(
+              (user: any) => user.completedTasks < user.totalTasks
+            ),
+            inDone: users.filter(
+              (user: any) => user.completedTasks === user.totalTasks
+            ),
           };
-        }),
+        })
       )
-      .subscribe(({inProgress, inDone}) => {
+      .subscribe(({ inProgress, inDone }) => {
         this.usersInProgress = inProgress;
         this.usersInDone = inDone;
-  
+
         this.dataSource = new MatTableDataSource<UserCard>(
-          this.activeTab === LeaderboardTabsEnum.InProgress ? this.usersInProgress : this.usersInDone
+          this.activeTab === LeaderboardTabsEnum.InProgress
+            ? this.usersInProgress
+            : this.usersInDone
         );
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;
       });
   }
-  
+
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
 }
