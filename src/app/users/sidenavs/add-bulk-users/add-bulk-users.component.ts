@@ -3,6 +3,7 @@ import { FormControl } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
 import { UsersService } from 'src/app/services/users/users.service';
 import { UsersListTable } from 'src/app/interfaces/users-list-table';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-add-bulk-users',
@@ -16,6 +17,7 @@ export class AddBulkUsersComponent implements OnInit {
   fileControl = new FormControl(null);
   displayedColumns: string[] = ['firstname', 'lastname', 'email'];
   dataSource = new MatTableDataSource<UsersListTable>();
+  private destroy$ = new Subject<void>();
 
   constructor(private usersService: UsersService) {}
 
@@ -24,18 +26,21 @@ export class AddBulkUsersComponent implements OnInit {
   }
 
   addFromListener() {
-    this.fileControl.valueChanges.subscribe(async (files: any) => {
-      try {
-        await this.usersService.uploadCSVFile(files);
-      } catch (error) {
-        console.error('Error loading file.', error);
-      }
-    });
+    this.fileControl.valueChanges
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(async (files: any) => {
+        try {
+          await this.usersService.uploadCSVFile(files);
+        } catch (error) {
+          console.error('Error loading file.', error);
+        }
+      });
   }
 
   ngOnInit() {
     this.usersService
       .getUsersFromCSVFile()
+      .pipe(takeUntil(this.destroy$))
       .subscribe((values: UsersListTable[]) => {
         this.dataSource.data = values;
         this.dataSource.data.push({
@@ -49,5 +54,10 @@ export class AddBulkUsersComponent implements OnInit {
         });
       });
     this.addFromListener();
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }
