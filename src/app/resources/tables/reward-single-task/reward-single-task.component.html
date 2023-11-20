@@ -1,0 +1,49 @@
+<hr class="stepper-divider" />
+<div class="reward-single-task-container" [formGroup]="thirdFormGroup">
+  <div class="reward-input-container">
+    <mat-form-field>
+      <ngx-mat-file-input class="input-png" [placeholder]="'Upload Icon'" accept=".png" formControlName="fileControl">
+        <mat-icon ngxMatFileInputIcon>add</mat-icon>
+      </ngx-mat-file-input>
+      <mat-hint class="hint-title">
+        File Type: .png, size 80x80px
+      </mat-hint>
+    </mat-form-field>
+  </div>
+  <hr class="stepper-divider" />
+  <div class="reward-container">
+    <div class="reward-type-container">
+      <select class="reward-input" formControlName="rewardType" (change)="onRewardTypeSelected($event)">
+        <option *ngFor="let reward of rewards" [value]="reward.name">{{ reward.name }}</option>
+      </select>    
+      <mat-hint class="hint-title">Type of Reward</mat-hint>
+    </div>
+    <div class="reward-value-container">
+      <input matInput type="number" class="reward-input" placeholder="1" formControlName="rewardValue" />
+      <mat-hint class="hint-title">Reward Value</mat-hint>
+    </div>
+  </div>
+  <div class="reward-score-container">
+    <input matInput formControlName="score" type="text" class="reward-input score-input" [value]="rewardPoints + ' Points'" [readonly]="true" />
+    <mat-hint class="hint-title">No. Points; Pre-Calculated</mat-hint>
+  </div>
+  <hr class="stepper-divider" />
+  <div class="avatar-container">
+    <select formControlName="avatarSelected" name="avatar" id="avatar" class="avatar-select" (change)="onAvatarSelected($event)">
+      <option value="" disabled hidden>Select Unlock Avatars</option>
+      <option *ngFor="let avatar of avatars; let i = index" [value]="i">
+        {{ avatar.name }}
+      </option>
+    </select>
+    <div class="avatar-option-container" *ngFor="let avatar of avatarsSelected; let i = index">
+      <div class="avatar-content">
+        <img [src]="getDecodedImage(avatar.content)" alt="SVG Icon" class="mat-cell-img">
+        <span>{{ avatar.name }}</span>
+      </div>
+      <div class="delete-course">
+        <img class="remove-course" src="assets/icons/remove.svg" alt="Remove Course Icon" (click)="removeAvatar(i)">
+      </div>
+    </div>
+  </div>
+</div>
+

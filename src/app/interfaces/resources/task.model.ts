@@ -1,12 +1,12 @@
 export interface Task {
     icon: string;
-    name: string;
+    title: string;
     type: string;
     courses: string;
-    order: number;
-    length: number;
-    rewards: number;
-    dateAdded: Date;
+    position: number;
+    duration: number;
+    rewardQuantity: number;
+    dateCreated: Date;
     lastEdited: Date;
     editedBy: string;
   }

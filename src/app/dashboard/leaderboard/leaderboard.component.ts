@@ -66,6 +66,10 @@ export class LeaderboardComponent implements OnInit {
         this.usersInProgress = userInProgress;
         this.usersInDone = userInDone;
       });
+
+        this.userService.getLeaderboardUsers().subscribe(data => {
+          console.log(data);
+        })
   }
 
   private sortAndFilterUsers(users: UserCard[], status: boolean): UserCard[] {

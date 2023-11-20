@@ -17,7 +17,7 @@ import {
   AddTaskTitleError,
   AddTaskDescriptionError,
 } from 'src/app/enums/addtask-error';
-import { Subject, takeUntil } from 'rxjs';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-add-task',
@@ -37,20 +37,20 @@ export class AddTaskComponent {
   showOrderAlert = false;
   firstFormGroup!: FormGroup;
   secondFormGroup!: FormGroup;
+  thirdFormGroup!: FormGroup;
   numericRegex: string = '^[0-9]+';
   httpsUrlPattern = '^(https?://[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}(?:/\\S*)?)$';
   isSingleButtonClick: boolean = true;
   isMultipleButtonClick: boolean = false;
   selectedFormType: FormType = FormType.SINGLE;
   addTaskTitleError: AddTaskTitleError = AddTaskTitleError.titleRequired;
-  addTaskDescriptionError: AddTaskDescriptionError =
-    AddTaskDescriptionError.descriptionRequired;
-  private destroy$ = new Subject<void>();
+  addTaskDescriptionError: AddTaskDescriptionError = AddTaskDescriptionError.descriptionRequired;
 
   constructor(
     private formBuilder: FormBuilder,
     private resourcesService: ResourcesService,
-    private dialogService: DialogService
+    private dialogService: DialogService,
+    private snackBar: MatSnackBar
   ) {}
 
   ngOnInit() {
@@ -74,23 +74,37 @@ export class AddTaskComponent {
       order: ['', [Validators.required, Validators.pattern(this.numericRegex)]],
     });
     this.secondFormGroup = this.formBuilder.group({
-      link: [
-        '',
-        [Validators.required, Validators.pattern(this.httpsUrlPattern)],
-      ],
+      link: ['',[Validators.required, Validators.pattern(this.httpsUrlPattern)],],
+      type: ['WITHOUT_COURSES', [Validators.required]],
       durationHour: ['', [Validators.required]],
       durationMinutes: ['', [Validators.required]],
       unlockHour: ['', [Validators.required]],
       unlockMinutes: ['', [Validators.required]],
     });
 
+    this.thirdFormGroup = this.formBuilder.group({
+      fileControl: [null, [Validators.required]],
+      rewardType: ['', [Validators.required]],
+      rewardId: ['', [Validators.required]],
+      rewardValue: ['', [Validators.required, Validators.min(1)]],
+      score: ['', [Validators.min(0)]],
+      avatarSelected: this.formBuilder.control([])
+    });
+    
+
     this.checkValueChanges();
   }
 
   closeDialog(): void {
+    if (this.isDialogOpen) {
+      return;
+    }
+
     this.isDialogOpen = true;
+
     this.dialogService.openConfirmationDialog().then((result) => {
       this.isDialogOpen = false;
+
       if (result) {
         this.showSidenav = false;
         this.showSidenavChange.emit(this.showSidenav);
@@ -127,41 +141,35 @@ export class AddTaskComponent {
     const descriptionControl = this.firstFormGroup.get('description')!;
     const orderControl = this.firstFormGroup.get('order')!;
 
-    titleControl.valueChanges
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((titleValue) => {
-        const isTitleEmpty = titleValue.trim() === '';
-        const isTitleLengthInvalid =
-          titleValue.trim().length < 2 || titleValue.trim().length > 200;
-        this.showTitleAlert = isTitleEmpty || isTitleLengthInvalid;
-        this.addTaskTitleError = isTitleEmpty
-          ? AddTaskTitleError.titleRequired
-          : isTitleLengthInvalid
-          ? AddTaskTitleError.titleLength
-          : AddTaskTitleError.noError;
-      });
+    titleControl.valueChanges.subscribe((titleValue) => {
+      const isTitleEmpty = titleValue.trim() === '';
+      const isTitleLengthInvalid =
+        titleValue.trim().length < 2 || titleValue.trim().length > 200;
+      this.showTitleAlert = isTitleEmpty || isTitleLengthInvalid;
+      this.addTaskTitleError = isTitleEmpty
+        ? AddTaskTitleError.titleRequired
+        : isTitleLengthInvalid
+        ? AddTaskTitleError.titleLength
+        : AddTaskTitleError.noError;
+    });
 
-    descriptionControl.valueChanges
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((descriptionValue) => {
-        const isDescriptionEmpty = descriptionValue.trim() === '';
-        const isDescriptionLengthInvalid =
-          descriptionValue.trim().length < 2 ||
-          descriptionValue.trim().length > 800;
-        this.showDescriptionAlert =
-          isDescriptionEmpty || isDescriptionLengthInvalid;
-        this.addTaskDescriptionError = isDescriptionEmpty
-          ? AddTaskDescriptionError.descriptionRequired
-          : isDescriptionLengthInvalid
-          ? AddTaskDescriptionError.descriptionLength
-          : AddTaskDescriptionError.noError;
-      });
+    descriptionControl.valueChanges.subscribe((descriptionValue) => {
+      const isDescriptionEmpty = descriptionValue.trim() === '';
+      const isDescriptionLengthInvalid =
+        descriptionValue.trim().length < 2 ||
+        descriptionValue.trim().length > 800;
+      this.showDescriptionAlert =
+        isDescriptionEmpty || isDescriptionLengthInvalid;
+      this.addTaskDescriptionError = isDescriptionEmpty
+        ? AddTaskDescriptionError.descriptionRequired
+        : isDescriptionLengthInvalid
+        ? AddTaskDescriptionError.descriptionLength
+        : AddTaskDescriptionError.noError;
+    });
 
-    orderControl.valueChanges
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((orderValue) => {
-        this.showOrderAlert = !new RegExp(this.numericRegex).test(orderValue);
-      });
+    orderControl.valueChanges.subscribe((orderValue) => {
+      this.showOrderAlert = !new RegExp(this.numericRegex).test(orderValue);
+    });
   }
 
   toggleFormType(isSingle: boolean): void {
@@ -170,21 +178,27 @@ export class AddTaskComponent {
     this.selectedFormType = isSingle ? FormType.SINGLE : FormType.WITH_COURSES;
 
     const config: { [key: string]: any } = isSingle
-      ? {
-          link: this.formBuilder.control('', [
-            Validators.required,
-            Validators.pattern(this.httpsUrlPattern),
-          ]),
-          durationHour: this.formBuilder.control('', [Validators.required]),
-          durationMinutes: this.formBuilder.control('', [Validators.required]),
-          unlockHour: this.formBuilder.control('', [Validators.required]),
-          unlockMinutes: this.formBuilder.control('', [Validators.required]),
-        }
-      : {
-          selectedCourses: this.formBuilder.control([], [Validators.required]),
-        };
+    ? {
+        link: this.formBuilder.control('', [
+          Validators.required,
+          Validators.pattern(this.httpsUrlPattern),
+        ]),
+        durationHour: this.formBuilder.control('', [Validators.required]),
+        durationMinutes: this.formBuilder.control('', [Validators.required]),
+        unlockHour: this.formBuilder.control('', [Validators.required]),
+        unlockMinutes: this.formBuilder.control('', [Validators.required]),
+        type: ['WITHOUT_COURSES', [Validators.required]],
+      }
+    : {
+        selectedCourses: this.formBuilder.control([], [Validators.required]),
+        type: ['WITH_COURSES', [Validators.required]],
+        duration: ['', [Validators.required]],
+        timeToUnlock: ['', [Validators.required]],
+        link: ['', [Validators.required]]
+      };
 
-    this.secondFormGroup = this.formBuilder.group(config);
+      this.secondFormGroup = this.formBuilder.group(config);
+
   }
 
   checkSingleOrMultiple(stepper: MatStepper): void {
@@ -207,8 +221,24 @@ export class AddTaskComponent {
     }
   }
 
-  ngOnDestroy() {
-    this.destroy$.next();
-    this.destroy$.complete();
+  addTask() {
+    this.resourcesService.addTask(this.firstFormGroup, this.secondFormGroup, this.thirdFormGroup).subscribe(
+      (response) => {
+        console.log('Post cu succes:', response);
+        this.showSidenav = false;
+        this.showSidenavChange.emit(this.showSidenav);
+        this.resourcesService.setSidenavVisibility(false);
+  
+        this.snackBar.open('Task added successfully!', '', {
+          duration: 5000,
+          panelClass: 'green-snackbar',
+          verticalPosition: 'top'
+        });
+      },
+      (error) => {
+        console.error('Eroare la post:', error);
+      }
+    );
   }
-}
+  
+ }

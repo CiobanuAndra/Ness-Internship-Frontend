@@ -188,4 +188,59 @@ export class UsersService {
       map((users) => users.filter((user) => user.status === false))
     );
   }
+  //modals
+  usersModalRequire: UserModal[] = [
+    {
+      name: 'Mustas1',
+      surname: 'Abdul1',
+      email: '1412421@ness.com',
+      message: 'No Email Adress',
+    },
+    {
+      name: 'Mustas2',
+      surname: 'Abdul2',
+      email: '1512512@ness.com',
+      message: 'No Email Adress',
+    },
+    {
+      name: 'Mustas2',
+      surname: 'Abdul2',
+      email: '1512512@ness.com',
+      message: 'No Email Adress',
+    },
+  ];
+
+  usersModalAwait: UserModal[] = [
+    { name: 'Mustas1', surname: 'Abdul1', email: '15132512@ness.com' },
+    { name: 'Mustas2', surname: 'Abdul2', email: '15132512@ness.com' },
+    { name: 'Mustas3', surname: 'Abdul', email: '15125512@ness.com' },
+    { name: 'Mustas', surname: 'Rajesh', email: '15125412@ness.com' },
+  ];
+
+  public loadUsersRequireModal(): Observable<UserModal[]> {
+    return of(this.usersModalRequire);
+  }
+
+  public loadUsersAwaitModal(): Observable<UserModal[]> {
+    return of(this.usersModalAwait);
+  }
+
+  //HTTP REQUESTS
+  addNewUser(userData: UserModal, userId: string): Observable<UserModal> {
+    return this.http.post<UserModal>(`${this.urlAddUser}/admin?id=${userId}`, userData);
+  };
+
+  getTotalCourses() {
+    return of(this.totalCourses);
+  }
+
+  getAllUsersAPI(): Observable<UserResponse> {
+    return this.http.get<UserResponse>(this.getUsersURL, { responseType: 'json' });
+  }
+
+  getLeaderboardUsers() {
+    const url = "http://localhost:8282/api/gamification-event/leaderboard?page=0&size=100&direction=ASC";
+    return this.http.get<any>(url, { responseType: 'json' })
+  }
+  
 }

@@ -1,24 +1,24 @@
 export enum ResourceTableTasks {
     ICON = 'icon',
-    NAME = 'name',
+    NAME = 'title',
     TYPE = 'type',
     COURSES = 'courses',
-    ORDER = 'order',
-    LENGTH = 'length',
-    REWARDS = 'rewards',
-    DATEADDED = 'dateAdded',
+    ORDER = 'position',
+    LENGTH = 'duration',
+    REWARDS = 'rewardQuantity',
+    DATEADDED = 'dateCreated',
     LASTEDITED = 'lastEdited',
     EDITEDBY = 'editedBy',
     OPTIONS = 'options',
 }
 
 export enum ResourceTableCourses {
-    NAME = 'name',
+    NAME = 'title',
     LINK = 'link',
     FILETYPE = 'fileType',
-    LENGTH = 'length',
-    REWARDS = 'rewards',
-    DATEADDED = 'dateAdded',
+    LENGTH = 'duration',
+    REWARDS = 'rewardQuantity',
+    DATEADDED = 'dateCreated',
     LASTEDITED = 'lastEdited',
     EDITEDBY = 'editedBy',
     OPTIONS = 'options',
@@ -26,8 +26,8 @@ export enum ResourceTableCourses {
 
 export enum ResourceTableAvatars {
     NAMES = 'name',
-    LINKED_TO = 'linked_to',
-    DEFAULT = 'default',
+    LINKED_TO = 'mymeType',
+    DEFAULT = 'isDefault',
     ADDEDBY = 'addedBy',
     OPTIONS = 'options',
 }

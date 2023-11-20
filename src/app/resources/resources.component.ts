@@ -35,36 +35,31 @@ export class ResourcesComponent implements OnInit {
 
   loadData(): void {
     this.fetchDataTasks();
-    this.fetchDataCourse();
+    this.fetchDataCourses();
     this.fetchDataAvatars();
   }
 
-  //fetch data for tables
   fetchDataTasks(): void {
-    this.resourcesService
-      .loadTasks()
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((data) => {
-        this.dataSourceTasks.data = data;
-      });
+    this.resourcesService.getTasks(0).subscribe((data: Task[]) => {
+      this.dataSourceTasks.data = data;
+    });
   }
 
-  fetchDataCourse(): void {
-    this.resourcesService
-      .loadCourses()
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((data) => {
-        this.dataSourceCourses.data = data;
-      });
+  fetchDataCourses(): void {
+    this.resourcesService.getCourses(0).subscribe((data: any) => {
+      if (data && data.content && Array.isArray(data.content)) {
+        this.dataSourceCourses.data = data.content;
+      }
+    });
   }
+  
 
   fetchDataAvatars(): void {
-    this.resourcesService
-      .loadAvatars()
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((data) => {
-        this.dataSourceAvatars.data = data;
-      });
+    this.resourcesService.getAvatars().subscribe((data: any) => {
+      if (data && data.content && Array.isArray(data.content)) {
+        this.dataSourceAvatars.data = data.content;
+      }
+    });
   }
 
   parseEnumToArray(enumObject: any) {
@@ -76,7 +71,6 @@ export class ResourcesComponent implements OnInit {
     this.activeTable = tabLabels[selectedIndex];
     this.loadData();
   }
-
   toggleSidenav() {
     this.showSidenav = !this.showSidenav;
     this.resourcesService.setSidenavVisibility(this.showSidenav);

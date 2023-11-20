@@ -1,6 +1,6 @@
 export interface Avatar {
     name: string, 
-    linked_to: string,
-    default: boolean, 
+    mymeType: string,
+    isDefault: boolean, 
     addedBy: string,
 }
