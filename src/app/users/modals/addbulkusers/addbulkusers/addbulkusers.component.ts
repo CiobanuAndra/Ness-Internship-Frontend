@@ -5,9 +5,11 @@ import { UsersService } from 'src/app/services/users/users.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { tableHeaders } from 'src/app/enums/addbulkuser-table';
 import { Subject, takeUntil } from 'rxjs';
-import { MatDialog } from '@angular/material/dialog';
-import { AddBulkUsersComponent } from 'src/app/users/sidenavs/add-bulk-users/add-bulk-users.component';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
+import { SnackBarPosition } from 'src/app/enums/snackbarposition';
+
+type UserField = 'name' | 'surname' | 'email';
 
 @Component({
   selector: 'app-addbulkusers',
@@ -16,6 +18,9 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 })
 export class AddbulkusersComponent implements OnInit {
   @ViewChild(AddbulkuserTableComponent) child!: AddbulkuserTableComponent;
+  
+  horizontalPosition: MatSnackBarHorizontalPosition = SnackBarPosition.positionCenter;
+  verticalPosition: MatSnackBarVerticalPosition = SnackBarPosition.positionTop;
 
   selectedTableAttention = tableHeaders.attention;
   selectedTableConfirmation = tableHeaders.confirmation;
@@ -34,7 +39,7 @@ export class AddbulkusersComponent implements OnInit {
   userIndex!: UserModal;
   functionEditState = false;
 
-  constructor(private usersService: UsersService, @Inject(MAT_DIALOG_DATA) public data: any, private dialog: MatDialog) { }
+  constructor(private usersService: UsersService, @Inject(MAT_DIALOG_DATA) public data: any, private dialog: MatDialog, private snackBar: MatSnackBar, private dialogRef: MatDialogRef<AddbulkusersComponent>) { }
 
   ngOnInit(): void {
     this.fetchUsers();
@@ -104,8 +109,9 @@ export class AddbulkusersComponent implements OnInit {
     }
     else {
       this.usersService.addBulkUsers(this.combinedUsers).subscribe({
-        next: (response) => {
-          console.log(response.message);
+        next: () => {
+          this.toastMessage('Users added successfully!', 'green-snackbar');
+          this.closeDialog();
         }
       })
     }
@@ -119,20 +125,20 @@ export class AddbulkusersComponent implements OnInit {
   };
 
   concatArrays(): void {
-    const usersValid = this.data.validUsers.map((user: any) => ({
-      name: user.name,
-      surname: user.surname,
-      email: user.email,
-    }));
-
     const usersInvalid = this.data.invalidUsers.map((user: any) => ({
       name: user.user.name,
       surname: user.user.surname,
       email: user.user.email,
     }));
 
+    const usersValid = this.data.validUsers.map((user: any) => ({
+      name: user.name,
+      surname: user.surname,
+      email: user.email,
+    }));
+
     this.combinedUsers = {
-      users: this.usersToCheck.concat(usersValid, usersInvalid),
+      users: this.usersToCheck.concat(usersInvalid, usersValid),
     }
   };
 
@@ -165,5 +171,18 @@ export class AddbulkusersComponent implements OnInit {
         this.fetchUsers();
       }
     })
+  };
+
+  toastMessage(message: string, colorClass: string): void {
+    this.snackBar.open(message, '', {
+      horizontalPosition: this.horizontalPosition,
+      verticalPosition: this.verticalPosition,
+      duration: 3000,
+      panelClass: colorClass
+    });
+  };
+
+  closeDialog(){
+    this.dialogRef.close();
   };
 }

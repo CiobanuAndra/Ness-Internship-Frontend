@@ -1,9 +1,9 @@
 <div class="table-container">
     <!-- Require Attention Table -->
     <table mat-table *ngIf="selectedTableAttention === tableAttention" [dataSource]="dataSource" multiTemplateDataRows
-        class="mat-elevation-z8" matSort (matSortChange)="announceSortChange($event)">
+        class="mat-elevation-z8">
         <ng-container matColumnDef="{{column}}" *ngFor="let column of columnsToDisplayAttention">
-            <th mat-header-cell class="header-cell" *matHeaderCellDef mat-sort-header
+            <th mat-header-cell class="header-cell" *matHeaderCellDef
                 sortActionDescription="Sort by column"> {{column}} </th>
             <td mat-cell *matCellDef="let element"> {{element.user[column]}} </td>
         </ng-container>
@@ -58,21 +58,17 @@
 
 
     <!-- Await Confirmation table -->
-    <mat-table *ngIf="selectedTableConfirmation === tableConfirmation" [dataSource]="dataSource" matSort
-        (matSortChange)="announceSortChange($event)" class="mat-elevation-z8">
+    <mat-table *ngIf="selectedTableConfirmation === tableConfirmation" [dataSource]="dataSource" class="mat-elevation-z8">
         <ng-container matColumnDef="name">
-            <mat-header-cell class="header-cell" *matHeaderCellDef mat-sort-header
-                sortActionDescription="Sort by name">name</mat-header-cell>
+            <mat-header-cell class="header-cell" *matHeaderCellDef>name</mat-header-cell>
             <mat-cell *matCellDef="let user;"> {{ user.name }}</mat-cell>
         </ng-container>
         <ng-container matColumnDef="surname">
-            <mat-header-cell class="header-cell" *matHeaderCellDef mat-sort-header
-                sortActionDescription="Sort by surname">surname</mat-header-cell>
+            <mat-header-cell class="header-cell" *matHeaderCellDef>surname</mat-header-cell>
             <mat-cell *matCellDef="let user"> {{ user.surname }}</mat-cell>
         </ng-container>
         <ng-container matColumnDef="email">
-            <mat-header-cell class="header-cell" *matHeaderCellDef mat-sort-header
-                sortActionDescription="Sort by email">email</mat-header-cell>
+            <mat-header-cell class="header-cell" *matHeaderCellDef>email</mat-header-cell>
             <mat-cell *matCellDef="let user"> {{ user.email }}</mat-cell>
         </ng-container>
 

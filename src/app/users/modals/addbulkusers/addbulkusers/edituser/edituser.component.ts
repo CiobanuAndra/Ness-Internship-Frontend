@@ -1,4 +1,4 @@
-import { Component, Inject} from '@angular/core';
+import { Component, Inject, OnInit} from '@angular/core';
 import { AbstractControl, FormBuilder, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
@@ -11,18 +11,7 @@ import { specialChars, emailDomain } from 'src/app/utils/formUtils';
   templateUrl: './edituser.component.html',
   styleUrls: ['./edituser.component.scss']
 })
-export class EdituserComponent {
-  isSubmitted = false;
-  isNameInputInteracted = false;
-  isSurnameInputInteracted = false;
-  isEmailInputInteracted = false;
-
-  errorMessage = '';
-  stateInputEmail = false;
-
-  horizontalPosition: MatSnackBarHorizontalPosition = SnackBarPosition.positionCenter;
-  verticalPosition: MatSnackBarVerticalPosition = SnackBarPosition.positionTop;
-
+export class EdituserComponent implements OnInit {
   functionState = false;
 
   constructor(private formBuilder: FormBuilder, private usersService: UsersService, private snackBar: MatSnackBar, @Inject(MAT_DIALOG_DATA) public data:any, private dialogRef: MatDialogRef<EdituserComponent>) {}
@@ -33,12 +22,13 @@ export class EdituserComponent {
     email: [''],
   });
 
-  toggleInteractions(state: boolean): void {
-    this.isSubmitted = state;
-    this.isNameInputInteracted = state;
-    this.isSurnameInputInteracted = state;
-    this.isEmailInputInteracted = state;
-  };
+  ngOnInit(): void {
+    this.editUserForm.setValue({
+      name: this.data.userDetails.name,
+      surname: this.data.userDetails.surname,
+      email: this.data.userDetails.email,
+    });
+  }
 
   onSubmit(): void {
       const userFormData = {
@@ -46,7 +36,7 @@ export class EdituserComponent {
       }
 
       this.functionState = true;
-      this.usersService.sendEditUserFormData(userFormData, this.data.user, this.functionState);
+      this.usersService.sendEditUserFormData(userFormData, this.data.userIndex, this.functionState);
       this.closeDialog();
   };
 

@@ -32,10 +32,7 @@ import { MatDialog } from '@angular/material/dialog';
   ],
 })
 
-export class AddbulkuserTableComponent{
-  @ViewChild(MatSort) sortAttention!:MatSort;
-  @ViewChild(MatSort) sortConfirmation!:MatSort;
-  
+export class AddbulkuserTableComponent {
   @Input() selectedTableAttention = '';
   @Input() selectedTableConfirmation = '';
 
@@ -52,26 +49,13 @@ export class AddbulkuserTableComponent{
   tableAttention  = tableHeaders.attention;
   tableConfirmation = tableHeaders.confirmation;
 
-  userDetails = -1;
+  userDetails = {};
+  userIndex = -1;
 
   constructor(private liveAnnouncer: LiveAnnouncer, private usersService: UsersService, private dialog: MatDialog) {}
 
   parseEnumToArray(enumObject: any) {
     return Object.values(enumObject).filter(value => isNaN(Number(value)));
-  };
-
-  //Sorting
-  ngAfterViewInit(): void {
-    this.dataSource.sort = this.sortAttention;
-    this.dataSource.sort = this.sortConfirmation;
-  };
-
-  announceSortChange(sortState: Sort) {
-    if (sortState.direction) {
-      this.liveAnnouncer.announce(`Sorted ${sortState.direction}ending`);
-    } else {
-      this.liveAnnouncer.announce('Sorting cleared');
-    }
   };
 
   //Open multiple rows at the same time
@@ -99,7 +83,13 @@ export class AddbulkuserTableComponent{
 
   //get userIndex from table
   getUserDetails(userDetailsFromTable: any): void {
-    this.userDetails = this.dataSource.data.indexOf(userDetailsFromTable);
+    this.userIndex = this.dataSource.data.indexOf(userDetailsFromTable);
+
+    this.userDetails = {
+      name: userDetailsFromTable.user.name,
+      surname: userDetailsFromTable.user.surname,
+      email: userDetailsFromTable.user.email,
+    }
   };
 
   //Delete user
@@ -113,7 +103,8 @@ export class AddbulkuserTableComponent{
     this.dialog.open(EdituserComponent, {
       autoFocus: false,
       data: {
-        user: this.userDetails
+        userIndex: this.userIndex,
+        userDetails: this.userDetails
       }
     });
   };
