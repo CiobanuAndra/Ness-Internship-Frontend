@@ -15,12 +15,12 @@
         <mat-dialog-content class="dialog-container">
             <div class="require-attention-container">
                 <p class="table-header">{{usersAttention}} Users Require Attention</p>
-                <app-addbulkuser-table [dataSource]="dataSourceAttention" [selectedTableAttention]="selectedTableAttention"></app-addbulkuser-table>
+                <app-addbulkuser-table [dataSource]="dataSourceAttention" [selectedTableAttention]="selectedTableAttention" (deleteUserEvent)="deleteUserInvalid($event)"></app-addbulkuser-table>
             </div>
     
             <div class="await-confirmation-container">
                 <p class="table-header">{{usersConfirmation}} Users Await Confirmation</p>
-                <app-addbulkuser-table [dataSource]="dataSourceConfirmation" [selectedTableConfirmation]="selectedTableConfirmation"></app-addbulkuser-table>
+                <app-addbulkuser-table [dataSource]="dataSourceConfirmation" [selectedTableConfirmation]="selectedTableConfirmation" (deleteUserEvent)="deleteUserValid($event)"></app-addbulkuser-table>
             </div>
             <div class="buttons-container">
                 <button mat-raised-button (click)="addUsers()" class="addUser-button">Confirm & Add Users</button>

@@ -21,7 +21,15 @@ import { UserRequireAttention } from 'src/app/interfaces/user-require-attention.
 export class UsersService {
   private baseUserURL = environment.baseUserURL;
 
+  private editUserFormData = new BehaviorSubject<any>([]);
+  editUserFormData$ = this.editUserFormData.asObservable();
+
   constructor(private http: HttpClient) {}
+
+  sendEditUserFormData(formData: any, userDetails: any, functionState: boolean): void {
+    const combinedData = { formData, userDetails, functionState };
+    this.editUserFormData.next(combinedData);
+  };
 
   getAllUsers(): Observable<any> {
     return this.http.get<User>(`${this.baseUserURL}`);

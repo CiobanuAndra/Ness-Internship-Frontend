@@ -30,17 +30,22 @@ export class AddbulkusersComponent implements OnInit {
   usersToCheck = [];
   combinedUsers = {};
 
-  constructor(private usersService: UsersService, @Inject(MAT_DIALOG_DATA) public data: any) { }
+  formDataEditUser!: UserModal;
+  userIndex!: UserModal;
+  functionEditState = false;
+
+  constructor(private usersService: UsersService, @Inject(MAT_DIALOG_DATA) public data: any, private dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.fetchUsers();
     this.concatArrays();
-  }
+    this.listenEditUser();
+  };
 
   fetchUsers(): void {
     this.fetchUserAwaitModal();
     this.fetchUserRequireModal();
-  }
+  };
 
   fetchUserRequireModal(): void {
     this.dataSourceAttention.data = this.data.invalidUsers;
@@ -52,6 +57,65 @@ export class AddbulkusersComponent implements OnInit {
     this.dataSourceConfirmation.data = this.data.validUsers;
     this.usersConfirmation += this.data.validUsers.length;
     this.usersToUpload += this.usersConfirmation;
+  };
+
+  editUser(): void {
+    this.recieveUserDataForm();
+
+    const index = Number(this.userIndex);
+
+    if (index !== -1) {
+      if(this.formDataEditUser.name !== '') {
+        this.updateUserField(index, 'name', this.formDataEditUser.name);
+      }
+      if(this.formDataEditUser.surname !== '') {
+        this.updateUserField(index, 'surname', this.formDataEditUser.surname);
+      }
+      if(this.formDataEditUser.email !== '') {
+        this.updateUserField(index, 'email', this.formDataEditUser.email);
+      }
+    }
+
+    this.resetVariablesWhenActionOccurs();
+    this.concatArrays();
+    this.validateUsers();
+  };
+
+  deleteUserInvalid(userIndex: number): void {
+    this.resetVariablesWhenActionOccurs();
+  
+    userIndex !== -1? this.data.invalidUsers.splice(userIndex, 1) : null;
+  
+    this.fetchUsers();
+  };
+
+  deleteUserValid(userIndex: number): void {
+    this.resetVariablesWhenActionOccurs();
+  
+    userIndex !== -1? this.data.validUsers.splice(userIndex, 1) : null;
+  
+    this.fetchUsers();
+  };
+
+  //Check if tables have users with problems and if no proceed to submit
+  public addUsers(): void {
+    if (this.data.invalidUsers.length > 0) {
+      this.child.expandMultipleRows();
+    }
+    else {
+      this.usersService.addBulkUsers(this.combinedUsers).subscribe({
+        next: (response) => {
+          console.log(response.message);
+        }
+      })
+    }
+  };
+
+  //UTILS
+  resetVariablesWhenActionOccurs(): void {
+    this.usersToUpload = 0;
+    this.usersConfirmation = 0;
+    this.usersAttention = 0;
   };
 
   concatArrays(): void {
@@ -72,23 +136,34 @@ export class AddbulkusersComponent implements OnInit {
     }
   };
 
-  //Check if tables have users with problems and if no proceed to submit
-  public addUsers(): void {
-    if (this.data.invalidUsers.length > 0) {
-      this.child.expandMultipleRows();
-      this.usersService.validateUsers(this.combinedUsers).subscribe({
-        next: (response) => {
-          this.data.invalidUsers = response.invalidUsers;
-          this.data.validUsers = response.validUsers;
-        }
-      })
+  recieveUserDataForm(): void {
+    this.usersService.editUserFormData$.subscribe(data => {
+      this.formDataEditUser = data.formData;
+      this.userIndex = data.userDetails;
+      this.functionEditState = data.functionState;
     }
-    else {
-      this.usersService.addBulkUsers(this.combinedUsers).subscribe({
-        next: (response) => {
-          console.log(response.message);
-        }
-      })
-    }
+    )
+  };
+
+  updateUserField(index: number, field: UserField, value: string): void {
+    this.dataSourceAttention.data[index].user![field] = value;
+  };
+
+  listenEditUser(): void {
+    this.usersService.editUserFormData$.subscribe((functionState: boolean) => {
+      if (functionState) {
+        this.editUser();
+      }
+    });
+  };
+
+  validateUsers(): void {
+    this.usersService.validateUsers(this.combinedUsers).subscribe({
+      next: (response) => {
+        this.data.invalidUsers = response.invalidUsers;
+        this.data.validUsers = response.validUsers;
+        this.fetchUsers();
+      }
+    })
   };
 }

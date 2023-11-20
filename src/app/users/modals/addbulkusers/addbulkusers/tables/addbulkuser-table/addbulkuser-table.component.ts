@@ -1,6 +1,6 @@
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
-import { Component, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { AwaitConfirmationTable, RequireAttentionTable, tableHeaders} from 'src/app/enums/addbulkuser-table';
@@ -41,6 +41,8 @@ export class AddbulkuserTableComponent{
 
   @Input() dataSource!: MatTableDataSource<UserModal>;
 
+  @Output() deleteUserEvent = new EventEmitter<any>();
+
   expandedElement: UserModal[] = [];
 
   columnsToDisplayAttention: string[] = this.parseEnumToArray(RequireAttentionTable) as string[];
@@ -49,6 +51,8 @@ export class AddbulkuserTableComponent{
 
   tableAttention  = tableHeaders.attention;
   tableConfirmation = tableHeaders.confirmation;
+
+  userDetails = -1;
 
   constructor(private liveAnnouncer: LiveAnnouncer, private usersService: UsersService, private dialog: MatDialog) {}
 
@@ -93,10 +97,24 @@ export class AddbulkuserTableComponent{
     event.stopPropagation();
   };
 
+  //get userIndex from table
+  getUserDetails(userDetailsFromTable: any): void {
+    this.userDetails = this.dataSource.data.indexOf(userDetailsFromTable);
+  };
+
+  //Delete user
+  deleteUserEventFunction(userDetailsFromTable: any): void {
+    const userIndex = this.dataSource.data.indexOf(userDetailsFromTable);
+    this.deleteUserEvent.emit(userIndex);
+  };
+
   //Open modal to edit rows data
   openEditUser() {
     this.dialog.open(EdituserComponent, {
       autoFocus: false,
+      data: {
+        user: this.userDetails
+      }
     });
-  }
+  };
 }

@@ -31,12 +31,16 @@
         <ng-container matColumnDef="options">
             <th mat-header-cell *matHeaderCellDef></th>
             <td mat-cell *matCellDef="let element">
-                <button mat-icon-button (click)="stopPropagation($event)" (click)="openEditUser()">
+                <button mat-icon-button (click)="stopPropagation($event)" [matMenuTriggerFor]="menu">
                     <mat-icon>more_vert</mat-icon>
                 </button>
+                <mat-menu #menu="matMenu">
+                    <button mat-menu-item (click)="getUserDetails(element)" (click)="openEditUser()">Edit User</button>
+                    <button mat-menu-item (click)="deleteUserEventFunction(element)">Delete User</button>
+                </mat-menu>
             </td>
         </ng-container>
-
+        
         <tr mat-header-row *matHeaderRowDef="columnsToDisplayWithExpand"></tr>
         <tr mat-row *matRowDef="let element; columns: columnsToDisplayWithExpand;" class="element-row"
             [class.expanded-row]="checkExpanded(element)" (click)="pushPopElement(element)">
@@ -75,9 +79,12 @@
         <ng-container matColumnDef="options">
             <mat-header-cell *matHeaderCellDef></mat-header-cell>
             <mat-cell *matCellDef="let user">
-                <button mat-icon-button>
+                <button mat-icon-button  [matMenuTriggerFor]="menu">
                     <mat-icon>more_vert</mat-icon>
                 </button>
+                <mat-menu #menu="matMenu">
+                    <button mat-menu-item (click)="deleteUserEventFunction(user)">Delete User</button>
+                </mat-menu>
             </mat-cell>
         </ng-container>
 
