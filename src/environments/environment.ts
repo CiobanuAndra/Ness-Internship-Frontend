@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  baseUserURL: 'http://localhost:3000/api/user/',
+  baseUserURL: 'http://ec2-3-231-211-65.compute-1.amazonaws.com:3000/api/user',
 };

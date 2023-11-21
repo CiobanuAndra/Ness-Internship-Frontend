@@ -12,14 +12,12 @@ import { UserRequireAttention } from 'src/app/interfaces/user-require-attention.
   providedIn: 'root',
 })
 export class UsersService {
-  urlAddUser = environment.baseUserURL;
-  baseUrl = environment.baseUserURL;
+  private baseUserURL = environment.baseUserURL;
 
-  getUsersURL = 'http://localhost:3000/api/user';
   constructor(private http: HttpClient) {}
 
   getAllUsers(): Observable<any> {
-    return this.http.get<User>(`${this.baseUrl}`);
+    return this.http.get<User>(`${this.baseUserURL}`);
   }
 
   filterActiveUsers(): Observable<User[]> {
@@ -150,13 +148,13 @@ export class UsersService {
 
   addNewUser(userData: UserModal, userId: string): Observable<UserModal> {
     return this.http.post<UserModal>(
-      `${this.urlAddUser}/admin?id=${userId}`,
+      `${this.baseUserURL}/admin?id=${userId}`,
       userData
     );
   }
 
   getAllUsersAPI(): Observable<UserResponse> {
-    return this.http.get<UserResponse>(this.getUsersURL, {
+    return this.http.get<UserResponse>(this.baseUserURL, {
       responseType: 'json',
     });
   }
