@@ -37,7 +37,7 @@ export class AddbulkusersComponent implements OnInit {
 
   formDataEditUser!: UserModal;
   userIndex!: UserModal;
-  functionEditState = false;
+
 
   constructor(private usersService: UsersService, @Inject(MAT_DIALOG_DATA) public data: any, private dialog: MatDialog, private snackBar: MatSnackBar, private dialogRef: MatDialogRef<AddbulkusersComponent>) { }
 
@@ -146,7 +146,6 @@ export class AddbulkusersComponent implements OnInit {
     this.usersService.editUserFormData$.subscribe(data => {
       this.formDataEditUser = data.formData;
       this.userIndex = data.userDetails;
-      this.functionEditState = data.functionState;
     }
     )
   };
