@@ -1,0 +1,55 @@
+<div class="add-avatar-container" [ngClass]="{'open': isDialogOpen}">
+    <div class="add-avatar-header">
+      <span>Add Avatar</span>
+      <button mat-icon-button (click)="closeDialog()">
+        <mat-icon >close</mat-icon>
+      </button>
+    </div>
+  
+    <div class="avatar-container">
+        <form [formGroup]="avatarFormGroup">
+            <div class="avatar-content">
+            <span class="avatar-message">To assign a avatar you have to go to a task and select the avatar there.</span>
+              <div class="general-stepper-inputs">
+                <input
+                  matInput
+                  placeholder="Pirate"
+                  type="text"
+                  class="custom-input"
+                  formControlName="name"
+                />
+                <mat-hint class="hint-title">Title</mat-hint>
+  
+                <mat-form-field>
+                    <ngx-mat-file-input class="input-png" [placeholder]="'Upload Icon'" accept="*/*" formControlName="fileControl">
+                      <mat-icon ngxMatFileInputIcon>add</mat-icon>
+                    </ngx-mat-file-input>
+                    <mat-hint class="hint-title">
+                        Image should be in .png format with a size of 384x384.
+                    </mat-hint>
+                  </mat-form-field>
+                  <div class="checkbox-container">
+                    <input type="checkbox" id="avatar" name="avatar" class="avatar-checkbox" formControlName="isDefault">
+                    <label for="avatar" class="checkbox-text"> Set as default avatar</label><br>
+                  </div>
+
+                </div>
+            </div>
+            <div class="avatar-buttons">
+              <button
+                mat-button
+                class="next-button"
+                (click)="addAvatar(avatarFormGroup)"
+              >
+                {{ "add avatar" | uppercase }}
+              </button>
+              <button
+                mat-button
+                class="cancel-button"
+                (click)="closeDialog()"
+              >
+                {{ "cancel" | uppercase }}
+              </button>
+            </div>
+        </form>
+    </div>

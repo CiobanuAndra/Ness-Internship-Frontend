@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, Input, OnChanges, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { FormGroup } from '@angular/forms';
+import { Avatar } from 'src/app/interfaces/resources/avatar.model';
 import { ResourcesService } from 'src/app/services/resources/resources.service';
 
 @Component({
@@ -15,7 +16,7 @@ export class RewardMultipleTaskComponent implements OnInit{
   files: any[] = [];
   fileControl: FormControl;
   avatarsSelected: any[] = [];
-  avatars: any = [];
+  avatars: Avatar[] = [];
   rewards: any = [];
   public listAccepts = [null, '.png', 'image/*'];
   rewardTypeName: any;
@@ -90,8 +91,10 @@ export class RewardMultipleTaskComponent implements OnInit{
   }
 
   fetchDataAvatars(): void {
-    this.resourcesService.getAvatars().subscribe(data => {
-      this.avatars = data.content;
+    this.resourcesService.getAvatars().subscribe((data: any) => {
+      if (data && data.content && Array.isArray(data.content)) {
+        this.avatars = data.content;
+      }
     });
   }
 
@@ -163,7 +166,6 @@ export class RewardMultipleTaskComponent implements OnInit{
   }
 
   onAvatarSelected(event: Event): void {
-    console.log(this.secondFormGroup.get('type')?.value);
     const selectElement = event.target as HTMLSelectElement;
     const selectedOptionIndex = parseInt(selectElement.value, 10);
     const selectedAvatar = this.avatars[selectedOptionIndex];

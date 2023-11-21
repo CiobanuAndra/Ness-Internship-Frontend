@@ -5,8 +5,8 @@ import { Task } from '../interfaces/resources/task.model';
 import { Avatar } from '../interfaces/resources/avatar.model';
 import { Course } from '../interfaces/resources/course.model';
 import { tabTitle } from '../enums/tab-title';
-import { Subject, takeUntil } from 'rxjs';
-
+import { BehaviorSubject, Observable } from 'rxjs';
+ 
 @Component({
   selector: 'app-resources',
   templateUrl: './resources.component.html',
@@ -15,8 +15,8 @@ import { Subject, takeUntil } from 'rxjs';
 export class ResourcesComponent implements OnInit {
   activeTable = 'Tasks';
   showSidenav = false;
-  isDialogOpen = false;
-  private destroy$ = new Subject<void>();
+  showAddTask = false;
+  showAddAvatar = false;
 
   selectedTableTasks = tabTitle.tasks;
   selectedTableCourses = tabTitle.courses;
@@ -31,7 +31,18 @@ export class ResourcesComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadData();
+    this.subscribeToAvatars();
   }
+
+  subscribeToAvatars(): void {
+    this.resourcesService.avatarsSubject.subscribe((avatars) => {
+      if (Array.isArray(avatars)) {
+        const currentAvatars = this.dataSourceAvatars.data || [];
+        this.dataSourceAvatars.data = [...currentAvatars, ...avatars];
+      }
+    });
+  }
+  
 
   loadData(): void {
     this.fetchDataTasks();
@@ -52,7 +63,6 @@ export class ResourcesComponent implements OnInit {
       }
     });
   }
-  
 
   fetchDataAvatars(): void {
     this.resourcesService.getAvatars().subscribe((data: any) => {
@@ -61,6 +71,7 @@ export class ResourcesComponent implements OnInit {
       }
     });
   }
+  
 
   parseEnumToArray(enumObject: any) {
     return Object.values(enumObject).filter((value) => isNaN(Number(value)));
@@ -71,13 +82,30 @@ export class ResourcesComponent implements OnInit {
     this.activeTable = tabLabels[selectedIndex];
     this.loadData();
   }
-  toggleSidenav() {
-    this.showSidenav = !this.showSidenav;
+
+  toggleSidenav(type: string): void {
+    if (type === 'task') {
+      this.showAddTask = true;
+      this.showAddAvatar = false;
+    } else if (type === 'avatar') {
+      this.showAddAvatar = true;
+      this.showAddTask = false;
+    }
+
+    this.showSidenav = true;
     this.resourcesService.setSidenavVisibility(this.showSidenav);
   }
 
-  ngOnDestroy() {
-    this.destroy$.next();
-    this.destroy$.complete();
+  closeDialog(type: string): void {
+    if (type === 'task') {
+      this.showAddTask = false;
+    } else if (type === 'avatar') {
+      this.showAddAvatar = false;
+    }
+
+    this.showSidenav = false;
+    this.resourcesService.setSidenavVisibility(this.showSidenav);
   }
+  
+  
 }

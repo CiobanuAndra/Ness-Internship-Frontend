@@ -1,6 +1,8 @@
 export interface Avatar {
+    avatarHash: string,
     name: string, 
-    mymeType: string,
-    isDefault: boolean, 
     addedBy: string,
+    isDefault: boolean, 
+    mimeType: string,
+    content: File
 }

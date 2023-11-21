@@ -37,6 +37,7 @@ export class ResourceTableComponent implements AfterViewInit {
     this.resourcesService.tasksSubject.subscribe((tasks) => {
       this.dataSource.data = tasks;
     });
+
   }
   
 

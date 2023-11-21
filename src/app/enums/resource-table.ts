@@ -26,7 +26,7 @@ export enum ResourceTableCourses {
 
 export enum ResourceTableAvatars {
     NAMES = 'name',
-    LINKED_TO = 'mymeType',
+    LINKED_TO = 'mimeType',
     DEFAULT = 'isDefault',
     ADDEDBY = 'addedBy',
     OPTIONS = 'options',

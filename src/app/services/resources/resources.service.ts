@@ -8,6 +8,7 @@ import { FormGroup } from '@angular/forms';
 import { BehaviorSubject } from 'rxjs';
 import { tap } from 'rxjs';
 import { switchMap } from 'rxjs';
+import { map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -49,17 +50,52 @@ export class ResourcesService {
     return this.http.get<Task[]>(url, { responseType: 'json' });
   }
   
-
   getRewards(): Observable<any> {
     const url = `http://localhost:8282/api/reward`;
     return this.http.get<any>(url, { responseType: 'json' });
   }
+  
 
-  getAvatars(): Observable<any> {
+  public avatarsSubject: BehaviorSubject<Avatar[]> = new BehaviorSubject<Avatar[]>([]);
+  public avatars$: Observable<Avatar[]> = this.avatarsSubject.asObservable();
+
+  getAvatars(): Observable<Avatar[]> {
     const url = `http://localhost:8282/api/avatar`;
-    return this.http.get<any>(url, { responseType: 'json' });
+    return this.http.get<Avatar[]>(url, { responseType: 'json' })
+    .pipe(
+      tap(avatars => {
+        this.avatarsSubject.next(avatars);
+      })
+    );
   }
 
+  addAvatar(formData: FormData): Observable<any> {
+    const url = 'http://localhost:8282/api/avatar';
+    return this.http.post<any>(url, formData, { headers: {} }).pipe(
+      switchMap((response: any) => {
+        const newAvatar: Avatar = {
+          avatarHash: response.avatarHash,
+          name: response.name,
+          addedBy: response.addedBy,
+          isDefault: response.isDefault,
+          mimeType: response.mimeType,
+          content: response.content
+        };
+  
+        return this.getAvatars().pipe(
+          switchMap(avatars => {
+            if (!Array.isArray(avatars)) {
+              avatars = [];
+            }
+            const updatedAvatars = [...avatars, newAvatar];
+            this.avatarsSubject.next(updatedAvatars);
+            return of(newAvatar);
+          })
+        );
+      })
+    );
+  }
+  
   addTask(firstFormGroup: FormGroup, secondFormGroup: FormGroup, thirdFormGroup: FormGroup): Observable<any> {
     console.log(thirdFormGroup.get('rewardValue')?.value)
     const url = 'http://localhost:8181/api/tasks';
@@ -119,7 +155,5 @@ export class ResourcesService {
     const url = `http://localhost:8282/api/avatar/${avatarId}`;
     return this.http.delete<any>(url, { responseType: 'json' });
   }
-  
-  
   
 }

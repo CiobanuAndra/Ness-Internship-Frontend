@@ -1,6 +1,11 @@
 <mat-sidenav-container class="sidenav-container" *ngIf="showSidenav">
     <mat-sidenav-content>
-        <app-add-task [showSidenav]="showSidenav" (showSidenavChange)="showSidenav = $event"></app-add-task>
+        <ng-container *ngIf="showAddTask">
+            <app-add-task [showSidenav]="showAddTask" (showSidenavChange)="closeDialog('task')"></app-add-task>
+        </ng-container>
+        <ng-container *ngIf="showAddAvatar">
+            <app-add-avatar [showSidenav]="showAddAvatar" (showSidenavChange)="closeDialog('avatar')"></app-add-avatar>
+        </ng-container>
     </mat-sidenav-content>
 </mat-sidenav-container>
 
@@ -34,15 +39,11 @@
                     <app-resource-table [dataSource]="dataSourceAvatars" [selectedTable]="selectedTableAvatars"></app-resource-table>
                 </div>
             </mat-tab>
-            <mat-tab label="INDUSTRIES" [disabled]="showSidenav"> 
-                <mat-divider></mat-divider>
-            </mat-tab>
         </mat-tab-group>
         
-        <button mat-raised-button class="tab-button" *ngIf="activeTable === selectedTableTasks" (click)="toggleSidenav()">Add Task</button>
+        <button mat-raised-button class="tab-button" *ngIf="activeTable === selectedTableTasks"  (click)="toggleSidenav('task')">Add Task</button>
         <button mat-raised-button class="tab-button" *ngIf="activeTable === selectedTableCourses">Add Course</button>
-        <button mat-raised-button class="tab-button" *ngIf="activeTable === selectedTableAvatars">Add Avatar</button>
-        <button mat-raised-button class="tab-button" *ngIf="activeTable === selectedTableIndustries">Add Industry</button>
+        <button mat-raised-button class="tab-button" *ngIf="activeTable === selectedTableAvatars" (click)="toggleSidenav('avatar')">Add Avatar</button>
     </div>
 </mat-card>
 </div>

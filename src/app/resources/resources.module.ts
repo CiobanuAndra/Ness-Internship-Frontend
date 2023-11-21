@@ -19,6 +19,7 @@ import { RewardSingleTaskComponent } from './tables/reward-single-task/reward-si
 import { MatInputModule } from '@angular/material/input';
 import { NgxMatFileInputModule } from '@angular-material-components/file-input';
 import { RewardMultipleTaskComponent } from './tables/reward-multiple-task/reward-multiple-task.component';
+import { AddAvatarComponent } from './tables/add-avatar/add-avatar.component';
 
 const routes: Routes = [
   {
@@ -36,6 +37,7 @@ const routes: Routes = [
     SingleTaskComponent,
     RewardSingleTaskComponent,
     RewardMultipleTaskComponent,
+    AddAvatarComponent,
   ],
   imports: [
     CommonModule,

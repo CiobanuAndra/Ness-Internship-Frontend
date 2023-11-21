@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { FormGroup } from '@angular/forms';
+import { Avatar } from 'src/app/interfaces/resources/avatar.model';
 import { ResourcesService } from 'src/app/services/resources/resources.service';
 
 @Component({
@@ -13,7 +14,7 @@ export class RewardSingleTaskComponent implements OnInit {
   files: any[] = [];
   fileControl: FormControl;
   avatarsSelected: any[] = [];
-  avatars: any = [];
+  avatars: Avatar[] = [];
   rewards: any = [];
   public listAccepts = [
     null,
@@ -52,9 +53,11 @@ export class RewardSingleTaskComponent implements OnInit {
   }
 
   fetchDataAvatars(): void {
-    this.resourcesService.getAvatars().subscribe(data => {
-      this.avatars = data.content;
-    })
+    this.resourcesService.getAvatars().subscribe((data: any) => {
+      if (data && data.content && Array.isArray(data.content)) {
+        this.avatars = data.content;
+      }
+    });
   }
 
   getDecodedImage(imageData: string): string {
