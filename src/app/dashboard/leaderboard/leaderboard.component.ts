@@ -19,7 +19,8 @@ export class LeaderboardComponent implements OnInit {
   leaderboardTabsEnum = LeaderboardTabsEnum;
   screenHeight: number;
   maxUsersToShow: number;
-  currentUsersNumber: any;
+  currentUsersNumberDone: any;
+  currentUsersNumberProgress: any;
   private destroy$ = new Subject<void>();
 
   constructor(private userService: UsersService, private router: Router) {
@@ -48,14 +49,13 @@ export class LeaderboardComponent implements OnInit {
             userInDone: this.sortAndFilterUsers(user, true),
           };
         }),
-        tap((user) => {
-          this.currentUsersNumber = user.userInDone;
-        })
       )
       .pipe(takeUntil(this.destroy$))
       .subscribe(({ userInProgress, userInDone }) => {
         this.usersInProgress = userInProgress;
         this.usersInDone = userInDone;
+        this.currentUsersNumberProgress = userInProgress;
+        this.currentUsersNumberDone = userInDone;
       });
   }
 

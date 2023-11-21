@@ -16,14 +16,14 @@
     </div>
   </div>
 
-  <ng-container *ngIf="
-      activeTab === leaderboardTabsEnum.InProgress && usersInProgress.length
-    ">
-    <app-leaderboard-list [leaderboardUsers]="usersInProgress"></app-leaderboard-list>
+  <ng-container *ngIf="activeTab === leaderboardTabsEnum.InProgress && usersInProgress.length">
+    <app-leaderboard-list [leaderboardUsers]="usersInProgress"
+      [currentUsersNumberProgress]="currentUsersNumberProgress" [activeTab]="leaderboardTabsEnum.InProgress"></app-leaderboard-list>
   </ng-container>
 
   <ng-container *ngIf="activeTab === leaderboardTabsEnum.Done && usersInDone.length">
-    <app-leaderboard-list [leaderboardUsers]="usersInDone"></app-leaderboard-list>
+    <app-leaderboard-list [leaderboardUsers]="usersInDone"
+      [currentUsersNumberDone]="currentUsersNumberDone" [activeTab]="leaderboardTabsEnum.Done"></app-leaderboard-list>
   </ng-container>
 
   <ng-container *ngIf="

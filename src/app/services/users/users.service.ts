@@ -125,52 +125,16 @@ export class UsersService {
     return of(this.usersFromCSVFile);
   }
 
-  usersModalRequire: UserModal[] = [
-    {
-      name: 'Mustas1',
-      surname: 'Abdul1',
-      email: '1412421@ness.com',
-      message: 'No Email Adress',
-    },
-    {
-      name: 'Mustas2',
-      surname: 'Abdul2',
-      email: '1512512@ness.com',
-      message: 'No Name',
-    },
-    {
-      name: 'Mustas3',
-      surname: 'Abdul3',
-      email: '616214212@ness.com',
-      message: 'No Email Adress',
-    },
-  ];
-
-  usersModalAwait: UserModal[] = [
-    { name: 'Mustas1', surname: 'Abdul1', email: '15132512@ness.com' },
-    { name: 'Mustas2', surname: 'Abdul2', email: '15132512@ness.com' },
-    { name: 'Mustas3', surname: 'Abdul', email: '15125512@ness.com' },
-    { name: 'Mustas', surname: 'Rajesh', email: '15125412@ness.com' },
-  ];
-
-  public loadUsersRequireModal(): Observable<UserModal[]> {
-    return of(this.usersModalRequire);
-  }
-
-  public loadUsersAwaitModal(): Observable<UserModal[]> {
-    return of(this.usersModalAwait);
-  }
-
   //HTTP REQUESTS
   validateUsers(users: any): Observable<any> {
     return this.http.post<any>(
-      `${this.urlAddUser}/validate`, users
+      `${this.baseUserURL}/validate`, users
     );
   };
 
   addBulkUsers(users: any): Observable<any> {
     return this.http.post<any>(
-      `${this.urlAddUser}/upload`, users
+      `${this.baseUserURL}/upload`, users
     );
   };
 

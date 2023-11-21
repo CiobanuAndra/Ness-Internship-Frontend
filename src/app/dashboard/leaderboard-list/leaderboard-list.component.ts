@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { LeaderboardTabsEnum } from 'src/app/enums/leaderboard-tabs.enum';
 import { UserCard } from 'src/app/interfaces/users/user-card.model';
 
 @Component({
@@ -8,7 +9,12 @@ import { UserCard } from 'src/app/interfaces/users/user-card.model';
 })
 export class LeaderboardListComponent implements OnInit {
   @Input() leaderboardUsers: UserCard[] = [];
-  @Input() currentUsersNumber!: number;
+  @Input() currentUsersNumberProgress!: number;
+  @Input() currentUsersNumberDone!: number;
+  @Input() activeTab!:LeaderboardTabsEnum;
+  leaderboardTabsEnumProgress = LeaderboardTabsEnum.InProgress;
+  leaderboardTabsEnumDone = LeaderboardTabsEnum.Done;
+
   constructor() {}
 
   ngOnInit() {
