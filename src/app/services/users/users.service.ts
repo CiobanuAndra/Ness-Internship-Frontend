@@ -161,6 +161,19 @@ export class UsersService {
     return of(this.usersModalAwait);
   }
 
+  //HTTP REQUESTS
+  validateUsers(users: any): Observable<any> {
+    return this.http.post<any>(
+      `${this.urlAddUser}/validate`, users
+    );
+  };
+
+  addBulkUsers(users: any): Observable<any> {
+    return this.http.post<any>(
+      `${this.urlAddUser}/upload`, users
+    );
+  };
+
   addNewUser(userData: UserModal, userId: string): Observable<UserModal> {
     return this.http.post<UserModal>(
       `${this.baseUserURL}/admin?id=${userId}`,

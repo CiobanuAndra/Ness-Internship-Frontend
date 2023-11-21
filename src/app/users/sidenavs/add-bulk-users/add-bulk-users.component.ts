@@ -35,7 +35,9 @@ export class AddBulkUsersComponent implements OnInit {
       .pipe(takeUntil(this.destroy$))
       .subscribe(async (files: any) => {
         try {
-          await this.usersService.uploadCSVFile(files);
+          const response = await this.usersService.uploadCSVFile(files);
+          this.invalidUsersResponse = response.invalidUsers;
+          this.validUsersResponse = response.validUsers;
         } catch (error) {
           console.error('Error loading file.', error);
         }

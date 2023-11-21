@@ -4,8 +4,7 @@ import { UserModal } from 'src/app/interfaces/users/user-modal.model';
 import { UsersService } from 'src/app/services/users/users.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { tableHeaders } from 'src/app/enums/addbulkuser-table';
-import { Subject, takeUntil } from 'rxjs';
-import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { SnackBarPosition } from 'src/app/enums/snackbarposition';
 
@@ -18,7 +17,7 @@ type UserField = 'name' | 'surname' | 'email';
 })
 export class AddbulkusersComponent implements OnInit {
   @ViewChild(AddbulkuserTableComponent) child!: AddbulkuserTableComponent;
-  
+
   horizontalPosition: MatSnackBarHorizontalPosition = SnackBarPosition.positionCenter;
   verticalPosition: MatSnackBarVerticalPosition = SnackBarPosition.positionTop;
 
@@ -38,8 +37,7 @@ export class AddbulkusersComponent implements OnInit {
   formDataEditUser!: UserModal;
   userIndex!: UserModal;
 
-
-  constructor(private usersService: UsersService, @Inject(MAT_DIALOG_DATA) public data: any, private dialog: MatDialog, private snackBar: MatSnackBar, private dialogRef: MatDialogRef<AddbulkusersComponent>) { }
+  constructor(private usersService: UsersService, @Inject(MAT_DIALOG_DATA) public data: any, private snackBar: MatSnackBar, private dialogRef: MatDialogRef<AddbulkusersComponent>) { }
 
   ngOnInit(): void {
     this.fetchUsers();
@@ -70,13 +68,13 @@ export class AddbulkusersComponent implements OnInit {
     const index = Number(this.userIndex);
 
     if (index !== -1) {
-      if(this.formDataEditUser.name !== '') {
+      if (this.formDataEditUser.name !== '') {
         this.updateUserField(index, 'name', this.formDataEditUser.name);
       }
-      if(this.formDataEditUser.surname !== '') {
+      if (this.formDataEditUser.surname !== '') {
         this.updateUserField(index, 'surname', this.formDataEditUser.surname);
       }
-      if(this.formDataEditUser.email !== '') {
+      if (this.formDataEditUser.email !== '') {
         this.updateUserField(index, 'email', this.formDataEditUser.email);
       }
     }
@@ -88,17 +86,17 @@ export class AddbulkusersComponent implements OnInit {
 
   deleteUserInvalid(userIndex: number): void {
     this.resetVariablesWhenActionOccurs();
-  
-    userIndex !== -1? this.data.invalidUsers.splice(userIndex, 1) : null;
-  
+
+    userIndex !== -1 ? this.data.invalidUsers.splice(userIndex, 1) : null;
+
     this.fetchUsers();
   };
 
   deleteUserValid(userIndex: number): void {
     this.resetVariablesWhenActionOccurs();
-  
-    userIndex !== -1? this.data.validUsers.splice(userIndex, 1) : null;
-  
+
+    userIndex !== -1 ? this.data.validUsers.splice(userIndex, 1) : null;
+
     this.fetchUsers();
   };
 
@@ -107,7 +105,9 @@ export class AddbulkusersComponent implements OnInit {
     if (this.data.invalidUsers.length > 0) {
       this.child.expandMultipleRows();
     }
-    else {
+    else if (this.data.validUsers.length === 0) {
+      this.toastMessage('No user to add', 'red-snackbar');
+    } else if (this.data.validUsers.length > 0) {
       this.usersService.addBulkUsers(this.combinedUsers).subscribe({
         next: () => {
           this.toastMessage('Users added successfully!', 'green-snackbar');
@@ -181,7 +181,7 @@ export class AddbulkusersComponent implements OnInit {
     });
   };
 
-  closeDialog(){
+  closeDialog() {
     this.dialogRef.close();
   };
 }
