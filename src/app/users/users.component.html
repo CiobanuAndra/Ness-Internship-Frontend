@@ -157,6 +157,6 @@
  <mat-sidenav-container class="sidenav-container" *ngIf="showSidenav">
   <app-addnewuser
     [showSidenav]="showSidenav"
-    (showSidenavChange)="showSidenav = $event"
+    (showSidenavChange)="showSidenav = $event; filterAllUsers()"
   ></app-addnewuser>
 </mat-sidenav-container>

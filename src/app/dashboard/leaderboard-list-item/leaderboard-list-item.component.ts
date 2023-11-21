@@ -20,6 +20,7 @@ export class LeaderboardListItemComponent{
   }
 
   getHeightStyle(): string {
+    if (!this.currentUsersNumber) return '';
     if (this.screenBigger) {
       return 'calc(88.5% / ' + this.currentUsersNumber.length + ')';
     } else {
