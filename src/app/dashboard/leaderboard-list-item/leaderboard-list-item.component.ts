@@ -9,7 +9,6 @@ import { UserCard } from 'src/app/interfaces/users/user-card.model';
 export class LeaderboardListItemComponent{
   @Input() user!: UserCard;
   @Input() status!: number;
-  @Input() currentUsersNumber!: any;
 
   screenHeight: number;
   screenBigger: boolean;
@@ -22,9 +21,9 @@ export class LeaderboardListItemComponent{
   getHeightStyle(): string {
     if (!this.currentUsersNumber) return '';
     if (this.screenBigger) {
-      return 'calc(88.5% / ' + this.currentUsersNumber.length + ')';
+      return 'calc(88.5% / ' + 13 + ')';
     } else {
-      return 'calc(84.6% / ' + this.currentUsersNumber.length + ')';
+      return 'calc(84.6% / ' + 9 + ')';
     }
   }
 }

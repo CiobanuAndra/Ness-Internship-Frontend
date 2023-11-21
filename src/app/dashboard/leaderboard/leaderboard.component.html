@@ -23,8 +23,7 @@
   </ng-container>
 
   <ng-container *ngIf="activeTab === leaderboardTabsEnum.Done && usersInDone.length">
-    <app-leaderboard-list [leaderboardUsers]="usersInDone"
-      [currentUsersNumber]="currentUsersNumber"></app-leaderboard-list>
+    <app-leaderboard-list [leaderboardUsers]="usersInDone"></app-leaderboard-list>
   </ng-container>
 
   <ng-container *ngIf="

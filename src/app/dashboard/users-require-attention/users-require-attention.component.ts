@@ -32,7 +32,7 @@ export class UsersRequireAttentionComponent implements OnInit {
       .getUsersRequireAttention()
       .pipe(takeUntil(this.destroy$))
       .subscribe((values) => {
-        this.screenHeight > 750
+        this.screenHeight > 700
           ? (this.usersRequireAttention = values.slice(0, 3))
           : (this.usersRequireAttention = values.slice(0, 2));
         this.allUsersRequireAttention = values;
