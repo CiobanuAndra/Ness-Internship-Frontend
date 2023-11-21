@@ -69,9 +69,9 @@ services:
       - DATABASE_PASSWORD=postgres
       - DATABASE_DBNAME=postgres
       - DATABASE_SCHEMA=ni23_be_users
-      - NI23_LOGIN_PORT=8080
+      - NI23_LOGIN_PORT=8084
     ports:
-      - "8080:8080"
+      - "8084:8084"
     links:
       - ni23-be-postgres
 volumes:
