@@ -14,12 +14,12 @@
     <ng-container matColumnDef="name">
       <mat-header-cell class="header-cell" *matHeaderCellDef mat-sort-header
         sortActionDescription="Sort by name">name</mat-header-cell>
-      <mat-cell *matCellDef="let element;"> {{ element.name }}</mat-cell>
+      <mat-cell *matCellDef="let element"> {{ element.name }}</mat-cell>
     </ng-container>
     <ng-container matColumnDef="taskCompleted">
       <mat-header-cell class="header-cell" *matHeaderCellDef mat-sort-header
         sortActionDescription="Sort by tasks completed">tasks completed</mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{ element.taskCompleted }}/{{ totalCourses }}</mat-cell>
+      <mat-cell *matCellDef="let element"> {{ element.taskCompleted }}/{{ element.totalTasks }}</mat-cell>
     </ng-container>
     <ng-container matColumnDef="timeLeft">
       <mat-header-cell class="header-cell" *matHeaderCellDef mat-sort-header
@@ -49,8 +49,8 @@
   <!-- State: No Data -->
   <div *ngIf="dataSource.data.length === 0">
     <div class="table-with-no-data">
-      <img src="assets/icons/avatar.svg" alt="user-icon">
-      <p class="no-data-message">No tasks to display!</p>
+      <mat-icon svgIcon="users"></mat-icon>
+      <p class="no-data-message">No users added yet.</p>
     </div>
   </div>
 
