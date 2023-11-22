@@ -73,7 +73,7 @@ export class UsersComponent implements AfterViewInit, OnInit {
     const currentDate = new Date();
     const endDate = new Date(activationEndDate);
     const timeDifference = endDate.getTime() - currentDate.getTime();
-    console.log(`${timeDifference}`)
+    
     return Math.ceil(timeDifference / (1000 * 60 * 60 * 24));
   }
 

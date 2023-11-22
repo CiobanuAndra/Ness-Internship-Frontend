@@ -11,7 +11,6 @@ export class InterceptorService implements HttpInterceptor {
       },
     });
 
-
     if (request.body instanceof FormData) {
       return next.handle(request);
     }
@@ -27,7 +26,11 @@ export class InterceptorService implements HttpInterceptor {
             //server-side errors
             if (error.status === 422) {
               errorMessage = 'User with this email already exists';
-            } else {
+            } 
+            else if (error.status === 401) {
+              errorMessage = 'Authorization Required';
+            }
+            else {
               errorMessage = `Error Status: ${error.status} Message: ${error.message}`;
             }
           }
