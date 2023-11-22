@@ -48,6 +48,13 @@
   .users-list__title__buttons__add-user {
     background-color: #e6e7e9;
   }
+
+  .table-with-no-data{
+    mat-icon{
+      height: 50px;
+      width: auto;
+    }
+  }
 }
 
 
