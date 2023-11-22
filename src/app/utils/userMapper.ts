@@ -1,5 +1,3 @@
-import { UserCard } from '../interfaces/users/user-card.model';
-
 const dashboardUserMapper = (payload: any) => {
   return {
     name: `${payload.user.name} ${payload.user.surname}`,
@@ -11,14 +9,4 @@ const dashboardUserMapper = (payload: any) => {
   };
 };
 
-const leaderboardUserMapper = (user: UserCard) => {
-  return {
-    name: `${user.name} ${user.surname}`,
-    totalTasks: user.totalTasks,
-    completedTasks: user.completedTasks,
-    points: user.score,
-    rank: user.rank,
-  };
-};
-
-export { dashboardUserMapper, leaderboardUserMapper };
+export { dashboardUserMapper };

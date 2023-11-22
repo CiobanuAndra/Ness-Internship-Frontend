@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UsersService } from 'src/app/services/users/users.service';
 import { UserCard } from 'src/app/interfaces/users/user-card.model';
-import { LeaderboardTabsEnum, tabsLeaderboard } from '../../enums/leaderboard-tabs.enum';
+import { LeaderboardTabsEnum } from '../../enums/leaderboard-tabs.enum';
 import { Router } from '@angular/router';
 import { map, takeUntil } from 'rxjs/operators';
 import { dashboardUserMapper } from 'src/app/utils/userMapper';
@@ -13,9 +13,7 @@ import { Subject } from 'rxjs';
   styleUrls: ['./leaderboard.component.scss'],
 })
 export class LeaderboardComponent implements OnInit {
-  InProgress = tabsLeaderboard.InProgress;
-  InDone = tabsLeaderboard.InDone;
-  activeTab = tabsLeaderboard.InProgress;
+  activeTab = LeaderboardTabsEnum.InProgress;
 
   usersInProgress: UserCard[] = [];
   usersInDone: UserCard[] = [];
@@ -38,9 +36,9 @@ export class LeaderboardComponent implements OnInit {
     this.getAllUsers();
   }
 
-  updateActiveTabTitle(selectedIndex: number): void {
-    const tabLabels: string[] = this.parseEnumToArray(LeaderboardTabsEnum) as string[];
-    this.activeTab = tabLabels[selectedIndex];
+  updateActiveTabTitle(): void {
+    this.activeTab === LeaderboardTabsEnum.InProgress
+     ? this.activeTab = LeaderboardTabsEnum.Done : this.activeTab = LeaderboardTabsEnum.InProgress;
   };
 
   parseEnumToArray(enumObject: any) {

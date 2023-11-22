@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { UsersService } from 'src/app/services/users/users.service';
 import { UserCard } from 'src/app/interfaces/users/user-card.model';
 import { LeaderboardTabsEnum } from '../../enums/leaderboard-tabs.enum';
@@ -6,9 +6,8 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { MatSort, Sort } from '@angular/material/sort';
-import { map, takeUntil, tap } from 'rxjs/operators';
-import { leaderboardUserMapper } from 'src/app/utils/userMapper';
-import { UserResponse } from 'src/app/interfaces/user-response';
+import { map, takeUntil } from 'rxjs/operators';
+import { dashboardUserMapper } from 'src/app/utils/userMapper';
 import { Subject } from 'rxjs';
 
 @Component({
@@ -75,16 +74,12 @@ export class LeaderboardTableComponent implements OnInit {
       .pipe(takeUntil(this.destroy$))
       .pipe(
         map((data: any) =>
-          data.users.map((user: any) => leaderboardUserMapper(user))
+          data.content.map((user: any) => dashboardUserMapper(user))
         ),
         map((users: UserCard[]) => {
           return {
-            inProgress: users.filter(
-              (user: any) => user.completedTasks < user.totalTasks
-            ),
-            inDone: users.filter(
-              (user: any) => user.completedTasks === user.totalTasks
-            ),
+            inProgress: this.sortAndFilterUsers(users, LeaderboardTabsEnum.InProgress),
+            inDone: this.sortAndFilterUsers(users, LeaderboardTabsEnum.Done),
           };
         })
       )
@@ -100,6 +95,12 @@ export class LeaderboardTableComponent implements OnInit {
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;
       });
+  }
+
+  private sortAndFilterUsers(users: UserCard[], status: LeaderboardTabsEnum): UserCard[] {
+    return users
+      .filter((user) => user.status === status)
+      .sort((a, b) => a.rank - b.rank);
   }
 
   ngOnDestroy() {
