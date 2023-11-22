@@ -12,7 +12,7 @@ import {
 } from '@angular/material/snack-bar';
 import { Subject, takeUntil } from 'rxjs';
 import { SnackBarPosition } from 'src/app/enums/snackbarposition';
-import { UserModal } from 'src/app/interfaces/users/user-modal.model';
+import { User } from 'src/app/interfaces/users/user';
 import { ResourcesService } from 'src/app/services/resources/resources.service';
 import { UsersService } from 'src/app/services/users/users.service';
 import { emailDomain, specialChars } from 'src/app/utils/formUtils';
@@ -135,14 +135,14 @@ export class AddnewuserComponent {
     }
 
     const userData = {
-      ...(this.addNewUserForm.value as UserModal),
+      ...(this.addNewUserForm.value as User),
     };
 
     //hardcoded ID
     const userId = '1ADM';
 
     this.usersService
-      .addNewUser(userData, userId)
+      .addNewUserAndUpdateTable(userData, userId)
       .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: () => {

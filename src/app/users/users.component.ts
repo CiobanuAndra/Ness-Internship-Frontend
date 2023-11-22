@@ -88,7 +88,10 @@ export class UsersComponent implements AfterViewInit, OnInit {
             leftDays: this.calculateRemainingDays(user.activationEndDate),
           })
         );
-        this.dataSource.data = activeUsersWithLeftDays;
+        this.userService.updateUsersAdded(activeUsersWithLeftDays);
+        this.userService.usersUpdateTable$.subscribe((users) => {
+          this.dataSource.data = users;
+        });
       });
   }
 
@@ -103,7 +106,10 @@ export class UsersComponent implements AfterViewInit, OnInit {
             leftDays: this.calculateRemainingDays(user.activationEndDate),
           })
         );
-        this.dataSource.data = inactiveUserWithLeftDays;
+        this.userService.updateUsersAdded(inactiveUserWithLeftDays);
+        this.userService.usersUpdateTable$.subscribe((users) => {
+          this.dataSource.data = users;
+        });
       });
   }
 
@@ -118,7 +124,10 @@ export class UsersComponent implements AfterViewInit, OnInit {
             leftDays: this.calculateRemainingDays(user.activationEndDate),
           })
         );
-        this.dataSource.data = usersWithLeftDays;
+        this.userService.updateUsersAdded(usersWithLeftDays);
+        this.userService.usersUpdateTable$.subscribe((users) => {
+          this.dataSource.data = users;
+        });
       });
   }
 
