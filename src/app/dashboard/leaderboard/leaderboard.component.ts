@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { UsersService } from 'src/app/services/users/users.service';
 import { UserCard } from 'src/app/interfaces/users/user-card.model';
-import { LeaderboardTabsEnum } from '../../enums/leaderboard-tabs.enum';
+import { LeaderboardTabsEnum, tabsLeaderboard } from '../../enums/leaderboard-tabs.enum';
 import { Router } from '@angular/router';
-import { map, takeUntil, tap } from 'rxjs/operators';
+import { map, takeUntil } from 'rxjs/operators';
 import { dashboardUserMapper } from 'src/app/utils/userMapper';
 import { Subject } from 'rxjs';
 
@@ -13,14 +13,16 @@ import { Subject } from 'rxjs';
   styleUrls: ['./leaderboard.component.scss'],
 })
 export class LeaderboardComponent implements OnInit {
-  activeTab: LeaderboardTabsEnum = LeaderboardTabsEnum.InProgress;
+  InProgress = tabsLeaderboard.InProgress;
+  InDone = tabsLeaderboard.InDone;
+  activeTab = tabsLeaderboard.InProgress;
+
   usersInProgress: UserCard[] = [];
   usersInDone: UserCard[] = [];
   leaderboardTabsEnum = LeaderboardTabsEnum;
+  
   screenHeight: number;
   maxUsersToShow: number;
-  currentUsersNumberDone: any;
-  currentUsersNumberProgress: any;
   private destroy$ = new Subject<void>();
 
   constructor(private userService: UsersService, private router: Router) {
@@ -35,6 +37,15 @@ export class LeaderboardComponent implements OnInit {
   ngOnInit() {
     this.getAllUsers();
   }
+
+  updateActiveTabTitle(selectedIndex: number): void {
+    const tabLabels: string[] = this.parseEnumToArray(LeaderboardTabsEnum) as string[];
+    this.activeTab = tabLabels[selectedIndex];
+  };
+
+  parseEnumToArray(enumObject: any) {
+    return Object.values(enumObject).filter((value) => isNaN(Number(value)));
+  };
 
   getAllUsers(): void {
     this.userService
@@ -54,8 +65,6 @@ export class LeaderboardComponent implements OnInit {
       .subscribe(({ userInProgress, userInDone }) => {
         this.usersInProgress = userInProgress;
         this.usersInDone = userInDone;
-        this.currentUsersNumberProgress = userInProgress;
-        this.currentUsersNumberDone = userInDone;
       });
   }
 

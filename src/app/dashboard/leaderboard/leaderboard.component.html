@@ -5,37 +5,24 @@
       {{ "view all" | uppercase }}
     </button>
   </div>
-  <div class="my-custom-tabs">
-    <div class="tab in-progress-tab" [class.active-tab]="activeTab === leaderboardTabsEnum.InProgress"
-      (click)="activeTab = leaderboardTabsEnum.InProgress">
-      IN PROGRESS
-    </div>
-    <div class="tab done-tab" [class.active-tab]="activeTab === leaderboardTabsEnum.Done"
-      (click)="activeTab = leaderboardTabsEnum.Done">
-      DONE
-    </div>
-  </div>
+  <mat-tab-group (selectedIndexChange)="updateActiveTabTitle($event)">
+    <mat-tab label="IN PROGRESS">
+      <mat-divider></mat-divider>
+      <app-leaderboard-list [leaderboardUsers]="usersInProgress"></app-leaderboard-list>
+    </mat-tab>
+    <mat-tab label="DONE">
+      <mat-divider></mat-divider>
+      <app-leaderboard-list [leaderboardUsers]="usersInDone"></app-leaderboard-list>
+    </mat-tab>
+  </mat-tab-group>
 
-  <ng-container *ngIf="activeTab === leaderboardTabsEnum.InProgress && usersInProgress.length">
-    <app-leaderboard-list [leaderboardUsers]="usersInProgress"
-      [currentUsersNumberProgress]="currentUsersNumberProgress" [activeTab]="leaderboardTabsEnum.InProgress"></app-leaderboard-list>
-  </ng-container>
-
-  <ng-container *ngIf="activeTab === leaderboardTabsEnum.Done && usersInDone.length">
-    <app-leaderboard-list [leaderboardUsers]="usersInDone"
-      [currentUsersNumberDone]="currentUsersNumberDone" [activeTab]="leaderboardTabsEnum.Done"></app-leaderboard-list>
-  </ng-container>
-
-  <ng-container *ngIf="
-      (activeTab === leaderboardTabsEnum.InProgress &&
-        !usersInProgress.length) ||
-      (activeTab === leaderboardTabsEnum.Done && !usersInDone.length)
-    ">
+  <ng-container
+    *ngIf="(activeTab === InProgress && !usersInProgress.length) || (activeTab === InDone && !usersInDone.length)">
     <div class="no-users-container">
       <img src="assets/icons/users.svg" alt="Users Icon" />
       <p>
         No users in
-        {{ activeTab === leaderboardTabsEnum.InProgress ? "progress" : "done" }}
+        {{ activeTab === InProgress ? "progress" : "done" }}
       </p>
     </div>
   </ng-container>

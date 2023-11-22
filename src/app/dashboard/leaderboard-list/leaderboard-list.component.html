@@ -1,6 +1,2 @@
-<ng-container *ngIf="activeTab === leaderboardTabsEnumProgress">
-    <app-leaderboard-list-item *ngFor="let user of leaderboardUsers" [user]="user" [currentUsersNumberProgress]="currentUsersNumberProgress" [activeTab]="activeTab"></app-leaderboard-list-item>
-</ng-container>
-<ng-container *ngIf="activeTab === leaderboardTabsEnumDone">
-    <app-leaderboard-list-item *ngFor="let user of leaderboardUsers" [user]="user" [currentUsersNumberDone]="currentUsersNumberDone" [activeTab]="activeTab"></app-leaderboard-list-item>
-</ng-container>
+<app-leaderboard-list-item *ngFor="let user of leaderboardUsers" [user]="user"></app-leaderboard-list-item>
+

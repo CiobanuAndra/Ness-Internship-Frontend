@@ -139,7 +139,7 @@ export class AddnewuserComponent {
     };
 
     //hardcoded ID
-    const userId = '1';
+    const userId = '0e0382b5-5c1e-4395-9f31-2cb842df9a40';
 
     this.usersService
       .addNewUser(userData, userId)
