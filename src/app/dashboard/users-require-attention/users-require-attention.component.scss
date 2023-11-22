@@ -78,6 +78,7 @@
     }
     &__points-icon {
       @include set-size(1rem, 1rem);
+      cursor: pointer;
     }
   }
 
