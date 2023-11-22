@@ -13,6 +13,7 @@ export class LeaderboardListItemComponent{
   @Input() currentUsersNumberProgress!: any;
   @Input() currentUsersNumberDone!: any;
   @Input() activeTab!:LeaderboardTabsEnum;
+  
   leaderboardTabsEnumProgress = LeaderboardTabsEnum.InProgress;
   leaderboardTabsEnumDone = LeaderboardTabsEnum.Done;
 
@@ -26,9 +27,11 @@ export class LeaderboardListItemComponent{
 
   getConditionalStyles(): { [key: string]: string } {
     if (this.activeTab === this.leaderboardTabsEnumProgress) {
+      console.log(this.currentUsersNumberProgress.length)
       return {'height': this.getHeightStyle(this.currentUsersNumberProgress.length)};
     }
     if (this.activeTab === this.leaderboardTabsEnumDone) {
+      console.log(this.currentUsersNumberDone.length)
       return {'height': this.getHeightStyle(this.currentUsersNumberDone.length)};
     } else {
       return {};
