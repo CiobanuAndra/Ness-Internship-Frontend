@@ -29,5 +29,4 @@ export enum ResourceTableAvatars {
     LINKED_TO = 'mimeType',
     DEFAULT = 'isDefault',
     ADDEDBY = 'addedBy',
-    OPTIONS = 'options',
 }

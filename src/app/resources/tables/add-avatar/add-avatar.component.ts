@@ -92,7 +92,7 @@ export class AddAvatarComponent {
       this.resourcesService.setSidenavVisibility(false);
   
       this.snackBar.open('Avatar added successfully!', '', {
-        duration: 5000,
+        duration: 3000,
         panelClass: 'green-snackbar',
         verticalPosition: 'top'
       });
@@ -100,7 +100,7 @@ export class AddAvatarComponent {
     }, (error) => {
       console.error('Error adding avatar:', error);
       this.snackBar.open('Failed to add avatar', '', {
-        duration: 5000,
+        duration: 3000,
         panelClass: 'red-snackbar',
         verticalPosition: 'top'
       });

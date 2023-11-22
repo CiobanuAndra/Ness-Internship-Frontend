@@ -40,7 +40,6 @@ export class ResourceTableComponent implements AfterViewInit {
 
   }
   
-
   //Sorting
   ngAfterViewInit(): void {
     this.dataSource.sort = this.sortTasks;
