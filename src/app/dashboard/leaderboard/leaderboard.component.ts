@@ -13,12 +13,14 @@ import { Subject } from 'rxjs';
   styleUrls: ['./leaderboard.component.scss'],
 })
 export class LeaderboardComponent implements OnInit {
-  activeTab = tabsLeaderboard.InProgress;
   InProgress = tabsLeaderboard.InProgress;
   InDone = tabsLeaderboard.InDone;
+  activeTab = tabsLeaderboard.InProgress;
+
   usersInProgress: UserCard[] = [];
   usersInDone: UserCard[] = [];
   leaderboardTabsEnum = LeaderboardTabsEnum;
+  
   screenHeight: number;
   maxUsersToShow: number;
   private destroy$ = new Subject<void>();

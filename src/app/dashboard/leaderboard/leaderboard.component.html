@@ -5,12 +5,12 @@
       {{ "view all" | uppercase }}
     </button>
   </div>
-  <mat-tab-group (selectedIndexChange)="updateActiveTabTitle($event)" class="tab-group">
+  <mat-tab-group (selectedIndexChange)="updateActiveTabTitle($event)">
     <mat-tab label="IN PROGRESS">
       <mat-divider></mat-divider>
       <app-leaderboard-list [leaderboardUsers]="usersInProgress"></app-leaderboard-list>
     </mat-tab>
-    <mat-tab label="IN PROGRESS">
+    <mat-tab label="DONE">
       <mat-divider></mat-divider>
       <app-leaderboard-list [leaderboardUsers]="usersInDone"></app-leaderboard-list>
     </mat-tab>
