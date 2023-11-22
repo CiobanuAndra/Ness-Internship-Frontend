@@ -1,9 +1,4 @@
 export enum LeaderboardTabsEnum {
-  InProgress,
-  Done,
-}
-
-export const tabsLeaderboard = {
-  InProgress: 'InProgress',
-  InDone: 'Done',
+  InProgress = "IN_PROGRESS",
+  Done = "DONE",
 }

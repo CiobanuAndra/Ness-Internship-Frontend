@@ -1,13 +1,13 @@
 import { UserCard } from '../interfaces/users/user-card.model';
 
-const dashboardUserMapper = (user: UserCard) => {
+const dashboardUserMapper = (payload: any) => {
   return {
-    name: user.name,
-    status: user.totalTasks - user.completedTasks === 0,
-    totalTasks: user.totalTasks,
-    completedTasks: user.completedTasks,
-    points: user.score,
-    rank: user.rank,
+    name: `${payload.user.name} ${payload.user.surname}`,
+    status: payload.status,
+    totalTasks: payload.completedTasks.length + payload.remainingTasks.length,
+    completedTasks: payload.completedTasks.length,
+    score: payload.score,
+    rank: payload.rank,
   };
 };
 

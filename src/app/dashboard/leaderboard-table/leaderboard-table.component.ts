@@ -71,7 +71,7 @@ export class LeaderboardTableComponent implements OnInit {
 
   private getUsers() {
     this.userService
-      .getAllUsersAPI()
+      .getLeaderboardUsers()
       .pipe(takeUntil(this.destroy$))
       .pipe(
         map((data: any) =>

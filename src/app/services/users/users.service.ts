@@ -20,6 +20,7 @@ import { UserRequireAttention } from 'src/app/interfaces/user-require-attention.
 })
 export class UsersService {
   private baseUserURL = environment.baseUserURL;
+  private baseGamificationURL = environment.baseGamificationURL;
 
   private editUserFormData = new BehaviorSubject<any>([]);
   editUserFormData$ = this.editUserFormData.asObservable();
@@ -226,20 +227,20 @@ export class UsersService {
   }
 
   //HTTP REQUESTS
-  addNewUser(userData: UserModal, userId: string): Observable<UserModal> {
-    return this.http.post<UserModal>(`${this.urlAddUser}/admin?id=${userId}`, userData);
-  };
+  // addNewUser(userData: UserModal, userId: string): Observable<UserModal> {
+  //   return this.http.post<UserModal>(`${this.urlAddUser}/admin?id=${userId}`, userData);
+  // };
 
-  getTotalCourses() {
-    return of(this.totalCourses);
-  }
+  // getTotalCourses() {
+  //   return of(this.totalCourses);
+  // }
 
-  getAllUsersAPI(): Observable<UserResponse> {
-    return this.http.get<UserResponse>(this.getUsersURL, { responseType: 'json' });
-  }
+  // getAllUsersAPI(): Observable<UserResponse> {
+  //   return this.http.get<UserResponse>(this.getUsersURL, { responseType: 'json' });
+  // }
 
   getLeaderboardUsers() {
-    const url = "http://localhost:8282/api/gamification-event/leaderboard?page=0&size=100&direction=ASC";
+    const url = `${this.baseGamificationURL}/leaderboard?page=0&size=100&direction=ASC`;
     return this.http.get<any>(url, { responseType: 'json' })
   }
   
