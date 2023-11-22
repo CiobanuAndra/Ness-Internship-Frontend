@@ -5,7 +5,7 @@
       {{ "view all" | uppercase }}
     </button>
   </div>
-  <mat-tab-group (selectedIndexChange)="updateActiveTabTitle($event)">
+  <mat-tab-group (selectedTabChange)="updateActiveTabTitle()">
     <mat-tab label="IN PROGRESS">
       <mat-divider></mat-divider>
       <app-leaderboard-list [leaderboardUsers]="usersInProgress"></app-leaderboard-list>
@@ -16,13 +16,12 @@
     </mat-tab>
   </mat-tab-group>
 
-  <ng-container
-    *ngIf="(activeTab === InProgress && !usersInProgress.length) || (activeTab === InDone && !usersInDone.length)">
+  <ng-container *ngIf="!usersInProgress.length || !usersInDone.length">
     <div class="no-users-container">
       <img src="assets/icons/users.svg" alt="Users Icon" />
       <p>
         No users in
-        {{ activeTab === InProgress ? "progress" : "done" }}
+        {{ activeTab === leaderboardTabsEnum.InProgress ? 'Progress' : 'Done'}}
       </p>
     </div>
   </ng-container>

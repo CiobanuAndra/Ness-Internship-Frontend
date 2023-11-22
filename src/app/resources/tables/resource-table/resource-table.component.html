@@ -50,15 +50,19 @@
         </ng-container>
         <ng-container matColumnDef="editedBy">
             <mat-header-cell class="header-cell" *matHeaderCellDef mat-sort-header sortActionDescription="Sort by editedBy" mat-sort>edited by</mat-header-cell>
-            <mat-cell *matCellDef="let task"> {{ task.editedBy }}</mat-cell>
+            <mat-cell *matCellDef="let task"> {{ task.editedBy ?? '-' }}</mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="options">
             <mat-header-cell *matHeaderCellDef></mat-header-cell>
             <mat-cell *matCellDef="let element"> 
-                <button mat-icon-button>
+                <button mat-icon-button [matMenuTriggerFor]="menu">
                     <mat-icon>more_vert</mat-icon>
                 </button>
+                <mat-menu #menu="matMenu">
+                    <button mat-menu-item>Edit Task</button>
+                    <button mat-menu-item>Delete Task</button>
+                </mat-menu>
             </mat-cell>
         </ng-container>
 
@@ -121,7 +125,7 @@
             <mat-cell *matCellDef="let avatar;"> {{ avatar.name }}</mat-cell>
         </ng-container>
         <ng-container matColumnDef="mimeType">
-            <mat-header-cell class="header-cell" *matHeaderCellDef mat-sort-header sortActionDescription="Sort by mimeType">linked to</mat-header-cell>
+            <mat-header-cell class="header-cell" *matHeaderCellDef mat-sort-header sortActionDescription="Sort by mimeType">Extension</mat-header-cell>
             <mat-cell *matCellDef="let avatar"> {{ avatar.mimeType }}</mat-cell>
         </ng-container>
         <ng-container matColumnDef="isDefault">
@@ -131,15 +135,6 @@
         <ng-container matColumnDef="addedBy">
             <mat-header-cell class="header-cell" *matHeaderCellDef mat-sort-header sortActionDescription="Sort by addedBy">added by</mat-header-cell>
             <mat-cell *matCellDef="let avatar"> {{ avatar.addedBy }}</mat-cell>
-        </ng-container>
-        
-        <ng-container matColumnDef="options">
-            <mat-header-cell *matHeaderCellDef></mat-header-cell>
-            <mat-cell *matCellDef="let avatar"> 
-                <button mat-icon-button>
-                    <mat-icon>more_vert</mat-icon>
-                </button>
-            </mat-cell>
         </ng-container>
 
         <mat-header-row *matHeaderRowDef="columnsToDisplayAvatars"></mat-header-row>
