@@ -24,8 +24,8 @@ export class AddbulkusersComponent implements OnInit {
   selectedTableAttention = tableHeaders.attention;
   selectedTableConfirmation = tableHeaders.confirmation;
 
-  dataSourceAttention = new MatTableDataSource<UserModal>();
-  dataSourceConfirmation = new MatTableDataSource<UserModal>();
+  dataSourceAttention = new MatTableDataSource<any>();
+  dataSourceConfirmation = new MatTableDataSource<any>();
 
   usersAttention = 0;
   usersConfirmation = 0;
@@ -37,7 +37,11 @@ export class AddbulkusersComponent implements OnInit {
   formDataEditUser!: UserModal;
   userIndex!: UserModal;
 
-  constructor(private usersService: UsersService, @Inject(MAT_DIALOG_DATA) public data: any, private snackBar: MatSnackBar, private dialogRef: MatDialogRef<AddbulkusersComponent>) { }
+  constructor(private usersService: UsersService,
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private snackBar: MatSnackBar,
+    private dialogRef: MatDialogRef<AddbulkusersComponent>
+  ) { }
 
   ngOnInit(): void {
     this.fetchUsers();

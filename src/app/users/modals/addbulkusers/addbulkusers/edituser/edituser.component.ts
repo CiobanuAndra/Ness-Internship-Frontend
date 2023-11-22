@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit} from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
@@ -14,7 +14,12 @@ import { specialChars, emailDomain } from 'src/app/utils/formUtils';
 export class EdituserComponent implements OnInit {
   functionState = false;
 
-  constructor(private formBuilder: FormBuilder, private usersService: UsersService, private snackBar: MatSnackBar, @Inject(MAT_DIALOG_DATA) public data:any, private dialogRef: MatDialogRef<EdituserComponent>) {}
+  constructor(private formBuilder: FormBuilder,
+    private usersService: UsersService,
+    private snackBar: MatSnackBar,
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private dialogRef: MatDialogRef<EdituserComponent>
+  ) { }
 
   editUserForm = this.formBuilder.group({
     name: [''],
@@ -31,16 +36,16 @@ export class EdituserComponent implements OnInit {
   }
 
   onSubmit(): void {
-      const userFormData = {
-        ...this.editUserForm.value
-      }
+    const userFormData = {
+      ...this.editUserForm.value
+    }
 
-      this.functionState = true;
-      this.usersService.sendEditUserFormData(userFormData, this.data.userIndex, this.functionState);
-      this.closeDialog();
+    this.functionState = true;
+    this.usersService.sendEditUserFormData(userFormData, this.data.userIndex, this.functionState);
+    this.closeDialog();
   };
 
-  closeDialog(){
+  closeDialog() {
     this.dialogRef.close();
   }
 }

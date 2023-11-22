@@ -3,7 +3,7 @@ import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { AwaitConfirmationTable, RequireAttentionTable, tableHeaders} from 'src/app/enums/addbulkuser-table';
+import { AwaitConfirmationTable, RequireAttentionTable, tableHeaders } from 'src/app/enums/addbulkuser-table';
 import { UserModal } from 'src/app/interfaces/users/user-modal.model';
 import { UsersService } from 'src/app/services/users/users.service';
 import { EdituserComponent } from '../../edituser/edituser.component';
@@ -46,13 +46,16 @@ export class AddbulkuserTableComponent {
   columnsToDisplayWithExpand = ['expand', ...this.columnsToDisplayAttention, 'options'];
   columnsToDisplayConfirmation = this.parseEnumToArray(AwaitConfirmationTable);
 
-  tableAttention  = tableHeaders.attention;
+  tableAttention = tableHeaders.attention;
   tableConfirmation = tableHeaders.confirmation;
 
   userDetails = {};
   userIndex = -1;
 
-  constructor(private liveAnnouncer: LiveAnnouncer, private usersService: UsersService, private dialog: MatDialog) {}
+  constructor(private liveAnnouncer: LiveAnnouncer,
+    private usersService: UsersService,
+    private dialog: MatDialog
+  ) { }
 
   parseEnumToArray(enumObject: any) {
     return Object.values(enumObject).filter(value => isNaN(Number(value)));
@@ -70,7 +73,7 @@ export class AddbulkuserTableComponent {
   checkExpanded(element: UserModal): boolean {
     return this.expandedElement.includes(element);
   };
-  
+
   pushPopElement(element: UserModal) {
     const index = this.expandedElement.indexOf(element);
     index === -1 ? this.expandedElement.push(element) : this.expandedElement.splice(index, 1);
