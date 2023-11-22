@@ -7,13 +7,13 @@ import { UserCard } from 'src/app/interfaces/users/user-card.model';
   templateUrl: './leaderboard-list-item.component.html',
   styleUrls: ['./leaderboard-list-item.component.scss'],
 })
-export class LeaderboardListItemComponent{
+export class LeaderboardListItemComponent {
   @Input() user!: UserCard;
   @Input() status!: number;
   @Input() currentUsersNumberProgress!: any;
   @Input() currentUsersNumberDone!: any;
-  @Input() activeTab!:LeaderboardTabsEnum;
-  
+  @Input() activeTab!: LeaderboardTabsEnum;
+
   leaderboardTabsEnumProgress = LeaderboardTabsEnum.InProgress;
   leaderboardTabsEnumDone = LeaderboardTabsEnum.Done;
 
@@ -22,17 +22,15 @@ export class LeaderboardListItemComponent{
 
   constructor() {
     this.screenHeight = window.innerHeight;
-    this.screenHeight >= 960? this.screenBigger = true: this.screenBigger = false;
+    this.screenHeight >= 960 ? this.screenBigger = true : this.screenBigger = false;
   }
 
   getConditionalStyles(): { [key: string]: string } {
     if (this.activeTab === this.leaderboardTabsEnumProgress) {
-      console.log(this.currentUsersNumberProgress.length)
-      return {'height': this.getHeightStyle(this.currentUsersNumberProgress.length)};
+      return { 'height': this.getHeightStyle(this.currentUsersNumberProgress.length) };
     }
-    if (this.activeTab === this.leaderboardTabsEnumDone) {
-      console.log(this.currentUsersNumberDone.length)
-      return {'height': this.getHeightStyle(this.currentUsersNumberDone.length)};
+    else if (this.activeTab === this.leaderboardTabsEnumDone) {
+      return { 'height': this.getHeightStyle(this.currentUsersNumberDone.length) };
     } else {
       return {};
     }
