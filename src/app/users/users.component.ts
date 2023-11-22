@@ -69,7 +69,8 @@ export class UsersComponent implements AfterViewInit, OnInit {
   }
 
   openAddBulkUsers() {
-    const dialogRef = this.dialog.open(AddBulkUsersComponent, {
+    this.showSidenav = false;
+    this.dialog.open(AddBulkUsersComponent, {
       autoFocus: false,
     });
   }

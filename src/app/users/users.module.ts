@@ -12,6 +12,7 @@ import { IconsModule } from 'src/shared/icons-module/icons/icons.module';
 import { NgxMatFileInputModule } from 'node_modules/@angular-material-components/file-input';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatConfirmDialogComponent } from './dialog/mat-confirm-dialog/mat-confirm-dialog.component';
+import { EdituserComponent } from './modals/addbulkusers/addbulkusers/edituser/edituser.component';
 
 const routes: Routes = [
   {
@@ -28,6 +29,7 @@ const routes: Routes = [
     AddbulkuserTableComponent,
     AddBulkUsersComponent,
     MatConfirmDialogComponent,
+    EdituserComponent,
   ],
   imports: [
     CommonModule,

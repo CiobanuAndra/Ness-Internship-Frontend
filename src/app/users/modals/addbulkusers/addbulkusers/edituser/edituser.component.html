@@ -1,0 +1,34 @@
+<mat-card class="card-container">
+    <mat-card-header class="card-header">
+        <mat-card-title class="card-title">
+            edit user
+        </mat-card-title>
+        <button mat-icon-button mat-dialog-close class="close-button">
+            <mat-icon>
+                close
+            </mat-icon>
+        </button>
+    </mat-card-header>
+
+    <mat-divider></mat-divider>
+
+    <div class="content-container">
+        <form class="form" [formGroup]="editUserForm">
+            <div class="form-container">
+                <mat-form-field class="field-1">
+                    <input matInput type="text" class="input" formControlName="name" placeholder="Name">
+                </mat-form-field>
+                <mat-form-field class="field-2">
+                    <input matInput type="text" class="input" formControlName="surname" placeholder="Surname">
+                </mat-form-field>
+                <mat-form-field class="field-3">
+                    <input matInput type="text" class="input" formControlName="email" placeholder="Email">
+                </mat-form-field>
+            </div>
+        </form>
+        <div class="footer-container">
+            <button mat-raised-button class="addUser-button" (click)="onSubmit()">add user</button>
+            <button mat-raised-button mat-dialog-close class="cancel-button">cancel</button> 
+        </div>
+    </div>
+</mat-card>

@@ -1,4 +1,29 @@
-<div class="user-card" [ngStyle]="{'height': getHeightStyle()}">
+<div *ngIf="activeTab === leaderboardTabsEnumProgress" class="user-card" [ngStyle]="getConditionalStyles()">
+  <div class="user-card__avatar">
+    <img src="assets/icons/user.svg" alt="User Avatar" />
+  </div>
+
+  <div class="user-card__info">
+    <div class="user-card__name">
+      <span>{{ user.name }}</span>
+    </div>
+
+    <div class="user-card__data">
+      <img class="user-card__icon" src="assets/icons/blue-file.svg" alt="Document Icon" />
+      <span class="user-card__days_left">{{ user.totalTasks - user.completedTasks }} Left</span>
+      <span class="user-card__separator">∙</span>
+      <img class="user-card__icon" src="assets/icons/star.svg" alt="Star Icon" />
+      <span class="user-card__points">{{ user.score }} Points</span>
+    </div>
+  </div>
+
+  <div class="user-card__trophies">
+    <img src="assets/icons/trophy.svg" alt="Trophy Icon" />
+    <span>{{ user.rank }}</span>
+  </div>
+</div>
+
+<div *ngIf="activeTab === leaderboardTabsEnumDone" class="user-card" [ngStyle]="getConditionalStyles()">
   <div class="user-card__avatar">
     <img src="assets/icons/user.svg" alt="User Avatar" />
   </div>

@@ -1,7 +1,7 @@
 <mat-card class="card-container">
     <mat-card-header class="card-header">
         <mat-card-title class="card-title">
-            {{usersToUpdate}} Users Uploaded
+            {{usersToUpload}} Users Uploaded
         </mat-card-title>
         <button mat-icon-button mat-dialog-close class="close-button">
             <mat-icon>
@@ -15,12 +15,12 @@
         <mat-dialog-content class="dialog-container">
             <div class="require-attention-container">
                 <p class="table-header">{{usersAttention}} Users Require Attention</p>
-                <app-addbulkuser-table [dataSource]="dataSourceAttention" [selectedTableAttention]="selectedTableAttention"></app-addbulkuser-table>
+                <app-addbulkuser-table [dataSource]="dataSourceAttention" [selectedTableAttention]="selectedTableAttention" (deleteUserEvent)="deleteUserInvalid($event)"></app-addbulkuser-table>
             </div>
     
             <div class="await-confirmation-container">
                 <p class="table-header">{{usersConfirmation}} Users Await Confirmation</p>
-                <app-addbulkuser-table [dataSource]="dataSourceConfirmation" [selectedTableConfirmation]="selectedTableConfirmation"></app-addbulkuser-table>
+                <app-addbulkuser-table [dataSource]="dataSourceConfirmation" [selectedTableConfirmation]="selectedTableConfirmation" (deleteUserEvent)="deleteUserValid($event)"></app-addbulkuser-table>
             </div>
             <div class="buttons-container">
                 <button mat-raised-button (click)="addUsers()" class="addUser-button">Confirm & Add Users</button>

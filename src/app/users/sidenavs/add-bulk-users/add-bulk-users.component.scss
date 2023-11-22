@@ -1,17 +1,17 @@
 @import "../../../../styleguide.scss";
 
 .add-bulk-users {
+  height: 100%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  gap: 34rem;
 
   &__details {
     &__table {
-      width: 39.875rem;
-      box-shadow: 0px 5px 5px 5px #0000001f;
-      margin-left: 0.75rem;
-      margin-top: 1rem;
+      width: 95%;
+      box-shadow: 0px 1px 2px 1px #00000043;
+      margin: 1rem;
     }
 
     &__title {
@@ -31,7 +31,6 @@
         margin-left: 0.75rem;
         margin-top: 1rem;
         display: flex;
-        flex-direction: row;
         gap: 2rem;
 
         &__icon {
@@ -39,7 +38,7 @@
         }
 
         &__upload {
-          width: 95%;
+          width: 97.599%;
 
           &__hint {
             color: rgba(0, 0, 0, 0.6);
@@ -59,7 +58,7 @@
     height: 2.25rem;
     gap: 1rem;
     display: flex;
-    margin-left: 0.75rem;
+    margin: 0 0 1rem 0.75rem;
 
     &__check-file {
       width: 7.438rem;

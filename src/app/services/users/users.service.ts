@@ -1,5 +1,12 @@
 import { Injectable } from '@angular/core';
-import { Observable, map, of } from 'rxjs';
+import {
+  BehaviorSubject,
+  Observable,
+  catchError,
+  map,
+  of,
+  throwError,
+} from 'rxjs';
 import { UsersListTable } from '../../interfaces/users-list-table';
 import { UserModal } from '../../interfaces/users/user-modal.model';
 import { environment } from 'src/environments/environment';
@@ -14,7 +21,15 @@ import { UserRequireAttention } from 'src/app/interfaces/user-require-attention.
 export class UsersService {
   private baseUserURL = environment.baseUserURL;
 
+  private editUserFormData = new BehaviorSubject<any>([]);
+  editUserFormData$ = this.editUserFormData.asObservable();
+
   constructor(private http: HttpClient) {}
+
+  sendEditUserFormData(formData: any, userDetails: any, functionState: boolean): void {
+    const combinedData = { formData, userDetails, functionState };
+    this.editUserFormData.next(combinedData);
+  };
 
   getAllUsers(): Observable<any> {
     return this.http.get<User>(`${this.baseUserURL}`);
@@ -110,48 +125,25 @@ export class UsersService {
     return of(this.usersFromCSVFile);
   }
 
-  usersModalRequire: UserModal[] = [
-    {
-      name: 'Mustas1',
-      surname: 'Abdul1',
-      email: '1412421@ness.com',
-      message: 'No Email Adress',
-    },
-    {
-      name: 'Mustas2',
-      surname: 'Abdul2',
-      email: '1512512@ness.com',
-      message: 'No Email Adress',
-    },
-    {
-      name: 'Mustas2',
-      surname: 'Abdul2',
-      email: '1512512@ness.com',
-      message: 'No Email Adress',
-    },
-  ];
+  //HTTP REQUESTS
+  validateUsers(users: any): Observable<any> {
+    return this.http.post<any>(
+      `${this.baseUserURL}/validate`, users
+    );
+  };
 
-  usersModalAwait: UserModal[] = [
-    { name: 'Mustas1', surname: 'Abdul1', email: '15132512@ness.com' },
-    { name: 'Mustas2', surname: 'Abdul2', email: '15132512@ness.com' },
-    { name: 'Mustas3', surname: 'Abdul', email: '15125512@ness.com' },
-    { name: 'Mustas', surname: 'Rajesh', email: '15125412@ness.com' },
-  ];
-
-  public loadUsersRequireModal(): Observable<UserModal[]> {
-    return of(this.usersModalRequire);
-  }
-
-  public loadUsersAwaitModal(): Observable<UserModal[]> {
-    return of(this.usersModalAwait);
-  }
+  addBulkUsers(users: any): Observable<any> {
+    return this.http.post<any>(
+      `${this.baseUserURL}/upload`, users
+    );
+  };
 
   addNewUser(userData: UserModal, userId: string): Observable<UserModal> {
     return this.http.post<UserModal>(
       `${this.baseUserURL}/admin?id=${userId}`,
       userData
     );
-  }
+  };
 
   getAllUsersAPI(): Observable<UserResponse> {
     return this.http.get<UserResponse>(this.baseUserURL, {
@@ -162,7 +154,7 @@ export class UsersService {
   async uploadCSVFile(file: File) {
     try {
       const formData = new FormData();
-      formData.append('csvFile', file);
+      formData.append('users', file);
 
       const response = await fetch(`${environment.baseUserURL}/extract`, {
         method: 'POST',

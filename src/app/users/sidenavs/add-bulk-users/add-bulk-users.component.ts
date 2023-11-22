@@ -4,6 +4,8 @@ import { MatTableDataSource } from '@angular/material/table';
 import { UsersService } from 'src/app/services/users/users.service';
 import { UsersListTable } from 'src/app/interfaces/users-list-table';
 import { Subject, takeUntil } from 'rxjs';
+import { MatDialog } from '@angular/material/dialog';
+import { AddbulkusersComponent } from '../../modals/addbulkusers/addbulkusers/addbulkusers.component';
 
 @Component({
   selector: 'app-add-bulk-users',
@@ -14,12 +16,15 @@ export class AddBulkUsersComponent implements OnInit {
   @Input() opened!: boolean;
   @Output() closeSidenavEvent = new EventEmitter<void>();
 
+  invalidUsersResponse = [];
+  validUsersResponse = [];
+
   fileControl = new FormControl(null);
   displayedColumns: string[] = ['firstname', 'lastname', 'email'];
   dataSource = new MatTableDataSource<UsersListTable>();
   private destroy$ = new Subject<void>();
 
-  constructor(private usersService: UsersService) {}
+  constructor(private usersService: UsersService, private dialog: MatDialog) {}
 
   closeSidenav(): void {
     this.closeSidenavEvent.emit();
@@ -30,11 +35,24 @@ export class AddBulkUsersComponent implements OnInit {
       .pipe(takeUntil(this.destroy$))
       .subscribe(async (files: any) => {
         try {
-          await this.usersService.uploadCSVFile(files);
+          const response = await this.usersService.uploadCSVFile(files);
+          this.invalidUsersResponse = response.invalidUsers;
+          this.validUsersResponse = response.validUsers;
         } catch (error) {
           console.error('Error loading file.', error);
         }
       });
+  }
+
+  openAddBulkUsers() {
+    this.dialog.open(AddbulkusersComponent, {
+      autoFocus: false,
+      data: {
+        invalidUsers: this.invalidUsersResponse,
+        validUsers: this.validUsersResponse,
+      },
+    });
+    this.closeSidenav();
   }
 
   ngOnInit() {
@@ -53,7 +71,7 @@ export class AddBulkUsersComponent implements OnInit {
           dateAdded: new Date(),
         });
       });
-    this.addFromListener();
+      this.addFromListener();
   }
 
   ngOnDestroy() {
