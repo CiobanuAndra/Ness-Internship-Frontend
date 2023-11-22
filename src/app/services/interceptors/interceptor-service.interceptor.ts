@@ -11,6 +11,11 @@ export class InterceptorService implements HttpInterceptor {
       },
     });
 
+
+    if (request.body instanceof FormData) {
+      return next.handle(request);
+    }
+    
     return next.handle(modifiedRequest)
       .pipe(
         catchError((error: HttpErrorResponse) => {

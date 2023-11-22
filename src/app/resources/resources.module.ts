@@ -15,6 +15,11 @@ import { MultipleTaskComponent } from './tables/multiple-task/multiple-task.comp
 import { SingleTaskComponent } from './tables/single-task/single-task.component';
 import { ResourceTableComponent } from './tables/resource-table/resource-table.component';
 import { AddTaskComponent } from './tables/add-task/add-task.component';
+import { RewardSingleTaskComponent } from './tables/reward-single-task/reward-single-task.component';
+import { MatInputModule } from '@angular/material/input';
+import { NgxMatFileInputModule } from '@angular-material-components/file-input';
+import { RewardMultipleTaskComponent } from './tables/reward-multiple-task/reward-multiple-task.component';
+import { AddAvatarComponent } from './tables/add-avatar/add-avatar.component';
 
 const routes: Routes = [
   {
@@ -30,6 +35,9 @@ const routes: Routes = [
     AddTaskComponent,
     MultipleTaskComponent,
     SingleTaskComponent,
+    RewardSingleTaskComponent,
+    RewardMultipleTaskComponent,
+    AddAvatarComponent,
   ],
   imports: [
     CommonModule,
@@ -43,6 +51,8 @@ const routes: Routes = [
     MatSidenavModule,
     MatListModule,
     NgFor,
+    MatInputModule,
+    NgxMatFileInputModule,
     ReactiveFormsModule,
     RouterModule.forChild(routes)
   ],

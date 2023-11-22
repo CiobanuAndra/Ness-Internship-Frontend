@@ -13,38 +13,35 @@
   >
     <option value="" disabled hidden>Select a course</option>
     <option *ngFor="let course of courses; let i = index" [value]="i">
-      {{ course.name }}
+      {{ course.title }}
     </option>
   </select>
 
   <p class="error-message" *ngIf="showErrorMessage">
-    You have to select atleast 1 course to continue
+    You have to select at least 1 course to continue
   </p>
 
-  <div
-    class="course-option-container"
-    *ngFor="let course of selectedCourses; let i = index"
-  >
+  <div class="course-option-container" *ngFor="let course of selectedCourses; let i = index">
     <div class="main-course-content">
       <div class="course-option-content">
         <div class="course-title-container">
-          <span class="course-title">{{ course.name }}</span>
+          <span class="course-title">{{ course?.title }}</span>
         </div>
         <div class="course-details">
           <div class="course-details-item">
-            <span>{{ course.length }} Minutes</span>
+            <span>{{ course.duration }} Minutes</span>
           </div>
           <div class="course-details-item"><span>∙</span></div>
           <div class="course-details-item">
-            <span>{{ course.fileType }}</span>
+            <span>{{ course.link }}</span>
           </div>
           <div class="course-details-item"><span>∙</span></div>
           <div class="course-details-item">
-            <span>{{ course.rewards }} Diamonds</span>
+            <span>{{ course.rewardQuantity }} {{ rewardTypeNameMap[course.id] }}</span>
           </div>
           <div class="course-details-item"><span>∙</span></div>
           <div class="course-details-item">
-            <span>{{ course.points }} Points</span>
+            <span>{{ course.noOfPoints }} Points</span>
           </div>
         </div>
       </div>

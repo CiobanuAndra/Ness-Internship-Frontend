@@ -156,18 +156,57 @@
         </form>
       </mat-step>
 
-      <mat-step>
+      <!-- STEP 3  -->
+
+      <mat-step [stepControl]="thirdFormGroup">
+        <form [formGroup]="thirdFormGroup">
         <ng-template matStepLabel>
           <div class="stepper-rewards-container">
             <span class="rewards-text">Rewards</span>
             <span class="points-avatar-text">Points & Avatar</span>
           </div>
         </ng-template>
-        <div>
-          <button mat-button matStepperPrevious>Back</button>
-          <button mat-button (click)="stepper.reset()">Reset</button>
+        <app-reward-single-task
+          *ngIf="isSingleButtonClick; else withCourses"
+          [thirdFormGroup]="thirdFormGroup"
+        ></app-reward-single-task>
+
+        <ng-template #withCourses>
+          <app-reward-multiple-task
+          [thirdFormGroup]="thirdFormGroup"
+          [secondFormGroup]="secondFormGroup"
+
+        ></app-reward-multiple-task>
+      </ng-template>
+        <div class="details-buttons">
+          <div class="toggle-step-buttons">
+            <button
+              mat-button
+              matStepperPrevious
+              class="cancel-button"
+            >
+              {{ "previous step" | uppercase }}
+            </button>
+            <button
+              mat-button
+              class="next-button"
+              (click)="addTask()"
+            >
+              {{ "add task" | uppercase }}
+            </button>
+          </div>
+          <button
+            mat-button
+            class="cancel-button"
+            (click)="closeDialog()"
+          >
+            {{ "cancel" | uppercase }}
+          </button>
         </div>
+      </form>
       </mat-step>
+
+      <!-- STEP 3   -->
     </mat-horizontal-stepper>
   </div>
 </div>

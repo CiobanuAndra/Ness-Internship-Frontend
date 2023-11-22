@@ -1,5 +1,5 @@
 export interface UserCard {
-    status: boolean;
+    status: any;
     name: string;
     surname?: string,
     totalTasks: number;

@@ -49,15 +49,15 @@ export class LeaderboardComponent implements OnInit {
 
   getAllUsers(): void {
     this.userService
-      .getAllUsersAPI()
+      .getLeaderboardUsers()
       .pipe(
         map((data: any) =>
-          data.users.map((user: any) => dashboardUserMapper(user))
+          data.content.map((user: any) => dashboardUserMapper(user))
         ),
         map((user: any) => {
           return {
-            userInProgress: this.sortAndFilterUsers(user, false),
-            userInDone: this.sortAndFilterUsers(user, true),
+            userInProgress: this.sortAndFilterUsers(user, LeaderboardTabsEnum.InProgress),
+            userInDone: this.sortAndFilterUsers(user, LeaderboardTabsEnum.Done),
           };
         }),
       )
@@ -66,9 +66,12 @@ export class LeaderboardComponent implements OnInit {
         this.usersInProgress = userInProgress;
         this.usersInDone = userInDone;
       });
+
+        this.userService.getLeaderboardUsers().subscribe(data => {
+        })
   }
 
-  private sortAndFilterUsers(users: UserCard[], status: boolean): UserCard[] {
+  private sortAndFilterUsers(users: UserCard[], status: LeaderboardTabsEnum): UserCard[] {
     return users
       .filter((user) => user.status === status)
       .slice(0, this.maxUsersToShow)

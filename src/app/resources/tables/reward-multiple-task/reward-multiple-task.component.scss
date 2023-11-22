@@ -1,0 +1,136 @@
+@import "/src/styleguide.scss";
+
+.reward-multiple-task-container {
+  height: 73vh;
+  overflow-y: auto;
+}
+
+.stepper-divider {
+  height: 1px;
+  background: rgba(0, 0, 0, 0.12);
+}
+
+.hint-title {
+  color: rgba(0, 0, 0, 0.6);
+  font-family: Roboto;
+  font-size: 0.75rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.25rem;
+  letter-spacing: 0.025rem;
+}
+
+.input-png {
+  height: 3vh;
+}
+
+.reward-input-container,
+.reward-input-container mat-form-field {
+  width: 100%;
+}
+
+.reward-container {
+  display: flex;
+  flex-direction: column;
+  height: 10vh;
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.reward-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.reward-type-container,
+.reward-score-container {
+  display: flex;
+  flex-direction: column;
+  width: 45%;
+}
+
+.reward-input {
+  font-family: Roboto;
+  border: none;
+  height: 2.5625rem;
+  margin-bottom: 0.3125rem;
+  color: rgba(0, 0, 0, 0.87);
+  font-style: normal;
+  font-weight: normal;
+  font-size: 1rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.42);
+}
+
+.reward-text {
+    color: #0E0F11;
+    font-family: Roboto;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 28px;
+    letter-spacing: 0.15px;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  opacity: 1;
+}
+
+.score-input {
+  color: #666;
+  font-family: Roboto;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: 0.5px;
+}
+
+.avatar-container {
+  width: 100%;
+}
+
+.avatar-select {
+  font-family: Roboto;
+  border: none;
+  height: 2.5625rem;
+  margin-bottom: 0.3125rem;
+  color: rgba(0, 0, 0, 0.87);
+  font-style: normal;
+  font-weight: normal;
+  font-size: 1rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.42);
+  width: 100%;
+}
+
+.avatar-option-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.12),
+    0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 1px 0px rgba(0, 0, 0, 0.2);
+  background: $white-color;
+  margin-top: 1rem;
+  width: 100%;
+}
+
+.avatar-content {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 30%;
+  padding: 1rem;
+  gap: 10px;
+}
+
+.mat-cell-img {
+  width: 34px;
+  height: 34px;
+  border-radius: 34px;
+}
+
+  .delete-course {
+    cursor: pointer;
+    padding: 1rem;
+  }

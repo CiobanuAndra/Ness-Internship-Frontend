@@ -1,12 +1,12 @@
 export interface Course {
-    name: string,
+    title: string,
     task: string,
     link: string,
     fileType: string,
-    length: number,
-    rewards: number,
+    duration: number,
+    rewardQuantity: number,
     points: number,
-    dateAdded: Date,
+    dateCreated: Date,
     lastEdited: Date,
     editedBy:string,
 }

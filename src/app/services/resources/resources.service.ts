@@ -1,8 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Task } from '../../interfaces/resources/task.model';
-import { Observable, of } from 'rxjs';
+import { Observable, of, Subject } from 'rxjs';
 import { Course } from '../../interfaces/resources/course.model';
 import { Avatar } from '../../interfaces/resources/avatar.model';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { FormGroup } from '@angular/forms';
+import { BehaviorSubject } from 'rxjs';
+import { tap } from 'rxjs';
+import { switchMap } from 'rxjs';
+import { map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -11,47 +17,12 @@ export class ResourcesService {
 
   private showSidenav = false;
 
-  constructor() { }
+  constructor(private http: HttpClient) {
+    this.loadTasks();
+   }
 
-  tasks: Task[] = [
-    { icon: '../../../assets/icons/Ellipse.svg', name: 'repair1', type: 'easy', courses: 'API', order: 3, length: 1230, rewards: 2, dateAdded: new Date('2023-10-11'), lastEdited: new Date('2023-10-11'), editedBy: 'Ioana Maria'},
-    { icon: '../../../assets/icons/file.svg', name: 'repair2', type: 'mid', courses: 'Angular Material', order: 32, length: 1202, rewards: 2, dateAdded: new Date('2023-10-15'), lastEdited: new Date('2023-10-15'), editedBy: 'Irina Nistor'},
-    { icon: '../../../assets/icons/Ellipse.svg', name: 'repair3', type: 'easy', courses: 'Angular HTTP Methods', order: 3, length: 1230, rewards: 2, dateAdded: new Date('2023-10-11'), lastEdited: new Date('2023-10-11'), editedBy: 'Ioana Maria'},
-    { icon: '../../../assets/icons/file.svg', name: 'repair4', type: 'mid', courses: 'Agile 101', order: 32, length: 1202, rewards: 2, dateAdded: new Date('2023-10-15'), lastEdited: new Date('2023-10-15'), editedBy: 'Irina Nistor'},
-    { icon: '../../../assets/icons/Ellipse.svg', name: 'repair5', type: 'easy', courses: 'Java', order: 3, length: 1230, rewards: 2, dateAdded: new Date('2023-10-11'), lastEdited: new Date('2023-10-11'), editedBy: 'Ioana Maria'},
-    { icon: '../../../assets/icons/file.svg', name: 'repair6', type: 'mid', courses: 'JavaScript', order: 32, length: 1202, rewards: 2, dateAdded: new Date('2023-10-15'), lastEdited: new Date('2023-10-15'), editedBy: 'Irina Nistor'},
-  ];  
-
-  courses: Course[] = [
-    { name: 'API', task: 'repair1',link: 'file', fileType: 'Video', length: 30, rewards: 2, points: 100, dateAdded: new Date('2023-10-11'), lastEdited: new Date('2023-10-11'), editedBy: 'Ioana Maria'},
-    { name: 'Angular Material', task: 'repair2', link: 'file', fileType: 'Text', length: 35, rewards: 3, points: 120, dateAdded: new Date('2023-10-12'), lastEdited: new Date('2023-10-12'), editedBy: 'Ioana Maria1'},
-    { name: 'Angular HTTP Methods', task: 'repair3', link: 'file', fileType: 'Text', length: 45, rewards: 4, points: 140, dateAdded: new Date('2023-10-13'), lastEdited: new Date('2023-10-12'), editedBy: 'Ioana Maria2'},
-    { name: 'Agile 101', task: 'repair4',  link: 'file', fileType: 'Text', length: 50, rewards: 5, points: 160, dateAdded: new Date('2023-10-14'), lastEdited: new Date('2023-10-13'), editedBy: 'Ioana Maria3'},
-    { name: 'Java', task: 'repair5', link: 'link', fileType: 'Video', length: 55, rewards: 6, points: 200, dateAdded: new Date('2023-10-15'), lastEdited: new Date('2023-10-14'), editedBy: 'Ioana Maria4'},
-    { name: 'React', task: "", link: 'file', fileType: 'Text', length: 45, rewards: 4, points: 140, dateAdded: new Date('2023-10-13'), lastEdited: new Date('2023-10-12'), editedBy: 'Ioana Maria2'},
-    { name: 'JavaScript', task: 'repair6', link: 'file', fileType: 'Text', length: 50, rewards: 5, points: 160, dateAdded: new Date('2023-10-14'), lastEdited: new Date('2023-10-13'), editedBy: 'Ioana Maria3'},
-    { name: 'Router', task: "", link: 'link', fileType: 'Video', length: 55, rewards: 6, points: 200, dateAdded: new Date('2023-10-15'), lastEdited: new Date('2023-10-14'), editedBy: 'Ioana Maria4'},
-
-  ];  
-
-  avatars: Avatar[] = [
-    { name: 'Mustas', linked_to: 'Task_Name1', default: true, addedBy: 'Ioana Maria'},
-    { name: 'Kewl', linked_to: 'Task_Name2', default: true, addedBy: 'Ioana Maria'},
-    { name: 'Mustas', linked_to: 'Task_Name3', default: false, addedBy: 'Ioana Popescu'},
-    { name: 'Kewl', linked_to: 'Task_Name4', default: false, addedBy: 'Ioana Maria'},
-    { name: 'Mustas', linked_to: 'Task_Name5', default: true, addedBy: 'Ioana Popescu'},
-  ];  
-
-  public loadTasks(): Observable<Task[]> {
-    return of(this.tasks)
-  }
-
-  public loadCourses(): Observable<Course[]> {
-    return of(this.courses);
-  }
-
-  public loadAvatars(): Observable<Avatar[]> {
-    return of(this.avatars);
+  private loadTasks(): void {
+    this.getTasks(0).subscribe();
   }
 
   setSidenavVisibility(show: boolean): void {
@@ -60,6 +31,129 @@ export class ResourcesService {
 
   getShowSidenav(): boolean {
     return this.showSidenav;
+  }
+
+  getCourses(page: number): Observable<any> {
+    const url = `http://localhost:8181/api/courses?page=${page}`;
+    return this.http.get<any>(url, { responseType: 'json' });
+  }
+
+  getUnassignedCourses(): Observable<any> {
+    const url = `http://localhost:8181/api/courses/unassigned`;
+    return this.http.get<any>(url, { responseType: 'json' });
+  }
+
+  tasksSubject: BehaviorSubject<Task[]> = new BehaviorSubject<Task[]>([]);
+
+  getTasks(page: number): Observable<Task[]> {
+    const url = `http://localhost:8181/api/tasks/page/${page}`;
+    return this.http.get<Task[]>(url, { responseType: 'json' });
+  }
+  
+  getRewards(): Observable<any> {
+    const url = `http://localhost:8282/api/reward`;
+    return this.http.get<any>(url, { responseType: 'json' });
+  }
+  
+
+  public avatarsSubject: BehaviorSubject<Avatar[]> = new BehaviorSubject<Avatar[]>([]);
+  public avatars$: Observable<Avatar[]> = this.avatarsSubject.asObservable();
+
+  getAvatars(): Observable<Avatar[]> {
+    const url = `http://localhost:8282/api/avatar`;
+    return this.http.get<Avatar[]>(url, { responseType: 'json' })
+    .pipe(
+      tap(avatars => {
+        this.avatarsSubject.next(avatars);
+      })
+    );
+  }
+
+  addAvatar(formData: FormData): Observable<any> {
+    const url = 'http://localhost:8282/api/avatar';
+    return this.http.post<any>(url, formData, { headers: {} }).pipe(
+      switchMap((response: any) => {
+        const newAvatar: Avatar = {
+          avatarHash: response.avatarHash,
+          name: response.name,
+          addedBy: response.addedBy,
+          isDefault: response.isDefault,
+          mimeType: response.mimeType,
+          content: response.content
+        };
+  
+        return this.getAvatars().pipe(
+          switchMap(avatars => {
+            if (!Array.isArray(avatars)) {
+              avatars = [];
+            }
+            const updatedAvatars = [...avatars, newAvatar];
+            this.avatarsSubject.next(updatedAvatars);
+            return of(newAvatar);
+          })
+        );
+      })
+    );
+  }
+  
+  addTask(firstFormGroup: FormGroup, secondFormGroup: FormGroup, thirdFormGroup: FormGroup): Observable<any> {
+    console.log(thirdFormGroup.get('rewardValue')?.value)
+    const url = 'http://localhost:8181/api/tasks';
+  
+    const hoursToMinutes = secondFormGroup.get('durationHour')?.value ? parseInt(secondFormGroup.get('durationHour')?.value, 10) * 60 : 0;
+    const minutes = secondFormGroup.get('durationMinutes')?.value ? parseInt(secondFormGroup.get('durationMinutes')?.value, 10) : 0;
+    const totalDurationInMinutes = hoursToMinutes + minutes;
+    const selectedCourses = secondFormGroup.get('selectedCourses')?.value;
+    const taskType = secondFormGroup.get('type')?.value;
+    let requestBody;
+    if (taskType === 'WITHOUT_COURSES') {
+      requestBody = {
+        title: firstFormGroup.get('title')?.value,
+        description: firstFormGroup.get('description')?.value,
+        position: firstFormGroup.get('order')?.value,
+        type: secondFormGroup.get('type')?.value,
+        link: secondFormGroup.get('link')?.value,
+        duration: totalDurationInMinutes,
+        timeToUnlock: secondFormGroup.get('unlockMinutes')?.value,
+        image: thirdFormGroup.get('fileControl')?.value.name,
+        rewardId: thirdFormGroup.get('rewardId')?.value,
+        rewardQuantity: thirdFormGroup.get('rewardValue')?.value,
+        score: thirdFormGroup.get('score')?.value,
+        courses: []
+      };
+    } else if (taskType === 'WITH_COURSES') {
+      requestBody = {
+        title: firstFormGroup.get('title')?.value,
+        description: firstFormGroup.get('description')?.value,
+        position: firstFormGroup.get('order')?.value,
+        type: secondFormGroup.get('type')?.value,
+        link: secondFormGroup.get('link')?.value,
+        duration: secondFormGroup.get('duration')?.value,
+        timeToUnlock: secondFormGroup.get('timeToUnlock')?.value,
+        image: thirdFormGroup.get('fileControl')?.value.name,
+        rewardId: thirdFormGroup.get('rewardId')?.value,
+        rewardQuantity: thirdFormGroup.get('rewardValue')?.value,
+        score: thirdFormGroup.get('score')?.value,
+        courses: selectedCourses,
+      };
+    }
+  
+    const avatarId = thirdFormGroup.get('avatarSelected')?.value[0]?.id;
+  
+    if (avatarId) {
+      this.deleteAvatar(avatarId).subscribe();
+    }
+    
+    return this.http.post(url, requestBody).pipe(
+      switchMap(() => this.getTasks(0)),
+      tap((tasks) => {
+        this.tasksSubject.next(tasks);
+      }))
+  }
+  
+  deleteAvatar(avatarId: number): Observable<any> {
+    const url = `http://localhost:8282/api/avatar/${avatarId}`;
+    return this.http.delete<any>(url, { responseType: 'json' });
   }
   
 }

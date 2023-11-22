@@ -1,5 +1,5 @@
 import { LiveAnnouncer } from '@angular/cdk/a11y';
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/core';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ResourceTableAvatars, ResourceTableCourses, ResourceTableTasks } from 'src/app/enums/resource-table';
@@ -11,7 +11,7 @@ import { ResourcesService } from 'src/app/services/resources/resources.service';
   templateUrl: './resource-table.component.html',
   styleUrls: ['./resource-table.component.scss']
 })
-export class ResourceTableComponent {
+export class ResourceTableComponent implements AfterViewInit {
   @ViewChild(MatSort) sortTasks!:MatSort;
   @ViewChild(MatSort) sortCourses!:MatSort;
   @ViewChild(MatSort) sortAvatars!:MatSort;
@@ -33,6 +33,14 @@ export class ResourceTableComponent {
     return Object.values(enumObject).filter(value => isNaN(Number(value)));
   }
 
+  ngOnInit(): void {
+    this.resourcesService.tasksSubject.subscribe((tasks) => {
+      this.dataSource.data = tasks;
+    });
+
+  }
+  
+
   //Sorting
   ngAfterViewInit(): void {
     this.dataSource.sort = this.sortTasks;
@@ -47,4 +55,13 @@ export class ResourceTableComponent {
       this.liveAnnouncer.announce('Sorting cleared');
     }
   };
+
+  formatMinuteToHourAndMinute(minutes: number): string {
+    const hours = Math.floor(minutes / 60);
+    const remainingMinutes = minutes % 60;
+    const formattedHours = hours.toString().padStart(2, '0');
+    const formattedMinutes = remainingMinutes.toString().padStart(2, '0');
+    return `${formattedHours}:${formattedMinutes}`;
+  }
+  
 }
