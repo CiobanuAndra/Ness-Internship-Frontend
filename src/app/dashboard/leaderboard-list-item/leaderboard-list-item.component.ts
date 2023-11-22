@@ -1,5 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { LeaderboardTabsEnum } from 'src/app/enums/leaderboard-tabs.enum';
+import { Component, Input } from '@angular/core';
 import { UserCard } from 'src/app/interfaces/users/user-card.model';
 
 @Component({
@@ -10,37 +9,6 @@ import { UserCard } from 'src/app/interfaces/users/user-card.model';
 export class LeaderboardListItemComponent {
   @Input() user!: UserCard;
   @Input() status!: number;
-  @Input() currentUsersNumberProgress!: any;
-  @Input() currentUsersNumberDone!: any;
-  @Input() activeTab!: LeaderboardTabsEnum;
 
-  leaderboardTabsEnumProgress = LeaderboardTabsEnum.InProgress;
-  leaderboardTabsEnumDone = LeaderboardTabsEnum.Done;
-
-  screenHeight: number;
-  screenBigger: boolean;
-
-  constructor() {
-    this.screenHeight = window.innerHeight;
-    this.screenHeight >= 960 ? this.screenBigger = true : this.screenBigger = false;
-  }
-
-  getConditionalStyles(): { [key: string]: string } {
-    if (this.activeTab === this.leaderboardTabsEnumProgress) {
-      return { 'height': this.getHeightStyle(this.currentUsersNumberProgress.length) };
-    }
-    else if (this.activeTab === this.leaderboardTabsEnumDone) {
-      return { 'height': this.getHeightStyle(this.currentUsersNumberDone.length) };
-    } else {
-      return {};
-    }
-  };
-
-  getHeightStyle(parameter: any): string {
-    if (this.screenBigger) {
-      return 'calc(88.5% / ' + [parameter] + ')';
-    } else {
-      return 'calc(84.6% / ' + [parameter] + ')';
-    }
-  };
+  constructor() {}
 }
