@@ -21,6 +21,9 @@ export class UsersService {
   private usersUpdateTableSubject = new BehaviorSubject<User[]>([]);
   usersUpdateTable$ = this.usersUpdateTableSubject.asObservable();
 
+  private isNewUserAdded = new BehaviorSubject<boolean>(false);
+  isNewUserAdded$ = this.isNewUserAdded.asObservable();
+
   constructor(private http: HttpClient) {}
 
   sendEditUserFormData(
@@ -38,6 +41,10 @@ export class UsersService {
 
   updateUsersAdded(users: User[]) {
     this.usersUpdateTableSubject.next(users);
+  }
+
+  newUserAdded(isAdded: boolean) {
+    this.isNewUserAdded.next(isAdded);
   }
 
   filterActiveUsers(): Observable<User[]> {
@@ -141,12 +148,13 @@ export class UsersService {
     return this.http.post<any>(`${this.baseUserURL}/upload`, users);
   }
 
-  addBulkUsersAndUpdateTable(user: User): Observable<User> {
+  addBulkUsersAndUpdateTable(user: any): Observable<User> {
     return this.addBulkUsers(user).pipe(
-      map((addedUser) => {
-        const updateUsers = [...this.usersUpdateTableSubject.value, addedUser];
+      map((addedUsers) => {
+        const updateUsers = [...this.usersUpdateTableSubject.value, addedUsers];
         this.usersUpdateTableSubject.next(updateUsers);
-        return addedUser;
+        console.log(addedUsers);
+        return addedUsers;
       })
     );
   }

@@ -1,49 +1,53 @@
 .card-container {
-    width: 700px;
-    margin: 0 auto;
-    
-    .card-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 5px 1rem 5px 1rem;
-        
-        .card-title {
-            font-size: 1.2rem;
-            font-family: Roboto;
-            font-style: normal;
-            font-weight: 400;
-            line-height: 28px;
-            letter-spacing: 0.15px;
-        }
+  width: 700px;
+  margin: 0 auto;
+
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 1rem 5px 1rem;
+
+    .card-title {
+      font-size: 1.2rem;
+      font-family: Roboto;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 28px;
+      letter-spacing: 0.15px;
+    }
+  }
+
+  .dialog-container {
+    min-height: 85vh;
+    padding: 0 5px 0 5px;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+
+    .table-header {
+      margin-top: 1rem;
+      color: #0e0f11;
+    }
+  }
+
+  .buttons-container {
+    display: flex;
+    padding: 1rem 0 1rem 0;
+    gap: 1rem;
+
+    .addUser-button,
+    .cancel-button {
+      text-transform: uppercase;
     }
 
-    .dialog-container {
-        min-height: 85vh;
-        padding: 0 5px 0 5px;
-    
-        .table-header {
-            margin-top: 1rem;
-            color: #0E0F11;
-        }
+    .addUser-button {
+      background-color: #00195f;
+      color: #fff;
     }
 
-    .buttons-container {
-        display: flex;
-        padding: 1rem 0 1rem 0;
-        gap: 1rem;
-
-        .addUser-button, .cancel-button {
-            text-transform: uppercase;
-        }
-
-        .addUser-button {
-            background-color: #00195F;
-            color: #fff;    
-        }
-
-        .cancel-button {
-            background-color: #F5F5F5;
-        }
+    .cancel-button {
+      background-color: #f5f5f5;
     }
+  }
 }

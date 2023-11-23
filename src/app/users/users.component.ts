@@ -176,6 +176,14 @@ export class UsersComponent implements AfterViewInit, OnInit {
     new ngxCsv(this.dataSource.data, 'UsersList', options);
   }
 
+  subscribeUsersChanges(): void {
+    this.userService.isNewUserAdded$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((data) => {
+        if (data) this.filterAllUsers();
+      });
+  }
+
   ngAfterViewInit(): void {
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
@@ -183,6 +191,7 @@ export class UsersComponent implements AfterViewInit, OnInit {
 
   ngOnInit() {
     this.filterAllUsers();
+    this.subscribeUsersChanges();
   }
 
   ngOnDestroy() {
