@@ -36,12 +36,6 @@ export class UsersService {
     return this.http.get<User>(`${this.baseUserURL}`);
   }
 
-  loadUsers() {
-    this.getAllUsers().subscribe((allUsers) => {
-      this.usersUpdateTableSubject.next(allUsers);
-    });
-  }
-
   updateUsersAdded(users: User[]) {
     this.usersUpdateTableSubject.next(users);
   }
@@ -50,7 +44,8 @@ export class UsersService {
     return this.getAllUsers().pipe(
       map((resp) =>
         resp.users.filter(
-          (user: { isDeactivated: boolean }) => user.isDeactivated === false
+          (user: { hasPlatformAccess: boolean }) =>
+            user.hasPlatformAccess === true
         )
       )
     );
@@ -60,7 +55,8 @@ export class UsersService {
     return this.getAllUsers().pipe(
       map((resp) =>
         resp.users.filter(
-          (user: { isDeactivated: boolean }) => user.isDeactivated === true
+          (user: { hasPlatformAccess: boolean }) =>
+            user.hasPlatformAccess === false
         )
       )
     );
@@ -143,6 +139,16 @@ export class UsersService {
 
   addBulkUsers(users: any): Observable<any> {
     return this.http.post<any>(`${this.baseUserURL}/upload`, users);
+  }
+
+  addBulkUsersAndUpdateTable(user: User): Observable<User> {
+    return this.addBulkUsers(user).pipe(
+      map((addedUser) => {
+        const updateUsers = [...this.usersUpdateTableSubject.value, addedUser];
+        this.usersUpdateTableSubject.next(updateUsers);
+        return addedUser;
+      })
+    );
   }
 
   addNewUser(userData: User, userId: string): Observable<User> {

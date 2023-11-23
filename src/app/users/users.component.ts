@@ -1,4 +1,10 @@
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { UsersService } from '../services/users/users.service';
 import { UsersFilter } from '../enums/users-filter';
 import { MatTabChangeEvent } from '@angular/material/tabs';
@@ -73,8 +79,11 @@ export class UsersComponent implements AfterViewInit, OnInit {
     const currentDate = new Date();
     const endDate = new Date(activationEndDate);
     const timeDifference = endDate.getTime() - currentDate.getTime();
-    
-    return Math.ceil(timeDifference / (1000 * 60 * 60 * 24));
+    const remainingDays = Math.max(
+      0,
+      Math.ceil(timeDifference / (1000 * 60 * 60 * 24))
+    );
+    return remainingDays;
   }
 
   filterActiveUsers() {
