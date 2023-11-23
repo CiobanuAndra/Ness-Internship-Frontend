@@ -17,12 +17,13 @@
       </div>
     </div>
     <div class="users-list__mat-tab-group-div">
-      <mat-tab-group class="users-list__mat-tab-group-div__mat-tab-group" [(selectedIndex)]="selectedTabIndex"
+      <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start" [(selectedIndex)]="selectedTabIndex"
         (selectedTabChange)="onTabChange($event)">
         <mat-tab [label]="UsersFilterValues[0]"></mat-tab>
         <mat-tab [label]="UsersFilterValues[1]"></mat-tab>
         <mat-tab [label]="UsersFilterValues[2]"></mat-tab>
       </mat-tab-group>
+      <mat-divider></mat-divider>
     </div>
     <mat-table [dataSource]="dataSource" class="users-list__table" matSort matSortDirection="asc" matSortActive="id">
       <ng-container matColumnDef="name">
@@ -34,32 +35,20 @@
         </td>
       </ng-container>
       <ng-container matColumnDef="hasPlatformAccess">
-        <th
-          mat-header-cell
-          *matHeaderCellDef
-          class="users-list__mat-columnDef-status"
-          mat-sort-header="hasPlatformAccess"
-        >
+        <th mat-header-cell *matHeaderCellDef class="users-list__mat-columnDef-status"
+          mat-sort-header="hasPlatformAccess">
           STATUS
         </th>
-        <td
-          mat-cell
-          *matCellDef="let element"
-          [ngClass]="{
+        <td mat-cell *matCellDef="let element" [ngClass]="{
             'users-list__table__status-active': element.hasPlatformAccess,
             'users-list__table__status-inactive': !element.hasPlatformAccess
-          }"
-        >
+          }">
           {{ element.hasPlatformAccess ? " Active" : "Inactive" }}
         </td>
       </ng-container>
       <ng-container matColumnDef="completedTasks">
-        <th
-          mat-header-cell
-          *matHeaderCellDef
-          class="users-list__mat-columnDef-completedTasks"
-          mat-sort-header="completedTasks"
-        >
+        <th mat-header-cell *matHeaderCellDef class="users-list__mat-columnDef-completedTasks"
+          mat-sort-header="completedTasks">
           COURSES COMPLETED
         </th>
         <td mat-cell *matCellDef="let element">
@@ -73,12 +62,8 @@
         <td mat-cell *matCellDef="let element">{{ element.leftDays }} Days</td>
       </ng-container>
       <ng-container matColumnDef="activationStartDate">
-        <th
-          mat-header-cell
-          *matHeaderCellDef
-          class="users-list__mat-columnDef-dateAdded"
-          mat-sort-header="activationStartDate"
-        >
+        <th mat-header-cell *matHeaderCellDef class="users-list__mat-columnDef-dateAdded"
+          mat-sort-header="activationStartDate">
           DATE ADDED
         </th>
         <td mat-cell *matCellDef="let element">
@@ -95,6 +80,15 @@
       <tr mat-row *matRowDef="let row; columns: displayedColumns" class="users-list__table__row"></tr>
     </mat-table>
     <div class="line"></div>
+
+    <!-- State: No Data -->
+    <div *ngIf="dataSource.data.length === 0">
+      <div class="table-with-no-data">
+        <mat-icon svgIcon="users"></mat-icon>
+        <p class="no-data-message">No users to dipslay.</p>
+      </div>
+    </div>
+
     <mat-paginator [length]="10" [pageSize]="10" [pageSizeOptions]="[5, 10, 15]" aria-label="Rows per page">
     </mat-paginator>
   </div>
@@ -109,8 +103,6 @@
 </mat-sidenav-container>
 
 <mat-sidenav-container class="sidenav-container" *ngIf="showSidenav">
-  <app-addnewuser
-    [showSidenav]="showSidenav"
-    (showSidenavChange)="showSidenav = $event; filterAllUsers()"
-  ></app-addnewuser>
+  <app-addnewuser [showSidenav]="showSidenav"
+    (showSidenavChange)="showSidenav = $event; filterAllUsers()"></app-addnewuser>
 </mat-sidenav-container>

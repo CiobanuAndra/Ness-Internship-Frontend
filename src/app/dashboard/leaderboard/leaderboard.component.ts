@@ -41,10 +41,6 @@ export class LeaderboardComponent implements OnInit {
      ? this.activeTab = LeaderboardTabsEnum.Done : this.activeTab = LeaderboardTabsEnum.InProgress;
   };
 
-  parseEnumToArray(enumObject: any) {
-    return Object.values(enumObject).filter((value) => isNaN(Number(value)));
-  };
-
   getAllUsers(): void {
     this.userService
       .getLeaderboardUsers()

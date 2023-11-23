@@ -97,10 +97,14 @@ $error-color: #ff5252;
   justify-content: center;
   align-items: center;
   margin: 0 auto;
-  background-color: $white-color;
-  height: 400px;
   width: 100%;
+  background-color: $white-color;
   gap: 1rem;
+
+  mat-icon {
+    height: 50px;
+    width: auto;
+  }
 }
 
 .no-data-message {
@@ -132,3 +136,23 @@ $error-color: #ff5252;
 ::ng-deep.mdc-text-field--filled:not(.mdc-text-field--disabled) {
   background-color: white;
 }
+
+//RESPONSIVENESS
+@media(max-height: 54.2rem) {
+  .table-with-no-data {
+    height: 26rem;
+  }
+}
+
+@media(min-height: 54.3rem) {
+  .table-with-no-data {
+    height: 34rem;
+  }
+}
+
+@media(min-height: 65rem) {
+  .table-with-no-data {
+    height: 43rem;
+  }
+}
+
