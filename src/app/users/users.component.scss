@@ -23,7 +23,6 @@
 }
 
 .users-list {
-  max-width: 1660px;
   width: 90%;
   margin: 0 auto;
 
@@ -130,40 +129,11 @@
   }
 }
 
-.line {
-  @include dimensions(100%, 0.063rem);
-  background-color: $medium-gray-color;
-}
-
 .mat-sidenav-container {
   z-index: 10000;
   top: 0;
   right: 0;
   position: absolute;
   background-color: $white-color;
-  @include dimensions(35%, 100%);
-}
-
-.example-container {
-  width: 500px;
-  height: 300px;
-  border: 1px solid rgba(0, 0, 0, 0.5);
-}
-
-.example-sidenav-content {
-  display: flex;
-  height: 100%;
-  align-items: center;
-  justify-content: center;
-}
-
-.example-sidenav {
-  padding: 20px;
-}
-
-.sidenav-container {
-  position: absolute;
-  top: 0;
-  right: 0;
   @include dimensions(35%, 100%);
 }
