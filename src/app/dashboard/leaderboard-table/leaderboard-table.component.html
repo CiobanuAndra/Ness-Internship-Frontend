@@ -63,7 +63,8 @@
       <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
     </mat-table>
 
-    <ng-container *ngIf="!usersInProgress.length || !usersInDone.length">
+    <ng-container *ngIf="(activeTab === leaderboardTabsEnum.InProgress && !usersInProgress.length) ||
+      (activeTab === leaderboardTabsEnum.Done && !usersInDone.length)">
       <div class="no-users-container">
         <img src="assets/icons/users.svg" alt="Users Icon" />
         <p>
