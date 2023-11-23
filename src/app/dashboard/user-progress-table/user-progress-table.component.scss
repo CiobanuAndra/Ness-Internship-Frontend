@@ -15,7 +15,13 @@
     padding: 5px 1rem 5px 1rem;
 
     .card-title {
+      color: #0E0F11;
+      font-family: Roboto;
       font-size: 15px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 28px;
+      letter-spacing: 0.15px;
     }
   }
 
@@ -39,7 +45,7 @@
     .mat-column-name {
       flex: 0 0 35%;
     }
-    
+
     .mat-column-options {
       flex: 0 0 10%;
     }
@@ -48,14 +54,40 @@
   .users-list__title__buttons__add-user {
     background-color: #e6e7e9;
   }
+}
 
-  .table-with-no-data{
-    mat-icon{
-      height: 50px;
-      width: auto;
-    }
+//State no DATA table component
+.table-with-no-data-progress-table {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  width: 100%;
+  background-color: $white-color;
+  gap: 1rem;
+
+  mat-icon {
+    height: 50px;
+    width: auto;
   }
 }
 
+//RESPONSIVENESS
+@media(max-height: 54.2rem) {
+  .table-with-no-data-progress-table {
+    height: 18rem;
+  }
+}
 
+@media(min-height: 54.3rem) {
+  .table-with-no-data-progress-table {
+    height: 25rem;
+  }
+}
 
+@media(min-height: 65rem) {
+  .table-with-no-data-progress-table {
+    height: 37.5rem;
+  }
+}

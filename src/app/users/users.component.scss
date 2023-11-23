@@ -42,33 +42,27 @@
       gap: 1rem;
 
       &__export-csv {
-        @include button-style(
-          7.875rem,
+        @include button-style(7.875rem,
           $light-gray-color,
           2.25rem,
           none,
-          0.25rem
-        );
+          0.25rem);
       }
 
       &__add-user {
-        @include button-style(
-          6.688rem,
+        @include button-style(6.688rem,
           $light-gray-color,
           2.25rem,
           none,
-          0.25rem
-        );
+          0.25rem);
       }
 
       &__add-bulk-users {
-        @include button-style(
-          10.063rem,
+        @include button-style(10.063rem,
           $primary-color,
           2.25rem,
           none,
-          0.25rem
-        );
+          0.25rem);
 
         &__p {
           margin-top: 0.7rem;
@@ -79,6 +73,7 @@
   }
 
   &__table {
+
     td,
     th {
       vertical-align: middle;
@@ -117,6 +112,7 @@
     &__td {
       color: $primary-color !important;
     }
+
     display: flex;
     align-items: center;
     justify-content: space-between;

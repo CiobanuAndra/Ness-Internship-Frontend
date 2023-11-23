@@ -119,8 +119,27 @@ mat-paginator {
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  gap: 1rem;
   margin: 0 auto;
   background: $white-color;
-  height: 28.25rem;
   width: 100%;
+}
+
+//RESPONSIVENESS
+@media(max-height: 54.2rem) {
+  .no-users-container {
+    height: 26rem;
+  }
+}
+
+@media(min-height: 54.3rem) {
+  .no-users-container {
+    height: 34rem;
+  }
+}
+
+@media(min-height: 65rem) {
+  .no-users-container {
+    height: 43rem;
+  }
 }

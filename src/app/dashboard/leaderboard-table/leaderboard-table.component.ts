@@ -30,7 +30,7 @@ export class LeaderboardTableComponent implements OnInit {
   constructor(
     private userService: UsersService,
     private liveAnnouncer: LiveAnnouncer
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.getUsers();
@@ -44,13 +44,10 @@ export class LeaderboardTableComponent implements OnInit {
     }
   }
 
-  setActiveTab(tab: LeaderboardTabsEnum): void {
-    this.activeTab = tab;
-    this.dataSource.data =
-      tab === LeaderboardTabsEnum.InProgress
-        ? this.usersInProgress
-        : this.usersInDone;
-  }
+  updateActiveTabTitle(): void {
+    this.activeTab === LeaderboardTabsEnum.InProgress
+      ? this.activeTab = LeaderboardTabsEnum.Done : this.activeTab = LeaderboardTabsEnum.InProgress;
+  };
 
   onPageChange(event: any) {
     this.paginator.pageIndex = event.pageIndex;
