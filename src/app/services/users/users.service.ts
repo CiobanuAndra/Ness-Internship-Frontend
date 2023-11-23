@@ -1,19 +1,12 @@
 import { Injectable } from '@angular/core';
-import {
-  BehaviorSubject,
-  Observable,
-  catchError,
-  map,
-  of,
-  throwError,
-} from 'rxjs';
+import { BehaviorSubject, Observable, map, of } from 'rxjs';
 import { UsersListTable } from '../../interfaces/users-list-table';
-import { UserModal } from '../../interfaces/users/user-modal.model';
 import { environment } from 'src/environments/environment';
 import { UserResponse } from 'src/app/interfaces/user-response';
 import { HttpClient } from '@angular/common/http';
 import { User } from 'src/app/interfaces/users/user';
 import { UserRequireAttention } from 'src/app/interfaces/user-require-attention.model';
+import { UserModal } from 'src/app/interfaces/users/user-modal.model';
 
 @Injectable({
   providedIn: 'root',
@@ -25,22 +18,41 @@ export class UsersService {
   private editUserFormData = new BehaviorSubject<any>([]);
   editUserFormData$ = this.editUserFormData.asObservable();
 
+  private usersUpdateTableSubject = new BehaviorSubject<User[]>([]);
+  usersUpdateTable$ = this.usersUpdateTableSubject.asObservable();
+
+  private isNewUserAdded = new BehaviorSubject<boolean>(false);
+  isNewUserAdded$ = this.isNewUserAdded.asObservable();
+
   constructor(private http: HttpClient) {}
 
-  sendEditUserFormData(formData: any, userDetails: any, functionState: boolean): void {
+  sendEditUserFormData(
+    formData: any,
+    userDetails: any,
+    functionState: boolean
+  ): void {
     const combinedData = { formData, userDetails, functionState };
     this.editUserFormData.next(combinedData);
-  };
+  }
 
   getAllUsers(): Observable<any> {
     return this.http.get<User>(`${this.baseUserURL}`);
+  }
+
+  updateUsersAdded(users: User[]) {
+    this.usersUpdateTableSubject.next(users);
+  }
+
+  newUserAdded(isAdded: boolean) {
+    this.isNewUserAdded.next(isAdded);
   }
 
   filterActiveUsers(): Observable<User[]> {
     return this.getAllUsers().pipe(
       map((resp) =>
         resp.users.filter(
-          (user: { isDeactivated: boolean }) => user.isDeactivated === true
+          (user: { hasPlatformAccess: boolean }) =>
+            user.hasPlatformAccess === true
         )
       )
     );
@@ -50,7 +62,8 @@ export class UsersService {
     return this.getAllUsers().pipe(
       map((resp) =>
         resp.users.filter(
-          (user: { isDeactivated: boolean }) => user.isDeactivated === false
+          (user: { hasPlatformAccess: boolean }) =>
+            user.hasPlatformAccess === false
         )
       )
     );
@@ -128,23 +141,40 @@ export class UsersService {
 
   //HTTP REQUESTS
   validateUsers(users: any): Observable<any> {
-    return this.http.post<any>(
-      `${this.baseUserURL}/validate`, users
-    );
-  };
+    return this.http.post<any>(`${this.baseUserURL}/validate`, users);
+  }
 
   addBulkUsers(users: any): Observable<any> {
-    return this.http.post<any>(
-      `${this.baseUserURL}/upload`, users
-    );
-  };
+    return this.http.post<any>(`${this.baseUserURL}/upload`, users);
+  }
 
-  addNewUser(userData: UserModal, userId: string): Observable<UserModal> {
-    return this.http.post<UserModal>(
+  addBulkUsersAndUpdateTable(user: any): Observable<User> {
+    return this.addBulkUsers(user).pipe(
+      map((addedUsers) => {
+        const updateUsers = [...this.usersUpdateTableSubject.value, addedUsers];
+        this.usersUpdateTableSubject.next(updateUsers);
+        console.log(addedUsers);
+        return addedUsers;
+      })
+    );
+  }
+
+  addNewUser(userData: User, userId: string): Observable<User> {
+    return this.http.post<User>(
       `${this.baseUserURL}/admin?id=${userId}`,
       userData
     );
-  };
+  }
+
+  addNewUserAndUpdateTable(userData: User, userId: string): Observable<User> {
+    return this.addNewUser(userData, userId).pipe(
+      map((addedUser) => {
+        const updateUsers = [...this.usersUpdateTableSubject.value, addedUser];
+        this.usersUpdateTableSubject.next(updateUsers);
+        return addedUser;
+      })
+    );
+  }
 
   getAllUsersAPI(): Observable<UserResponse> {
     return this.http.get<UserResponse>(this.baseUserURL, {
@@ -164,7 +194,6 @@ export class UsersService {
 
       if (response.ok) {
         const data = await response.json();
-        console.log('Response:', data);
         return data;
       } else {
         throw new Error('Error loading file.');
@@ -241,7 +270,6 @@ export class UsersService {
 
   getLeaderboardUsers() {
     const url = `${this.baseGamificationURL}/leaderboard?page=0&size=100&direction=ASC`;
-    return this.http.get<any>(url, { responseType: 'json' })
+    return this.http.get<any>(url, { responseType: 'json' });
   }
-  
 }
